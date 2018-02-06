@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kz.dao.MajorCategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.kz.po.MajorCategory" >
+    <id column="MAJOR_CATEGORY_ID" property="majorCategoryId" jdbcType="BIGINT" />
+    <result column="MAJOR_CATEGORY_NAME" property="majorCategoryName" jdbcType="VARCHAR" />
+    <result column="CATEGORY_PARENT_ID" property="categoryParentId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MAJOR_CATEGORY_ID, MAJOR_CATEGORY_NAME, CATEGORY_PARENT_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from kz_major_category
+    where MAJOR_CATEGORY_ID = #{majorCategoryId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from kz_major_category
+    where MAJOR_CATEGORY_ID = #{majorCategoryId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.kz.po.MajorCategory" >
+    insert into kz_major_category (MAJOR_CATEGORY_ID, MAJOR_CATEGORY_NAME, 
+      CATEGORY_PARENT_ID)
+    values (#{majorCategoryId,jdbcType=BIGINT}, #{majorCategoryName,jdbcType=VARCHAR}, 
+      #{categoryParentId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kz.po.MajorCategory" >
+    insert into kz_major_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="majorCategoryId != null" >
+        MAJOR_CATEGORY_ID,
+      </if>
+      <if test="majorCategoryName != null" >
+        MAJOR_CATEGORY_NAME,
+      </if>
+      <if test="categoryParentId != null" >
+        CATEGORY_PARENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="majorCategoryId != null" >
+        #{majorCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="majorCategoryName != null" >
+        #{majorCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryParentId != null" >
+        #{categoryParentId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.MajorCategory" >
+    update kz_major_category
+    <set >
+      <if test="majorCategoryName != null" >
+        MAJOR_CATEGORY_NAME = #{majorCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryParentId != null" >
+        CATEGORY_PARENT_ID = #{categoryParentId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where MAJOR_CATEGORY_ID = #{majorCategoryId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kz.po.MajorCategory" >
+    update kz_major_category
+    set MAJOR_CATEGORY_NAME = #{majorCategoryName,jdbcType=VARCHAR},
+      CATEGORY_PARENT_ID = #{categoryParentId,jdbcType=INTEGER}
+    where MAJOR_CATEGORY_ID = #{majorCategoryId,jdbcType=BIGINT}
+  </update>
+</mapper>

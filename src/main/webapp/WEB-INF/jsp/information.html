@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>资讯首页</title>
+    <link href="fonts/iconfont.css" rel="stylesheet"/>
+    <link href="css/bass.css" rel="stylesheet"/>
+    <link href="css/index.css" rel="stylesheet"/>
+</head>
+<body>
+		<div>
+	        <header>
+	            <div class="header">
+	                <h1>资讯</h1>
+	                <a href="index.html" class="return"><i class="icon-16"></i></a>
+	            </div>
+	        </header>   
+	        <div style="height: 2.5rem;"></div>
+	    </div>
+		<!-- 资讯 information 首页头条-->
+		<div class="firmList information">
+			<!-- 导航分类 -->
+			<div id="carousel" class="carousel-nav">
+		        <ul class="infor-xnav">
+			        <li class="pitch" ><a href="javascript:;">推荐</a></li>
+					<li><a href="information-2.html">建筑类</a></li>
+					<li><a href="javascript:;">经济类</a></li>
+					<li><a href="javascript:;">法律类</a></li>
+					<li><a href="javascript:;">计算机</a></li>
+					<li><a href="javascript:;" >艺术</a></li>
+					<li><a href="javascript:;" >体育</a></li>
+		        </ul>
+		     </div>
+			<!-- 资讯内容列表 -->
+			<ul class="infor-content">
+				<li>
+					<a href="information-3.html">
+						<div class="infor-c-img"><img src="images/zx1.jpg"></div>
+						<div class="infor-c-text">
+							<h1>佛山二中获得全国中学生水科技发明大奖</h1>
+						</div>
+					</a>
+					<div class="scanTime">
+						<span>20&nbsp;浏览</span>
+						<span>12&nbsp;评论</span>
+						<span class="fr">2018-01-05</span>
+						<div class="cl"></div>
+					</div>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<div class="infor-c-img"><img src="images/zx2.jpg"></div>
+						<div class="infor-c-text">
+							<h1>乐从“520”电商青年创业节今日启动</h1>
+						</div>
+					</a>
+					<div class="scanTime">
+						<span>2000&nbsp;浏览</span>
+						<span>1265&nbsp;评论</span>
+						<span class="fr">2018-01-05</span>
+						<div class="cl"></div>
+					</div>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<div class="infor-c-img"><img src="images/j-banner03.jpg"></div>
+						<div class="infor-c-text">
+							<h1>佛山市“互联网”生产业联盟成立仪式单位座谈会</h1>
+						</div>
+					</a>
+					<div class="scanTime">
+						<span>10&nbsp;浏览</span>
+						<span>0&nbsp;评论</span>
+						<span class="fr">2016-05-04</span>
+						<div class="cl"></div>
+					</div>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<div class="infor-c-img"><img src="images/j-banner04.jpg"></div>
+						<div class="infor-c-text">
+							<h1>买家组团购房</h1>
+						</div>
+					</a>
+					<div class="scanTime">
+						<span>20&nbsp;浏览</span>
+						<span>12&nbsp;评论</span>
+						<span class="fr">2016-05-04</span>
+						<div class="cl"></div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<nav class="nav-bar nav-bar-tab">
+			<a href="index.html" class="nav-tab-item ">
+				<span class="nav-icon icon-uniE90A"></span>
+				<span class="nav-tab-label">首页</span>
+			</a>
+ 			<a href="chatrecord.html" class="nav-tab-item">
+				<span class="nav-icon icon-uniE903"></span>
+				<span class="nav-tab-label">资讯</span>
+			</a>
+			<a href="userFirm.html" class="nav-tab-item">
+				<span class="nav-icon icon-uniE90B"></span>
+				<span class="nav-tab-label">我的</span>
+			</a>
+		</nav>
+	</div>
+	<!-- 引入js资源 -->
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/iscroll.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+		  	$(".infot-liBtn").click(function(){
+			    $(".infot-liBtn").toggleClass("infot-liBtn2").siblings("li.infot-liOff").toggleClass("infot-liOn");
+		  	});
+		  	$(".infor-xnav li").click(function(){
+			    $(this).addClass("pitch").siblings().removeClass("pitch");
+		  	});
+		});
+	</script>
+	<script>
+		window.addEventListener('load',function(){ 
+		var $carousel = document.getElementById('carousel'),
+		    $ul = $carousel.querySelector('ul'),
+		    liArray = $carousel.querySelectorAll('li'),
+		    liNum = liArray.length;
+
+		$ul.style.width = (liArray[0].clientWidth + 10)*8 +"px";
+		  
+		var carousel=new iScroll("carousel",{hScrollbar:false, vScrollbar:false, vScroll: false});
+	 
+		});
+	</script>
+</body>
+</html>

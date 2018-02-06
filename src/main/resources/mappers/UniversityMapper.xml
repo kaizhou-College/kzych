@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kz.dao.UniversityMapper">
+	<resultMap id="BaseResultMap" type="com.kz.po.University">
+		<id column="ID" property="id" jdbcType="BIGINT" />
+		<result column="CODE" property="code" jdbcType="BIGINT" />
+		<result column="PROFILE" property="profile" jdbcType="VARCHAR" />
+		<result column="AGREEMENTS" property="agreements" jdbcType="VARCHAR" />
+		<result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+		<result column="GRANTS" property="grants" jdbcType="DECIMAL" />
+		<result column="VOUCHER" property="voucher" jdbcType="DECIMAL" />
+		<result column="CATEGORYID" property="categoryid" jdbcType="BIGINT" />
+		<result column="PUBLISH_STATUS" property="publishStatus"
+			jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.kz.po.University"
+		extends="BaseResultMap">
+		<result column="NAME" property="name" jdbcType="LONGVARCHAR" />
+		<result column="ADDRESS" property="address" jdbcType="LONGVARCHAR" />
+		<result column="EMPLOYMENT_INFO" property="employmentInfo"
+			jdbcType="LONGVARCHAR" />
+		<result column="BROCHURE" property="brochure" jdbcType="LONGVARCHAR" />
+		<result column="INTRODUCTION" property="introduction" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, CODE, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, VOUCHER,
+		CATEGORYID,
+		PUBLISH_STATUS
+	</sql>
+	<sql id="Blob_Column_List">
+		NAME, ADDRESS, EMPLOYMENT_INFO, BROCHURE, INTRODUCTION
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from kz_university
+		where ID = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		kz_university
+		where ID = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.kz.po.University">
+		insert into kz_university (ID,
+		CODE, PROFILE,
+		AGREEMENTS, TELEPHONE, GRANTS,
+		VOUCHER, CATEGORYID,
+		PUBLISH_STATUS,
+		NAME, ADDRESS, EMPLOYMENT_INFO,
+		BROCHURE, INTRODUCTION)
+		values (#{id,jdbcType=BIGINT}, #{code,jdbcType=BIGINT},
+		#{profile,jdbcType=VARCHAR},
+		#{agreements,jdbcType=VARCHAR},
+		#{telephone,jdbcType=VARCHAR}, #{grants,jdbcType=DECIMAL},
+		#{voucher,jdbcType=DECIMAL}, #{categoryid,jdbcType=BIGINT},
+		#{publishStatus,jdbcType=INTEGER},
+		#{name,jdbcType=LONGVARCHAR},
+		#{address,jdbcType=LONGVARCHAR},
+		#{employmentInfo,jdbcType=LONGVARCHAR},
+		#{brochure,jdbcType=LONGVARCHAR},
+		#{introduction,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.kz.po.University">
+		insert into kz_university
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="code != null">
+				CODE,
+			</if>
+			<if test="profile != null">
+				PROFILE,
+			</if>
+			<if test="agreements != null">
+				AGREEMENTS,
+			</if>
+			<if test="telephone != null">
+				TELEPHONE,
+			</if>
+			<if test="grants != null">
+				GRANTS,
+			</if>
+			<if test="voucher != null">
+				VOUCHER,
+			</if>
+			<if test="categoryid != null">
+				CATEGORYID,
+			</if>
+			<if test="publishStatus != null">
+				PUBLISH_STATUS,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="address != null">
+				ADDRESS,
+			</if>
+			<if test="employmentInfo != null">
+				EMPLOYMENT_INFO,
+			</if>
+			<if test="brochure != null">
+				BROCHURE,
+			</if>
+			<if test="introduction != null">
+				INTRODUCTION,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=BIGINT},
+			</if>
+			<if test="profile != null">
+				#{profile,jdbcType=VARCHAR},
+			</if>
+			<if test="agreements != null">
+				#{agreements,jdbcType=VARCHAR},
+			</if>
+			<if test="telephone != null">
+				#{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="grants != null">
+				#{grants,jdbcType=DECIMAL},
+			</if>
+			<if test="voucher != null">
+				#{voucher,jdbcType=DECIMAL},
+			</if>
+			<if test="categoryid != null">
+				#{categoryid,jdbcType=BIGINT},
+			</if>
+			<if test="publishStatus != null">
+				#{publishStatus,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="employmentInfo != null">
+				#{employmentInfo,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="brochure != null">
+				#{brochure,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="introduction != null">
+				#{introduction,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.kz.po.University">
+		update kz_university
+		<set>
+			<if test="code != null">
+				CODE = #{code,jdbcType=BIGINT},
+			</if>
+			<if test="profile != null">
+				PROFILE = #{profile,jdbcType=VARCHAR},
+			</if>
+			<if test="agreements != null">
+				AGREEMENTS = #{agreements,jdbcType=VARCHAR},
+			</if>
+			<if test="telephone != null">
+				TELEPHONE = #{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="grants != null">
+				GRANTS = #{grants,jdbcType=DECIMAL},
+			</if>
+			<if test="voucher != null">
+				VOUCHER = #{voucher,jdbcType=DECIMAL},
+			</if>
+			<if test="categoryid != null">
+				CATEGORYID = #{categoryid,jdbcType=BIGINT},
+			</if>
+			<if test="publishStatus != null">
+				PUBLISH_STATUS = #{publishStatus,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="employmentInfo != null">
+				EMPLOYMENT_INFO = #{employmentInfo,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="brochure != null">
+				BROCHURE = #{brochure,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="introduction != null">
+				INTRODUCTION = #{introduction,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.kz.po.University">
+		update
+		kz_university
+		set CODE = #{code,jdbcType=BIGINT},
+		PROFILE =
+		#{profile,jdbcType=VARCHAR},
+		AGREEMENTS =
+		#{agreements,jdbcType=VARCHAR},
+		TELEPHONE =
+		#{telephone,jdbcType=VARCHAR},
+		GRANTS = #{grants,jdbcType=DECIMAL},
+		VOUCHER = #{voucher,jdbcType=DECIMAL},
+		CATEGORYID =
+		#{categoryid,jdbcType=BIGINT},
+		PUBLISH_STATUS =
+		#{publishStatus,jdbcType=INTEGER},
+		NAME = #{name,jdbcType=LONGVARCHAR},
+		ADDRESS = #{address,jdbcType=LONGVARCHAR},
+		EMPLOYMENT_INFO =
+		#{employmentInfo,jdbcType=LONGVARCHAR},
+		BROCHURE =
+		#{brochure,jdbcType=LONGVARCHAR},
+		INTRODUCTION =
+		#{introduction,jdbcType=LONGVARCHAR}
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.kz.po.University">
+		update
+		kz_university
+		set CODE = #{code,jdbcType=BIGINT},
+		PROFILE =
+		#{profile,jdbcType=VARCHAR},
+		AGREEMENTS =
+		#{agreements,jdbcType=VARCHAR},
+		TELEPHONE =
+		#{telephone,jdbcType=VARCHAR},
+		GRANTS = #{grants,jdbcType=DECIMAL},
+		VOUCHER = #{voucher,jdbcType=DECIMAL},
+		CATEGORYID =
+		#{categoryid,jdbcType=BIGINT},
+		PUBLISH_STATUS =
+		#{publishStatus,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+	
+
+	<select id="getByConditionPage" parameterType="com.kz.po.UniversityQuery"
+		resultType="com.kz.po.University">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from kz_university
+		<where>
+			<if test="categoryid!=0 &amp;&amp;categoryid > 0">
+				and categoryid=#{categoryid}
+			</if>
+			<if test="name!=null &amp;&amp; name!=''">
+				and name like '%${name}%'
+			</if>
+		</where>
+	</select>
+	<resultMap id="universityMajorMap" type="com.kz.po.University" extends="BaseResultMap">
+		<collection property="majors" ofType="com.kz.po.Major">
+			<id column="major_id" property="id"></id>
+			<result column="major_category_id" property="majorCategoryId" />
+			<result column="major_name" property="name" />
+			<result column="major_code" property="majorCode" />
+			<result column="ishot" property="ishot" />
+			<result column="description" property="description" />
+		</collection>
+	</resultMap>
+	<sql id="kzBase_Column_List" >
+		kz_university.ID, CODE, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, VOUCHER,
+		CATEGORYID,
+		PUBLISH_STATUS,
+		kz_university.NAME, ADDRESS, EMPLOYMENT_INFO, BROCHURE, INTRODUCTION
+	</sql>
+	<select id="selectMajorsPageById" parameterType="long"
+		resultMap="universityMajorMap">
+		select
+		<include refid="kzBase_Column_List" />
+		,
+		kz_major.id  major_id,
+		kz_major.major_category_id,
+		kz_major.name  major_name,
+		kz_major.major_code,
+		kz_major.ishot,
+		kz_university_major.id um_id,
+		kz_major.description
+		from
+		kz_university,
+		kz_university_major,
+		kz_major
+		where
+		kz_university.id = kz_university_major.university_id
+		and
+		kz_university_major.major_id = kz_major.id
+		and
+		kz_university.id = #{id}
+	</select>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kz.dao.PackageMapper" >
+  <resultMap id="BaseResultMap" type="com.kz.po.Package" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="UUID" property="uuid" jdbcType="BIGINT" />
+    <result column="CATEGORYID" property="categoryid" jdbcType="BIGINT" />
+    <result column="STATE" property="state" jdbcType="BIGINT" />
+    <result column="MONEY" property="money" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, UUID, CATEGORYID, STATE, MONEY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from "kz_ package"
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from "kz_ package"
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.kz.po.Package" >
+    insert into "kz_ package" (ID, UUID, CATEGORYID, 
+      STATE, MONEY)
+    values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=BIGINT}, #{categoryid,jdbcType=BIGINT}, 
+      #{state,jdbcType=BIGINT}, #{money,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kz.po.Package" >
+    insert into "kz_ package"
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="categoryid != null" >
+        CATEGORYID,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="money != null" >
+        MONEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=BIGINT},
+      </if>
+      <if test="categoryid != null" >
+        #{categoryid,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=BIGINT},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.Package" >
+    update "kz_ package"
+    <set >
+      <if test="uuid != null" >
+        UUID = #{uuid,jdbcType=BIGINT},
+      </if>
+      <if test="categoryid != null" >
+        CATEGORYID = #{categoryid,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=BIGINT},
+      </if>
+      <if test="money != null" >
+        MONEY = #{money,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kz.po.Package" >
+    update "kz_ package"
+    set UUID = #{uuid,jdbcType=BIGINT},
+      CATEGORYID = #{categoryid,jdbcType=BIGINT},
+      STATE = #{state,jdbcType=BIGINT},
+      MONEY = #{money,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

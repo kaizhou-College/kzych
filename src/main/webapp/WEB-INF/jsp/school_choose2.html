@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>资讯-各地</title>
+    
+    <link href="fonts/iconfont.css" rel="stylesheet"/>
+    <link href="css/bass.css" rel="stylesheet"/>
+    <link href="css/index.css" rel="stylesheet"/>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link href="css/objInfo.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+
+</head>
+<body>
+	<div>
+		<header>
+			<div class="header">
+				<h1>选择学校</h1>
+				<a href="information.html" class="return"><i class="icon-16"></i></a>
+			</div>
+		</header>
+		<div style="height: 2.5rem;"></div>
+	</div>
+	<div class="all_box all_boxNodown">
+	<!-- 资讯 information information-2各地页 -->
+	<div class="firmList information information-2">
+		<!-- 导航分类 -->
+		<div id="carousel" class="carousel-nav">
+	        <ul class="infor-xnav">
+			        <li><a href="school_choose1.html">本科</a></li>
+					<li class="pitch"><a href="school_choose2.html">专科</a></li>
+					<li><a href="javascript:;">高职</a></li>
+					<li><a href="javascript:;">中职</a></li>
+					<li><a href="javascript:;">培训机构</a></li>
+		        </ul>
+	    </div>
+		<!-- 资讯内容列表  infor2-content（各地）-->
+		<ul class="infor-content  infor2-content">
+			<li>
+				<a href="javascript:;">
+					<div class="infor-c-img"><img src="images/北京大学.png"></div>
+					<div class="infor-c-text">
+						<h1>北京大学</h1>
+						<p>北京市海淀区颐和园路5号</p>
+						<p><span class="color_y">￥8200</span></p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:;">
+					<div class="infor-c-img"><img src="images/北京大学.png"></div>
+					<div class="infor-c-text">
+						<h1>北京大学</h1>
+						<p>北京市海淀区颐和园路5号</p>
+						<p><span class="color_y">￥8200</span></p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:;">
+					<div class="infor-c-img"><img src="images/北京大学.png"></div>
+					<div class="infor-c-text">
+						<h1>北京大学</h1>
+						<p>北京市海淀区颐和园路5号</p>
+						<p><span class="color_y">￥8200</span></p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:;">
+					<div class="infor-c-img"><img src="images/北京大学.png"></div>
+					<div class="infor-c-text">
+						<h1>北京大学</h1>
+						<p>北京市海淀区颐和园路5号</p>
+						<p><span class="color_y">￥8200</span></p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:;">
+					<div class="infor-c-img"><img src="images/北京大学.png"></div>
+					<div class="infor-c-text">
+						<h1>北京大学</h1>
+						<p>北京市海淀区颐和园路5号</p>
+						<p><span class="color_y">￥8200</span></p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:;">
+					<div class="infor-c-img"><img src="images/北京大学.png"></div>
+					<div class="infor-c-text">
+						<h1>北京大学</h1>
+						<p>北京市海淀区颐和园路5号</p>
+						<p><span class="color_y">￥8200</span></p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:;">
+					<div class="infor-c-img"><img src="images/北京大学.png"></div>
+					<div class="infor-c-text">
+						<h1>北京大学</h1>
+						<p>北京市海淀区颐和园路5号</p>
+						<p><span class="color_y">￥8200</span></p>
+					</div>
+				</a>
+			</li>
+		</ul>
+		
+		<!-- 引入js资源 -->
+  		<script type="text/javascript" src="js/zepto.min.js"></script>
+  		<script type="text/javascript" src="js/iscroll.js"></script>
+  		<script type="text/javascript">
+  			/*$(document).ready(function(){
+			  	$(".infot-liBtn").click(function(){
+				    $(".infot-liBtn").toggleClass("infot-liBtn2").siblings("li.infot-liOff").toggleClass("infot-liOn");
+			  	});
+			});*/
+
+  		</script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+			  	$(".infot-liBtn").click(function(){
+				    $(".infot-liBtn").toggleClass("infot-liBtn2").siblings("li.infot-liOff").toggleClass("infot-liOn");
+			  	});
+			  	$(".infor-xnav li").click(function(){
+				    $(this).addClass("pitch").siblings().removeClass("pitch");
+			  	});
+			});
+		</script>
+		<script>
+			window.addEventListener('load',function(){ 
+			var $carousel = document.getElementById('carousel'),
+			    $ul = $carousel.querySelector('ul'),
+			    liArray = $carousel.querySelectorAll('li'),
+			    liNum = liArray.length;
+
+			$ul.style.width = (liArray[0].clientWidth + 10)*8 +"px";
+			  
+			var carousel=new iScroll("carousel",{hScrollbar:false, vScrollbar:false, vScroll: false});
+		 
+			});
+		</script>
+	</div>
+</div>
+</body>
+</html>
