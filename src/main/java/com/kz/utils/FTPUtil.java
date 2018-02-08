@@ -27,10 +27,11 @@ public class FTPUtil {
         this.pwd = pwd;
     }
     public static boolean uploadFile(List<File> fileList) throws IOException {
+    	 logger.info("开始连接ftp服务器,ip:{}---用户名：{}---密码：{}",ftpIp,ftpUser,ftpPass);
         FTPUtil ftpUtil = new FTPUtil(ftpIp,21,ftpUser,ftpPass);
         logger.info("开始连接ftp服务器");
         boolean result = ftpUtil.uploadFile("img",fileList);
-        logger.info("开始连接ftp服务器,结束上传,上传结果:{"+result+"}");
+        logger.info("开始连接ftp服务器,结束上传,上传结果:{}",result);
         return result;
     }
 
