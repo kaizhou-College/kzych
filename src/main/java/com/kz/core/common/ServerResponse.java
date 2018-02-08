@@ -17,40 +17,39 @@ import java.io.Serializable;
 //保证序列化json的时候,如果是null的对象,key也会消失
 public class ServerResponse<T> implements Serializable {
 
-    private int ret;
+    private int status;
     private String msg;
     @JsonSerialize(include =  JsonSerialize.Inclusion.NON_NULL)
     private T data;
 
-    private ServerResponse(int ret){
-        this.ret = ret;
+    private ServerResponse(int status){
+        this.status = status;
     }
-    private ServerResponse(int ret,T data){
-        this.ret = ret;
+    private ServerResponse(int status,T data){
+        this.status = status;
         this.data = data;
     }
 
     private ServerResponse(int status,String msg,T data){
-        this.ret = ret;
+        this.status = status;
         this.msg = msg;
         this.data = data;
     }
 
     private ServerResponse(int status,String msg){
-        this.ret = ret;
+        this.status = status;
         this.msg = msg;
     }
 
     @JsonIgnore
     //使之不在json序列化结果当中
     public boolean isSuccess(){
-        return this.ret == ResponseCode.SUCCESS.getCode();
+        return this.status == ResponseCode.SUCCESS.getCode();
     }
-
-    public int getRet(){
-        return ret;
-    }
-    public T getData(){
+    public int getStatus() {
+		return status;
+	}
+	public T getData(){
         return data;
     }
     public String getMsg(){
@@ -87,17 +86,4 @@ public class ServerResponse<T> implements Serializable {
     public static <T> ServerResponse<T> createByErrorCodeMessage(int errorCode,String errorMessage){
         return new ServerResponse<T>(errorCode,errorMessage);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

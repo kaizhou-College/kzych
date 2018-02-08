@@ -32,7 +32,7 @@ public class Const {
         String LIMIT_NUM_SUCCESS = "LIMIT_NUM_SUCCESS";
     }
 
-    public interface TYPE{
+    public interface UserTYPE{
         int TYPE_CUSTOMER = 0; //普通用户
         int TYPE_ADMIN = 1;//管理员
     }
