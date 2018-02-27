@@ -8,7 +8,7 @@
 		<result column="AGREEMENTS" property="agreements" jdbcType="VARCHAR" />
 		<result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
 		<result column="GRANTS" property="grants" jdbcType="DECIMAL" />
-		<result column="VOUCHER" property="voucher" jdbcType="DECIMAL" />
+		<result column="coupon" property="coupon" jdbcType="DECIMAL" />
 		<result column="CATEGORYID" property="categoryid" jdbcType="BIGINT" />
 		<result column="PUBLISH_STATUS" property="publishStatus"
 			jdbcType="INTEGER" />
@@ -23,7 +23,7 @@
 		<result column="INTRODUCTION" property="introduction" jdbcType="LONGVARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		ID, CODE, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, VOUCHER,
+		ID, CODE, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, coupon,
 		CATEGORYID,
 		PUBLISH_STATUS
 	</sql>
@@ -48,7 +48,7 @@
 		insert into kz_university (ID,
 		CODE, PROFILE,
 		AGREEMENTS, TELEPHONE, GRANTS,
-		VOUCHER, CATEGORYID,
+		coupon, CATEGORYID,
 		PUBLISH_STATUS,
 		NAME, ADDRESS, EMPLOYMENT_INFO,
 		BROCHURE, INTRODUCTION)
@@ -56,7 +56,7 @@
 		#{profile,jdbcType=VARCHAR},
 		#{agreements,jdbcType=VARCHAR},
 		#{telephone,jdbcType=VARCHAR}, #{grants,jdbcType=DECIMAL},
-		#{voucher,jdbcType=DECIMAL}, #{categoryid,jdbcType=BIGINT},
+		#{coupon,jdbcType=DECIMAL}, #{categoryid,jdbcType=BIGINT},
 		#{publishStatus,jdbcType=INTEGER},
 		#{name,jdbcType=LONGVARCHAR},
 		#{address,jdbcType=LONGVARCHAR},
@@ -85,8 +85,8 @@
 			<if test="grants != null">
 				GRANTS,
 			</if>
-			<if test="voucher != null">
-				VOUCHER,
+			<if test="coupon != null">
+				coupon,
 			</if>
 			<if test="categoryid != null">
 				CATEGORYID,
@@ -129,8 +129,8 @@
 			<if test="grants != null">
 				#{grants,jdbcType=DECIMAL},
 			</if>
-			<if test="voucher != null">
-				#{voucher,jdbcType=DECIMAL},
+			<if test="coupon != null">
+				#{coupon,jdbcType=DECIMAL},
 			</if>
 			<if test="categoryid != null">
 				#{categoryid,jdbcType=BIGINT},
@@ -173,8 +173,8 @@
 			<if test="grants != null">
 				GRANTS = #{grants,jdbcType=DECIMAL},
 			</if>
-			<if test="voucher != null">
-				VOUCHER = #{voucher,jdbcType=DECIMAL},
+			<if test="coupon != null">
+				coupon = #{coupon,jdbcType=DECIMAL},
 			</if>
 			<if test="categoryid != null">
 				CATEGORYID = #{categoryid,jdbcType=BIGINT},
@@ -211,7 +211,7 @@
 		TELEPHONE =
 		#{telephone,jdbcType=VARCHAR},
 		GRANTS = #{grants,jdbcType=DECIMAL},
-		VOUCHER = #{voucher,jdbcType=DECIMAL},
+		coupon = #{coupon,jdbcType=DECIMAL},
 		CATEGORYID =
 		#{categoryid,jdbcType=BIGINT},
 		PUBLISH_STATUS =
@@ -237,7 +237,7 @@
 		TELEPHONE =
 		#{telephone,jdbcType=VARCHAR},
 		GRANTS = #{grants,jdbcType=DECIMAL},
-		VOUCHER = #{voucher,jdbcType=DECIMAL},
+		coupon = #{coupon,jdbcType=DECIMAL},
 		CATEGORYID =
 		#{categoryid,jdbcType=BIGINT},
 		PUBLISH_STATUS =
@@ -273,7 +273,7 @@
 		</collection>
 	</resultMap>
 	<sql id="kzBase_Column_List" >
-		kz_university.ID, CODE, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, VOUCHER,
+		kz_university.ID, CODE, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, coupon,
 		CATEGORYID,
 		PUBLISH_STATUS,
 		kz_university.NAME, ADDRESS, EMPLOYMENT_INFO, BROCHURE, INTRODUCTION

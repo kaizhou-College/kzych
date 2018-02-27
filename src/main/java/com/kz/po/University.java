@@ -18,7 +18,7 @@ public class University extends BaseModel{
 
     private BigDecimal grants;
 
-    private BigDecimal voucher;
+    private BigDecimal coupon;
     //默认是查询本科类学校
     private Long categoryid = 1L;
 
@@ -134,15 +134,15 @@ public class University extends BaseModel{
         this.grants = grants;
     }
 
-    public BigDecimal getVoucher() {
-        return voucher;
-    }
+    public BigDecimal getCoupon() {
+		return coupon;
+	}
 
-    public void setVoucher(BigDecimal voucher) {
-        this.voucher = voucher;
-    }
+	public void setCoupon(BigDecimal coupon) {
+		this.coupon = coupon;
+	}
 
-    public Long getCategoryid() {
+	public Long getCategoryid() {
         return categoryid;
     }
 

@@ -1,4 +1,4 @@
-package com.kz.service;
+package com.kz.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +8,7 @@ import com.kz.dao.MajorMapper;
 import com.kz.po.Major;
 import com.kz.po.MajorQuery;
 import com.kz.po.MajorUniversity;
+import com.kz.service.IMajorService;
 
 @Service
 public class MajorServiceImpl extends BaseService<Major, MajorQuery> implements IMajorService {
@@ -23,5 +24,4 @@ public class MajorServiceImpl extends BaseService<Major, MajorQuery> implements 
 	public MajorUniversity findByUniversityId(int universityId, int majorId) {
 		return mapper.findByUniversityId(universityId,majorId);
 	}
-
 }

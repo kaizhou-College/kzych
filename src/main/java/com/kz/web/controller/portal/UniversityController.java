@@ -40,9 +40,9 @@ public class UniversityController {
 
 	@RequestMapping("list.do")
 	@ResponseBody
-	public ServerResponse<PageInfo<University>> list(UniversityQuery uq, Model model) {
+	public ServerResponse<PageInfo> list(UniversityQuery uq) {
 		// TODO 1,验证是否登陆
-		PageInfo<University> pageInfo = iUniversityService.getByConditionPage(uq);
+		PageInfo pageInfo = iUniversityService.getByConditionPage(uq);
 		// 页面显示数据
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}

@@ -1,16 +1,17 @@
-package com.kz.service;
+package com.kz.service.impl;
 
-import com.google.common.collect.Lists;
-import com.kz.utils.FTPUtil;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
+import com.google.common.collect.Lists;
+import com.kz.service.IFileService;
+import com.kz.utils.FTPUtil;
 
 /**
  * @Title: FileServiceImpl.java 

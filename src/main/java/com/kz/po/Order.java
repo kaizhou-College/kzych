@@ -3,7 +3,7 @@ package com.kz.po;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class OrderModel {
+public class Order {
     private Long id;
 
     private Long uuid;

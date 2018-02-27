@@ -6,7 +6,7 @@
             <pattern>[%d{HH:mm:ss.SSS}][%p][%c{40}][%t] %m%n</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>DEBUG</level>
+            <level>debug</level>
         </filter>
     </appender>
 
@@ -43,7 +43,7 @@
         </filter>
     </appender>
 
-    <logger name="com.kz" additivity="false" level="INFO" >
+    <logger name="com.kz" additivity="false" level="debug" >
         <appender-ref ref="ych" />
         <appender-ref ref="console"/>
     </logger>
@@ -52,7 +52,7 @@
 
     <!-- kate note mybatis log 日志 -->
 
-    <logger name="com.kz.dao" level="DEBUG"/>
+    <logger name="com.kz.dao" level="debug"/>
 
     <!--<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG" >-->
         <!--<appender-ref ref="console"/>-->
@@ -70,7 +70,7 @@
     <!--</logger>-->
 
 
-    <root level="DEBUG">
+    <root level="debug">
         <appender-ref ref="console"/>
         <appender-ref ref="error"/>
     </root>

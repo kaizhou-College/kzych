@@ -5,11 +5,13 @@
     <id column="ID" property="id" jdbcType="BIGINT" />
     <result column="ORDERID" property="orderid" jdbcType="BIGINT" />
     <result column="UNIVERSITY_ID" property="universityId" jdbcType="BIGINT" />
+    <result column="major_id" property="majorId" jdbcType="BIGINT" />
     <result column="COST" property="cost" jdbcType="DECIMAL" />
-    <result column="VOUCHER" property="voucher" jdbcType="DECIMAL" />
+    <result column="coupon" property="coupon" jdbcType="DECIMAL" />
+    <result column="grants" property="grants" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, ORDERID, UNIVERSITY_ID, COST, VOUCHER
+    ID, ORDERID, UNIVERSITY_ID, major_id, COST, coupon, grants
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -23,9 +25,11 @@
   </delete>
   <insert id="insert" parameterType="com.kz.po.OrderDetail" >
     insert into kz_orderdetail (ID, ORDERID, UNIVERSITY_ID, 
-      COST, VOUCHER)
+      major_id, COST, coupon, 
+      grants)
     values (#{id,jdbcType=BIGINT}, #{orderid,jdbcType=BIGINT}, #{universityId,jdbcType=BIGINT}, 
-      #{cost,jdbcType=DECIMAL}, #{voucher,jdbcType=DECIMAL})
+      #{majorId,jdbcType=BIGINT}, #{cost,jdbcType=DECIMAL}, #{coupon,jdbcType=DECIMAL}, 
+      #{grants,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.kz.po.OrderDetail" >
     insert into kz_orderdetail
@@ -39,11 +43,17 @@
       <if test="universityId != null" >
         UNIVERSITY_ID,
       </if>
+      <if test="majorId != null" >
+        major_id,
+      </if>
       <if test="cost != null" >
         COST,
       </if>
-      <if test="voucher != null" >
-        VOUCHER,
+      <if test="coupon != null" >
+        coupon,
+      </if>
+      <if test="grants != null" >
+        grants,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -56,11 +66,17 @@
       <if test="universityId != null" >
         #{universityId,jdbcType=BIGINT},
       </if>
+      <if test="majorId != null" >
+        #{majorId,jdbcType=BIGINT},
+      </if>
       <if test="cost != null" >
         #{cost,jdbcType=DECIMAL},
       </if>
-      <if test="voucher != null" >
-        #{voucher,jdbcType=DECIMAL},
+      <if test="coupon != null" >
+        #{coupon,jdbcType=DECIMAL},
+      </if>
+      <if test="grants != null" >
+        #{grants,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -73,11 +89,17 @@
       <if test="universityId != null" >
         UNIVERSITY_ID = #{universityId,jdbcType=BIGINT},
       </if>
+      <if test="majorId != null" >
+        major_id = #{majorId,jdbcType=BIGINT},
+      </if>
       <if test="cost != null" >
         COST = #{cost,jdbcType=DECIMAL},
       </if>
-      <if test="voucher != null" >
-        VOUCHER = #{voucher,jdbcType=DECIMAL},
+      <if test="coupon != null" >
+        coupon = #{coupon,jdbcType=DECIMAL},
+      </if>
+      <if test="grants != null" >
+        grants = #{grants,jdbcType=DECIMAL},
       </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
@@ -86,8 +108,10 @@
     update kz_orderdetail
     set ORDERID = #{orderid,jdbcType=BIGINT},
       UNIVERSITY_ID = #{universityId,jdbcType=BIGINT},
+      major_id = #{majorId,jdbcType=BIGINT},
       COST = #{cost,jdbcType=DECIMAL},
-      VOUCHER = #{voucher,jdbcType=DECIMAL}
+      coupon = #{coupon,jdbcType=DECIMAL},
+      grants = #{grants,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

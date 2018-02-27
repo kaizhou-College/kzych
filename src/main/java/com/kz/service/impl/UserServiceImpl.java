@@ -1,4 +1,4 @@
-package com.kz.service;
+package com.kz.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +9,7 @@ import com.kz.core.service.BaseService;
 import com.kz.dao.UserMapper;
 import com.kz.po.User;
 import com.kz.po.UserQuery;
+import com.kz.service.IUserService;
 import com.kz.utils.MD5Util;
 
 @Service
@@ -20,8 +21,6 @@ public class UserServiceImpl extends BaseService<User, UserQuery>implements IUse
 		this.userMapper = mapper;
 		super.setMapper(mapper);
 	}
-
-	@Override
 	public ServerResponse<User> login(String username, String password) {
 		int resultCount = userMapper.checkUsername(username);
 		if (resultCount == 0) {
@@ -49,7 +48,7 @@ public class UserServiceImpl extends BaseService<User, UserQuery>implements IUse
 		user.setUserType(Const.UserTYPE.TYPE_CUSTOMER);
 		// MD5加密
 		user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
-		int resultCount = userMapper.insert(user);
+		Long resultCount = userMapper.insert(user);
 		if (resultCount == 0) {
 			return ServerResponse.createByErrorMessage("注册失败");
 		}
@@ -95,7 +94,7 @@ public class UserServiceImpl extends BaseService<User, UserQuery>implements IUse
 		updateUser.setSignMessage(user.getSignMessage());
 		updateUser.setLastLoginTime(user.getLastLoginTime());
 
-		int updateCount = userMapper.updateByPrimaryKeySelective(updateUser);
+		Long updateCount = userMapper.updateByPrimaryKeySelective(updateUser);
 		if (updateCount > 0) {
 			return ServerResponse.createBySuccess("更新个人信息成功", updateUser);
 		}

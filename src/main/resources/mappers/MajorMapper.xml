@@ -118,8 +118,27 @@
       ISHOT = #{ishot,jdbcType=INTEGER}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+  <select id="getByConditionPage" parameterType="com.kz.po.MajorQuery"
+		resultType="com.kz.po.Major">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from kz_major
+		<where>
+			<if test="majorCategoryId!=0 &amp;&amp;majorCategoryId > 0">
+				and major_Category_Id=#{majorCategoryId}
+			</if>
+			<if test="name!=null &amp;&amp; name!=''">
+				and name like '%${name}%'
+			</if>
+		</where>
+	</select>
+  
+  
+  
   <sql id="kzBase_Column_List">
- 	 kz_major.ID, MAJOR_CATEGORY_ID, NAME, MAJOR_CODE, ISHOT,DESCRIPTION
+ 	 kz_major.ID, MAJOR_CATEGORY_ID, kz_major.NAME, MAJOR_CODE, ISHOT,DESCRIPTION
   </sql>
   <resultMap id="kzMajorMap" type="com.kz.po.MajorUniversity" extends="ResultMapWithBLOBs">
   	 <id column="universityId" property="universityId" jdbcType="BIGINT" />
@@ -128,11 +147,19 @@
   	select 
   	<include refid="kzBase_Column_List"/>
   	,kz_university_major.university_id universityId,
-  	kz_university_major.
+  	kz_university_major.id umid,
+  	kz_university_major.cost,
+  	kz_university_major.major_message majorMesssage,
+  	kz_university_major.COST_Constitution costConstitution,
+  	kz_university_major.job_info jobInfo,
+  	kz_university.profile,
+  	kz_university.name universityName
   	from 
-  		kz_major,kz_university_major
+  		kz_major,kz_university_major,kz_university
   	where 
   		kz_major.id = kz_university_major.major_id
+  	and 
+  		kz_university.id= kz_university_major.university_id
   	and 
   		kz_major.id=#{majorId} 
   	and 

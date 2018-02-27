@@ -7,10 +7,10 @@ import com.github.pagehelper.PageInfo;
 public class BaseModel implements java.io.Serializable{
 	
 	private Long uuid;
-	private int pageNum;
-	private int pageSize;
+	//private int pageNum;
+	//private int pageSize;
 	
-	public int getPageNum() {
+	/*public int getPageNum() {
 		return pageNum;
 	}
 	public void setPageNum(int pageNum) {
@@ -21,7 +21,7 @@ public class BaseModel implements java.io.Serializable{
 	}
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
-	}
+	}*/
 	public Long getUuid() {
 		return uuid;
 	}

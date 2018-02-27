@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.kz.dao.OrderModelMapper" >
-  <resultMap id="BaseResultMap" type="com.kz.po.OrderModel" >
+<mapper namespace="com.kz.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.kz.po.Order" >
     <id column="ID" property="id" jdbcType="BIGINT" />
     <result column="UUID" property="uuid" jdbcType="BIGINT" />
     <result column="PAYMENT" property="payment" jdbcType="DECIMAL" />
@@ -27,7 +27,7 @@
     delete from kz_order
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.kz.po.OrderModel" >
+  <insert id="insert" parameterType="com.kz.po.Order" >
     insert into kz_order (ID, UUID, PAYMENT, 
       STATUS, PAYMENT_TYPE, CREATE_TIME, 
       UPDATE_TIME, END_TIME, CLOSE_TIME, 
@@ -37,7 +37,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, 
       #{playmentTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.kz.po.OrderModel" >
+  <insert id="insertSelective" parameterType="com.kz.po.Order" >
     insert into kz_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -104,7 +104,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.OrderModel" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.Order" >
     update kz_order
     <set >
       <if test="uuid != null" >
@@ -137,7 +137,7 @@
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.kz.po.OrderModel" >
+  <update id="updateByPrimaryKey" parameterType="com.kz.po.Order" >
     update kz_order
     set UUID = #{uuid,jdbcType=BIGINT},
       PAYMENT = #{payment,jdbcType=DECIMAL},
