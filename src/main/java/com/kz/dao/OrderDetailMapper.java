@@ -1,17 +1,8 @@
 package com.kz.dao;
 
+import com.kz.core.dao.BaseMapper;
 import com.kz.po.OrderDetail;
+import com.kz.po.OrderDetailQuery;
 
-public interface OrderDetailMapper {
-    int deleteByPrimaryKey(Long id);
-
-    int insert(OrderDetail record);
-
-    int insertSelective(OrderDetail record);
-
-    OrderDetail selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(OrderDetail record);
-
-    int updateByPrimaryKey(OrderDetail record);
+public interface OrderDetailMapper extends BaseMapper<OrderDetail, OrderDetailQuery>{
 }

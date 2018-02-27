@@ -25,7 +25,7 @@ public class User extends BaseModel{
     private String signMessage;
 
     private String profile;
-
+    /*角色0-普通用户,1-管理员',*/
     private Integer userType;
 
     private Date createTime;

@@ -1,5 +1,7 @@
 package com.kz.po;
 
-public class UserQuery extends User {
+import com.kz.core.web.BaseQueryModel;
+
+public class UserQuery extends BaseQueryModel{
 	
 }

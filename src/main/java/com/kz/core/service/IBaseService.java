@@ -3,22 +3,21 @@ package com.kz.core.service;
 import java.io.Serializable;
 
 import com.github.pagehelper.PageInfo;
-import com.kz.core.po.BaseModel;
-import com.kz.po.User;
+import com.kz.core.web.BaseQueryModel;
 
-public interface IBaseService<M,QM extends BaseModel> {
+public interface IBaseService<M,QM extends BaseQueryModel> {
 	
-	public int deleteByPrimaryKey(Serializable uuid);
+	public Long deleteByPrimaryKey(Serializable uuid);
 
-	public int insert(M m);
+	public Long insert(M m);
 
-	public int insertSelective(M m);
+	public Long insertSelective(M m);
 
 	public M selectByPrimaryKey(Serializable uuid);
 
-	public int updateByPrimaryKeySelective(M m);
+	public Long updateByPrimaryKeySelective(M m);
 
-	public int updateByPrimaryKey(M m);
+	public Long updateByPrimaryKey(M m);
 
 	public PageInfo<M> getByConditionPage(QM qm);
 	

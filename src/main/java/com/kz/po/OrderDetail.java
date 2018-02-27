@@ -3,53 +3,73 @@ package com.kz.po;
 import java.math.BigDecimal;
 
 public class OrderDetail {
-    private Long id;
+	private Long id;
 
-    private Long orderid;
+	private Long orderid;
 
-    private Long universityId;
+	private Long universityId;
 
-    private BigDecimal cost;
+	private Long majorId;
 
-    private BigDecimal voucher;
+	private BigDecimal cost;
 
-    public Long getId() {
-        return id;
-    }
+	private BigDecimal coupon;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	private BigDecimal grants;
 
-    public Long getOrderid() {
-        return orderid;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setOrderid(Long orderid) {
-        this.orderid = orderid;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Long getUniversityId() {
-        return universityId;
-    }
+	public Long getOrderid() {
+		return orderid;
+	}
 
-    public void setUniversityId(Long universityId) {
-        this.universityId = universityId;
-    }
+	public void setOrderid(Long orderid) {
+		this.orderid = orderid;
+	}
 
-    public BigDecimal getCost() {
-        return cost;
-    }
+	public Long getUniversityId() {
+		return universityId;
+	}
 
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
-    }
+	public void setUniversityId(Long universityId) {
+		this.universityId = universityId;
+	}
 
-    public BigDecimal getVoucher() {
-        return voucher;
-    }
+	public Long getMajorId() {
+		return majorId;
+	}
 
-    public void setVoucher(BigDecimal voucher) {
-        this.voucher = voucher;
-    }
+	public void setMajorId(Long majorId) {
+		this.majorId = majorId;
+	}
+
+	public BigDecimal getCost() {
+		return cost;
+	}
+
+	public void setCost(BigDecimal cost) {
+		this.cost = cost;
+	}
+
+	public BigDecimal getCoupon() {
+		return coupon;
+	}
+
+	public void setCoupon(BigDecimal coupon) {
+		this.coupon = coupon;
+	}
+
+	public BigDecimal getGrants() {
+		return grants;
+	}
+
+	public void setGrants(BigDecimal grants) {
+		this.grants = grants;
+	}
 }
