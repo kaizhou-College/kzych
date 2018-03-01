@@ -2,6 +2,7 @@ package com.kz.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.kz.core.service.BaseService;
@@ -14,6 +15,7 @@ import com.kz.service.IOrderService;
 import com.kz.vo.OrderVo;
 
 @Service
+@Transactional
 public class OrderServiceImpl extends BaseService<Order, OrderQuery> implements IOrderService {
 	private OrderMapper orderMapper = null;
 	@Autowired

@@ -2,6 +2,7 @@ package com.kz.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kz.core.common.Const;
 import com.kz.core.common.ServerResponse;
@@ -13,6 +14,7 @@ import com.kz.service.IUserService;
 import com.kz.utils.MD5Util;
 
 @Service
+@Transactional
 public class UserServiceImpl extends BaseService<User, UserQuery>implements IUserService {
 	private UserMapper userMapper = null;
 
