@@ -9,7 +9,7 @@
     <result column="PUBLISHDATE" property="publishdate" jdbcType="TIMESTAMP" />
     <result column="IMG" property="img" jdbcType="VARCHAR" />
     <result column="HIT" property="hit" jdbcType="BIGINT" />
-    <result column="commentNum" property="commentnum" jdbcType="BIGINT" />
+    <result column="comment_Num" property="commentNum" jdbcType="BIGINT" />
     <result column="ISTOP" property="istop" jdbcType="INTEGER" />
     <result column="ISCOMMENT" property="iscomment" jdbcType="INTEGER" />
     <result column="COMEFROM" property="comefrom" jdbcType="VARCHAR" />
@@ -23,7 +23,7 @@
     <result column="SOURCEURL" property="sourceurl" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, CHANNELID, TITLE, AUTHOR, PUBLISHDATE, IMG, HIT, commentNum, ISTOP, ISCOMMENT, 
+    ID, CHANNELID, TITLE, AUTHOR, PUBLISHDATE, IMG, HIT, comment_Num, ISTOP, ISCOMMENT, 
     COMEFROM, ISDELETE, STATUS
   </sql>
   <sql id="Blob_Column_List" >
@@ -34,29 +34,29 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from kz_content
+    from kz_news
     where ID = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from kz_content
+    delete from kz_news
     where ID = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.kz.po.NewsWithBLOBs" >
-    insert into kz_content (ID, CHANNELID, TITLE, 
+    insert into kz_news (ID, CHANNELID, TITLE, 
       AUTHOR, PUBLISHDATE, IMG, 
-      HIT, ISTOP,COMMENTNUM, ISCOMMENT, 
+      HIT, ISTOP,comment_Num, ISCOMMENT, 
       COMEFROM, ISDELETE, STATUS, 
       CONTENT, KEYWORD, STATICURL, 
       SOURCEURL)
     values (#{id,jdbcType=BIGINT}, #{channelid,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
       #{author,jdbcType=VARCHAR}, #{publishdate,jdbcType=TIMESTAMP}, #{img,jdbcType=VARCHAR}, 
-      #{hit,jdbcType=BIGINT}, #{istop,jdbcType=INTEGER}, #{commentnum,jdbcType=INTEGER}, #{iscomment,jdbcType=INTEGER}, 
+      #{hit,jdbcType=BIGINT}, #{istop,jdbcType=INTEGER}, #{commentNum,jdbcType=INTEGER}, #{iscomment,jdbcType=INTEGER}, 
       #{comefrom,jdbcType=VARCHAR}, #{isdelete,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
       #{content,jdbcType=LONGVARCHAR}, #{keyword,jdbcType=LONGVARCHAR}, #{staticurl,jdbcType=LONGVARCHAR}, 
       #{sourceurl,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.kz.po.NewsWithBLOBs" >
-    insert into kz_content
+    insert into kz_news
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         ID,
@@ -82,8 +82,8 @@
       <if test="istop != null" >
         ISTOP,
       </if>
-      <if test="commentnum != null" >
-        COMMENTNUM,
+      <if test="commentNum != null" >
+        comment_Num,
       </if>
       <if test="iscomment != null" >
         ISCOMMENT,
@@ -135,8 +135,8 @@
       <if test="istop != null" >
         #{istop,jdbcType=INTEGER},
       </if>
-      <if test="commentnum != null">
-        #{commentnum,jdbcType=INTEGER},
+      <if test="commentNum != null">
+        #{comment_Num,jdbcType=INTEGER},
       </if>
       <if test="iscomment != null" >
         #{iscomment,jdbcType=INTEGER},
@@ -165,7 +165,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.NewsWithBLOBs" >
-    update kz_content
+    update kz_news
     <set >
       <if test="channelid != null" >
         CHANNELID = #{channelid,jdbcType=BIGINT},
@@ -188,8 +188,8 @@
       <if test="istop != null" >
         ISTOP = #{istop,jdbcType=INTEGER},
       </if>
-      <if test="commentnum != null">
-        COMMENTNUM = #{COMMENTNUM,jdbcType=INTEGER},
+      <if test="commentNum != null">
+        comment_Num = #{commentNum,jdbcType=INTEGER},
       </if>
       <if test="iscomment != null" >
         ISCOMMENT = #{iscomment,jdbcType=INTEGER},
@@ -218,8 +218,13 @@
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
+  <update id="updateByPrimaryKeycommentNum" parameterType="com.kz.po.News">
+       update kz_news
+       set comment_Num = comment_Num+1
+       where ID = #{id,jdbcType=BIGINT}
+  </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.kz.po.NewsWithBLOBs" >
-    update kz_content
+    update kz_news
     set CHANNELID = #{channelid,jdbcType=BIGINT},
       TITLE = #{title,jdbcType=VARCHAR},
       AUTHOR = #{author,jdbcType=VARCHAR},
@@ -227,7 +232,7 @@
       IMG = #{img,jdbcType=VARCHAR},
       HIT = #{hit,jdbcType=BIGINT},
       ISTOP = #{istop,jdbcType=INTEGER},
-      COMMENTNUM = #{COMMENTNUM,jdbcType=INTEGER},
+      comment_Num = #{commentNum,jdbcType=INTEGER},
       ISCOMMENT = #{iscomment,jdbcType=INTEGER},
       COMEFROM = #{comefrom,jdbcType=VARCHAR},
       ISDELETE = #{isdelete,jdbcType=INTEGER},
@@ -239,7 +244,7 @@
     where ID = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.kz.po.News" >
-    update kz_content
+    update kz_news
     set CHANNELID = #{channelid,jdbcType=BIGINT},
       TITLE = #{title,jdbcType=VARCHAR},
       AUTHOR = #{author,jdbcType=VARCHAR},
@@ -247,7 +252,7 @@
       IMG = #{img,jdbcType=VARCHAR},
       HIT = #{hit,jdbcType=BIGINT},
       ISTOP = #{istop,jdbcType=INTEGER},
-      COMMENTNUM = #{COMMENTNUM,jdbcType=INTEGER},
+      comment_Num = #{commentNum,jdbcType=INTEGER},
       ISCOMMENT = #{iscomment,jdbcType=INTEGER},
       COMEFROM = #{comefrom,jdbcType=VARCHAR},
       ISDELETE = #{isdelete,jdbcType=INTEGER},
@@ -260,7 +265,7 @@
 		<include refid="Base_Column_List" />
 		,
 		<include refid="Blob_Column_List" />
-		from kz_content
+		from kz_news
 	</select>
 	<select id="dimContentPage" parameterType="com.kz.po.NewsQuery"
 		resultType="com.kz.po.News">
@@ -268,7 +273,7 @@
 		<include refid="Base_Column_List" />
 		,
 		<include refid="Blob_Column_List" />
-		from kz_content
+		from kz_news
 	    <where>
 			<if test="title!=null">
 				and TITLE like  '%${title}%'
@@ -276,7 +281,7 @@
 		</where>
 	</select>
 	<update id="whileKeyUpdateHit" parameterType="com.kz.po.News" >
-	    update kz_content 
+	    update kz_news 
 	    set  HIT=HIT+1
 	    where ID = #{id,jdbcType=BIGINT}
 	</update>

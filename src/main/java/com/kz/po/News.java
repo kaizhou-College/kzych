@@ -19,7 +19,7 @@ public class News {
 
     private Integer istop;
     
-    private Integer commentnum;
+    private Integer commentNum;
 
     private Integer iscomment;
 
@@ -93,14 +93,12 @@ public class News {
 		this.istop = istop;
 	}
 
-	
-
-	public Integer getCommentnum() {
-		return commentnum;
+	public Integer getCommentNum() {
+		return commentNum;
 	}
 
-	public void setCommentnum(Integer commentnum) {
-		this.commentnum = commentnum;
+	public void setCommentNum(Integer commentNum) {
+		this.commentNum = commentNum;
 	}
 
 	public Integer getIscomment() {

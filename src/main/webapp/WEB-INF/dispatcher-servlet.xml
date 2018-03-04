@@ -57,5 +57,16 @@
 		<property name="defaultEncoding" value="UTF-8"></property>
 	</bean>
 
-
+	<!--拦截器 -->
+	<mvc:interceptors>
+		<!--多个拦截器,顺序执行 -->
+		<mvc:interceptor>
+			<!--可以拦截路径不管多少层
+				/*   /1.jsp   /index.action
+				/**  /abc/1.jsp  /1.jsp  /a/b/c/index.action
+			-->
+			<mvc:mapping path="/comment/create.do" />
+			<bean class="com.kz.web.intercept.LoginIntercept"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
