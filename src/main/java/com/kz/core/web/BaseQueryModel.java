@@ -6,7 +6,7 @@ public class BaseQueryModel{
 	
 	private String queryJsonStr = "";
 	private int pageNum = 1;
-	private int pageSize = 0;
+	private int pageSize = 2;
 	public String getQueryJsonStr() {
 		return queryJsonStr;
 	}

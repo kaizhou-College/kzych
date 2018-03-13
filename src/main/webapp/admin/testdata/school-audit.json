@@ -1,0 +1,27 @@
+
+{
+    "status": 0,
+    "msg": "学校列表成功",
+    "data": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 2,
+        "orderBy": null,
+        "startRow": 1,
+        "endRow": 2,
+        "total": 100,
+        "pages": 10,
+        "list": [
+							 {"id":1,"categoryid": 1,"name":"湖南大学","img":"images/hndx.jpg","status": 1,"address": "湖南省长沙市岳麓区麓山南路2号"},
+							 {"id":2,"categoryid": 1,"name":"中南大学","img":"images/zndx.jpg","status": 1,"address": "湖南省长沙市岳麓区麓山南路2号"},
+							 {"id":3,"categoryid": 1,"name":"湘潭大学","img":"images/xtdx.jpg","status": 1,"address": "湖南省长沙市岳麓区麓山南路2号"},
+							 {"id":4,"categoryid": 1,"name":"湖南师范大学","img":"images/hnsf.jpg","status": 1,"address": "湖南省长沙市岳麓区麓山南路2号"},
+							 {"id":5,"categoryid": 1,"name":"湖南农业大学","img":"images/hnly.jpg","status": 1,"address": "湖南省长沙市岳麓区麓山南路2号"},
+							 {"id":6,"categoryid": 1,"name":"湖南大学","img":"images/hndx.jpg","status": 1,"address": "湖南省长沙市岳麓区麓山南路2号"},
+							 {"id":7,"categoryid": 1,"name":"中南大学","img":"images/zndx.jpg","status": 1,"address": "湖南省长沙市岳麓区麓山南路2号"},
+							 {"id":8,"categoryid": 1,"name":"湘潭大学","img":"images/xtdx.jpg","status": 1,"address": "湖南省长沙市岳麓区麓山南路2号"},
+							 {"id":9,"categoryid": 1,"name":"湖南师范大学","img":"images/hnsf.jpg","status": 1,"address": "湖南省长沙市岳麓区麓山南路2号"},
+							 {"id":10,"categoryid": 1,"name":"湖南农业大学","img":"images/hnly.jpg","status": 1,"address": "湖南省长沙市岳麓区麓山南路2号"}
+							]
+    }
+}
