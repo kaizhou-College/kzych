@@ -1,4 +1,6 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="common/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,12 +14,14 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="format-detection" content="telephone=no">
   
-  <link rel="stylesheet" href="css/layui.css?t=1515376178709"  media="all">
-  <link rel="stylesheet" href="css/global.css?t=1515376178709"  media="all">
+  <link rel="stylesheet" href="${basePath}admin/css/layui.css?t=1515376178709"  media="all">
+  <link rel="stylesheet" href="${basePath}admin/css/global.css?t=1515376178709"  media="all">
   <style>
   	  .layui-upload-img{height:150px;width:auto;margin: 0 10px 10px 0;
 }
   </style>
+  <script src="${basePath}admin/layui.js?t=1515376178709" charset="utf-8"></script>
+  <script src="${basePath}admin/app.js?t=1515376178709" charset="utf-8"></script>
   <script id="top_nav" type="text/html">
     	
   </script>
@@ -93,14 +97,13 @@
     © www.iychua.com - 湖南油菜花网络科技有限公司
   </div>
 </div>
-<script src="layui.js?t=1515376178709" charset="utf-8"></script>
-<script src="app.js?t=1515376178709" charset="utf-8"></script>
 <script>
 	
 	
 //JavaScript代码区域
 
 var cur_mod="系统管理";
+var basePath ="${basePath}" ;
 app.init(function($){
 	  //上传开机画面
   var uploadInst = app.upload.render({

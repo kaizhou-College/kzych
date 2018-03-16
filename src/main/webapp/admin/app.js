@@ -8,7 +8,7 @@ app = function(){
 }
 
 app.init = function(fn){
-	 alert(1);
+	 //alert(1);
 	 layui.use(['form', 'laypage', 'layer','laytpl','upload'], function(){ 
 	  app.form = layui.form;
       app.$= layui.$ ;//重点处
@@ -103,10 +103,16 @@ app.loadSideNav = function(mod_name,d,$){
        	  
        	  var select_class = '';
        	  //判断是否为当前选中的菜单
-       	  if(d[i].action != '' && window.location.href.indexOf(d[i].action ) != -1){
+//       	  alert(d[i].action);
+//       	  alert(window.location.href);
+       	  /*if(d[i].action != '' && window.location.href.indexOf(d[i].action ) != -1){
        	  	  select_class = 'layui-this';
+       	  }*/
+       	  if(d[i].action != ''&& window.location.href.indexOf("index.do")!=-1&& d[i].action.indexOf("schoolList.do")!=-1){
+       		  select_class = 'layui-this';
        	  }
-       	 
+       	  
+       	  
           ele += '<li class="layui-nav-item layui-nav-itemed ' + select_class + '">';
           
           ele += '<a class="" href="' + d[i].action + '">' + d[i].name + '</a>';

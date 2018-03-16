@@ -35,10 +35,80 @@ public class University extends BaseModel{
     private String introduction;
     
     private List<Major> majors;
+    
+    private String schoolLicense;
 
+    private String legalPersonName;
+
+    private String legalPersonCard;
+
+    private String legalPersonPhone;
+
+    private String administratorAccount;
+
+    private String administratorName;
+
+    private String administratorPhone;
     
     
-    public List<Major> getMajors() {
+
+	public String getSchoolLicense() {
+		return schoolLicense;
+	}
+
+	public void setSchoolLicense(String schoolLicense) {
+		this.schoolLicense = schoolLicense;
+	}
+
+	public String getLegalPersonName() {
+		return legalPersonName;
+	}
+
+	public void setLegalPersonName(String legalPersonName) {
+		this.legalPersonName = legalPersonName;
+	}
+
+	public String getLegalPersonCard() {
+		return legalPersonCard;
+	}
+
+	public void setLegalPersonCard(String legalPersonCard) {
+		this.legalPersonCard = legalPersonCard;
+	}
+
+	public String getLegalPersonPhone() {
+		return legalPersonPhone;
+	}
+
+	public void setLegalPersonPhone(String legalPersonPhone) {
+		this.legalPersonPhone = legalPersonPhone;
+	}
+
+	public String getAdministratorAccount() {
+		return administratorAccount;
+	}
+
+	public void setAdministratorAccount(String administratorAccount) {
+		this.administratorAccount = administratorAccount;
+	}
+
+	public String getAdministratorName() {
+		return administratorName;
+	}
+
+	public void setAdministratorName(String administratorName) {
+		this.administratorName = administratorName;
+	}
+
+	public String getAdministratorPhone() {
+		return administratorPhone;
+	}
+
+	public void setAdministratorPhone(String administratorPhone) {
+		this.administratorPhone = administratorPhone;
+	}
+
+	public List<Major> getMajors() {
 		return majors;
 	}
 
@@ -157,4 +227,5 @@ public class University extends BaseModel{
     public void setPublishStatus(Integer publishStatus) {
         this.publishStatus = publishStatus;
     }
+    
 }
