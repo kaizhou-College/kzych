@@ -19,6 +19,22 @@
   <style>
   	.layui-tab i:hover{cursor:pointer;}
   </style>
+  <script src="${basePath}admin/layui.js?t=1515376178709" charset="utf-8"></script>
+  <script src="${basePath}admin/app.js?t=1515376178709" charset="utf-8"></script>
+  <script src="${basePath}admin/lay/modules/jquery.js"></script>
+  <link rel="stylesheet" href="${basePath}admin/css/layui.css" />
+  <script type="text/javascript" src="${basePath}admin/data.js"></script>
+  <script type="text/javascript" src="${basePath}admin/province.js"></script>
+  <script type="text/javascript">
+	var defaults = {
+		s1 : 'provid',
+		s2 : 'cityid',
+		s3 : 'areaid',
+		v1 : null,
+		v2 : null,
+		v3 : null
+	};
+  </script>
 </head>
 
 <body class="layui-layout-body">
@@ -53,47 +69,39 @@
     
     <div style="padding: 15px;" id="search_box">
       
-      <form class="layui-form" action="">
-      	
-					  <div class="layui-form-item">
-					    <label class="layui-form-label">过滤</label>
-					    <div class="layui-input-inline">
-				      <select name="quiz1">
-				        <option value="">请选择省</option>
-				        <option value="湖南省" selected="">湖南省</option>
-				        
-				      </select>
-				    </div>
-				    <div class="layui-input-inline">
-				      <select name="quiz2">
-				        <option value="">请选择市</option>
-				        <option value="长沙">长沙</option>
-				        <option value="常德">常德</option>
-				        <option value="岳阳">岳阳</option>
-				        <option value="株洲">株洲</option>
-				        <option value="湘潭">湘潭</option>
-				      </select>
-				    </div>
-				    <div class="layui-input-inline">
-				      <select name="quiz3">
-				        <option value="">请选择县/区</option>
-				        <option value="长沙县">长沙县</option>
-				        <option value="开福区">开福区</option>
-				        <option value="芙蓉区">芙蓉区</option>
-				      </select>
-				    </div>
-			      <div class="layui-input-inline">
-				      <input name="search_key"  placeholder="请输入" autocomplete="off" class="layui-input" type="text">
-				    </div>
-				    <div class="layui-input-inline">
-				      <button class="layui-btn" lay-submit="" lay-filter="demo1">查找</button>
-				      
-				    </div>
-			    
-			    
-			  </div>
-		  
-		  </form>
+   			 <form class="layui-form"  method="get">
+					<input type="hidden" value="2" name="publishStatus">
+					<div class="layui-form-item">
+						<label class="layui-form-label">选择地区</label>
+						<div class="layui-input-inline">
+							<select name="provid" id="provid" lay-filter="provid">
+								<option value="">请选择省</option>
+							</select>
+						</div>
+						<div class="layui-input-inline">
+							<select name="cityid" id="cityid" lay-filter="cityid">
+								<option value="">请选择市</option>
+							</select>
+						</div>
+						<div class="layui-input-inline">
+							<select class="layui-select" name="areaid" id="areaid"
+								lay-filter="areaid">
+								<option value="">请选择县/区</option>
+							</select>
+						</div>
+						<div class="layui-input-inline">
+							<input name="search_key" placeholder="请输入" autocomplete="off"
+								class="layui-input" type="text">
+						</div>
+						<div class="layui-input-inline">
+							<button class="layui-btn" lay-submit lay-filter="formDemo"id="but_submit">查找</button>
+
+						</div>
+
+
+					</div>
+
+				</form>
       
       
     </div>
@@ -124,58 +132,58 @@
 			        <div class="layui-form-item">
 						    <label class="layui-form-label">学校名称:</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="" value="湖南大学" autocomplete="off" disabled class="layui-input">
+						      <input type="text" name="" value="湖南大学" id="school_Name" autocomplete="off" disabled class="layui-input">
 						    </div>
 						  </div>
 						  <div class="layui-form-item">
 						    <label class="layui-form-label">学校地址:</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="" value="湖南长沙" autocomplete="off" disabled class="layui-input">
+						      <input type="text" name="" value="湖南长沙" id="school_Address" autocomplete="off" disabled class="layui-input">
 						    </div>
 						  </div>
 						  <div class="layui-form-item">
 						    <label class="layui-form-label">办学许可证:</label>
 						    <div class="layui-input-block">
-						      <img src="images/school_cert.jpg" style="height:100px;">
+						      <img src="images/school_cert.jpg" id="school_License" style="height:100px;">
 						    </div>
 						  </div>
 						  <div class="layui-form-item">
 						    <label class="layui-form-label">法人姓名:</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="" value="张三" autocomplete="off" disabled class="layui-input">
+						      <input type="text" name="" value="张三" id="legal_person_Name" autocomplete="off" disabled class="layui-input">
 						    </div>
 						  </div>
 						  <div class="layui-form-item">
 						    <label class="layui-form-label">法人身份证:</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="" value="431111111111111" autocomplete="off" disabled class="layui-input">
+						      <input type="text" name="" value="431111111111111" id="legal_person_Card" autocomplete="off" disabled class="layui-input">
 						    </div>
 						  </div>
 						  
 						  <div class="layui-form-item">
 						    <label class="layui-form-label">法人电话:</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="" value="13882821234" autocomplete="off" disabled class="layui-input">
+						      <input type="text" name="" value="13882821234" autocomplete="off" id="legal_person_Phone" disabled class="layui-input">
 						    </div>
 						  </div>
 						  <div class="layui-form-item">
 						    <label class="layui-form-label">管理员帐号:</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="" value="13882822897" autocomplete="off" disabled class="layui-input">
+						      <input type="text" name="" value="13882822897" id="administrator_Account" autocomplete="off" disabled class="layui-input">
 						    </div>
 						  </div>
 						  
 						  <div class="layui-form-item">
 						    <label class="layui-form-label">管理员姓名:</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="" value="李四" autocomplete="off" disabled class="layui-input">
+						      <input type="text" name="" value="李四" id="administrator_Name" autocomplete="off" disabled class="layui-input">
 						    </div>
 						  </div>
 						  
 						  <div class="layui-form-item">
 						    <label class="layui-form-label">管理员电话:</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="" value="13882822897" autocomplete="off" disabled class="layui-input">
+						      <input type="text" name="" value="13882822897" id="administrator_Phone" autocomplete="off" disabled class="layui-input">
 						    </div>
 						  </div>
 						</div>
@@ -194,42 +202,219 @@
 </body>
 
 </html>
-<script src="${basePath}admin/layui.js?t=1515376178709" charset="utf-8"></script>
-<script src="${basePath}admin/app.js?t=1515376178709" charset="utf-8"></script>
 <script>
 	cur_mod="学校管理";
 	var basePath ="${basePath}" ;
 	app.init(function($){
 		 
-    	$.get("http://localhost:8080/kzych/university/list.do",function(schoollist){
+		layui.use('form', function(){
+			  var form = layui.form;
+			  
+			  //监听提交  (省份筛选)
+			  form.on('submit(formDemo)', function(data){
+				  $.ajax({
+			  			type:"get",
+			  			url:"http://localhost:8080/kzych/university/dimListPage.do",
+			  			data:{"provid":$("#provid").val(),
+			  					"cityid":$("#cityid").val(),
+			  					"areaid":$("#areaid").val(),
+			  					"search_key":$("#search_key").val()},
+			  			success:function(data){
+			  				//数据返回时
+			  				$("#school_list").empty();
+			  				var ele = '';
+			  				app.laypage.render({
+								elem : 'page',
+								limit : data.pageSize,
+								count : data.total//数据总数
+								,
+								jump : function(obj, first) {//点跳转触发
+									if (!first) {
+										layer.msg('第'
+												+ obj.curr
+												+ '页');
+										var currentPage = obj.curr;//获取点击的页码 
+										var limit = obj.limit;
+										//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
+										$.get("http://localhost:8080/kzych/university/schoolListPageWithConditions.do?&pageNum="
+																+ currentPage
+																+ "&pageSize="
+																+ limit
+																+ "&provid="+$("#provid").val()
+																+ "&cityid="+$("#cityid").val()
+																+ "&areaid="+$("#areaid").val()
+																+ "&search_key="+$("#search_key").val(),
+														function(
+																schoollist) {
+															var ele = '';
+															var list = schoollist.data.list;
+
+															//清空
+															$(
+																	"#school_list")
+																	.empty();
+															for ( var i in list) {
+																   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
+											        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+											    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
+																		+ list[i].name
+																		+ '</lable></div>';
+
+															}
+															//加载
+															$("#school_list").append(ele);
+															//显示单个信息
+															 //单击图片显示单个信息  隐藏其他学校图片
+															$("#school_list div").on("click",function(){
+							                  		       		  $("#main").hide();
+							                  		      		  $("#detail").show();
+							                  		      	   });
+															//单击返回隐藏单个学校学校 显示其他学校图片
+							                  		   		  $(".layui-tab i").on("click",function(){
+							                  		   	 		  $("#main").show();
+							                  		     		  $("#detail").hide();
+							                  		   		  });
+															
+
+														});
+									}
+								}
+							});
+			  				var list = data.list;
+			  				$("#school_list").empty();
+							for ( var i in list) {
+								   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
+			        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+			    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
+							}
+							//加载
+							$("#school_list").append(ele);
+			  				$("#school_list div").on("click",
+			  						function() {
+			  							$("#main").hide();
+			  							$("#detail").show();
+			  						});
+
+			  				$(".layui-tab i").on("click", function() {
+			  					$("#main").show();
+			  					$("#detail").hide();
+			  				});
+			  			},
+						});
+				    return false;
+			});
+		});
+		
+		
+    	$.get("http://localhost:8080/kzych/university/schoolList.do",function(schoollist){
     		   var ele = '';
+    		   function loadData(list){
+    			   //清空
+    			   /*
+    			   	alert($("#school_Name").val()+"-"+
+					$("#school_Address").val()+"-"+
+					$("#school_License").val()+"-"+
+					$("#legal_person_Name").val()+"-"+
+					$("#legal_person_Card").val()+"-"+
+					$("#legal_person_Phone").val()+"-"+
+					$("#administrator_Account").val()+"-"+
+					$("#administrator_Name").val()+"-"+
+					$("#administrator_Phone").val());
+    			   */
+    			   $("#school_list").empty();
+    			   for(var i in list){
+    				   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
+        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
+        		   	/*    ele += '<div style="width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;" schoolid="' + list[i].id + '"> ';
+        		   	   ele += '<img  onmouseup="showScoolInfo('+JSON.stringify(list[i])+')" src="' + list[i].profile + '" style="width:160px;height:120px;float:left;"/>';
+    		           ele += '<lable style="float:left;">' + list[i].name + '</lable></div>'; */
+    		         
+        		   }
+    			   //加载
+        		   $("#school_list").append(ele); 
+    		   }
     		   app.laypage.render({
 					    elem: 'page'
-					    ,limit:10
-					    ,count: schoollist.data.total //数据总数
-					    ,jump: function(obj){
-					      console.log(obj)
+					    ,limit:schoollist.data.pageSize
+						,count: schoollist.data.total//数据总数
+					    ,jump: function(obj,first){
+					      //console.log(obj);
+					      /* if(first!=true){//是否首次进入页面  
+                              var currentPage = obj.curr;//获取点击的页码 
+                              
+                              window.location.href ="http://localhost:8080/kzych/university/schoolList.do?pageNum="+currentPage;  
+                          }   */
+                          //console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                          //console.log(obj.limit); //得到每页显示的条数
+                          if(!first){
+					    	 layer.msg('第'+ obj.curr +'页');
+					    	 var currentPage = obj.curr;//获取点击的页码 
+					    	 var limit = obj.limit;
+                             //window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
+                             $.get("http://localhost:8080/kzych/university/schoolList.do?pageNum="+currentPage+"&pageSize="+limit,function(schoollist){
+                            	 var ele = '';
+                            	 var list = schoollist.data.list;
+                            	
+                            	 //清空
+                  			   $("#school_list").empty();
+                  			   for(var i in list){
+                  				 ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
+                  		   	  	 ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+              		           	 ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
+                  		         
+                      		   }
+                  			   //加载
+                      		 	  $("#school_list").append(ele); 
+                  			   //显示单个数据
+                      		   	  $("#school_list div").on("click",function(){
+                  		       		  $("#main").hide();
+                  		      		  $("#detail").show();
+                  		      	   });
+                  		   
+                  		   		  $(".layui-tab i").on("click",function(){
+                  		   	 		  $("#main").show();
+                  		     		  $("#detail").hide();
+                  		   		  });
+                  		    
+                  		    
+                             });
+                          }
 					    }
 					  });
-					 var list = schoollist.data.list;
-    		   for(var i in list){
+			   var list = schoollist.data.list;
+			   loadData(list);
+    		  /*  for(var i in list){
     		   	   ele += '<div style="width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;" schoolid="' + list[i].id + '"> ';
     		   	   ele += '<img src="' + list[i].profile + '" style="width:160px;height:120px;float:left;"/>';
 		         	 ele += '<lable style="float:left;">' + list[i].name + '</lable></div>';
 		         
     		   }
-    		   $("#school_list").append(ele);
+    		   $("#school_list").append(ele); */
+    		 //单击图片显示单个信息  隐藏其他学校图片
     		   $("#school_list div").on("click",function(){
     		       $("#main").hide();
     		       $("#detail").show();
     		   });
-    		   
+    		 //单击返回隐藏单个学校学校 显示其他学校图片
     		   $(".layui-tab i").on("click",function(){
     		   	   $("#main").show();
     		       $("#detail").hide();
     		   });
     		   
+    		   
     	});
 	});
-	
+	//给学校信息赋值
+	function showScoolInfo(list){
+		$("#school_Name").val(list.name);
+		$("#school_Address").val(list.address);
+		$("#school_License").attr("src",list.schoolLicense);
+		$("#legal_person_Name").val(list.legalPersonName);
+		$("#legal_person_Card").val(list.legalPersonCard);
+		$("#legal_person_Phone").val(list.legalPersonPhone);
+		$("#administrator_Account").val(list.administratorAccount);
+		$("#administrator_Name").val(list.administratorName);
+		$("#administrator_Phone").val(list.administratorPhone);
+	}
 </script>

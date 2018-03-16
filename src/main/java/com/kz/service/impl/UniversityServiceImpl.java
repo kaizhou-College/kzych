@@ -1,10 +1,13 @@
 package com.kz.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.kz.core.service.BaseService;
 import com.kz.dao.UniversityMapper;
 import com.kz.po.University;
@@ -24,5 +27,12 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 		PageHelper.startPage(pageNum, pageSize);
 		return mapper.selectMajorsPageById(id);
 		
+	}
+	@Override
+	public PageInfo<University> listKeyPublishStatus(UniversityQuery qu) {
+			PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
+			List<University> list = mapper.listKeyPublishStatus(qu);
+			PageInfo<University> result = new PageInfo<University>(list);
+			return result;
 	}
 }

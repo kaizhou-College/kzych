@@ -1,16 +1,16 @@
-[{"name":"系统管理","action":"index.html","children":[],
+[{"name":"系统管理","action":"/kzych/index.jsp","children":[],
                                          "side_nav":[
-                                            {"name":"应用管理 ","action":"","children":[{"name":"开机画面","action":"setting_app.html#start-img-box"},{"name":"主页轮播图","action":"setting_app.html#carousel-figure"}]},
+                                            {"name":"应用管理 ","action":"","children":[{"name":"开机画面","action":"/kzych/settingApp.do#start-img-box"},{"name":"主页轮播图","action":"setting_app.html#carousel-figure"}]},
                                             
                                             {"name":"优惠活动","action":"","children":[]},
                                             {"name":"事件通知","action":"","children":[]}
                                          ]},
- {"name":"学校管理","action":"university/index.do","children":[],"side_nav":[
-                                            {"name":"所有学校","action":"university/list.do","children":[]},
-                                            {"name":"待审学校","action":"school_audit.html","children":[]},
-                                            {"name":"末通过学校","action":"nopass_schools.html","children":[]}
+ {"name":"学校管理","action":"/kzych/university/index.do","children":[],"side_nav":[
+                                            {"name":"所有学校","action":"/kzych/university/index.do","children":[]},
+                                            {"name":"待审学校","action":"/kzych/university/schoolAuditTo.do","children":[]},
+                                            {"name":"末通过学校","action":"/kzych/university/schoolNopassTo.do","children":[]}
                                             ]},
- {"name":"用户管理","action":"userlist.html","children":[],"side_nav":[]},
- {"name":"内容管理","action":"content.html","children":[],"side_nav":[]}
+ {"name":"用户管理","action":"/kzych/admin/userlist.html","children":[],"side_nav":[]},
+ {"name":"内容管理","action":"/kzych/admin/content.html","children":[],"side_nav":[]}
 
 ]

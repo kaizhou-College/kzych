@@ -10,4 +10,8 @@ public class IndexController {
 	public String toIndex(){
 		return "index";
 	}
+	@RequestMapping("settingApp.do")
+	public String toSettingApp(){
+		return "setting_app";
+	}
 }
