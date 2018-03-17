@@ -1,14 +1,18 @@
 package com.kz.web.controller.portal;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +30,8 @@ import com.kz.service.IUniversityService;
 import com.kz.service.IUserService;
 import com.kz.utils.PropertiesUtil;
 
+import alipay.api.domain.Data;
+
 @Controller
 @RequestMapping("/university/")
 public class UniversityController {
@@ -37,8 +43,23 @@ public class UniversityController {
 	
 	@Autowired
     private IFileService iFileService;
-
-	@RequestMapping("list.do")
+	
+	//学校首页
+	@RequestMapping(value="index.do",method=RequestMethod.GET) 
+	public String SchoolIndex(){
+		return "schoollist";
+	}
+	//跳转到审查学校
+	@RequestMapping(value="schoolAuditTo.do",method=RequestMethod.GET) 
+	public String SchoolAudit(){
+		return "school_audit";
+	}
+	//跳转到未通过学校
+	@RequestMapping(value="schoolNopassTo.do",method=RequestMethod.GET) 
+	public String SchoolNopass(){
+		return "nopass_schools";
+	}
+	@RequestMapping("schoolList.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> list(UniversityQuery uq) {
 		// TODO 1,验证是否登陆
@@ -46,7 +67,21 @@ public class UniversityController {
 		// 页面显示数据
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}
-
+	@RequestMapping("schoolListPageWithConditions.do")
+	@ResponseBody
+	public ServerResponse<PageInfo> listKeyPublishStatus(UniversityQuery qu){
+		//按条件分页查询
+		PageInfo pageInfo = iUniversityService.listKeyPublishStatus(qu);
+		return ServerResponse.createBySuccess("查询成功", pageInfo);
+	}
+	@RequestMapping("dimListPage.do")
+	@ResponseBody
+	public PageInfo  dimListPage(HttpServletResponse resp,UniversityQuery qu){
+		//ajax   按地址分页
+		PageInfo pageInfo = iUniversityService.listKeyPublishStatus(qu);
+		return pageInfo;
+	}
+	
 	@RequestMapping("university_detail.do")
 	@ResponseBody
 	public ServerResponse<University> list(Long universityId, int pageNum, int pageSize) {

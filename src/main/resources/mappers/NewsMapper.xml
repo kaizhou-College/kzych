@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kz.dao.NewsMapper" >
+ <resultMap id="BaseResultMap" type="com.kz.po.News" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="CHANNELID" property="channelid" jdbcType="BIGINT" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="AUTHOR" property="author" jdbcType="VARCHAR" />
+    <result column="PUBLISHDATE" property="publishdate" jdbcType="TIMESTAMP" />
+    <result column="IMG" property="img" jdbcType="VARCHAR" />
+    <result column="HIT" property="hit" jdbcType="BIGINT" />
+    <result column="comment_Num" property="commentNum" jdbcType="BIGINT" />
+    <result column="ISTOP" property="istop" jdbcType="INTEGER" />
+    <result column="ISCOMMENT" property="iscomment" jdbcType="INTEGER" />
+    <result column="COMEFROM" property="comefrom" jdbcType="VARCHAR" />
+    <result column="ISDELETE" property="isdelete" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.kz.po.NewsWithBLOBs" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+    <result column="KEYWORD" property="keyword" jdbcType="LONGVARCHAR" />
+    <result column="STATICURL" property="staticurl" jdbcType="LONGVARCHAR" />
+    <result column="SOURCEURL" property="sourceurl" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CHANNELID, TITLE, AUTHOR, PUBLISHDATE, IMG, HIT, comment_Num, ISTOP, ISCOMMENT, 
+    COMEFROM, ISDELETE, STATUS
+  </sql>
+  <sql id="Blob_Column_List" >
+    CONTENT, KEYWORD, STATICURL, SOURCEURL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from kz_news
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from kz_news
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.kz.po.NewsWithBLOBs" >
+    insert into kz_news (ID, CHANNELID, TITLE, 
+      AUTHOR, PUBLISHDATE, IMG, 
+      HIT, ISTOP,comment_Num, ISCOMMENT, 
+      COMEFROM, ISDELETE, STATUS, 
+      CONTENT, KEYWORD, STATICURL, 
+      SOURCEURL)
+    values (#{id,jdbcType=BIGINT}, #{channelid,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{publishdate,jdbcType=TIMESTAMP}, #{img,jdbcType=VARCHAR}, 
+      #{hit,jdbcType=BIGINT}, #{istop,jdbcType=INTEGER}, #{commentNum,jdbcType=INTEGER}, #{iscomment,jdbcType=INTEGER}, 
+      #{comefrom,jdbcType=VARCHAR}, #{isdelete,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{content,jdbcType=LONGVARCHAR}, #{keyword,jdbcType=LONGVARCHAR}, #{staticurl,jdbcType=LONGVARCHAR}, 
+      #{sourceurl,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kz.po.NewsWithBLOBs" >
+    insert into kz_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="channelid != null" >
+        CHANNELID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="author != null" >
+        AUTHOR,
+      </if>
+      <if test="publishdate != null" >
+        PUBLISHDATE,
+      </if>
+      <if test="img != null" >
+        IMG,
+      </if>
+      <if test="hit != null" >
+        HIT,
+      </if>
+      <if test="istop != null" >
+        ISTOP,
+      </if>
+      <if test="commentNum != null" >
+        comment_Num,
+      </if>
+      <if test="iscomment != null" >
+        ISCOMMENT,
+      </if>
+      <if test="comefrom != null" >
+        COMEFROM,
+      </if>
+      <if test="isdelete != null" >
+        ISDELETE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="keyword != null" >
+        KEYWORD,
+      </if>
+      <if test="staticurl != null" >
+        STATICURL,
+      </if>
+      <if test="sourceurl != null" >
+        SOURCEURL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="channelid != null" >
+        #{channelid,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="publishdate != null" >
+        #{publishdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="hit != null" >
+        #{hit,jdbcType=BIGINT},
+      </if>
+      <if test="istop != null" >
+        #{istop,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        #{comment_Num,jdbcType=INTEGER},
+      </if>
+      <if test="iscomment != null" >
+        #{iscomment,jdbcType=INTEGER},
+      </if>
+      <if test="comefrom != null" >
+        #{comefrom,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="staticurl != null" >
+        #{staticurl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sourceurl != null" >
+        #{sourceurl,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.NewsWithBLOBs" >
+    update kz_news
+    <set >
+      <if test="channelid != null" >
+        CHANNELID = #{channelid,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        AUTHOR = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="publishdate != null" >
+        PUBLISHDATE = #{publishdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="img != null" >
+        IMG = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="hit != null" >
+        HIT = #{hit,jdbcType=BIGINT},
+      </if>
+      <if test="istop != null" >
+        ISTOP = #{istop,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        comment_Num = #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="iscomment != null" >
+        ISCOMMENT = #{iscomment,jdbcType=INTEGER},
+      </if>
+      <if test="comefrom != null" >
+        COMEFROM = #{comefrom,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        ISDELETE = #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="keyword != null" >
+        KEYWORD = #{keyword,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="staticurl != null" >
+        STATICURL = #{staticurl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sourceurl != null" >
+        SOURCEURL = #{sourceurl,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeycommentNum" parameterType="com.kz.po.News">
+       update kz_news
+       set comment_Num = comment_Num+1
+       where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.kz.po.NewsWithBLOBs" >
+    update kz_news
+    set CHANNELID = #{channelid,jdbcType=BIGINT},
+      TITLE = #{title,jdbcType=VARCHAR},
+      AUTHOR = #{author,jdbcType=VARCHAR},
+      PUBLISHDATE = #{publishdate,jdbcType=TIMESTAMP},
+      IMG = #{img,jdbcType=VARCHAR},
+      HIT = #{hit,jdbcType=BIGINT},
+      ISTOP = #{istop,jdbcType=INTEGER},
+      comment_Num = #{commentNum,jdbcType=INTEGER},
+      ISCOMMENT = #{iscomment,jdbcType=INTEGER},
+      COMEFROM = #{comefrom,jdbcType=VARCHAR},
+      ISDELETE = #{isdelete,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      CONTENT = #{content,jdbcType=LONGVARCHAR},
+      KEYWORD = #{keyword,jdbcType=LONGVARCHAR},
+      STATICURL = #{staticurl,jdbcType=LONGVARCHAR},
+      SOURCEURL = #{sourceurl,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kz.po.News" >
+    update kz_news
+    set CHANNELID = #{channelid,jdbcType=BIGINT},
+      TITLE = #{title,jdbcType=VARCHAR},
+      AUTHOR = #{author,jdbcType=VARCHAR},
+      PUBLISHDATE = #{publishdate,jdbcType=TIMESTAMP},
+      IMG = #{img,jdbcType=VARCHAR},
+      HIT = #{hit,jdbcType=BIGINT},
+      ISTOP = #{istop,jdbcType=INTEGER},
+      comment_Num = #{commentNum,jdbcType=INTEGER},
+      ISCOMMENT = #{iscomment,jdbcType=INTEGER},
+      COMEFROM = #{comefrom,jdbcType=VARCHAR},
+      ISDELETE = #{isdelete,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getByConditionPage" parameterType="com.kz.po.NewsQuery"
+		resultType="com.kz.po.News">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from kz_news
+	</select>
+	<select id="dimContentPage" parameterType="com.kz.po.NewsQuery"
+		resultType="com.kz.po.News">
+	    select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from kz_news
+	    <where>
+			<if test="title!=null">
+				and TITLE like  '%${title}%'
+			</if>
+		</where>
+	</select>
+	<update id="whileKeyUpdateHit" parameterType="com.kz.po.News" >
+	    update kz_news 
+	    set  HIT=HIT+1
+	    where ID = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>

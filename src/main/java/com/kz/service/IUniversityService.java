@@ -15,4 +15,5 @@ import com.kz.po.UserQuery;
 public interface IUniversityService extends IBaseService<University, UniversityQuery>{
 
 	University selectMajorsPageById(Long id, int pageNum, int pageSize);
+	PageInfo listKeyPublishStatus(UniversityQuery qu);
 }

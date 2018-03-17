@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.kz.po.User;
 
-public interface BaseMapper<M, QM> {
 	
+public interface BaseMapper<M, QM> {
 	public Long deleteByPrimaryKey(Serializable uuid);
 
 	public Long insert(M m);

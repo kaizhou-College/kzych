@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Lists;
@@ -22,6 +23,7 @@ import com.kz.utils.FTPUtil;
  * @version V1.0
  */
 @Service("iFileService")
+@Transactional
 public class FileServiceImpl implements IFileService {
 
     private Logger logger = LoggerFactory.getLogger(FileServiceImpl.class);

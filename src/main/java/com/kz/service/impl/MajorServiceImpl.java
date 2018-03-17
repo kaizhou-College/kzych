@@ -2,6 +2,7 @@ package com.kz.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kz.core.service.BaseService;
 import com.kz.dao.MajorMapper;
@@ -11,6 +12,7 @@ import com.kz.po.MajorUniversity;
 import com.kz.service.IMajorService;
 
 @Service
+@Transactional
 public class MajorServiceImpl extends BaseService<Major, MajorQuery> implements IMajorService {
 	
 	private MajorMapper mapper;

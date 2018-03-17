@@ -1,0 +1,10 @@
+[{"name":"我的学校","action":"my_school.html","children":[],
+                                         "side_nav":[
+                                            {"name":"学校信息","action":"my_school.html","children":[]},
+                                            
+                                            {"name":"报名管理","action":"","children":[]}
+                                           
+                                         ]}
+
+
+]
