@@ -31,7 +31,7 @@ public class AppPayTest {
 		model.setTotalAmount("0.01");
 		model.setProductCode("QUICK_MSECURITY_PAY");
 		request.setBizModel(model);
-		//request.setNotifyUrl("商户外网可以访问的异步地址");
+		//request.setNotifyUrl("商户外网可以访问的异步地 址");
 		try {
 			// 这里和普通的接口调用不同，使用的是sdkExecute
 			AlipayTradeAppPayResponse response = alipayClient.sdkExecute(request);
