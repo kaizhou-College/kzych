@@ -14,4 +14,8 @@ public interface UniversityMapper extends BaseMapper<University, UniversityQuery
 
 	University selectMajorsPageById(Long id);
 	List<University> listKeyPublishStatus(UniversityQuery uq);
+	Long insertSelectiveSequence(University m);
+	Long updateByKeySelective(University m);
+	List<University> schoolByUserIdList(University m);
+	Long schoolByUserIdUpdate(University m);
 }

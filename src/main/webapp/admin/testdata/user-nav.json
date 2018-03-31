@@ -1,0 +1,44 @@
+[{"name":"个人中心","action":"/kzych/university/productTO.do","children":[],
+                                         "side_nav":[
+                                            {"name":"产品与服务","action":"/kzych/university/productTO.do","children":[]},
+                                            {"name":"我的优惠券","action":"","children":[]},
+                                            {"name":"我的定单","action":"","children":[]},
+                                            {"name":"用户信息","action":"/kzych/user/userinfoTo.do","children":[]},
+                                            {"name":"安全设置","action":"","children":[]}
+                                           
+                                         ]},
+ {"name":"招生","action":"my_school.html","children":[],
+                                         "side_nav":[
+                                            {"name":"招生信息","action":"my_school.html","children":[]},
+                                            
+                                            {"name":"报名管理","action":"enroll_manager.html","children":[]}
+                                           
+                                         ]},
+                                         
+ {"name":"招聘","action":"post_publish.html","children":[],
+                                         "side_nav":[
+                                            {"name":"发布岗位","action":"post_publish.html","children":[]},
+                                            
+                                            {"name":"岗位管理","action":"post_manager.html","children":[]},
+                                            {"name":"简历管理","action":"resume_manager.html","children":[]},
+                                            {"name":"人才查找","action":"talent_find.html","children":[]}
+                                           
+                                         ]},
+ {"name":"油菜园","action":"info.html","children":[],
+                                         "side_nav":[
+                                            {"name":"图文主页","action":"info.html","children":[]},
+                                            {"name":"内容发布","action":"content_publish.html","children":[]},
+                                            {"name":"内容管理","action":"","children":[
+																												                                            {"name":"图文","action":"article_manager.html","children":[]},
+																												                                            
+																												                                            {"name":"视频","action":"vision_manager.html","children":[]}
+																												                                            
+						                                                                                       ]},
+                                            {"name":"评论管理","action":"comment_manager.html","children":[]},
+                                            {"name":"素材管理","action":"material_manager.html","children":[]}
+                                            
+                                           
+                                         ]}                                   
+
+
+]

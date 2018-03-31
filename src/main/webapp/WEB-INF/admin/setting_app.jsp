@@ -70,7 +70,7 @@
 			    <p id="errText1"></p>
 			  </div>
 			</div>  
-      <button type="button" class="layui-btn">保存</button>
+      <button type="button" class="layui-btn" id="btu_01">保存</button>
       
     </div>
         <div style="padding: 15px;" id="carousel-figure-box">
@@ -87,7 +87,7 @@
         <div class="layui-upload-list" id="carousel-figure-view"></div>
       </blockquote>
 			</div>  
-      <button type="button" class="layui-btn">保存</button>
+      <button type="button" class="layui-btn" id="btu_02">保存</button>
       
     </div>
   </div>
@@ -108,7 +108,10 @@ app.init(function($){
 	  //上传开机画面
   var uploadInst = app.upload.render({
     elem: '#start-img'
-    ,url: '/upload/'
+    ,url: '/kzych/university/save.do'
+    ,auto: false //选择文件后不自动上传
+    ,bindAction: '#btu_01' //指向一个按钮触发上传
+    ,field: 'upload_file'
     ,before: function(obj){
       //预读本地文件示例，不支持ie8
       obj.preview(function(index, file, result){
@@ -136,7 +139,10 @@ app.init(function($){
   //上传轮播图
   app.upload.render({
     elem: '#carousel-figure'
-    ,url: '/upload/'
+    ,url: '/kzych/university/save.do'
+    ,auto: false //选择文件后不自动上传
+    ,bindAction: '#btu_02' //指向一个按钮触发上传
+    ,field: 'upload_file'
     ,multiple: true
     ,before: function(obj){
       //预读本地文件示例，不支持ie8

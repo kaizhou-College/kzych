@@ -75,18 +75,18 @@
 						<label class="layui-form-label">选择地区</label>
 						<div class="layui-input-inline">
 							<select name="provid" id="provid" lay-filter="provid">
-								<option value="">请选择省</option>
+								<option value="1">请选择省</option>
 							</select>
 						</div>
 						<div class="layui-input-inline">
 							<select name="cityid" id="cityid" lay-filter="cityid">
-								<option value="">请选择市</option>
+								<option value="2">请选择市</option>
 							</select>
 						</div>
 						<div class="layui-input-inline">
 							<select class="layui-select" name="areaid" id="areaid"
 								lay-filter="areaid">
-								<option value="">请选择县/区</option>
+								<option value="3">请选择县/区</option>
 							</select>
 						</div>
 						<div class="layui-input-inline">

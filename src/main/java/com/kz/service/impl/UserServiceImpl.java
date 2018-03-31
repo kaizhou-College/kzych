@@ -1,5 +1,7 @@
 package com.kz.service.impl;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +17,7 @@ import com.kz.utils.MD5Util;
 
 @Service
 @Transactional
-public class UserServiceImpl extends BaseService<User, UserQuery>implements IUserService {
+public class UserServiceImpl extends BaseService<User, UserQuery> implements IUserService {
 	private UserMapper userMapper = null;
 
 	@Autowired
@@ -23,6 +25,7 @@ public class UserServiceImpl extends BaseService<User, UserQuery>implements IUse
 		this.userMapper = mapper;
 		super.setMapper(mapper);
 	}
+
 	public ServerResponse<User> login(String username, String password) {
 		int resultCount = userMapper.checkUsername(username);
 		if (resultCount == 0) {
@@ -123,6 +126,53 @@ public class UserServiceImpl extends BaseService<User, UserQuery>implements IUse
 			return ServerResponse.createBySuccess();
 		}
 		return ServerResponse.createByError();
+	}
+
+	@Override
+	public ServerResponse<User> IsNotAdministrator(String username) {
+		int resultCount = userMapper.checkUsername(username);
+		if (resultCount == 0) {
+			ServerResponse.createByErrorMessage("用户不存在!");
+		}
+		User user = userMapper.selectAdministrator(username);
+		if (user == null) {
+			return ServerResponse.createByErrorMessage("用户不存在");
+		}
+		return ServerResponse.createBySuccess("登陆成功！！", user);
+	}
+
+	@Override
+	public Long updateByKeyInfo(User u) {
+		// 编码
+		String realName = u.getRealName();
+		String school = u.getSchool();
+		String originPlace = u.getOriginPlace();
+		try {
+			realName = new String((u.getRealName()).getBytes("iso-8859-1"), "UTF-8");
+			school = new String((u.getSchool()).getBytes("iso-8859-1"), "UTF-8");
+			originPlace = new String((u.getOriginPlace()).getBytes("iso-8859-1"), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		for (int i = 0; i < 3; i++) {
+			if (u.getIdcard().equals("只有在用户报读大中专学校和找工作、社会实践时才会要求填写")) {
+				u.setRealName(null);
+			}
+			if (u.getSchool().equals("只有在用户报读大中专学校和找工作、社会实践时才会要求填写")) {
+				u.setSchool(null);
+			}
+			if (u.getOriginPlace().equals("只有在用户报读大中专学校和找工作、社会实践时才会要求填写")) {
+				u.setOriginPlace(null);
+			}
+		}
+		// 用户名不能改
+		u.setRealName(realName);
+		u.setSchool(school);
+		u.setOriginPlace(originPlace);
+		u.setUsername(null);
+		System.out.println(u);
+		return userMapper.updateByKeyInfo(u);
 	}
 
 }

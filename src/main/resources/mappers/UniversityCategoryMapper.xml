@@ -79,4 +79,9 @@
       PARENTID = #{parentid,jdbcType=INTEGER}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+  <select id="select" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from kz_university_category
+  </select>
 </mapper>

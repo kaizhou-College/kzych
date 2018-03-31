@@ -80,7 +80,7 @@
 						<label class="layui-form-label">选择地区</label>
 						<div class="layui-input-inline">
 							<select name="provid" id="provid" lay-filter="provid">
-								<option value="">请选择省</option>
+								<option value="1">请选择省</option>
 							</select>
 						</div>
 						<div class="layui-input-inline">
@@ -186,10 +186,28 @@
 						    <label class="layui-form-label">管理员电话:</label>
 						    <div class="layui-input-block">
 						      <input type="text" name="" value="13882822897" id="administrator_Phone" autocomplete="off" disabled class="layui-input">
+						      <input type="hidden" id="id_school" >
 						    </div>
 						  </div>
 						</div>
-						
+						<hr class="layui-bg-green">
+						<form class="layui-form">
+							  
+								    
+							      <div class="layui-form-item layui-form-text">
+									    <label class="layui-form-label">审核</label>
+									    <div class="layui-input-block">
+									      <textarea placeholder="如果不通过请输入不通过原因" class="layui-textarea" id="checkedInfo"></textarea>
+									    </div>
+									  </div>
+									  
+									    <div class="layui-form-item" style="text-align:center;">
+										    <button id="pass" class="layui-btn" lay-submit="" lay-filter="demo2">通过</button>
+								            <button id="nopass" class="layui-btn" lay-submit="" lay-filter="demo1">不通过</button>
+										  </div>
+								 
+								  
+						</form>
 			    </div>
 			    <div class="layui-tab-item">学校主页</div>
 			    <div class="layui-tab-item">招生简章</div>
@@ -223,7 +241,7 @@
 			  					"cityid":$("#cityid").val(),
 			  					"areaid":$("#areaid").val(),
 			  					"search_key":$("#search_key").val(),
-			  					"publishStatus":"2"},
+			  					"publishStatus":"1"},
 			  			success:function(data){
 			  				//数据返回时
 			  				$("#school_list").empty();
@@ -249,7 +267,7 @@
 																+ "&cityid="+$("#cityid").val()
 																+ "&areaid="+$("#areaid").val()
 																+ "&search_key="+$("#search_key").val()
-																+ "&publishStatus=2",
+																+ "&publishStatus=1",
 														function(
 																schoollist) {
 															var ele = '';
@@ -306,11 +324,79 @@
 						});
 				    return false;
 			});
+			/*//测试代码  //修改学校状态
+				$("#pass").on("click",function(){
+					setCookie("zhaosheng_service_status","2","d1"); 
+					//异步请求更改该学校的状态
+					$.ajax({
+			  			type:"get",
+			  			url:"http://localhost:8080/kzych/university/updatePublicStatus.do",
+			  			data:{"id":$("#id_school").val(),"publishStatus":2},
+			  			success:function(data){
+			  			},
+			  			error:function(){
+			  				alert("请求失败");
+			  			}		
+					});
+				});
+				/* //修改学校状态
+				$("#nopass").on("click",function(){
+					  setCookie("zhaosheng_service_status","3","d1"); 
+					//异步请求更改该学校的状态
+						$.ajax({
+				  			type:"post",
+				  			url:"http://localhost:8080/kzych/university/updatePublicStatus.do",
+				  			data:{"id":$("#id_school").val(),"publishStatus":3,"checkedInfo":$("#checkedInfo").val()},
+				  			success:function(data){
+				  				alert("哈哈哈")
+				  				alert("成功"+data);
+				  			},
+				  			error:function(){
+				  				alert("请求失败");
+				  			}		
+						});
+				});*/
+			  
+			  form.on('submit(demo2)', function(data){
+					//异步请求更改该学校的状态
+						$.ajax({
+							type:"get",
+				  			url:"http://localhost:8080/kzych/university/updatePublicStatus.do",
+				  			data:{"id":$("#id_school").val(),"publishStatus":2},
+				  			success:function(data){
+				  				setCookie("zhaosheng_service_status"+data,"2","d1"); 
+				  				//页面刷新
+				  				location.reload();
+				  			},
+				  			error:function(){
+				  				alert("请求失败");
+				  			}		
+						});
+				  return false;
+			  });
+			  form.on('submit(demo1)', function(data){
+					//异步请求更改该学校的状态
+						$.ajax({
+				  			type:"post",
+				  			url:"http://localhost:8080/kzych/university/updatePublicStatus.do",
+				  			data:{"id":$("#id_school").val(),"publishStatus":3,"checkedInfo":$("#checkedInfo").val()},
+				  			success:function(data){
+				  				setCookie("zhaosheng_service_status"+data,"3","d1"); 
+				  				//页面刷新
+				  				location.reload();
+				  			},
+				  			error:function(){
+				  				alert("请求失败");
+				  			}		
+						});
+				  return false;
+			  });
+			  
 		});
 		
 		
 		//分页跳转 ajax
-		$.get("http://localhost:8080/kzych/university/schoolListPageWithConditions.do?publishStatus=2",
+		$.get("http://localhost:8080/kzych/university/schoolListPageWithConditions.do?publishStatus=1",
 		function(schoollist) {
 			var ele = '';
 			function loadData(list) {
@@ -347,7 +433,7 @@
 							//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
 							$
 									.get(
-											"http://localhost:8080/kzych/university/schoolListPageWithConditions.do?publishStatus=2&pageNum="
+											"http://localhost:8080/kzych/university/schoolListPageWithConditions.do?publishStatus=1&pageNum="
 													+ currentPage
 													+ "&pageSize="
 													+ limit,
@@ -418,5 +504,9 @@
 		$("#administrator_Account").val(list.administratorAccount);
 		$("#administrator_Name").val(list.administratorName);
 		$("#administrator_Phone").val(list.administratorPhone);
+		$("#id_school").val(list.id);
+		
 	}
+	
+	
 </script>

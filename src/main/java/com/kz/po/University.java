@@ -49,8 +49,24 @@ public class University extends BaseModel{
     private String administratorName;
 
     private String administratorPhone;
+
+    private Integer userId;
+
+    private Integer universityType;
+
+    private Integer universityNature;
+    
+    private String checkedInfo;
     
     
+
+	public String getCheckedInfo() {
+		return checkedInfo;
+	}
+
+	public void setCheckedInfo(String checkedInfo) {
+		this.checkedInfo = checkedInfo;
+	}
 
 	public String getSchoolLicense() {
 		return schoolLicense;
@@ -227,5 +243,45 @@ public class University extends BaseModel{
     public void setPublishStatus(Integer publishStatus) {
         this.publishStatus = publishStatus;
     }
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public Integer getUniversityType() {
+		return universityType;
+	}
+
+	public void setUniversityType(Integer universityType) {
+		this.universityType = universityType;
+	}
+
+	public Integer getUniversityNature() {
+		return universityNature;
+	}
+
+	public void setUniversityNature(Integer universityNature) {
+		this.universityNature = universityNature;
+	}
+
+	@Override
+	public String toString() {
+		return "University [id=" + id + ", code=" + code + ", profile=" + profile + ", agreements=" + agreements
+				+ ", telephone=" + telephone + ", grants=" + grants + ", coupon=" + coupon + ", categoryid="
+				+ categoryid + ", publishStatus=" + publishStatus + ", name=" + name + ", address=" + address
+				+ ", employmentInfo=" + employmentInfo + ", brochure=" + brochure + ", introduction=" + introduction
+				+ ", majors=" + majors + ", schoolLicense=" + schoolLicense + ", legalPersonName=" + legalPersonName
+				+ ", legalPersonCard=" + legalPersonCard + ", legalPersonPhone=" + legalPersonPhone
+				+ ", administratorAccount=" + administratorAccount + ", administratorName=" + administratorName
+				+ ", administratorPhone=" + administratorPhone + ", userId=" + userId + ", universityType="
+				+ universityType + ", universityNature=" + universityNature + ", checkedInfo=" + checkedInfo + "]";
+	}
+
+
+	
     
 }

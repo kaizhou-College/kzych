@@ -75,7 +75,7 @@
 						<label class="layui-form-label">选择地区</label>
 						<div class="layui-input-inline">
 							<select name="provid" id="provid" lay-filter="provid">
-								<option value="">请选择省</option>
+								<option value="1">请选择省</option>
 							</select>
 						</div>
 						<div class="layui-input-inline">

@@ -18,6 +18,10 @@
     <result column="Administrator_Account" property="administratorAccount" jdbcType="VARCHAR" />
     <result column="Administrator_Name" property="administratorName" jdbcType="VARCHAR" />
     <result column="Administrator_Phone" property="administratorPhone" jdbcType="VARCHAR" />
+    <result column="USER_id" property="userId" jdbcType="INTEGER" />
+    <result column="University_Type" property="universityType" jdbcType="INTEGER" />
+    <result column="University_Nature" property="universityNature" jdbcType="INTEGER" />
+    <result column="checked_info" property="checkedInfo" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.kz.po.universityWithBLOBs" extends="BaseResultMap" >
     <result column="NAME" property="name" jdbcType="LONGVARCHAR" />
@@ -29,7 +33,8 @@
   <sql id="Base_Column_List" >
     ID, CODE, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, coupon, CATEGORYID, PUBLISH_STATUS, 
     School_license, Legal_person_name, Legal_person_Card, Legal_person_Phone, Administrator_Account, 
-    Administrator_Name, Administrator_Phone
+    Administrator_Name, Administrator_Phone, USER_id, University_Type, University_Nature, 
+    checked_info
   </sql>
   <sql id="Blob_Column_List" >
     NAME, ADDRESS, EMPLOYMENT_INFO, BROCHURE, INTRODUCTION
@@ -53,16 +58,20 @@
       School_license, Legal_person_name, Legal_person_Card, 
       Legal_person_Phone, Administrator_Account, 
       Administrator_Name, Administrator_Phone, 
-      NAME, ADDRESS, EMPLOYMENT_INFO, 
-      BROCHURE, INTRODUCTION)
+      USER_id, University_Type, University_Nature, 
+      checked_info, NAME, ADDRESS, 
+      EMPLOYMENT_INFO, BROCHURE, INTRODUCTION
+      )
     values (#{id,jdbcType=BIGINT}, #{code,jdbcType=BIGINT}, #{profile,jdbcType=VARCHAR}, 
       #{agreements,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{grants,jdbcType=DECIMAL}, 
       #{coupon,jdbcType=DECIMAL}, #{categoryid,jdbcType=BIGINT}, #{publishStatus,jdbcType=INTEGER}, 
       #{schoolLicense,jdbcType=VARCHAR}, #{legalPersonName,jdbcType=VARCHAR}, #{legalPersonCard,jdbcType=VARCHAR}, 
       #{legalPersonPhone,jdbcType=VARCHAR}, #{administratorAccount,jdbcType=VARCHAR}, 
       #{administratorName,jdbcType=VARCHAR}, #{administratorPhone,jdbcType=VARCHAR}, 
-      #{name,jdbcType=LONGVARCHAR}, #{address,jdbcType=LONGVARCHAR}, #{employmentInfo,jdbcType=LONGVARCHAR}, 
-      #{brochure,jdbcType=LONGVARCHAR}, #{introduction,jdbcType=LONGVARCHAR})
+      #{userId,jdbcType=INTEGER}, #{universityType,jdbcType=INTEGER}, #{universityNature,jdbcType=INTEGER}, 
+      #{checkedInfo,jdbcType=VARCHAR}, #{name,jdbcType=LONGVARCHAR}, #{address,jdbcType=LONGVARCHAR}, 
+      #{employmentInfo,jdbcType=LONGVARCHAR}, #{brochure,jdbcType=LONGVARCHAR}, #{introduction,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.kz.po.universityWithBLOBs" >
     insert into kz_university
@@ -114,6 +123,18 @@
       </if>
       <if test="administratorPhone != null" >
         Administrator_Phone,
+      </if>
+      <if test="userId != null" >
+        USER_id,
+      </if>
+      <if test="universityType != null" >
+        University_Type,
+      </if>
+      <if test="universityNature != null" >
+        University_Nature,
+      </if>
+      <if test="checkedInfo != null" >
+        checked_info,
       </if>
       <if test="name != null" >
         NAME,
@@ -180,6 +201,171 @@
       <if test="administratorPhone != null" >
         #{administratorPhone,jdbcType=VARCHAR},
       </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="universityType != null" >
+        #{universityType,jdbcType=INTEGER},
+      </if>
+      <if test="universityNature != null" >
+        #{universityNature,jdbcType=INTEGER},
+      </if>
+      <if test="checkedInfo != null" >
+        #{checkedInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="employmentInfo != null" >
+        #{employmentInfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="brochure != null" >
+        #{brochure,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertSelectiveSequence" parameterType="com.kz.po.universityWithBLOBs" >
+    insert into kz_university
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        ID,
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="profile != null" >
+        PROFILE,
+      </if>
+      <if test="agreements != null" >
+        AGREEMENTS,
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE,
+      </if>
+      <if test="grants != null" >
+        GRANTS,
+      </if>
+      <if test="coupon != null" >
+        coupon,
+      </if>
+      <if test="categoryid != null" >
+        CATEGORYID,
+      </if>
+      <if test="publishStatus != null" >
+        PUBLISH_STATUS,
+      </if>
+      <if test="schoolLicense != null" >
+        School_license,
+      </if>
+      <if test="legalPersonName != null" >
+        Legal_person_name,
+      </if>
+      <if test="legalPersonCard != null" >
+        Legal_person_Card,
+      </if>
+      <if test="legalPersonPhone != null" >
+        Legal_person_Phone,
+      </if>
+      <if test="administratorAccount != null" >
+        Administrator_Account,
+      </if>
+      <if test="administratorName != null" >
+        Administrator_Name,
+      </if>
+      <if test="administratorPhone != null" >
+        Administrator_Phone,
+      </if>
+      <if test="userId != null" >
+        USER_id,
+      </if>
+      <if test="universityType != null" >
+        University_Type,
+      </if>
+      <if test="universityNature != null" >
+        University_Nature,
+      </if>
+      <if test="checkedInfo != null" >
+        checked_info,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="employmentInfo != null" >
+        EMPLOYMENT_INFO,
+      </if>
+      <if test="brochure != null" >
+        BROCHURE,
+      </if>
+      <if test="introduction != null" >
+        INTRODUCTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        null,
+      <if test="code != null" >
+        #{code,jdbcType=BIGINT},
+      </if>
+      <if test="profile != null" >
+        #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="agreements != null" >
+        #{agreements,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="grants != null" >
+        #{grants,jdbcType=DECIMAL},
+      </if>
+      <if test="coupon != null" >
+        #{coupon,jdbcType=DECIMAL},
+      </if>
+      <if test="categoryid != null" >
+        #{categoryid,jdbcType=BIGINT},
+      </if>
+      <if test="publishStatus != null" >
+        #{publishStatus,jdbcType=INTEGER},
+      </if>
+      <if test="schoolLicense != null" >
+        #{schoolLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonName != null" >
+        #{legalPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonCard != null" >
+        #{legalPersonCard,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonPhone != null" >
+        #{legalPersonPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="administratorAccount != null" >
+        #{administratorAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="administratorName != null" >
+        #{administratorName,jdbcType=VARCHAR},
+      </if>
+      <if test="administratorPhone != null" >
+        #{administratorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="universityType != null" >
+        #{universityType,jdbcType=INTEGER},
+      </if>
+      <if test="universityNature != null" >
+        #{universityNature,jdbcType=INTEGER},
+      </if>
+      <if test="checkedInfo != null" >
+        #{checkedInfo,jdbcType=VARCHAR},
+      </if>
       <if test="name != null" >
         #{name,jdbcType=LONGVARCHAR},
       </if>
@@ -245,6 +431,18 @@
       <if test="administratorPhone != null" >
         Administrator_Phone = #{administratorPhone,jdbcType=VARCHAR},
       </if>
+      <if test="userId != null" >
+        USER_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="universityType != null" >
+        University_Type = #{universityType,jdbcType=INTEGER},
+      </if>
+      <if test="universityNature != null" >
+        University_Nature = #{universityNature,jdbcType=INTEGER},
+      </if>
+      <if test="checkedInfo != null" >
+        checked_info = #{checkedInfo,jdbcType=VARCHAR},
+      </if>
       <if test="name != null" >
         NAME = #{name,jdbcType=LONGVARCHAR},
       </if>
@@ -263,6 +461,49 @@
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
+   <update id="schoolByUserIdUpdate" parameterType="com.kz.po.universityWithBLOBs" >
+    update kz_university
+    <set >
+      <if test="categoryid != null" >
+        CATEGORYID = #{categoryid,jdbcType=BIGINT},
+      </if>
+      <if test="legalPersonName != null" >
+        Legal_person_name = #{legalPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonCard != null" >
+        Legal_person_Card = #{legalPersonCard,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonPhone != null" >
+        Legal_person_Phone = #{legalPersonPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="universityType != null" >
+        University_Type = #{universityType,jdbcType=INTEGER},
+      </if>
+      <if test="universityNature != null" >
+        University_Nature = #{universityNature,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="introduction != null" >
+        INTRODUCTION = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+    <update id="updateByKeySelective" parameterType="com.kz.po.universityWithBLOBs" >
+    update kz_university
+    <set >
+      <if test="publishStatus != null" >
+        PUBLISH_STATUS = #{publishStatus},
+      </if>
+      <if test="checkedInfo != null" >
+        checked_info = '${checkedInfo}',
+      </if>
+    </set>
+    where ID = #{id}
+  </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.kz.po.universityWithBLOBs" >
     update kz_university
     set CODE = #{code,jdbcType=BIGINT},
@@ -280,6 +521,10 @@
       Administrator_Account = #{administratorAccount,jdbcType=VARCHAR},
       Administrator_Name = #{administratorName,jdbcType=VARCHAR},
       Administrator_Phone = #{administratorPhone,jdbcType=VARCHAR},
+      USER_id = #{userId,jdbcType=INTEGER},
+      University_Type = #{universityType,jdbcType=INTEGER},
+      University_Nature = #{universityNature,jdbcType=INTEGER},
+      checked_info = #{checkedInfo,jdbcType=VARCHAR},
       NAME = #{name,jdbcType=LONGVARCHAR},
       ADDRESS = #{address,jdbcType=LONGVARCHAR},
       EMPLOYMENT_INFO = #{employmentInfo,jdbcType=LONGVARCHAR},
@@ -303,10 +548,14 @@
       Legal_person_Phone = #{legalPersonPhone,jdbcType=VARCHAR},
       Administrator_Account = #{administratorAccount,jdbcType=VARCHAR},
       Administrator_Name = #{administratorName,jdbcType=VARCHAR},
-      Administrator_Phone = #{administratorPhone,jdbcType=VARCHAR}
+      Administrator_Phone = #{administratorPhone,jdbcType=VARCHAR},
+      USER_id = #{userId,jdbcType=INTEGER},
+      University_Type = #{universityType,jdbcType=INTEGER},
+      University_Nature = #{universityNature,jdbcType=INTEGER},
+      checked_info = #{checkedInfo,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <resultMap id="universityMajorMap" type="com.kz.po.University" extends="BaseResultMap"> 
+   <resultMap id="universityMajorMap" type="com.kz.po.University" extends="BaseResultMap"> 
  		<collection property="majors" ofType="com.kz.po.Major"> 
  			<id column="major_id" property="id"></id> 
  			<result column="major_category_id" property="majorCategoryId" /> 
@@ -363,7 +612,7 @@
 		</where>
 	</select>
 	<select id="listKeyPublishStatus" parameterType="com.kz.po.UniversityQuery"
-		resultType="com.kz.po.University">
+		resultMap="ResultMapWithBLOBs" >
 		select
 		<include refid="Base_Column_List" />
 		,
@@ -385,5 +634,15 @@
 			</if>   
 			1=1
 		</where>
+	</select>
+	<select id="schoolByUserIdList" parameterType="com.kz.po.University"
+		resultMap="ResultMapWithBLOBs" >
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from kz_university
+		where
+			user_Id=#{userId}
 	</select>
 </mapper>

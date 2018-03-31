@@ -7,6 +7,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import com.kz.core.po.BaseModel;
 public class User extends BaseModel{
     private Long uuid;
+    
+    private String realName;
 
     private String username;
 
@@ -134,6 +136,22 @@ public class User extends BaseModel{
 
 	public void setLastLoginTime(Date lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+	@Override
+	public String toString() {
+		return "User [uuid=" + uuid + ", realName=" + realName + ", username=" + username + ", password=" + password
+				+ ", cellphone=" + cellphone + ", sex=" + sex + ", idcard=" + idcard + ", originPlace=" + originPlace
+				+ ", school=" + school + ", signMessage=" + signMessage + ", profile=" + profile + ", userType="
+				+ userType + ", createTime=" + createTime + ", lastLoginTime=" + lastLoginTime + "]";
 	}
 
    

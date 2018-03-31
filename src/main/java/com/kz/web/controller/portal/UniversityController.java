@@ -1,6 +1,8 @@
 package com.kz.web.controller.portal;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,7 @@ import com.kz.core.common.Const;
 import com.kz.core.common.ResponseCode;
 import com.kz.core.common.ServerResponse;
 import com.kz.po.University;
+import com.kz.po.UniversityCategory;
 import com.kz.po.UniversityQuery;
 import com.kz.po.User;
 import com.kz.service.IFileService;
@@ -44,7 +48,105 @@ public class UniversityController {
 	@Autowired
     private IFileService iFileService;
 	
-	//学校首页
+	
+	//按照学校id来修改该学校
+		@RequestMapping("schoolByUserIdUpdate.do")
+		public void schoolByUserIdUpdate(University m,HttpServletResponse re) {
+			
+			Long result=iUniversityService.schoolByUserIdUpdate(m);
+			
+			try {
+				re.sendRedirect("/kzych/user/userinfoTo.do");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	
+	
+	//按照用户id来查找该学校
+	@RequestMapping("schoolByUserIdList.do")
+	public void schoolByUserIdList(University m,HttpServletResponse re) {
+		PrintWriter out = null;
+		try {
+			out = re.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		List<University> result = iUniversityService.schoolByUserIdList(m);
+		if(result!=null){
+			out.print(result.get(0).getCheckedInfo());
+		}else{
+			out.print("失败");
+		}
+		
+	}
+	
+	//按学校id查询 并且修改这一条数据（但审核时点击通过或者不通过时需要修改Cookie中的值 但我的Cookie中名字是跟表数据有关系的）
+	@RequestMapping("updatePublicStatus.do")
+	public void universityUpdatePublicString(University m,HttpServletResponse re) {
+		PrintWriter out = null;
+		try {
+			out = re.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Long result = iUniversityService.updateByKeySelective(m);
+		if(result==1L){
+			University university = iUniversityService.selectByPrimaryKey(m.getId());
+			out.print(university.getUserId());
+		}else{
+			out.print("失败");
+		}
+		
+	}
+	
+	//为该用户添加一所学校
+	@RequestMapping("universityAdd.do")
+	public void universityAdd(University m,HttpServletResponse re) {
+		PrintWriter out = null;
+		try {
+			out = re.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Long long1 = iUniversityService.insertSelectiveSequence(m);
+		if(long1==1L){
+			out.print("请求成功");
+		}else{
+			out.print("请求失败");
+		}
+	}
+	
+	//查询学校的全部等级（kz_university_category）
+	@RequestMapping("categoryList.do")
+	@ResponseBody
+	public List<UniversityCategory> categoryList() {
+		List<UniversityCategory> list = iUniversityService.categoryList();
+		return list;
+	}
+	
+	//从前台跳到普通用户后台
+	@RequestMapping(value="productTO.do",method=RequestMethod.GET) 
+	public String productTO(HttpSession session){
+		//由于页面加载时级需要查询状态所以就在在里做查询了
+		User u =(User) session.getAttribute(Const.CURRENT_USER);
+		University un=new University();
+		long userid=u.getUuid();
+		un.setUserId((int)userid);
+		List<University> result = iUniversityService.schoolByUserIdList(un);
+		session.setAttribute("publicStatus", result.get(0).getPublishStatus());
+		session.setAttribute("User_list", result.get(0));
+		return "product";
+	}
+	public static void main(String[] args) {
+		User u=new User();
+		u.setUuid(1L);
+		University un=new University();
+		long userid=u.getUuid();
+		un.setUserId((int)userid);
+		System.out.println(un.getUserId().TYPE);
+	}
+	//学校首页 （也是从前台跳到管理员后台）
 	@RequestMapping(value="index.do",method=RequestMethod.GET) 
 	public String SchoolIndex(){
 		return "schoollist";
@@ -78,6 +180,21 @@ public class UniversityController {
 	@ResponseBody
 	public PageInfo  dimListPage(HttpServletResponse resp,UniversityQuery qu){
 		//ajax   按地址分页
+		
+		//解决乱码问题
+		String provid=qu.getProvid();
+		String cityid=qu.getCityid();
+		String areaid=qu.getAreaid();
+		try {
+			provid= new String(qu.getProvid().getBytes("iso-8859-1"),"UTF-8");
+			cityid= new String(qu.getCityid().getBytes("iso-8859-1"),"UTF-8");
+			areaid= new String(qu.getAreaid().getBytes("iso-8859-1"),"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		qu.setProvid(provid);
+		qu.setCityid(cityid);
+		qu.setAreaid(areaid);
 		PageInfo pageInfo = iUniversityService.listKeyPublishStatus(qu);
 		return pageInfo;
 	}

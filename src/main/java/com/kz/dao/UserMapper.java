@@ -14,4 +14,8 @@ public interface UserMapper extends BaseMapper<User,UserQuery>{
 	int checkEmailByUserId(@Param("idcard")String idcard, @Param("uuid")Long uuid);
 
 	int checkUsername(String str);
+	
+	User selectAdministrator(String username);
+	
+	Long updateByKeyInfo(User u);
 }

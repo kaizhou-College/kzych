@@ -1,5 +1,7 @@
 package com.kz.dao;
 
+import java.util.List;
+
 import com.kz.po.UniversityCategory;
 
 public interface UniversityCategoryMapper {
@@ -14,4 +16,5 @@ public interface UniversityCategoryMapper {
     int updateByPrimaryKeySelective(UniversityCategory record);
 
     int updateByPrimaryKey(UniversityCategory record);
+    List select();
 }
