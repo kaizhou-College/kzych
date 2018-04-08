@@ -18,6 +18,17 @@ public class MajorController {
 	@Autowired
 	private IMajorService iMajorService;
 
+	/**
+	 * 
+	 * @Title: list
+	 * @Description: 分页查询学校信息
+	 * @param: @param
+	 *             pageSiz
+	 * @param: @param
+	 *             pageNum
+	 * @param: @return
+	 * @return: ServerResponse<PageInfo> 返回值类型
+	 */
 	@RequestMapping("list.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> list(MajorQuery mq){

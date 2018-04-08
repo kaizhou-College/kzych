@@ -33,9 +33,26 @@ public class UserController {
 	@Autowired
 	private IUserService iUserService;
 
-	// 根据id修改用户信息
-	// updateByPrimaryKeySelective
-	//
+	/**
+	 * @Title: login
+	 * @Description: 根据id修改用户信息
+	 * @param: @param
+	 *             uuid
+	 * @param: @param
+	 *             username
+	 * @param: @param
+	 *             realName
+	 * @param: @param
+	 *             cellphone
+	 * @param: @param
+	 *             idcard
+	 * @param: @param
+	 *             school
+	 * @param: @param
+	 *             originPlace
+	 *             
+	 * @return: 没有返回值
+	 */
 	@RequestMapping(value = "userinfoByKeyUpdate.do", method = RequestMethod.GET)
 	public void userinfoByKeyUpdate(User u, HttpServletResponse response,HttpSession session) {
 		Long long1 = iUserService.updateByKeyInfo(u);
@@ -51,7 +68,13 @@ public class UserController {
 
 	}
 
-	// 跳往用户信息()
+	/**
+	 * @Title: login
+	 * @Description: 跳往用户信息
+	 * @param: @param
+	 *             session
+	 * @return: String 返回值类型
+	 */
 	@RequestMapping(value = "userinfoTo.do", method = RequestMethod.GET)
 	public String userinfoTo(HttpSession session) {
 		//由于在userinfo页面修改信息后session中的用户信息还没有更新Const.CURRENT_USER 所以在这里需要把session中的值更新成最新的
@@ -83,6 +106,16 @@ public class UserController {
 		return response;
 	}
 
+	/**
+	 * @Title: login
+	 * @Description: 验证是否管理员
+	 * @param: @param
+	 *             username
+	 * @param: @param
+	 *             session
+	 * @param: @return
+	 * @return: ServerResponse<User> 返回值类型
+	 */
 	@RequestMapping("IsNotAdministrator.do")
 	@ResponseBody
 	public ServerResponse<User> IsNotAdministrator(String username, HttpSession session) {

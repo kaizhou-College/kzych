@@ -21,7 +21,16 @@ public class NewsController {
 	private INewsService  iNewsService;
 	
 	
-	//一开始的分页
+	/**
+	 * @Title: list
+	 * @Description: 一开始的分页
+	 * @param: @param
+	 *             pageSize
+	 * @param: @param
+	 *             pageNum
+	 * @param: @return
+	 * @return: ServerResponse<PageInfo> 返回值类型
+	 */
 	@RequestMapping("list.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> list(NewsQuery uq) {
@@ -34,7 +43,14 @@ public class NewsController {
 		}
 		
 	}
-	//单个查询（按照id）   点击进入显示单个详细详细
+	/**
+	 * @Title: listKey
+	 * @Description: 单个查询（按照id）   点击进入显示单个详细详细
+	 * @param: @param
+	 *             id
+	 * @param: @return
+	 * @return: ServerResponse<PageInfo> 返回值类型
+	 */
 	@RequestMapping("accordingKeyList.do")
 	@ResponseBody
 	public ServerResponse<News> listKey(News co){
@@ -46,16 +62,32 @@ public class NewsController {
 		}
 		
 	}
-	
-	// 按照标题模糊查询  并且分页
+	/**
+	 * @Title: dimListPage
+	 * @Description: 按照标题模糊查询  并且分页
+	 * @param: @param
+	 *             title
+	 * @param: @param
+	 *             pageSize
+	 * @param: @param
+	 *             pageNum
+	 * @param: @return
+	 * @return: ServerResponse 返回值类型
+	 */
 	@RequestMapping("dimListPage.do")
 	@ResponseBody
 	public ServerResponse dimListPage(NewsQuery co){
 		List contentPage = iNewsService.dimContentPage(co);
 		return ServerResponse.createBySuccess("模糊询成功",contentPage);
 	}
-	
-	//点赞  按照id 添加一个赞
+	/**
+	 * @Title: hit
+	 * @Description: 点赞  按照id 添加一个赞
+	 * @param: @param
+	 *             id
+	 * @param: @return
+	 * @return: ServerResponse<PageInfo> 返回值类型
+	 */
 	@RequestMapping("hit.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> hit(News co){

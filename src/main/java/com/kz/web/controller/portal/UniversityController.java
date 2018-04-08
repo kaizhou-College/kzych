@@ -36,6 +36,7 @@ import com.kz.utils.PropertiesUtil;
 
 import alipay.api.domain.Data;
 
+
 @Controller
 @RequestMapping("/university/")
 public class UniversityController {
@@ -47,8 +48,31 @@ public class UniversityController {
 
 	@Autowired
 	private IFileService iFileService;
-
-	// 按照学校id来修改该学校
+	/**
+	 * 
+	 * @Title: schoolByUserIdUpdate
+	 * @Description: 按照学校id来修改该学校
+	 * @param: @param
+	 *             id
+	 * @param: @param
+	 *             universityType
+	 * @param: @param
+	 *             universityNature
+	 * @param: @param
+	 *             categoryid
+	 * @param: @param
+	 *             address
+	 * @param: @param
+	 *             legalPersonName
+	 * @param: @param
+	 *             legalPersonCard
+	 * @param: @param
+	 *             legalPersonPhone
+	 * @param: @param
+	 *             introduction
+	 * @param: @param
+	 *             re
+	 */
 	@RequestMapping("schoolByUserIdUpdate.do")
 	public void schoolByUserIdUpdate(University m, HttpServletResponse re) {
 		Long result = iUniversityService.schoolByUserIdUpdate(m);
@@ -59,8 +83,15 @@ public class UniversityController {
 			e.printStackTrace();
 		}
 	}
-
-	// 按照用户id来查找该学校
+	/**
+	 * 
+	 * @Title: schoolByUserIdList
+	 * @Description: 按照用户id来查找该学校
+	 * @param: @param
+	 *             userId
+	 * @param: @param
+	 *             re
+	 */
 	@RequestMapping("schoolByUserIdList.do")
 	public void schoolByUserIdList(University m, HttpServletResponse re) {
 		PrintWriter out = null;
@@ -76,8 +107,19 @@ public class UniversityController {
 			out.print("失败");
 		}
 	}
-
-	// 按学校id查询 并且修改这一条数据（但审核时点击通过或者不通过时需要修改Cookie中的值 但我的Cookie中名字是跟表数据有关系的）
+	/**
+	 * 
+	 * @Title: universityUpdatePublicString
+	 * @Description: 按学校id查询 并且修改这一条数据（但审核时点击通过或者不通过时需要修改Cookie中的值 但我的Cookie中名字是跟表数据有关系的）
+	 * @param: @param
+	 *             id
+	 * @param: @param
+	 *             publishStatus
+	 * @param: @param
+	 *             checkedInfo（点不通过时才需要这个）
+	 * @param: @param
+	 *             re
+	 */
 	@RequestMapping("updatePublicStatus.do")
 	public void universityUpdatePublicString(University m, HttpServletResponse re) {
 		PrintWriter out = null;
@@ -96,7 +138,33 @@ public class UniversityController {
 
 	}
 
-	// 为该用户添加一所学校
+	/**
+	 * 
+	 * @Title: universityAdd
+	 * @Description: 为用户添加一所学校
+	 * @param: @param
+	 *             name
+	 * @param: @param
+	 *             universityType
+	 * @param: @param
+	 *             universityNature
+	 * @param: @param
+	 *             categoryid
+	 * @param: @param
+	 *             legalPersonName
+	 * @param: @param
+	 *             legalPersonCard
+	 * @param: @param
+	 *             legalPersonPhone
+	 * @param: @param
+	 *             introduction
+	 * @param: @param
+	 *             userId
+	 * @param: @param
+	 *             address
+	 * @param: @param
+	 *             re
+	 */
 	@RequestMapping("universityAdd.do")
 	public void universityAdd(University m, HttpServletResponse re) {
 		PrintWriter out = null;
@@ -112,16 +180,28 @@ public class UniversityController {
 			out.print("请求失败");
 		}
 	}
-
-	// 查询学校的全部等级（kz_university_category）
+	/**
+	 * 
+	 * @Title: categoryList
+	 * @Description: 查询学校的全部等级（kz_university_category）
+	 * @param: @return
+	 * @return: List<UniversityCategory> 返回值类型
+	 */
 	@RequestMapping("categoryList.do")
 	@ResponseBody
 	public List<UniversityCategory> categoryList() {
 		List<UniversityCategory> list = iUniversityService.categoryList();
 		return list;
 	}
-
-	// 从前台跳到普通用户后台
+	/**
+	 * 
+	 * @Title: productTO
+	 * @Description: 从前台跳到普通用户后台
+	 * @param: @param
+	 *             session
+	 * @param: @return
+	 * @return: String 返回值类型
+	 */
 	@RequestMapping(value = "productTO.do", method = RequestMethod.GET)
 	public String productTO(HttpSession session) {
 		// 由于页面加载时级需要查询状态所以就在在里做查询了
@@ -135,27 +215,61 @@ public class UniversityController {
 		return "product";
 	}
 
-
-	// 学校首页 （也是从前台跳到管理员后台）
+	/**
+	 * 
+	 * @Title: SchoolIndex
+	 * @Description: 学校首页 （也是从前台跳到管理员后台）
+	 * @param: @return
+	 * @return: String 返回值类型
+	 */
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String SchoolIndex() {
 		return "schoollist";
 	}
-
-	// 跳转到审查学校
+	/**
+	 * 
+	 * @Title: SchoolAudit
+	 * @Description: 跳转到审查学校
+	 * @param: @return
+	 * @return: String 返回值类型
+	 */
 	@RequestMapping(value = "schoolAuditTo.do", method = RequestMethod.GET)
 	public String SchoolAudit() {
 		return "school_audit";
 	}
-
-	// 跳转到未通过学校
+	/**
+	 * 
+	 * @Title: SchoolNopass
+	 * @Description: 跳转到未通过学校
+	 * @param: @return
+	 * @return: String 返回值类型
+	 */
 	@RequestMapping(value = "schoolNopassTo.do", method = RequestMethod.GET)
 	public String SchoolNopass() {
 		return "nopass_schools";
 	}
 
 
-
+	/**
+	 * 
+	 * @Title: listKeyPublishStatus
+	 * @Description: 分页查询学校信息
+	 * @param: @param
+	 *             pageSiz
+	 * @param: @param
+	 *             pageNum
+	 *             
+	 * @param: @param
+	 *             provid
+	 * @param: @param
+	 *             cityid
+	 * @param: @param
+	 *             areaid
+	 * @param: @param
+	 *             search_key
+	 * @param: @return
+	 * @return: ServerResponse<PageInfo> 返回值类型
+	 */
 	@RequestMapping("schoolListPageWithConditions.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> listKeyPublishStatus(UniversityQuery qu) {
@@ -163,7 +277,29 @@ public class UniversityController {
 		PageInfo pageInfo = iUniversityService.listKeyPublishStatus(qu);
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}
-
+	
+	/**
+	 * 
+	 * @Title: dimListPage
+	 * @Description: 分页查询学校信息
+	 * @param: @param
+	 *             pageSiz
+	 * @param: @param
+	 *             pageNum
+	 *             
+	 * @param: @param
+	 *             provid
+	 * @param: @param
+	 *             cityid
+	 * @param: @param
+	 *             areaid
+	 * @param: @param
+	 *             search_key
+	 * @param: @param
+	 *             resp
+	 * @param: @return
+	 * @return: ServerResponse 返回值类型
+	 */
 	@RequestMapping("dimListPage.do")
 	@ResponseBody
 	public PageInfo dimListPage(HttpServletResponse resp, UniversityQuery qu) {
@@ -190,6 +326,19 @@ public class UniversityController {
 		return pageInfo;
 	}
 
+	/**
+	 * 
+	 * @Title: list
+	 * @Description: 分页查询学校信息
+	 * @param: @param
+	 *             pageSiz
+	 * @param: @param
+	 *             pageNum
+	 * @param: @param
+	 *             session
+	 * @param: @return
+	 * @return: ServerResponse<PageInfo> 返回值类型
+	 */
 	@RequestMapping("schoolList.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> list(UniversityQuery uq,HttpSession session) {
@@ -202,7 +351,21 @@ public class UniversityController {
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}
 	
-	
+	/**
+	 * 
+	 * @Title: list
+	 * @Description: 按照universityId 分页查询学校信息
+	 * @param: @param
+	 *             pageSiz
+	 * @param: @param
+	 *             pageNum
+	 * @param: @param
+	 *             universityId
+	 * @param: @param
+	 *             session
+	 * @param: @return
+	 * @return: ServerResponse<University> 返回值类型
+	 */
 	@RequestMapping("university_detail.do")
 	@ResponseBody
 	public ServerResponse<University> list(HttpSession session ,Long universityId, int pageNum, int pageSize) {
@@ -222,7 +385,19 @@ public class UniversityController {
 		// 页面显示数据
 		return ServerResponse.createBySuccess("查询成功", university);
 	}
-
+	/**
+	 * 
+	 * @Title: save
+	 * @Description: 学校的图片上传
+	 * @param: @param
+	 *             session
+	 * @param: @param
+	 *             upload_file
+	 * @param: @param
+	 *             request
+	 * @param: @return
+	 * @return: ServerResponse 返回值类型
+	 */
 	@RequestMapping("save.do")
 	@ResponseBody
 	public ServerResponse save(HttpSession session,

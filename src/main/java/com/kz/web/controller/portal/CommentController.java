@@ -20,8 +20,16 @@ public class CommentController {
 	@Autowired
 	private ICommentService iCommentService;
 	
-	
-	//添加一条评论
+	/**
+	 * @Title: create
+	 * @Description: 添加一条评论
+	 * @param: @param
+	 *             content
+	 * @param: @param
+	 *             commentId
+	 * @param: @return
+	 * @return: ServerResponse<PageInfo> 返回值类型
+	 */
 	@RequestMapping("create.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> commentAdd(CommentWithBLOBs co,HttpSession session){
