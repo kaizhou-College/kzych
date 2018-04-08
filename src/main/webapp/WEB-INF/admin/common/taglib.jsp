@@ -4,5 +4,6 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 request.setAttribute("basePath", basePath);
+request.setAttribute("host","http://47.104.135.201:8080/");
 %>
     

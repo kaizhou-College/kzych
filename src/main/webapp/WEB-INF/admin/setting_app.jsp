@@ -104,6 +104,7 @@
 
 var cur_mod="系统管理";
 var basePath ="${basePath}" ;
+var host="${host}";
 app.init(function($){
 	  //上传开机画面
   var uploadInst = app.upload.render({

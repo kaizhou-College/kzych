@@ -97,7 +97,7 @@ public class UserServiceImpl extends BaseService<User, UserQuery> implements IUs
 		updateUser.setOriginPlace(user.getOriginPlace());
 		updateUser.setSchool(user.getSchool());
 		updateUser.setSignMessage(user.getSignMessage());
-		updateUser.setLastLoginTime(user.getLastLoginTime());
+		updateUser.setLastloginTime(user.getLastloginTime());
 
 		Long updateCount = userMapper.updateByPrimaryKeySelective(updateUser);
 		if (updateCount > 0) {

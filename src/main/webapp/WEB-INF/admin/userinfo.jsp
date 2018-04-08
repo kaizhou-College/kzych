@@ -291,6 +291,7 @@
 <script>
 
 var basePath = "${basePath}";
+var host="${host}";
 	cur_mod="个人中心";
 	
 	app.init(function($){

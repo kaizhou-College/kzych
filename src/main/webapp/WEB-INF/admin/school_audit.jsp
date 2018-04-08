@@ -138,6 +138,58 @@
 						    </div>
 						  </div>
 						  <div class="layui-form-item">
+						    <div class="layui-inline">
+						      <label class="layui-form-label">机构类型</label>
+						      <div class="layui-input-inline">
+						        <select name="interest" id="universityType_seelct_01" lay-filter="aihao" disabled="disabled">
+							        <option value="0"></option>
+							        <option value="1" selected="">学校</option>
+							        <option value="2" >企业</option>
+							        <option value="3">事业单位</option>
+							        <option value="4">政府机关</option>
+							        <option value="5">社会团体</option>
+							      </select>
+						      </div>
+						    </div>
+						    <div class="layui-inline"> 
+						      <!--只有选择学校才显示-->
+						      <label class="layui-form-label">机构性质:</label>
+						      <div class="layui-input-inline">
+						        <select name="interest" id="universityNature_seelct_02" lay-filter="" disabled="disabled">
+							        <option value="0"></option>
+							        <option value="1" selected="">公办</option>
+							        <option value="2" >民办</option>
+							        
+							      </select>
+						      </div>
+						    </div>
+						    <div class="layui-inline">
+						      <!--只有选择学校类型才显示-->
+						      <label class="layui-form-label">学校等级:</label>
+						      <div class="layui-input-inline">
+						        <select name="interest" id="categoryid_seelct_03" disabled="disabled">
+							        <option value="0"></option>
+							        <option value="1" selected="">本科</option>
+							        <option value="2" >大专</option>
+							        <option value="3" >中专</option>
+							        <option value="4" >培训学校</option>
+							        
+							      </select>
+						      </div>
+						    </div>
+						  </div>
+			        
+
+						  
+						   <div class="layui-form-item">
+              	  
+							    <label class="layui-form-label">机构封面图:</label>
+							    <div class="layui-input-block">
+							       <img id="school_coverImge" src="images/hndx.jpg" style="height:100px;">
+									  
+							    </div>
+							</div>
+						  <div class="layui-form-item">
 						    <label class="layui-form-label">学校地址:</label>
 						    <div class="layui-input-block">
 						      <input type="text" name="" value="湖南长沙" id="school_Address" autocomplete="off" disabled class="layui-input">
@@ -224,9 +276,10 @@
 </html>
 <script>
 
-
+	var host="host";	
 	cur_mod = "学校管理";
 	var basePath = "${basePath}";
+	var host="${host}";
 	app.init(function($) {
 		
 		layui.use('form', function(){
@@ -236,7 +289,7 @@
 			  form.on('submit(formDemo)', function(data){
 				  $.ajax({
 			  			type:"get",
-			  			url:"http://localhost:8080/kzych/university/dimListPage.do",
+			  			url:host+"kzych/university/dimListPage.do",
 			  			data:{"provid":$("#provid").val(),
 			  					"cityid":$("#cityid").val(),
 			  					"areaid":$("#areaid").val(),
@@ -259,7 +312,7 @@
 										var currentPage = obj.curr;//获取点击的页码 
 										var limit = obj.limit;
 										//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-										$.get("http://localhost:8080/kzych/university/schoolListPageWithConditions.do?&pageNum="
+										$.get(host+"kzych/university/schoolListPageWithConditions.do?&pageNum="
 																+ currentPage
 																+ "&pageSize="
 																+ limit
@@ -361,7 +414,7 @@
 					//异步请求更改该学校的状态
 						$.ajax({
 							type:"get",
-				  			url:"http://localhost:8080/kzych/university/updatePublicStatus.do",
+				  			url:host+"kzych/university/updatePublicStatus.do",
 				  			data:{"id":$("#id_school").val(),"publishStatus":2},
 				  			success:function(data){
 				  				setCookie("zhaosheng_service_status"+data,"2","d1"); 
@@ -375,10 +428,11 @@
 				  return false;
 			  });
 			  form.on('submit(demo1)', function(data){
+				  if($("#checkedInfo").val()!=null&&$("#checkedInfo").val().trim.length>0){
 					//异步请求更改该学校的状态
 						$.ajax({
 				  			type:"post",
-				  			url:"http://localhost:8080/kzych/university/updatePublicStatus.do",
+				  			url:host+"kzych/university/updatePublicStatus.do",
 				  			data:{"id":$("#id_school").val(),"publishStatus":3,"checkedInfo":$("#checkedInfo").val()},
 				  			success:function(data){
 				  				setCookie("zhaosheng_service_status"+data,"3","d1"); 
@@ -389,6 +443,9 @@
 				  				alert("请求失败");
 				  			}		
 						});
+				  }else{
+					  alert("请输入不通过原因");
+				  }
 				  return false;
 			  });
 			  
@@ -396,7 +453,7 @@
 		
 		
 		//分页跳转 ajax
-		$.get("http://localhost:8080/kzych/university/schoolListPageWithConditions.do?publishStatus=1",
+		$.get(host+"kzych/university/schoolListPageWithConditions.do?publishStatus=1",
 		function(schoollist) {
 			var ele = '';
 			function loadData(list) {
@@ -433,7 +490,7 @@
 							//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
 							$
 									.get(
-											"http://localhost:8080/kzych/university/schoolListPageWithConditions.do?publishStatus=1&pageNum="
+											host+"kzych/university/schoolListPageWithConditions.do?publishStatus=1&pageNum="
 													+ currentPage
 													+ "&pageSize="
 													+ limit,
@@ -504,9 +561,49 @@
 		$("#administrator_Account").val(list.administratorAccount);
 		$("#administrator_Name").val(list.administratorName);
 		$("#administrator_Phone").val(list.administratorPhone);
-		$("#id_school").val(list.id);
-		
+		$("#school_coverImge").attr("src",list.schoolCoverimg);
+	  	//设置下拉框的默认值
+	  	//机构类型 
+	  	var universityType=$("#universityType_seelct_01").html().split("<option value=\"");
+	  //机构性质
+	  	var universityNature=$("#universityNature_seelct_02").html().split("<option value=\"");
+	  //学校等级
+	  	var categoryname=$("#categoryid_seelct_03").html().split("<option value=\"");
+	  //机构类型的设置默认值
+	  	settingsSelected(universityType,list.universityType,"universityType_seelct_01");
+	  //机构性质设置默认值
+	  	settingsSelected(universityNature,list.universityNature,"universityNature_seelct_02");
+	  //学校等级的设置默认值 
+	  	settingsSelected(categoryname,list.categoryid,"categoryid_seelct_03");
+	  	function settingsSelected(list,id,select_id){
+	  		/* var size=0;
+	  		for(var i=1;0<list.length;i++){
+	      		if(list[i].substring(0,1)==id){
+	      			$("#"+select_id+" option[value="+(i-1)+"]").attr("selected","selected");
+	      		}else{
+	      			size=size+1;
+	      		}
+	      		alert(size+"--=："+(list.length-1)+"-=-=："+list[i].substring(0,1));
+	      	} */
+	      	var size=0;
+	  		for(var i=1;i<list.length;i++){
+	      		if(list[i].substring(0,1)==id){
+	      			$("#"+select_id+" option[value="+(i-1)+"]").attr("selected","selected");
+	      		}else{
+	      			//如果不符合上面的条件就给size加上1
+	      			size=size+1;
+	      		}
+	      		//如果size等于option的个数的话就需要重新设置个option
+	      		if(size==(list.length-1)){
+	      			$("#"+select_id).html("<option value='0'>未选择</option>");
+	      		}	
+	      	}
+	  	}
+	  	
+		layui.use('form', function(){
+			var form = layui.form;
+			//由于设置了下拉框的初始值所以需要重新渲染一次select
+		    form.render('select');
+		});
 	}
-	
-	
 </script>

@@ -179,30 +179,6 @@
     </set>
     where UUID = #{uuid,jdbcType=BIGINT}
   </update>
-  <update id="updateByKeyInfo" parameterType="com.kz.po.User" >
-    update kz_user
-    <set >
-      <if test="realName != null" >
-        real_name = #{realName,jdbcType=VARCHAR},
-      </if>
-      <if test="username != null" >
-        USERNAME = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="cellphone != null" >
-        CELLPHONE = #{cellphone,jdbcType=VARCHAR},
-      </if>
-      <if test="idcard != null" >
-        IDCARD = #{idcard,jdbcType=VARCHAR},
-      </if>
-      <if test="originPlace != null" >
-        ORIGIN_PLACE = #{originPlace,jdbcType=VARCHAR},
-      </if>
-      <if test="school != null" >
-        SCHOOL = #{school,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where UUID = #{uuid,jdbcType=BIGINT}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.kz.po.User" >
     update kz_user
     set real_name = #{realName,jdbcType=VARCHAR},
@@ -220,8 +196,7 @@
       LASTLOGIN_TIME = #{lastloginTime,jdbcType=TIMESTAMP}
     where UUID = #{uuid,jdbcType=BIGINT}
   </update>
-  
-  <select id="checkUsername" parameterType="string" resultType="int">
+   <select id="checkUsername" parameterType="string" resultType="int">
 		select count(1) from kz_user
 		where username=#{username}
 	</select>
@@ -247,4 +222,28 @@
 		from kz_user
 		where username=#{username}
 	</select>
+	<update id="updateByKeyInfo" parameterType="com.kz.po.User" >
+    update kz_user
+    <set >
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        CELLPHONE = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        IDCARD = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="originPlace != null" >
+        ORIGIN_PLACE = #{originPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        SCHOOL = #{school,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=BIGINT}
+  </update>
 </mapper>

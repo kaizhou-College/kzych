@@ -37,7 +37,7 @@ public class UserController {
 	// updateByPrimaryKeySelective
 	//
 	@RequestMapping(value = "userinfoByKeyUpdate.do", method = RequestMethod.GET)
-	public void userinfoByKeyUpdate(User u, HttpServletResponse response) {
+	public void userinfoByKeyUpdate(User u, HttpServletResponse response,HttpSession session) {
 		Long long1 = iUserService.updateByKeyInfo(u);
 		try {
 			if (long1 == 1l) {
@@ -53,7 +53,11 @@ public class UserController {
 
 	// 跳往用户信息()
 	@RequestMapping(value = "userinfoTo.do", method = RequestMethod.GET)
-	public String userinfoTo() {
+	public String userinfoTo(HttpSession session) {
+		//由于在userinfo页面修改信息后session中的用户信息还没有更新Const.CURRENT_USER 所以在这里需要把session中的值更新成最新的
+		User user=(User) session.getAttribute(Const.CURRENT_USER);
+		ServerResponse<User> login = iUserService.getInformation(user.getUuid());
+		session.setAttribute(Const.CURRENT_USER, login.getData());
 		return "userinfo";
 	}
 

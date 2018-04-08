@@ -58,7 +58,7 @@ public class University extends BaseModel{
     
     private String checkedInfo;
     
-    
+    private String schoolCoverimg;
 
 	public String getCheckedInfo() {
 		return checkedInfo;
@@ -267,18 +267,13 @@ public class University extends BaseModel{
 	public void setUniversityNature(Integer universityNature) {
 		this.universityNature = universityNature;
 	}
+	
+	public String getSchoolCoverimg() {
+		return schoolCoverimg;
+	}
 
-	@Override
-	public String toString() {
-		return "University [id=" + id + ", code=" + code + ", profile=" + profile + ", agreements=" + agreements
-				+ ", telephone=" + telephone + ", grants=" + grants + ", coupon=" + coupon + ", categoryid="
-				+ categoryid + ", publishStatus=" + publishStatus + ", name=" + name + ", address=" + address
-				+ ", employmentInfo=" + employmentInfo + ", brochure=" + brochure + ", introduction=" + introduction
-				+ ", majors=" + majors + ", schoolLicense=" + schoolLicense + ", legalPersonName=" + legalPersonName
-				+ ", legalPersonCard=" + legalPersonCard + ", legalPersonPhone=" + legalPersonPhone
-				+ ", administratorAccount=" + administratorAccount + ", administratorName=" + administratorName
-				+ ", administratorPhone=" + administratorPhone + ", userId=" + userId + ", universityType="
-				+ universityType + ", universityNature=" + universityNature + ", checkedInfo=" + checkedInfo + "]";
+	public void setSchoolCoverimg(String schoolCoverimg) {
+		this.schoolCoverimg = schoolCoverimg;
 	}
 
 

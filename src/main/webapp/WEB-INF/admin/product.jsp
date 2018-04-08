@@ -269,6 +269,7 @@ var uuid=${currentUser.uuid};
 var checkedInfo="初始值";
 //该用户的状态（PublicStatus）
 var status=${publicStatus};
+var host="${host}";
 var basePath = "${basePath}";
 	cur_mod="个人中心";
 	//测试代码
@@ -276,7 +277,7 @@ var basePath = "${basePath}";
 		//页面已加载时就需要查询该用户有没有开通学校的原因（通过用户id查询学校）
 		$.ajax({
   			type:"get",
-  			url:"http://localhost:8080/kzych/university/schoolByUserIdList.do",
+  			url:host+"kzych/university/schoolByUserIdList.do",
   			data:{"userId":uuid},
   			success:function(data){
   				checkedInfo=data;
@@ -290,7 +291,7 @@ var basePath = "${basePath}";
 		//通过ajax来给学校等级（下拉框加上值）
 		$.ajax({
   			type:"get",
-  			url:"http://localhost:8080/kzych/university/categoryList.do",
+  			url:host+"kzych/university/categoryList.do",
   			success:function(data){
   				var html_category=$("#category_id");
   				for(var i=0;i<data.length;i++){
@@ -313,21 +314,7 @@ var basePath = "${basePath}";
 		  var ycy_service_status = getCookie("ycy_service_status"+uuid);
 		//判断该用户有没有开通过学校（status==0表示没有开通）1:开通中 2 开通通过 3开通失败
 		if(status=="0"){
-			  //招生
-			  if(zhaosheng_service_status == null&&checkedInfo=="初始值"){
-			  	 zhaosheng_service_status = 0;
-			  }
-			  if(zhaosheng_service_status == 3 ){ 
-				  $(".error-cause").show();//显示末通过原因
-			  } 
-			  //招骋
-			  if(typeof(recruit_service_status) == 'undefined' || recruit_service_status == null ){
-			  	 recruit_service_status = 0;
-			  }
-			  //油菜园
-			  if(ycy_service_status == null ){
-			  	 ycy_service_status = 0;
-			  }
+			zhaosheng_service_status = 0;
 		}else if(status=="1"){
 			zhaosheng_service_status=1;
 		}else if(status=="2"){
@@ -335,6 +322,21 @@ var basePath = "${basePath}";
 		}else if(status=="3"){
 			zhaosheng_service_status=3;
 		}
+		 //招生
+		  if(zhaosheng_service_status == null&&checkedInfo=="初始值"){
+		  	 zhaosheng_service_status = 0;
+		  }
+		  if(zhaosheng_service_status == 3 ){ 
+			  $(".error-cause").show();//显示末通过原因
+		  } 
+		  //招骋
+		  if(typeof(recruit_service_status) == 'undefined' || recruit_service_status == null ){
+		  	 recruit_service_status = 0;
+		  }
+		  //油菜园
+		  if(ycy_service_status == null ){
+		  	 ycy_service_status = 0;
+		  }
 		//设置按钮的隐藏和显示（开通状态那些按钮）
 		$(".zhaosheng_service_status"+uuid+"").hide();
 		$("[zhaosheng_service_status"+uuid+"='" + zhaosheng_service_status + "']").show();
@@ -374,7 +376,7 @@ var basePath = "${basePath}";
 			  
 			  $.ajax({
   				type:"post",
-  				url:"http://localhost:8080/kzych/university/universityAdd.do",
+  				url:host+"kzych/university/universityAdd.do",
   				data:{"name":$("#name_p").val(),"universityType":$("#universityType_p").val(),"universityNature":$("#universityNature_p").val(),"categoryid":$("#categoryid_p").val(),"address":$("#address_p").val(),"legalPersonName":$("#legalPersonName_p").val(),"legalPersonCard":$("#legalPersonCard_p").val(),"legalPersonPhone":$("#legalPersonPhone_p").val(),"introduction":$("#detail").val(),"userId":uuid},
   				success:function(data){
   					alert("请求成功");

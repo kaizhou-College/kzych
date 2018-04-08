@@ -312,7 +312,7 @@
 			  }
 			  //异步请求 看该用户是否管理员
 			 $.ajax({
-				    type:"get",
+				    type:"post",
 		  			url:"http://localhost:8080/kzych/user/login.do",
 		  			data:{"username":$("#username").val(),"password":$("#password").val()},
 		  			success:function(data){
@@ -331,7 +331,7 @@
 		  				}
 		  			},
 		  			error:function(){
-		  				alert("请求失败！！！");
+		  				alert("请求失败！！！.3.3");
 		  			}
 			  });
 			  return false;
