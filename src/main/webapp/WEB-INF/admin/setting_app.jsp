@@ -109,7 +109,7 @@ app.init(function($){
 	  //上传开机画面
   var uploadInst = app.upload.render({
     elem: '#start-img'
-    ,url: '/kzych/university/save.do'
+    ,url: '/university/save.do'
     ,auto: false //选择文件后不自动上传
     ,bindAction: '#btu_01' //指向一个按钮触发上传
     ,field: 'upload_file'
@@ -140,7 +140,7 @@ app.init(function($){
   //上传轮播图
   app.upload.render({
     elem: '#carousel-figure'
-    ,url: '/kzych/university/save.do'
+    ,url: '/university/save.do'
     ,auto: false //选择文件后不自动上传
     ,bindAction: '#btu_02' //指向一个按钮触发上传
     ,field: 'upload_file'

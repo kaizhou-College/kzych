@@ -216,7 +216,7 @@
 			  form.on('submit(formDemo)', function(data){
 				  $.ajax({
 			  			type:"get",
-			  			url:host+"kzych/university/dimListPage.do",
+			  			url:host+"/university/dimListPage.do",
 			  			data:{"provid":$("#provid").val(),
 			  					"cityid":$("#cityid").val(),
 			  					"areaid":$("#areaid").val(),
@@ -238,7 +238,7 @@
 										var currentPage = obj.curr;//获取点击的页码 
 										var limit = obj.limit;
 										//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-										$.get(host+"kzych/university/schoolListPageWithConditions.do?&pageNum="
+										$.get(host+"/university/schoolListPageWithConditions.do?&pageNum="
 																+ currentPage
 																+ "&pageSize="
 																+ limit
@@ -308,7 +308,7 @@
 		});
 		
 		
-    	$.get(host+"kzych/university/schoolList.do",function(schoollist){
+    	$.get(host+"/university/schoolList.do",function(schoollist){
     		   var ele = '';
     		   function loadData(list){
     			   //清空
@@ -354,7 +354,7 @@
 					    	 var currentPage = obj.curr;//获取点击的页码 
 					    	 var limit = obj.limit;
                              //window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-                             $.get(host+"kzych/university/schoolList.do?pageNum="+currentPage+"&pageSize="+limit,function(schoollist){
+                             $.get(host+"/university/schoolList.do?pageNum="+currentPage+"&pageSize="+limit,function(schoollist){
                             	 var ele = '';
                             	 var list = schoollist.data.list;
                             	

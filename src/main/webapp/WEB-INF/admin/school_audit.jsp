@@ -312,7 +312,7 @@
 										var currentPage = obj.curr;//获取点击的页码 
 										var limit = obj.limit;
 										//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-										$.get(host+"kzych/university/schoolListPageWithConditions.do?&pageNum="
+										$.get(host+"/university/schoolListPageWithConditions.do?&pageNum="
 																+ currentPage
 																+ "&pageSize="
 																+ limit
@@ -414,7 +414,7 @@
 					//异步请求更改该学校的状态
 						$.ajax({
 							type:"get",
-				  			url:host+"kzych/university/updatePublicStatus.do",
+				  			url:host+"/university/updatePublicStatus.do",
 				  			data:{"id":$("#id_school").val(),"publishStatus":2},
 				  			success:function(data){
 				  				setCookie("zhaosheng_service_status"+data,"2","d1"); 
@@ -432,7 +432,7 @@
 					//异步请求更改该学校的状态
 						$.ajax({
 				  			type:"post",
-				  			url:host+"kzych/university/updatePublicStatus.do",
+				  			url:host+"/university/updatePublicStatus.do",
 				  			data:{"id":$("#id_school").val(),"publishStatus":3,"checkedInfo":$("#checkedInfo").val()},
 				  			success:function(data){
 				  				setCookie("zhaosheng_service_status"+data,"3","d1"); 
@@ -453,7 +453,7 @@
 		
 		
 		//分页跳转 ajax
-		$.get(host+"kzych/university/schoolListPageWithConditions.do?publishStatus=1",
+		$.get(host+"/university/schoolListPageWithConditions.do?publishStatus=1",
 		function(schoollist) {
 			var ele = '';
 			function loadData(list) {
@@ -490,7 +490,7 @@
 							//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
 							$
 									.get(
-											host+"kzych/university/schoolListPageWithConditions.do?publishStatus=1&pageNum="
+											host+"/university/schoolListPageWithConditions.do?publishStatus=1&pageNum="
 													+ currentPage
 													+ "&pageSize="
 													+ limit,

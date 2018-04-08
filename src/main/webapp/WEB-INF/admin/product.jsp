@@ -277,7 +277,7 @@ var basePath = "${basePath}";
 		//页面已加载时就需要查询该用户有没有开通学校的原因（通过用户id查询学校）
 		$.ajax({
   			type:"get",
-  			url:host+"kzych/university/schoolByUserIdList.do",
+  			url:host+"/university/schoolByUserIdList.do",
   			data:{"userId":uuid},
   			success:function(data){
   				checkedInfo=data;
@@ -291,7 +291,7 @@ var basePath = "${basePath}";
 		//通过ajax来给学校等级（下拉框加上值）
 		$.ajax({
   			type:"get",
-  			url:host+"kzych/university/categoryList.do",
+  			url:host+"/university/categoryList.do",
   			success:function(data){
   				var html_category=$("#category_id");
   				for(var i=0;i<data.length;i++){
@@ -376,7 +376,7 @@ var basePath = "${basePath}";
 			  
 			  $.ajax({
   				type:"post",
-  				url:host+"kzych/university/universityAdd.do",
+  				url:host+"/university/universityAdd.do",
   				data:{"name":$("#name_p").val(),"universityType":$("#universityType_p").val(),"universityNature":$("#universityNature_p").val(),"categoryid":$("#categoryid_p").val(),"address":$("#address_p").val(),"legalPersonName":$("#legalPersonName_p").val(),"legalPersonCard":$("#legalPersonCard_p").val(),"legalPersonPhone":$("#legalPersonPhone_p").val(),"introduction":$("#detail").val(),"userId":uuid},
   				success:function(data){
   					alert("请求成功");

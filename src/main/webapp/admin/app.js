@@ -170,7 +170,7 @@ app.loadTopNav = function ($){
 	  //异步请求看该用户是否管理员
 	  $.ajax({
 		    type:"get",//47.104.135.201
-			url:host+"kzych/user/IsNotAdministrator.do",
+			url:host+"/user/IsNotAdministrator.do",
 			data:{"username":app.userRole},
 			success:function(data){
 				//判断该用户是否管理员 （0不是管理员1是管理员）

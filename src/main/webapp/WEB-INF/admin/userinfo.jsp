@@ -64,7 +64,7 @@
 			  </ul>
 			  <div class="layui-tab-content">
 			    <div class="layui-tab-item layui-show">
-			    	<form  class="layui-form" id="form1" action="/kzych/user/userinfoByKeyUpdate.do" method="get">
+			    	<form  class="layui-form" id="form1" action="/user/userinfoByKeyUpdate.do" method="get">
 			    	 <input type="hidden" name="uuid" value="${currentUser.uuid} ">
 			        <div class="layui-form-item">
 						  
@@ -134,7 +134,7 @@
 						</form>
 			    </div>
 			    <div class="layui-tab-item">
-			    	<form class="layui-form" action="/kzych/university/schoolByUserIdUpdate.do">
+			    	<form class="layui-form" action="/university/schoolByUserIdUpdate.do">
 			    		<div class="layui-form-item">
 						    <label class="layui-form-label">机构名称:</label>
 						    <div class="layui-input-block">
