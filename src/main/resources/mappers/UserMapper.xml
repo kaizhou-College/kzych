@@ -235,10 +235,10 @@
         CELLPHONE = #{cellphone,jdbcType=VARCHAR},
       </if>
       <if test="idcard != null" >
-        IDCARD = ${idcard,jdbcType=VARCHAR},
+        IDCARD = #{idcard,jdbcType=VARCHAR},
       </if>
       <if test="originPlace != null" >
-        ORIGIN_PLACE = ${originPlace,jdbcType=VARCHAR},
+        ORIGIN_PLACE = #{originPlace,jdbcType=VARCHAR},
       </if>
       <if test="school != null" >
         SCHOOL = #{school,jdbcType=VARCHAR},
