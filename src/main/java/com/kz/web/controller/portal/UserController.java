@@ -58,9 +58,10 @@ public class UserController {
 		Long long1 = iUserService.updateByKeyInfo(u);
 		try {
 			if (long1 == 1l) {
-				response.sendRedirect("/kzych/user/userinfoTo.do");
+				response.sendRedirect("/user/userinfoTo.do");
+//				response.sendRedirect("/kzych/user/userinfoTo.do");
 			} else {
-				response.sendRedirect("/kzych/user/error.do");
+				response.sendRedirect("/user/error.do");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
