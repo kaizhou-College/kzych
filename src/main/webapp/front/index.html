@@ -104,6 +104,7 @@
 			 $.ajax({
 				    type:"get",
 		  			url:"http://47.104.135.201:8080/user/IsNotAdministrator.do",
+		  			//url:"http://localhost:8080/kzych/user/IsNotAdministrator.do",
 		  			data:{"username":token},
 		  			success:function(data){
 		  				if(token == data.data.username&data.data.userType==1){
@@ -357,8 +358,8 @@
 			                						
 			                					</ul>
 			                					<ul id="logined" style="display:none;">
-			                						
 			                						<li><a href="/university/productTO.do">控制台</a></li>
+			                						<!-- <li><a href="/kzych/university/productTO.do">控制台</a></li> -->
 			                					
 			                						<li class="quit"><a href="" class="track-signup " aria-label="Sign out">退出</a></li>
 			                						
@@ -367,8 +368,8 @@
 			                						
 			                					</ul>
 			                					<ul id="admin_logined" style="display:none;">
-			                						
-			                						<li><a href="/university/index.do">控制台</a></li>
+			                						 <li><a href="/university/index.do">控制台</a></li> 
+			                						<!--<li><a href="/kzych/university/index.do">控制台</a></li>-->
 			                						
 			                						<li class="quit"><a href="" class="track-signout hide-initially" aria-label="Sign out">退出</a></li>
 			                					</ul>
