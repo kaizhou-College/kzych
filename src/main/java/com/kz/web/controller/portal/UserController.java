@@ -53,7 +53,7 @@ public class UserController {
 	 *             
 	 * @return: 没有返回值
 	 */
-	@RequestMapping(value = "userinfoByKeyUpdate.do", method = RequestMethod.GET)
+	@RequestMapping(value = "userinfoByKeyUpdate.do")
 	public void userinfoByKeyUpdate(User u, HttpServletResponse response,HttpSession session) {
 		Long long1 = iUserService.updateByKeyInfo(u);
 		try {

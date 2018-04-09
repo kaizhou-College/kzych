@@ -143,21 +143,6 @@ public class UserServiceImpl extends BaseService<User, UserQuery> implements IUs
 
 	@Override
 	public Long updateByKeyInfo(User u) {
-		// 编码
-		String realName = u.getRealName();
-		String school = u.getSchool();
-		String originPlace = u.getOriginPlace();
-		try {
-			realName = new String((u.getRealName()).getBytes("iso-8859-1"), "UTF-8");
-			school = new String((u.getSchool()).getBytes("iso-8859-1"), "UTF-8");
-			originPlace = new String((u.getOriginPlace()).getBytes("iso-8859-1"), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		// 用户名不能改
-		u.setRealName(realName);
-		u.setSchool(school);
-		u.setOriginPlace(originPlace);
 		u.setUsername(null);
 		return userMapper.updateByKeyInfo(u);
 	}
