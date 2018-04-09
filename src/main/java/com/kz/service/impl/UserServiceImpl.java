@@ -168,7 +168,7 @@ public class UserServiceImpl extends BaseService<User, UserQuery> implements IUs
 		if (u.getOriginPlace().equals("只有在用户报读大中专学校和找工作、社会实践时才会要求填写")) {
 			u.setOriginPlace(null);
 		}
-		System.out.println(u);
+		
 		return userMapper.updateByKeyInfo(u);
 	}
 
