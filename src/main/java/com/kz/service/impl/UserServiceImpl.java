@@ -154,23 +154,20 @@ public class UserServiceImpl extends BaseService<User, UserQuery> implements IUs
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		
-		for (int i = 0; i < 3; i++) {
-			if (u.getIdcard().equals("只有在用户报读大中专学校和找工作、社会实践时才会要求填写")) {
-				u.setRealName(null);
-			}
-			if (u.getSchool().equals("只有在用户报读大中专学校和找工作、社会实践时才会要求填写")) {
-				u.setSchool(null);
-			}
-			if (u.getOriginPlace().equals("只有在用户报读大中专学校和找工作、社会实践时才会要求填写")) {
-				u.setOriginPlace(null);
-			}
-		}
 		// 用户名不能改
 		u.setRealName(realName);
 		u.setSchool(school);
 		u.setOriginPlace(originPlace);
 		u.setUsername(null);
+		if (u.getIdcard().equals("只有在用户报读大中专学校和找工作、社会实践时才会要求填写")) {
+			u.setRealName(null);
+		}
+		if (u.getSchool().equals("只有在用户报读大中专学校和找工作、社会实践时才会要求填写")) {
+			u.setSchool(null);
+		}
+		if (u.getOriginPlace().equals("只有在用户报读大中专学校和找工作、社会实践时才会要求填写")) {
+			u.setOriginPlace(null);
+		}
 		System.out.println(u);
 		return userMapper.updateByKeyInfo(u);
 	}
