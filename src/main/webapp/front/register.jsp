@@ -183,7 +183,7 @@
 			                				<div class="chg-hdr-notifications embed-js" id="notifications-component"></div>
 			                		</div>
 			                		<div id="eggshell-24" class="C-global-cheggheader-rightsection-usermenu">
-			                			<a href="login.html" class="signin-item nav-item track-signin">登录</a>
+			                			<a href="login.jsp" class="signin-item nav-item track-signin">登录</a>
 			                			<div class="more-item nav-item">
 			                				<div class="header" role="button" tabindex="0" aria-label="More Menu, has sub menu" aria-expanded="false">更多 <span class="icon-chegg-chevron"></span></div>
 			                				<div class="carrot">
