@@ -263,6 +263,7 @@
 cur_mod="学校管理";
 var basePath ="${basePath}" ;
 var host="${host}";
+var username ="${currentUser.username}";
 app.init(function($){
 	
 	layui.use('form', function(){
