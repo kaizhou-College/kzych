@@ -287,7 +287,7 @@
 <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
 <script src="layui.js?t=1515376178709" charset="utf-8"></script>
 	<script type="text/javascript">
-		 var host = "${host}";
+		var host = "${host}";
 		$(document).ready(function() {
 		
 			layui.use(['form','layedit'], function(){
@@ -332,6 +332,7 @@
 		  				}
 		  			},
 		  			error:function(){
+		  				alert(host);
 		  				alert("请求失败！！！.3.3");
 		  			}
 			  });
