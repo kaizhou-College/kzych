@@ -27,7 +27,7 @@ public class University extends BaseModel{
     private String name;
 
     private String address;
-
+    
     private String employmentInfo;
 
     private String brochure;
@@ -59,7 +59,7 @@ public class University extends BaseModel{
     private String checkedInfo;
     
     private String schoolCoverimg;
-
+    
 	public String getCheckedInfo() {
 		return checkedInfo;
 	}

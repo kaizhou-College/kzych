@@ -46,7 +46,7 @@
           <dd><a href="">安全设置</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="">退了</a></li>
+      <li class="layui-nav-item"><a href="javascript:exit();">退出</a></li>
     </ul>
   </div>
   
@@ -101,7 +101,7 @@
 	
 	
 //JavaScript代码区域
-
+var username ="${currentUser.username}";
 var cur_mod="系统管理";
 var basePath ="${basePath}" ;
 var host="${host}";
@@ -158,6 +158,18 @@ app.init(function($){
   
 	
 });
+
+//退出
+function exit(){
+	$.ajax({
+			type:"post",
+			url:host+"/user/logout.do",
+			success:function(data){
+				location.href="/front/";
+			},
+			error:function(){alert("退出失败");}
+	});
+}
 </script>
 
 </body>

@@ -505,6 +505,12 @@
       <if test="introduction != null" >
         INTRODUCTION = #{introduction,jdbcType=LONGVARCHAR},
       </if>
+      <if test="schoolLicense != null" >
+        school_License = #{schoolLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolCoverimg != null" >
+        school_Coverimg = #{schoolCoverimg,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
@@ -584,6 +590,9 @@
       <if test="introduction != null" >
         INTRODUCTION,
       </if>
+      <if test="schoolCoverimg != null" >
+        school_CoverImg,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
         null,
@@ -658,6 +667,9 @@
       </if>
       <if test="introduction != null" >
         #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="schoolCoverimg != null" >
+        #{schoolCoverimg,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

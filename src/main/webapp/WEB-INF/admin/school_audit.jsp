@@ -606,4 +606,15 @@
 		    form.render('select');
 		});
 	}
+	//退出
+	function exit(){
+		$.ajax({
+  			type:"post",
+  			url:host+"/user/logout.do",
+  			success:function(data){
+  				location.href="/front/";
+  			},
+  			error:function(){alert("退出失败");}
+		});
+	}
 </script>

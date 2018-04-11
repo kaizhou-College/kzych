@@ -24,12 +24,14 @@ public class User {
     private String signMessage;
 
     private String profile;
-    /*角色0-普通用户,1-管理员',*/
+    /*角色0-普通用户,1-管理员',3-学生*/
     private Integer userType;
 
     private Date createTime;
 
     private Date lastloginTime;
+    
+    private String userAvatar;
 
     public Long getUuid() {
         return uuid;
@@ -142,4 +144,14 @@ public class User {
     public void setLastloginTime(Date lastloginTime) {
         this.lastloginTime = lastloginTime;
     }
+
+	public String getUserAvatar() {
+		return userAvatar;
+	}
+
+	public void setUserAvatar(String userAvatar) {
+		this.userAvatar = userAvatar;
+	}
+    
+    
 }

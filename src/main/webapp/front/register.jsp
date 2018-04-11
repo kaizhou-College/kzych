@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="common/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -207,24 +210,24 @@
 		
 			<div ID="login-box">
 				   <h3 class="login-title">用户注册</h3>
-				   <form action="" onsubmit="return testRegister();" id="form">
+				   <form action="${host }/user/userTypeTO.do" method="post" onsubmit="return testRegister();" id="form">
 				   	  
 				   	<div class="layui-form-item">
 					    <label class="layui-form-label">帐号:</label>
 					    <div class="layui-input-block">
-					      <input name="username" lay-verify="required" placeholder="用户名／手机" autocomplete="off" class="layui-input" type="text">
+					      <input name="username" id="username" onblur="isNotUser();" lay-verify="required" placeholder="用户名／手机" autocomplete="off" class="layui-input" type="text">
 					    </div>
 					  </div>
 					  <div class="layui-form-item">
 					    <label class="layui-form-label">密码:</label>
 					    <div class="layui-input-block">
-					      <input name="password" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" type="password">
+					      <input  lay-verify="required" id="password1" placeholder="" autocomplete="off" class="layui-input" type="password">
 					    </div>
 					  </div>
 					  <div class="layui-form-item">
 					    <label class="layui-form-label">密码确认:</label>
 					    <div class="layui-input-block">
-					      <input name="password" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" type="password">
+					      <input name="password" id="password2" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" type="password">
 					    </div>
 					  </div>
 					  <div class="layui-form-item">
@@ -232,20 +235,18 @@
 					      <div class="layui-inline">
 						      <label class="layui-form-label">手机</label>
 						      <div class="layui-input-inline">
-						        <input name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input" type="tel">
+						        <input name="cellphone" id="cellphone" lay-verify="required|phone" autocomplete="off" class="layui-input" type="tel">
 						      </div>
 						    </div>
 						    <div class="layui-inline">
 						      <button class="layui-btn layui-btn-fluid" style="margin-left: 1.5rem;" >获取验证码</button>
 						    </div>
-					   
-					    
 					  </div>
 					  
 					  <div class="layui-form-item">
 					    <label class="layui-form-label">验证码:</label>
 					    <div class="layui-input-block">
-					      <input name="username" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" type="text">
+					      <input name="cellphone_yzm" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" type="text">
 					    </div>
 					  </div>
 					  
@@ -316,7 +317,8 @@
 <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
 <script src="layui.js?t=1515376178709" charset="utf-8"></script>
 	<script type="text/javascript">
-		 
+		 var host="${host}";
+		 var isNotPass=0;//接收符合条件的数量
 		$(document).ready(function() {
 		
 			layui.use(['form','layedit'], function(){
@@ -327,15 +329,63 @@
 	   });
 		});
 		
+		function isNotUser(){
+			isNotPass=0;//初始化
+			 //查看选择添加的用户是否存在  （我就直接在判断是不是管理员了  因为如果返回的data是管理员或者有用户的话就不不能让该用户填写这个名字了）
+			if($("#username").val().trim().length>0){
+				$.ajax({
+				    type:"get",
+		  			url:host+"/user/IsNotAdministrator.do",
+		  			data:{"username":$("#username").val()},
+		  			success:function(data){
+		  				if(data.msg=="用户不存在"){
+		  					isNotPass=isNotPass+1;
+		  				}else{
+		  					alert("亲该用户名已被注册过了");
+		  				}
+		  			},
+		  			error:function(){
+		  				alert("请求失败")
+		  			}
+			 });
+			}else{
+				alert("亲请输入用户名");
+			}
+			 
+		}
 		//本代码只是用于测试
 		function testRegister(){
-			 
-			 
-			  
-			  location.href = "/front/usertype.html";
-			  return false;
+			if(isNotPass>1){//初始化
+				isNotPass=1
+			}
+			 //查看输入的密码是否符合要求（俩次密码要一样  最大长度不能大于20 最小长度不能小于3 ）
+			 if($("#password1").val().trim().length>=3&&$("#password1").val().trim().length<=20){
+				 isNotPass=isNotPass+1;
+			 }else{
+				 alert("亲密码最大长度20 最小长度3");
+			 }
+			 //查看输入的俩次密码是否一样
+			 if($("#password1").val().trim()==$("#password2").val().trim()){
+				 isNotPass=isNotPass+1;
+			 }else{
+				 alert("亲第二次密码不符");
+			 }
+			 //判断电话是否是乱输入的
+			 var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
+			  	if(phone.test($("#cellphone").val())){
+			  		isNotPass=isNotPass+1;
+			  	}else{
+				  	alert("亲请输入正确的电话号");
+			  	}
+			 if(isNotPass==4){
+				 return true; 
+			 }else{
+				 return false;
+			 }
 			
 		}
+		
+		
 		
 		function setCookie(name,value,time)
 		{
@@ -365,4 +415,6 @@
 			return str1*24*60*60*1000;
 			}
     }
+		
+		
 	</script>

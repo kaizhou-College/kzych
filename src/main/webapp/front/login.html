@@ -287,7 +287,7 @@
 <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
 <script src="layui.js?t=1515376178709" charset="utf-8"></script>
 	<script type="text/javascript">
-		 
+		 var host = "${host}";
 		$(document).ready(function() {
 		
 			layui.use(['form','layedit'], function(){
@@ -313,20 +313,20 @@
 			  //异步请求 看该用户是否管理员
 			 $.ajax({
 				    type:"post",
-		  			url:"http://47.104.135.201:8080/user/login.do",
+		  			url:host+"/user/login.do",
 		  			data:{"username":$("#username").val(),"password":$("#password").val()},
 		  			success:function(data){
 		  				if(data.status==0){
-		  					  //管理员
+		  					 /* //管理员
 				  			  if(data.data.userType == 1){
 				  			  	   setCookie("token",data.data.username,"d1");
 				  			  }
 				  			   //普通用户
-				  			  else{
+				  			  else{*/
 				  			  	   setCookie("token",data.data.username,"d1");
-				  			  }
-				  			location.href = "/front/index.html 	";
-				  			//location.href = "/kzych/front/index.html 	";
+				  			 /* }*/
+				  			//location.href = "/front/index.jsp";
+				  			location.href = host+"/front/index.jsp";
 		  				}else{
 		  					layer.msg('密码或者账号错误');
 		  				}

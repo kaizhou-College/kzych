@@ -1,3 +1,4 @@
+
 app = function(){
 
    	//var $;
@@ -169,9 +170,9 @@ app.loadTopNav = function ($){
 	  var nav_url =  basePath+"admin/testdata/nav.json";
 	  //异步请求看该用户是否管理员
 	  $.ajax({
-		    type:"get",//47.104.135.201
+		    type:"post",//47.104.135.201
 			url:host+"/user/IsNotAdministrator.do",
-			data:{"username":app.userRole},
+			data:{"username":username},
 			success:function(data){
 				//判断该用户是否管理员 （0不是管理员1是管理员）
 				if(data.data.userType==0){

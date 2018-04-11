@@ -44,7 +44,7 @@
         </dl>
         -->
       </li>
-      <li class="layui-nav-item quit"><a href="javascript:void(0);">退出</a></li>
+      <li class="layui-nav-item quit"><a href="javascript:exit();">退出</a></li>
     </ul>
   </div>
   
@@ -118,7 +118,7 @@
 			    		<div class="layui-form-item">
 						    <label class="layui-form-label">机构名称:</label>
 						    <div class="layui-input-block">
-						      <input id="name_p" type="text" name="" value="湖南大学" autocomplete="off"  class="layui-input">
+						      <input id="name_p" type="text" name="" value="请输入学校名称" autocomplete="off"  class="layui-input">
 						    </div>
 						  </div>
 						  
@@ -127,8 +127,8 @@
 						      <label class="layui-form-label">机构类型</label>
 						      <div class="layui-input-inline">
 						        <select id="universityType_p" name="interest" lay-filter="aihao">
-							        <option value=""></option>
-							        <option value="1" selected="">学校</option>
+							        <option value="0"></option>
+							        <option value="1" >学校</option>
 							        <option value="2" >企业</option>
 							        <option value="3">事业单位</option>
 							        <option value="4">政府机关</option>
@@ -141,8 +141,8 @@
 						      <label class="layui-form-label">机构性质:</label>
 						      <div class="layui-input-inline">
 						        <select id="universityNature_p" name="interest" lay-filter="aihao">
-							        <option value=""></option>
-							        <option value="1" selected="">公办</option>
+							        <option value="0"></option>
+							        <option value="1">公办</option>
 							        <option value="2" >民办</option>
 							        
 							      </select>
@@ -153,7 +153,7 @@
 						      <label class="layui-form-label">学校等级:</label>
 						      <div class="layui-input-inline">
 						        <select id="categoryid_p" name="interest">
-							        <option value=""></option>
+							        <option value="0"></option>
 							    </select>
 						      </div>
 						    </div>
@@ -162,7 +162,7 @@
                <div class="layui-form-item">
 						    <label class="layui-form-label">机构地址:</label>
 						    <div class="layui-input-block">
-						      <input id="address_p" type="text" name="" value="湖南长沙" autocomplete="off"  class="layui-input">
+						      <input id="address_p" type="text" name="" value="请输入学校地址" autocomplete="off"  class="layui-input">
 						    </div>
 						  </div>
 						  
@@ -177,8 +177,9 @@
 												    <img class="layui-upload-img" id="start-img-view2" style="height:100px;">
 												    <p id="errText2"></p>
 												  </div>
-												</div> 
-									    </div>
+												</div> 	
+												<input type="hidden" name="schoolCoverimg" id="schoolCoverimg" value="">							   
+										 </div>
 							     </div>
 							     
 							     <div class="layui-inline">
@@ -192,7 +193,8 @@
 												    <img class="layui-upload-img" id="start-img-view3" style="height:100px;">
 												    <p id="errText3"></p>
 												  </div>
-												</div> 
+												</div>
+												<input type="hidden" name="schoolLicense" id="schoolLicense" value="">
 									    </div>
 							     </div>
 							</div>
@@ -204,21 +206,21 @@
 						    <div class="layui-inline">
 						      <label class="layui-form-label">法人姓名</label>
 						      <div class="layui-input-inline">
-						        <input id="legalPersonName_p" type="text" name="" value="张三" autocomplete="off"  class="layui-input">
+						        <input id="legalPersonName_p" type="text" name="" value="请输入法人姓名" autocomplete="off"  class="layui-input">
 						      </div>
 						    </div>
 						    <div class="layui-inline">
 						      <!--只有选择学校才显示-->
 						      <label class="layui-form-label">法人身份证:</label>
 						      <div class="layui-input-inline">
-						        <input id="legalPersonCard_p" type="text" name="" value="431111111111111" autocomplete="off"  class="layui-input">
+						        <input id="legalPersonCard_p" type="text" name="" value="请输入法人身份证" autocomplete="off"  class="layui-input">
 						      </div>
 						    </div>
 						    <div class="layui-inline">
 						      <!--只有选择学校类型才显示-->
 						      <label class="layui-form-label">法人电话:</label>
 						      <div class="layui-input-inline">
-						        <input id="legalPersonPhone_p" type="text" name="" value="13882821234" autocomplete="off"  class="layui-input">
+						        <input id="legalPersonPhone_p" type="text" name="" value="请输入法人电话" autocomplete="off"  class="layui-input">
 						      </div>
 						    </div>
 						  </div>
@@ -228,7 +230,7 @@
 						  <div class="layui-form-item">
 						    <label class="layui-form-label">机构简介:</label>
 						    <div class="layui-input-block">
-						       <textarea id="detail" ></textarea>
+						       <textarea id="detail" >请输入机构简历</textarea>
 						    </div>
 						  </div>
 						  
@@ -263,12 +265,16 @@
 <script type="text/javascript" src="${basePath}admin/js/uploader.min.js"></script>
 <script type="text/javascript" src="${basePath}admin/js/simditor.js"></script>
 <script>
+
+//用户名称
+var username ="${currentUser.username}";
 //用户的id（用于开通）
-var uuid=${currentUser.uuid};
+var uuid="${currentUser.uuid}";
+	
 //该用户不通过的原因
 var checkedInfo="初始值";
 //该用户的状态（PublicStatus）
-var status=${publicStatus};
+var status="${publicStatus}";
 var host="${host}";
 var basePath = "${basePath}";
 	cur_mod="个人中心";
@@ -374,25 +380,108 @@ var basePath = "${basePath}";
 		$("#school-auth-ok").on("click",function(){
 			  // 通过ajax提交
 			  
-			  $.ajax({
-  				type:"post",
-  				url:host+"/university/universityAdd.do",
-  				data:{"name":$("#name_p").val(),"universityType":$("#universityType_p").val(),"universityNature":$("#universityNature_p").val(),"categoryid":$("#categoryid_p").val(),"address":$("#address_p").val(),"legalPersonName":$("#legalPersonName_p").val(),"legalPersonCard":$("#legalPersonCard_p").val(),"legalPersonPhone":$("#legalPersonPhone_p").val(),"introduction":$("#detail").val(),"userId":uuid},
-  				success:function(data){
-  					alert("请求成功");
-  					alert(data);
-  					setCookie("zhaosheng_service_status"+uuid,"1","d1"); //这是测试代码，正试逻辑要删除。状态：0表示没有开通，1表示开通中，2表示已开通，3表示被拒决
-  					location.reload();
-  				},
-  				error:function(){
-  					alert("请求失败");
-  				}		
-			});
+			  
+    		var isNotPass=0;
+			
+			//验证  机构信息	
+			//机构名称
+			if($("#name_p").val().trim().length>0&&$("#name_p").val()!="请输入学校名称"){
+				isNotPass=isNotPass+1
+    		}else{
+    			alert("亲请输入学校名称");
+    		}
+			//机构类型
+			if($("#universityType_p").val()>0){
+				isNotPass=isNotPass+1
+    		}else{
+    			alert("亲请选择机构类型");
+    		}
+			//机构性质
+			if($("#universityNature_p").val()>0){
+				isNotPass=isNotPass+1
+    		}else{
+    			alert("亲请选择机构性质");
+    		}
+			//学校等级
+			if($("#categoryid_p").val()>0){
+				isNotPass=isNotPass+1
+    		}else{
+    			alert("亲请选择学校等级");
+    		}
+			//机构地址
+			if($("#address_p").val().trim().length>0&&$("#address_p").val()!="请输入学校地址"){
+				isNotPass=isNotPass+1
+    		}else{
+    			alert("亲请输入机构地址");
+    		}
+			//封面图片 $("#schoolCoverimg")
+			if($("#schoolCoverimg").val().trim().length>0){
+				isNotPass=isNotPass+1
+    		}else{
+    			alert("亲请上传封面图片");
+    		}
+			//办学许可证  $("#schoolLicense")
+			if($("#schoolLicense").val().trim().length>0){
+				isNotPass=isNotPass+1
+    		}else{
+    			alert("亲请上传办学许可证");
+    		}
+			//法人姓名 $("#legalPersonName_p").val()
+			if($("#legalPersonName_p").val().trim().length>0&&$("#legalPersonName_p").val()!="请输入法人姓名"){
+				isNotPass=isNotPass+1
+    		}else{
+    			alert("亲请输入法人姓名");
+    		}
+			//法人身份证$("#legalPersonCard_p").val()
+  		 	var isIDCard1=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/; //15位的身份证
+  		  	var isIDCard2=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$/;//18位  身份证的正则表达式
+			  	if(isIDCard2.test($("#legalPersonCard_p").val())||isIDCard1.test($("#default_1"))){
+			  		isNotPass=isNotPass+1;
+			  	}else{
+				  	alert("亲请输入正确的身份证号");
+			  	}
+			//法人电话$("#legalPersonPhone_p").val()
+			var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
+		  	if(phone.test($("#legalPersonPhone_p").val())){
+		  		isNotPass=isNotPass+1;
+		  	}else{
+			  	alert("亲请输入正确的电话号");
+		  	}
+			//机构简历$("#detail").val()
+			if($("#detail").val().trim().length>0&&$("#detail").val()!="请输入机构简历"){
+				isNotPass=isNotPass+1;
+		  	}else{
+			  	alert("亲请输入机构简历");
+		  	}
+			//isNot如果等于11 那么说明客户填的信息符合条件
+			if(isNotPass==11){
+				$.ajax({
+	  				type:"post",
+	  				url:host+"/university/universityAdd.do",
+	  				data:{"name":$("#name_p").val(),"universityType":$("#universityType_p").val(),
+	  					"universityNature":$("#universityNature_p").val(),"categoryid":$("#categoryid_p").val(),
+	  					"address":$("#address_p").val(),"legalPersonName":$("#legalPersonName_p").val(),
+	  					"legalPersonCard":$("#legalPersonCard_p").val(),"legalPersonPhone":$("#legalPersonPhone_p").val(),
+	  					"introduction":$("#detail").val(),"userId":uuid,"schoolCoverimg":$("#schoolCoverimg").val(),
+	  					"schoolLicense":$("#schoolLicense").val()},
+	  				success:function(data){
+	  					alert("请求成功");
+	  					alert(data);
+	  					setCookie("zhaosheng_service_status"+uuid,"1","d1"); //这是测试代码，正试逻辑要删除。状态：0表示没有开通，1表示开通中，2表示已开通，3表示被拒决
+	  					location.reload();
+	  				},
+	  				error:function(){
+	  					alert("请求失败");
+	  				}		
+				});
+			}
 		});
+		
 		
 		var uploadInst1 = app.upload.render({
 		    elem: '#start-img2'
-		    ,url: '/upload/'
+		    ,url: host+'/university/save1.do'
+		    ,field: 'upload_file'
 		    ,before: function(obj){
 		      //预读本地文件示例，不支持ie8
 		      obj.preview(function(index, file, result){
@@ -405,6 +494,7 @@ var basePath = "${basePath}";
 		        return layer.msg('上传失败');
 		      }
 		      //上传成功
+				$("#schoolCoverimg").val(res.data.uri);
 		    }
 		    ,error: function(){
 		      //演示失败状态，并实现重传
@@ -418,7 +508,8 @@ var basePath = "${basePath}";
      
      var uploadInst2 = app.upload.render({
 		    elem: '#start-img3'
-		    ,url: '/upload/'
+		    ,url: host+'/university/save1.do'
+			,field: 'upload_file'
 		    ,before: function(obj){
 		      //预读本地文件示例，不支持ie8
 		      obj.preview(function(index, file, result){
@@ -431,6 +522,7 @@ var basePath = "${basePath}";
 		        return layer.msg('上传失败');
 		      }
 		      //上传成功
+		      $("#schoolLicense").val(res.data.uri);
 		    }
 		    ,error: function(){
 		      //演示失败状态，并实现重传
@@ -459,9 +551,19 @@ var basePath = "${basePath}";
                 leaveConfirm: '正在上传文件'
             }
         });
-		
+        
 	});
 	
-	
+	//退出
+	function exit(){
+		$.ajax({
+  			type:"post",
+  			url:host+"/user/logout.do",
+  			success:function(data){
+  				location.href="/front/";
+  			},
+  			error:function(){alert("退出失败");}
+		});
+	}
 	
 </script>

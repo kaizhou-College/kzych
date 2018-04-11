@@ -2,7 +2,9 @@ package com.kz.web.controller.portal;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -10,13 +12,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.google.common.collect.Maps;
 import com.kz.core.common.Const;
 import com.kz.core.common.ResponseCode;
 import com.kz.core.common.ServerResponse;
 import com.kz.po.User;
+import com.kz.service.IFileService;
 import com.kz.service.IUserService;
+import com.kz.utils.PropertiesUtil;
 
 /**
  * @Title: UserController.java
@@ -32,7 +39,20 @@ import com.kz.service.IUserService;
 public class UserController {
 	@Autowired
 	private IUserService iUserService;
-
+	@Autowired
+	private IFileService iFileService;
+	
+	//用户注册时跳往用户设置权限页面
+	@RequestMapping(value = "userTypeTO.do", method = RequestMethod.POST)
+	public void userTypeTO(HttpSession session,HttpServletResponse response,User user) {
+		session.setAttribute("userInfo",user);
+		try {
+			response.sendRedirect("/front/usertype.jsp");
+//			response.sendRedirect("/kzych/front/usertype.jsp");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * @Title: login
 	 * @Description: 根据id修改用户信息
@@ -59,7 +79,7 @@ public class UserController {
 		try {
 			if (long1 == 1l) {
 				response.sendRedirect("/user/userinfoTo.do");
-//				response.sendRedirect("/kzych/user/userinfoTo.do");
+				//response.sendRedirect("/kzych/user/userinfoTo.do");
 			} else {
 				response.sendRedirect("/user/error.do");
 			}
@@ -150,8 +170,20 @@ public class UserController {
 	 */
 	@RequestMapping(value = "register.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<String> register(User user) {
-		return iUserService.register(user);
+	public ServerResponse<String> register(User user,HttpSession session) {
+		//登入时的数据
+		User u =(User) session.getAttribute("userInfo");
+		user.setUsername(u.getUsername());
+		user.setPassword(u.getPassword());
+		user.setCellphone(u.getCellphone());
+		//注册
+		ServerResponse<String> register = iUserService.register(user);
+		//注册之后就去获取该用户的信息
+		ServerResponse<User> response = iUserService.login(user.getUsername(),u.getPassword());
+		if (response.isSuccess()) {
+			session.setAttribute(Const.CURRENT_USER, response.getData());
+		}
+		return register;
 	}
 
 	/**
@@ -197,6 +229,36 @@ public class UserController {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
 		}
 		return iUserService.getInformation(currentUser.getUuid());
+	}
+	/**
+	 * 
+	 * @Title: save
+	 * @Description: 用户头像上传
+	 * @param: @param
+	 *             session
+	 * @param: @param
+	 *             upload_file
+	 * @param: @param
+	 *             request
+	 * @param: @return
+	 * @return: ServerResponse 返回值类型
+	 */
+	@RequestMapping("save.do")
+	@ResponseBody
+	public ServerResponse save(HttpSession session,
+			@RequestParam(value = "upload_file", required = false) MultipartFile file, HttpServletRequest request) {
+			//判断用户是否登入
+			User user = (User) session.getAttribute(Const.CURRENT_USER);
+			if (user == null) {
+				return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
+			}
+			String path = request.getSession().getServletContext().getRealPath("upload");
+			String targetFileName = iFileService.upload(file, path);
+			String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + targetFileName;
+			Map fileMap = Maps.newHashMap();
+			fileMap.put("uri", targetFileName);
+			fileMap.put("url", url);
+			return ServerResponse.createBySuccess(fileMap);
 	}
 
 }

@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="common/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -220,13 +223,11 @@
 			<div ID="login-box">
 				   <h3 class="login-title">请确认你的身份</h3>
 				   <div style="width:100%;padding:50px 20px;box-sizing:border-box;text-align:center;">
-				   	   <a class="user-type" style="background:#7dcb91;" href="/front/">
+				   	   <a class="user-type" style="background:#7dcb91;" onmousedown="return register(2);">
 				   	   	<h3 style="width:100%;text-align:center;">我是个人用户</h3>
 				   	   </a>
-				   	   <a class="user-type" style="background:#537ea499;margin-left:30px;" href="/admin/product.html">
-				   	   	
+				   	   <a class="user-type" style="background:#537ea499;margin-left:30px;" onmousedown="return register(0);">
 				   	   	  <h3 style="width:100%;display: inline-block;text-align:center;float:left;">我是机构用户</h3>
-				   	   	  
 				   	   		<p style="position:absolute;display: inline-block;top: 88px;width:100%;text-align:center;font-size:12px;float:left;">(学校、政府机关、企业单位、社会团体)</p>
 				   	   	</a>
 				   <div style="clear:both;"></div>
@@ -285,7 +286,7 @@
 <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
 <script src="layui.js?t=1515376178709" charset="utf-8"></script>
 	<script type="text/javascript">
-		 
+		 var host="${host}";
 		$(document).ready(function() {
 		
 			layui.use(['form','layedit'], function(){
@@ -295,6 +296,33 @@
 	     
 	   });
 		});
+		function register(id){
+			$.ajax({
+	  			type:"post",
+	  			url:host+"/user/register.do",
+	  			data:{"userType":id},
+	  			success:function(data){
+	  				if(id==2){
+	  					if(data.status==0){
+		  					location.href=host+"/front/";
+		  				}else{
+		  					alert("添加失败,可能是用户名重复");
+		  				}
+	  				}else{
+	  					if(data.status==0){
+		  					location.href=host+"/university/productTO.do";
+		  				}else{
+		  					alert("添加失败,可能是用户名重复");
+		  				}
+	  				}
+	  				
+	  			}
+	  			,error:function(){
+	  				alert(请求失败);
+	  			}
+			});
+			
+		}
 		
 		//本代码只是用于测试
 		function testRegister(){

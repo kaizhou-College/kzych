@@ -81,20 +81,6 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 	}
 	@Override
 	public Long schoolByUserIdUpdate(University m) {
-		//转编码
-		String address=m.getAddress();
-		String legalPersonName=m.getLegalPersonName();
-		String introduction=m.getIntroduction();
-		try {
-			address= new String(m.getAddress().getBytes("iso-8859-1"),"UTF-8");
-			legalPersonName=new String(m.getLegalPersonName().getBytes("iso-8859-1"),"UTF-8");
-			introduction=new String(m.getIntroduction().getBytes("iso-8859-1"),"UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		m.setAddress(address);
-		m.setLegalPersonName(legalPersonName);
-		m.setIntroduction(introduction);
 		return mapper.schoolByUserIdUpdate(m);
 	}
 }

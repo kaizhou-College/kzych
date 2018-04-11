@@ -33,6 +33,7 @@ public class UserServiceImpl extends BaseService<User, UserQuery> implements IUs
 		}
 		String md5Password = MD5Util.MD5EncodeUtf8(password);
 		User user = userMapper.selectLogin(username, md5Password);
+		System.out.println("username:"+username+"md5Password:"+md5Password);
 		if (user == null) {
 			return ServerResponse.createByErrorMessage("密码错误");
 		}
@@ -50,10 +51,10 @@ public class UserServiceImpl extends BaseService<User, UserQuery> implements IUs
 		if (!validResponse.isSuccess()) {
 			return validResponse;
 		}
-		user.setUserType(Const.UserTYPE.TYPE_CUSTOMER);
+		//user.setUserType(Const.UserTYPE.TYPE_CUSTOMER);
 		// MD5加密
 		user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
-		Long resultCount = userMapper.insert(user);
+		Long resultCount = userMapper.insertSelectiveRegister(user);
 		if (resultCount == 0) {
 			return ServerResponse.createByErrorMessage("注册失败");
 		}

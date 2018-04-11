@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="common/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +37,7 @@
 <script type="text/javascript" src="js/move-top.js"></script>
 <script type="text/javascript" src="js/easing.js"></script>
 <script type="text/javascript">
+var host="${host}";
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
 			event.preventDefault();
@@ -95,23 +99,23 @@
     checkUserLogin();
     //测试代码
     function checkUserLogin(){
-    	 var token = '' ;
-    	 var arr,reg=new RegExp("(^| )"+"token" +"=([^;]*)(;|$)");
+    	 var token = "${currentUser.username}" ;
+    	 
+    	  /*var arr,reg=new RegExp("(^| )"+"token" +"=([^;]*)(;|$)");
 			if(arr=document.cookie.match(reg)){
 			    token = unescape(arr[2])
-			}
+			} */
 			 //异步请求 看该用户是否管理员
 			 $.ajax({
 				    type:"get",
-		  			url:"http://47.104.135.201:8080/user/IsNotAdministrator.do",
-		  			
+		  			url:host+"/user/IsNotAdministrator.do",
 		  			data:{"username":token},
 		  			success:function(data){
 		  				if(token == data.data.username&data.data.userType==1){
 		  				  $("#admin_logined").show();
 		  				  $("#logined").hide();
 		  				  $("#nologin").hide();
-		  				  $("#login1").attr("href","javascript:void(0);");
+		  				  $("#login1").attr("href","javascript:exit();");
 		  				  $("#login1").text(data.data.username);
 		  				  
 		  				}
@@ -120,18 +124,21 @@
 		  				  $("#admin_logined").hide();
 		  				  $("#logined").show();
 		  				  $("#nologin").hide();
-		  				  $("#login1").attr("href","javascript:void(0);");
+		  				  $("#login1").attr("href","javascript:exit();");
 		  				  $("#login1").text(data.data.username);
+		  				}else if(token == data.data.username&data.data.userType==2){
+		  					  $("#admin_logined").hide();
+			  				  $("#logined").show();
+			  				  $("#nologin").hide();
+			  				  $(".kzt").hide();
+			  				  $("#login1").attr("href","javascript:exit();");
+			  				  $("#login1").text(data.data.username);
 		  				}
 		  			},
 		  			error:function(){
 		  				alert("请求失败！！！");
 		  			}
 			  });
-			
-			
-			
-			
     	
     }
     
@@ -153,7 +160,7 @@
 			var cval=getCookie("token");
 			if(cval!=null)
 			document.cookie= "token" + "="+ '' +";expires="+exp.toGMTString() + ";path=/;";
-			location.href = "/front";
+			location.href = host+"/front";
 
     });
 	});
@@ -352,26 +359,24 @@
 			                				</div>
 			                				<div class="more-hover-content hover-box">
 			                					<ul id="nologin">
-			                						
-			                						<li><a href="/front/register.html" class="track-signup" aria-label="Create an account">注册</a></li>
+			                						<li><a href="${host }/front/register.jsp" class="track-signup" aria-label="Create an account">注册</a></li>
 			                						<li><a href="" class="track-help" data-noajax="" aria-label="Help">帮助</a></li>
-			                						
 			                					</ul>
 			                					<ul id="logined" style="display:none;">
-			                						<li><a href="/university/productTO.do">控制台</a></li>
-			                						<!-- <li><a href="/kzych/university/productTO.do">控制台</a></li> -->
+			                						<!-- <li><a href="/university/productTO.do">控制台</a></li> -->
+			                						<li><a href="${host }/university/productTO.do"  class="kzt">控制台</a></li>
 			                					
-			                						<li class="quit"><a href="" class="track-signup " aria-label="Sign out">退出</a></li>
+			                						<li class="quit"><a  class="track-signup " aria-label="Sign out" href="javascript:exit();">退出</a></li>
 			                						
 			                						
 			                						
 			                						
 			                					</ul>
 			                					<ul id="admin_logined" style="display:none;">
-			                						 <li><a href="/university/index.do">控制台</a></li> 
-			                						<!--<li><a href="/kzych/university/index.do">控制台</a></li>-->
+			                						 <!--<li><a href="/university/index.do">控制台</a></li> -->
+			                						<li><a href="${host }/university/index.do" class="kzt">控制台</a></li>
 			                						
-			                						<li class="quit"><a href="" class="track-signout hide-initially" aria-label="Sign out">退出</a></li>
+			                						<li class="quit"><a href="javascript:exit();" class="track-signout hide-initially" aria-label="Sign out">退出</a></li>
 			                					</ul>
 			                				</div>
 			                			</div>
@@ -715,6 +720,7 @@
 <!-- //footer -->
 <!-- smooth scrolling -->
 	<script type="text/javascript">
+	var host="${host}";
 		$(document).ready(function() {
 		/*
 			var defaults = {
@@ -726,6 +732,18 @@
 		*/								
 		$().UItoTop({ easingType: 'easeOutQuart' });
 		});
+		
+		//退出
+		function exit(){
+			$.ajax({
+	  			type:"post",
+	  			url:host+"/user/logout.do",
+	  			success:function(data){
+	  				location.href="/front/";
+	  			},
+	  			error:function(){alert("退出失败");}
+			});
+		}
 	</script>
 	<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 <!-- //smooth scrolling -->

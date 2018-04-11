@@ -38,7 +38,7 @@
         </a>
         
       </li>
-      <li class="layui-nav-item quit"><a href="javascript:void(0);">退出</a></li>
+      <li class="layui-nav-item quit"><a href="javascript:exit();">退出</a></li>
     </ul>
   </div>
   
@@ -64,8 +64,8 @@
 			  </ul>
 			  <div class="layui-tab-content">
 			    <div class="layui-tab-item layui-show">
-			    <form  class="layui-form" id="form1" action="/user/userinfoByKeyUpdate.do" method="post"> 
-			    	<!-- <form  class="layui-form" id="form1" action="/kzych/user/userinfoByKeyUpdate.do" method="get"> -->
+			             <form  class="layui-form" id="form1" action="/user/userinfoByKeyUpdate.do" method="post">
+			    	<!-- <form  class="layui-form" id="form1" action="/kzych/user/userinfoByKeyUpdate.do" method="post"> -->
 			    	 <input type="hidden" name="uuid" value="${currentUser.uuid}">
 			        <div class="layui-form-item">
 						    <label class="layui-form-label">用户名:</label>
@@ -80,9 +80,10 @@
 									  <div class="layui-upload">
 										  <button type="button" class="layui-btn" id="start-img1">上传图片</button>
 										  <div class="layui-upload-list">
-										    <img class="layui-upload-img" id="start-img-view1" style="height:100px;">
+										    <img class="layui-upload-img" id="start-img-view1" src="ftp://47.104.135.201/${currentUser.userAvatar }" style="height:100px;">
 										    <p id="errText1"></p>
 										  </div>
+										  <input type="hidden" value="${currentUser.userAvatar }" id="userAvatar" name="userAvatar">
 										</div> 
 							    </div>
 							</div>
@@ -133,8 +134,11 @@
 								  
 						</form>
 			    </div>
+			    
+			    
 			    <div class="layui-tab-item">
-			    	<form class="layui-form" action="/university/schoolByUserIdUpdate.do" method="post">
+			    	     <form class="layui-form" action="/university/schoolByUserIdUpdate.do" method="post">
+			    	<!-- <form class="layui-form" action="/kzych/university/schoolByUserIdUpdate.do" method="post"> -->
 			    		<div class="layui-form-item">
 						    <label class="layui-form-label">机构名称:</label>
 						    <div class="layui-input-block">
@@ -186,7 +190,7 @@
                <div class="layui-form-item">
 						    <label class="layui-form-label">机构地址:</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="address" value="${User_list.address}" autocomplete="off"  class="layui-input">
+						      <input type="text" name="address" id="address" value="${User_list.address}" autocomplete="off"  class="layui-input">
 						    </div>
 						  </div>
 						  
@@ -198,9 +202,10 @@
 											  <div class="layui-upload">
 												  <button type="button" class="layui-btn" id="start-img2">上传图片</button>
 												  <div class="layui-upload-list">
-												    <img class="layui-upload-img" id="start-img-view2" style="height:100px;">
+												    <img  src="ftp://47.104.135.201/${User_list.schoolCoverimg}"  class="layui-upload-img" id="start-img-view2" style="height:100px;">
 												    <p id="errText2"></p>
 												  </div>
+												  <input type="hidden" name="schoolCoverimg" id="schoolCoverimg" value="${User_list.schoolCoverimg}"> 
 												</div> 
 									    </div>
 							     </div>
@@ -213,9 +218,10 @@
 											  <div class="layui-upload">
 												  <button type="button" class="layui-btn" id="start-img3">上传图片</button>
 												  <div class="layui-upload-list">
-												    <img class="layui-upload-img" id="start-img-view3" style="height:100px;">
+												    <img src="ftp://47.104.135.201/${User_list.schoolLicense}" class="layui-upload-img" id="start-img-view3" style="height:100px;">
 												    <p id="errText3"></p>
 												  </div>
+												  <input type="hidden" name="schoolLicense" id="schoolLicense" value="${User_list.schoolLicense}">
 												</div> 
 									    </div>
 							     </div>
@@ -228,21 +234,21 @@
 						    <div class="layui-inline">
 						      <label class="layui-form-label">法人姓名</label>
 						      <div class="layui-input-inline">
-						        <input type="text" name="legalPersonName" value="${User_list.legalPersonName}" autocomplete="off"  class="layui-input">
+						        <input type="text" name="legalPersonName" id="legalPersonName" value="${User_list.legalPersonName}" autocomplete="off"  class="layui-input">
 						      </div>
 						    </div>
 						    <div class="layui-inline">
 						      <!--只有选择学校才显示-->
 						      <label class="layui-form-label">法人身份证:</label>
 						      <div class="layui-input-inline">
-						        <input type="text" name="legalPersonCard" value="${User_list.legalPersonCard}" autocomplete="off"  class="layui-input">
+						        <input type="text" id="legalPersonCard" name="legalPersonCard" value="${User_list.legalPersonCard}" autocomplete="off"  class="layui-input">
 						      </div>
 						    </div>
 						    <div class="layui-inline">
 						      <!--只有选择学校类型才显示-->
 						      <label class="layui-form-label">法人电话:</label>
 						      <div class="layui-input-inline">
-						        <input type="text" name="legalPersonPhone" value="${User_list.legalPersonPhone}" autocomplete="off"  class="layui-input">
+						        <input type="text" id="legalPersonPhone" name="legalPersonPhone" value="${User_list.legalPersonPhone}" autocomplete="off"  class="layui-input">
 						      </div>
 						    </div>
 						  </div>
@@ -289,7 +295,8 @@
 <script type="text/javascript" src="${basePath}admin/js/uploader.min.js"></script>
 <script type="text/javascript" src="${basePath}admin/js/simditor.js"></script>
 <script>
-
+//用户名称
+var username ="${currentUser.username}";
 var basePath = "${basePath}";
 var host="${host}";
 	cur_mod="个人中心";
@@ -297,7 +304,8 @@ var host="${host}";
 	app.init(function($){
 			var uploadInst = app.upload.render({
 		    elem: '#start-img1'
-		    ,url: '/upload/'
+		    ,url: host+'/user/save.do'
+		    ,field: 'upload_file'
 		    ,before: function(obj){
 		      //预读本地文件示例，不支持ie8
 		      obj.preview(function(index, file, result){
@@ -310,6 +318,8 @@ var host="${host}";
 		        return layer.msg('上传失败');
 		      }
 		      //上传成功
+		      $("#userAvatar").val(res.data.uri);//到时候修改时就直接用字符串把路径传过去
+		      
 		    }
 		    ,error: function(){
 		      //演示失败状态，并实现重传
@@ -323,7 +333,8 @@ var host="${host}";
      
      		var uploadInst1 = app.upload.render({
 		    elem: '#start-img2'
-		    ,url: '/upload/'
+		    ,url: host+'/university/save1.do'
+		    ,field: 'upload_file'
 		    ,before: function(obj){
 		      //预读本地文件示例，不支持ie8
 		      obj.preview(function(index, file, result){
@@ -336,6 +347,7 @@ var host="${host}";
 		        return layer.msg('上传失败');
 		      }
 		      //上传成功
+		      $("#schoolCoverimg").val(res.data.uri);
 		    }
 		    ,error: function(){
 		      //演示失败状态，并实现重传
@@ -349,7 +361,8 @@ var host="${host}";
      
      var uploadInst2 = app.upload.render({
 		    elem: '#start-img3'
-		    ,url: '/upload/'
+		    ,url: host+'/university/save1.do'
+		    ,field: 'upload_file'
 		    ,before: function(obj){
 		      //预读本地文件示例，不支持ie8
 		      obj.preview(function(index, file, result){
@@ -362,6 +375,7 @@ var host="${host}";
 		        return layer.msg('上传失败');
 		      }
 		      //上传成功
+		      $("#schoolLicense").val(res.data.uri);
 		    }
 		    ,error: function(){
 		      //演示失败状态，并实现重传
@@ -409,11 +423,124 @@ var host="${host}";
       	layui.use('form', function(){
         	  var form = layui.form;
         	  form.on('submit(demo1)', function(data){
-        		return true;
+        		  var isNotPass=false;
+        		  //验证身份证
+        		  var isIDCard1=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/; //15位的身份证
+        		  var isIDCard2=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$/;//18位  身份证的正则表达式
+				  if(isIDCard2.test($("#default_1").val())||isIDCard1.test($("#default_1"))){
+					  isNotPass=true;
+				  }else{
+					  isNotPass=false;
+					  alert("亲请输入正确的身份证号");
+				  }
+        		  //验证电话 
+        		  var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
+        		  if(phone.test($("#cellphone").val())){
+        			  isNotPass=true;
+        		  }else{
+        			  isNotPass=false;
+        			  alert("亲请输入正确的电话号");
+        		  }
+        		  //验证学校是否为空 
+        		  if($("#default_2").val().trim().length>0&&$("#default_2").val()!=info){
+        			  isNotPass=true;
+        		  }else{
+        			  isNotPass=false;
+        			  alert("亲请输入学校名称");
+        		  }
+        		  //验证家庭住址是为空
+        		  if($("#default_3").val().trim().length>0&&$("#default_3").val()!=info){
+        			  isNotPass=true;
+        		  }else{
+        			  isNotPass=false;
+        			  alert("亲请输入家庭住址");
+        		  }
+        		  //验证姓名是否为空 
+        		  if($("#realName").val().trim().length){
+        			  isNotPass=true;
+        		  }else{
+        			  isNotPass=false;
+        			  alert("亲请输入真实姓名");
+        		  }
+        		  //验证
+        		  if($("#userAvatar").val().trim().length>0){
+        			  isNotPass=true;
+        		  }else{
+        			  isNotPass=false;
+        			  alert("亲请上传头像");
+        		  }
+        		  return isNotPass;
         	    }); 
         	    form.on('submit(demo2)', function(data){
-        	    	alert($("#"));
-            		return true;
+        	    	var isNotPass=0;
+        	    	//验证机构类型是否选择 
+        	    	if($("#universityType_seelct_01").val()!=0){
+        	    		isNotPass=isNotPass+1;
+        	    	}else{
+        	    		alert("亲请选择机构类型");
+        	    	}
+        	    	//验证机构性质是否选择 
+        	    	if($("#universityNature_seelct_02").val()!=0){
+        	    		isNotPass=isNotPass+1;
+        	    	}else{
+        	    		alert("亲请选择机构性质");
+        	    	}
+        	    	//验证学校等级是否选择 
+        	    	if($("#categoryid_seelct_03").val()!=0){
+        	    		isNotPass=isNotPass+1;
+        	    	}else{
+        	    		alert("亲请选择学校等级");
+        	    	}
+        	    	//验证机构地址是否填写
+        	    	if($("#address").val().trim().length>0){
+        	    		isNotPass=isNotPass+1;
+        	    	}else{
+        	    		alert("亲请输入机构地址");
+        	    	}
+        	    	//验证机构封面图片是否上传 
+        	    	if($("#schoolCoverimg").val().trim().length>0){
+        	    		isNotPass=isNotPass+1;
+        	    	}else{
+        	    		alert("亲请上传机构封面图片");
+        	    	}
+        	    	//验证办学许可证是否上传 
+        	    	if($("#schoolLicense").val().trim().length>0){
+        	    		isNotPass=isNotPass+1;
+        	    	}else{
+        	    		alert("亲请上传办学许可证");
+        	    	}
+        	    	//验证法人姓名是否填入 
+        	    	if($("#legalPersonName").val().trim().length>0){
+        	    		isNotPass=isNotPass+1;
+        	    	}else{
+        	    		alert("亲请输入法人姓名");
+        	    	}
+        	    	//验证法人身份证格式是否正确 
+          		 	var isIDCard1=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/; //15位的身份证
+          		  	var isIDCard2=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$/;//18位  身份证的正则表达式
+  				  	if(isIDCard2.test($("#legalPersonCard").val())||isIDCard1.test($("#default_1"))){
+  				  		isNotPass=isNotPass+1;
+  				  	}else{
+  					  	alert("亲请输入正确的身份证号");
+  				  	}
+        	    	//验证法人电话格式是否正确 
+  				  	var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
+        		  	if(phone.test($("#legalPersonPhone").val())){
+        		  		isNotPass=isNotPass+1;
+        		  	}else{
+        			  	alert("亲请输入正确的电话号");
+        		  	}
+        	    	//验证机构简历是否为空 
+        	    	if($("#detail").val().trim().length>0){
+        	    		isNotPass=isNotPass+1;
+        	    	}else{
+        	    		alert("亲请输入机构简历");
+        	    	}
+            		if(isNotPass>=10){
+            			return true;
+            		}else{
+            			return false;
+            		}
             	    });
         });
       	
@@ -509,6 +636,16 @@ var host="${host}";
     		});
       	}
 	});
-
+	//退出
+	function exit(){
+		$.ajax({
+  			type:"post",
+  			url:host+"/user/logout.do",
+  			success:function(data){
+  				location.href="/front/";
+  			},
+  			error:function(){alert("退出失败");}
+		});
+	}
 	
 </script>

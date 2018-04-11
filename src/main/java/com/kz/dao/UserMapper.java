@@ -18,4 +18,5 @@ public interface UserMapper extends BaseMapper<User,UserQuery>{
 	User selectAdministrator(String username);
 	
 	Long updateByKeyInfo(User u);
+	Long insertSelectiveRegister(User u);
 }

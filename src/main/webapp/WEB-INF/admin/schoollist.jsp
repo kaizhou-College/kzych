@@ -57,7 +57,7 @@
           <dd><a href="">安全设置</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="">退了</a></li>
+      <li class="layui-nav-item"><a href="javascript:exit();" >退了</a></li>
     </ul>
   </div>
  <div class="layui-side layui-bg-black" id="side-nav">
@@ -203,6 +203,7 @@
 
 </html>
 <script>
+	var username ="${currentUser.username}";
 	var host="host";
 	cur_mod="学校管理";
 	var basePath ="${basePath}" ;
@@ -418,5 +419,16 @@
 		$("#administrator_Account").val(list.administratorAccount);
 		$("#administrator_Name").val(list.administratorName);
 		$("#administrator_Phone").val(list.administratorPhone);
+	}
+	//退出
+	function exit(){
+		$.ajax({
+  			type:"post",
+  			url:host+"/user/logout.do",
+  			success:function(data){
+  				location.href="/front/";
+  			},
+  			error:function(){alert("退出失败");}
+		});
 	}
 </script>
