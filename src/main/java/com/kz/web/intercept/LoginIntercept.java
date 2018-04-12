@@ -35,7 +35,7 @@ public class LoginIntercept implements HandlerInterceptor {
 		if(attribute!=null){
 			return true;
 		}else{
-			response.sendRedirect("/kzych/user/login.do");
+			response.sendRedirect("/front/login.jsp");
 		}
 		return false;
 	}

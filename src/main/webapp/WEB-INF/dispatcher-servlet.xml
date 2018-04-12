@@ -72,7 +72,8 @@
 				/*   /1.jsp   /index.action
 				/**  /abc/1.jsp  /1.jsp  /a/b/c/index.action
 			-->
-			<mvc:mapping path="/comment/create.do" />
+			<mvc:mapping path="/*/*" />
+			<mvc:exclude-mapping path="/front/*" />
 			<bean class="com.kz.web.intercept.LoginIntercept"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
