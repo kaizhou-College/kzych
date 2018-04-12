@@ -283,7 +283,7 @@ var userLIst="${User_list.id}";
 	function init_page($){
 		//判断该用户是否开通过学校
 		//如果开通过但没有通过的话  那还是需要把你本来填写的值给放进去的
-		alert(userLIst+"-="+"=="+userLIst.profile);
+		alert(userLIst+"=="+userLIst.profile);
 		
 		
 		//页面已加载时就需要查询该用户有没有开通学校的原因（通过用户id查询学校）
