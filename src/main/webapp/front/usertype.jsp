@@ -297,6 +297,8 @@
 	   });
 		});
 		function register(id){
+			alert(id);
+			
 			$.ajax({
 	  			type:"post",
 	  			url:host+"/user/register.do",
