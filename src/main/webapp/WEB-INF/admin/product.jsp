@@ -277,13 +277,13 @@ var checkedInfo="初始值";
 var status="${publicStatus}";
 var host="${host}";
 var basePath = "${basePath}";
-var userLIst="${User_list}";
+var userLIst="${User_list.id}";
 	cur_mod="个人中心";
 	//测试代码
 	function init_page($){
 		//判断该用户是否开通过学校
 		//如果开通过但没有通过的话  那还是需要把你本来填写的值给放进去的
-		alert(userLIst+"-="+${userLIst.id}+"=="+userLIst.profile);
+		alert(userLIst+"-="+"=="+userLIst.profile);
 		
 		
 		//页面已加载时就需要查询该用户有没有开通学校的原因（通过用户id查询学校）
