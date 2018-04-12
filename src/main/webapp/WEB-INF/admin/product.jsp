@@ -317,10 +317,6 @@ var userId="${User_list.id}";
 		      			//如果不符合上面的条件就给size加上1
 		      			size=size+1;
 		      		}
-		      		//如果size等于option的个数的话就需要重新设置个option
-		      		if(size==(list.length-1)){
-		      			$("#"+select_id).html("<option value='0'>未选择</option>");
-		      		}	
 		      	}
 		  	}
 		  	
