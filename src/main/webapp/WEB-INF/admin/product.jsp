@@ -233,7 +233,6 @@
 						       <textarea id="detail" >请输入机构简历</textarea>
 						    </div>
 						  </div>
-						  
 						
 						<hr class="layui-bg-green">
 
@@ -277,13 +276,60 @@ var checkedInfo="初始值";
 var status="${publicStatus}";
 var host="${host}";
 var basePath = "${basePath}";
-var userLIst="${User_list.id}";
+var userId="${User_list.id}";
 	cur_mod="个人中心";
 	//测试代码
 	function init_page($){
 		//判断该用户是否开通过学校
 		//如果开通过但没有通过的话  那还是需要把你本来填写的值给放进去的
-		alert(userLIst+"=="+userLIst.profile);
+		if(userId.trim().length>0){
+			      
+			$("#name_p").val("${User_list.name}");
+			$("#address_p").val("${User_list.address}");
+			$("#start-img-view2").val("${User_list.schoolCoverimg}");
+			$("#schoolCoverimg").val("${User_list.schoolCoverimg}");
+			$("#start-img-view3").val("${User_list.schoolLicense}");
+			$("#schoolLicense").val("${User_list.schoolLicense}");
+			$("#legalPersonName_p").val("${User_list.legalPersonName}");
+			$("#legalPersonCard_p").val("${User_list.legalPersonCard}");
+			$("#legalPersonPhone_p").val("${User_list.legalPersonPhone}");
+			$("#detail").val("${User_list.introduction}");
+			
+			//设置下拉框的默认值
+		  	//机构类型 
+		  	var universityType=$("#universityNature_p").html().split("<option value=\"");
+		  //机构性质
+		  	var universityNature=$("#categoryid_p").html().split("<option value=\"");
+		  //学校等级
+		  	var categoryname=$("#universityType_p").html().split("<option value=\"");
+		  //机构类型的设置默认值
+		  	settingsSelected(universityType,"${User_list.universityType}","universityType_p");
+		  //机构性质设置默认值
+		  	settingsSelected(universityNature,"${User_list.universityNature}","universityNature_p");
+		  //学校等级的设置默认值 
+		  	settingsSelected(categoryname,"${User_list.categoryid}","categoryid_p");
+		  	function settingsSelected(list,id,select_id){
+		      	var size=0;
+		  		for(var i=1;i<list.length;i++){
+		      		if(list[i].substring(0,1)==id){
+		      			$("#"+select_id+" option[value="+(i-1)+"]").attr("selected","selected");
+		      		}else{
+		      			//如果不符合上面的条件就给size加上1
+		      			size=size+1;
+		      		}
+		      		//如果size等于option的个数的话就需要重新设置个option
+		      		if(size==(list.length-1)){
+		      			$("#"+select_id).html("<option value='0'>未选择</option>");
+		      		}	
+		      	}
+		  	}
+		  	
+			layui.use('form', function(){
+				var form = layui.form;
+				//由于设置了下拉框的初始值所以需要重新渲染一次select
+			    form.render('select');
+			});
+		}
 		
 		
 		//页面已加载时就需要查询该用户有没有开通学校的原因（通过用户id查询学校）
