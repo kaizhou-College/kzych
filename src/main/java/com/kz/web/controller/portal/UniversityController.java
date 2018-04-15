@@ -351,10 +351,10 @@ public class UniversityController {
 	@RequestMapping("schoolList.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> list(UniversityQuery uq,HttpSession session) {
-		User user = (User) session.getAttribute(Const.CURRENT_USER);
+		/*User user = (User) session.getAttribute(Const.CURRENT_USER);
 		if (user == null) {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
-		}
+		}*/
 		PageInfo pageInfo = iUniversityService.getByConditionPage(uq);
 		// 页面显示数据
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
@@ -405,10 +405,10 @@ public class UniversityController {
 		if (pageSize == 0) {
 			pageSize = 8;
 		}
-		User user = (User) session.getAttribute(Const.CURRENT_USER);
+		/*User user = (User) session.getAttribute(Const.CURRENT_USER);
 		if (user == null) {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
-		}
+		}*/
 		// 3，根据学校的id查询该学校的所有专业信息
 		University university = iUniversityService.selectMajorsPageById(universityId, pageNum, pageSize);
 
