@@ -75,7 +75,7 @@ public class UniversityController {
 	 * @param: @param
 	 *             re
 	 */
-	@RequestMapping("schoolByUserIdUpdate.do")
+	@RequestMapping(value="schoolByUserIdUpdate.do", method = RequestMethod.POST)
 	public void schoolByUserIdUpdate(University m, HttpServletResponse response,HttpServletRequest request) {
 		Long result = iUniversityService.schoolByUserIdUpdate(m);
 
@@ -95,7 +95,7 @@ public class UniversityController {
 	 * @param: @param
 	 *             re
 	 */
-	@RequestMapping("schoolByUserIdList.do")
+	@RequestMapping(value="schoolByUserIdList.do", method = RequestMethod.POST)
 	public void schoolByUserIdList(University m, HttpServletResponse re) {
 		PrintWriter out = null;
 		try {
@@ -168,7 +168,7 @@ public class UniversityController {
 	 * @param: @param
 	 *             re
 	 */
-	@RequestMapping("universityAdd.do")
+	@RequestMapping(value="universityAdd.do", method = RequestMethod.POST)
 	public void universityAdd(University m, HttpServletResponse re) {
 		PrintWriter out = null;
 		try {
@@ -190,7 +190,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: List<UniversityCategory> 返回值类型
 	 */
-	@RequestMapping("categoryList.do")
+	@RequestMapping(value="categoryList.do", method = RequestMethod.GET)
 	@ResponseBody
 	public List<UniversityCategory> categoryList() {
 		List<UniversityCategory> list = iUniversityService.categoryList();
@@ -279,7 +279,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping("schoolListPageWithConditions.do")
+	@RequestMapping(value="schoolListPageWithConditions.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<PageInfo> listKeyPublishStatus(UniversityQuery qu) {
 		// 按条件分页查询
@@ -309,7 +309,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: ServerResponse 返回值类型
 	 */
-	@RequestMapping("dimListPage.do")
+	@RequestMapping(value="dimListPage.do", method = RequestMethod.GET)
 	@ResponseBody
 	public PageInfo dimListPage(HttpServletResponse resp, UniversityQuery qu) {
 		// ajax 按地址分页
@@ -360,9 +360,30 @@ public class UniversityController {
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}
 	
+
 	/**
 	 * 
-	 * @Title: list
+	 * @Title: schoolByIsNotHotList
+	 * @Description: 查询学校是否热门 
+	 * @param: @param
+	 *             pageSiz
+	 * @param: @param
+	 *             pageNum
+	 * @param: @param
+	 *             isHot
+	 * @param: @return
+	 * @return: ServerResponse<University> 返回值类型
+	 */
+	@RequestMapping(value="schoolByIsNotHotList.do", method = RequestMethod.POST)
+	@ResponseBody
+	public PageInfo<University> schoolByIsNotHotList(UniversityQuery hq){
+		PageInfo<University> hotList = iUniversityService.schoolByIsNotHotList(hq);
+		return hotList;
+	}
+	
+	/**
+	 * 
+	 * @Title: university_detail
 	 * @Description: 按照universityId 分页查询学校信息
 	 * @param: @param
 	 *             pageSiz
@@ -375,7 +396,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: ServerResponse<University> 返回值类型
 	 */
-	@RequestMapping("university_detail.do")
+	@RequestMapping(value="university_detail.do", method = RequestMethod.GET)
 	@ResponseBody
 	public ServerResponse<University> list(HttpSession session ,Long universityId, int pageNum, int pageSize) {
 		if (pageNum == 0) {
@@ -396,6 +417,27 @@ public class UniversityController {
 	}
 	/**
 	 * 
+	 * @Title: schoolAddressList
+	 * @Description: 按照用户id来查找该学校
+	 * @param: @param
+	 *             pageSiz
+	 * @param: @param
+	 *             pageNum
+	 * @param: @param
+	 *             schoolLongitude
+	 * @param: @param
+	 *             schoolLatitude
+	 * @param: @return
+	 * @return: ServerResponse 返回值类型
+	 */
+	@RequestMapping(value="schoolAddressList.do", method = RequestMethod.POST)
+	@ResponseBody
+	public PageInfo<University> schoolAddressList(UniversityQuery hq){
+		PageInfo<University> hotList = iUniversityService.schoolAddressList(hq);
+		return hotList;
+	}
+	/**
+	 * 
 	 * @Title: save
 	 * @Description: 管理员学校的图片上传
 	 * @param: @param
@@ -411,7 +453,6 @@ public class UniversityController {
 	@ResponseBody
 	public ServerResponse save(HttpSession session,
 			@RequestParam(value = "upload_file", required = false) MultipartFile file, HttpServletRequest request) {
-		System.out.println("------------------我盡力了---------------------------");
 		User user = (User) session.getAttribute(Const.CURRENT_USER);
 		if (user == null) {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");

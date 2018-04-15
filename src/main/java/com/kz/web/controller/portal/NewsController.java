@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
@@ -31,7 +32,7 @@ public class NewsController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping("list.do")
+	@RequestMapping(value="list.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<PageInfo> list(NewsQuery uq) {
 		PageInfo pageInfo = iNewsService.getByConditionPage(uq);
@@ -51,7 +52,7 @@ public class NewsController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping("accordingKeyList.do")
+	@RequestMapping(value="accordingKeyList.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<News> listKey(News co){
 		News content = iNewsService.selectByPrimaryKey(co.getId());
@@ -74,7 +75,7 @@ public class NewsController {
 	 * @param: @return
 	 * @return: ServerResponse 返回值类型
 	 */
-	@RequestMapping("dimListPage.do")
+	@RequestMapping(value="dimListPage.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse dimListPage(NewsQuery co){
 		List contentPage = iNewsService.dimContentPage(co);
@@ -88,7 +89,7 @@ public class NewsController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping("hit.do")
+	@RequestMapping(value="hit.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<PageInfo> hit(News co){
 		Long whileKeyUpdateHit = iNewsService.whileKeyUpdateHit(co);

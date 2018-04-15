@@ -83,4 +83,19 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 	public Long schoolByUserIdUpdate(University m) {
 		return mapper.schoolByUserIdUpdate(m);
 	}
+	@Override
+	public PageInfo<University> schoolByIsNotHotList(UniversityQuery hq) {
+		PageHelper.startPage(hq.getPageNum(),hq.getPageSize());
+		List<University> list = mapper.schoolByIsNotHotList(hq.getIsHot());
+		PageInfo<University> result = new PageInfo<University>(list);
+		return result;
+	}
+	@Override
+	public PageInfo<University> schoolAddressList(UniversityQuery uq) {
+		PageHelper.startPage(uq.getPageNum(),uq.getPageSize());
+		List<University> list = mapper.selectByPrimaryLongitudeAndLatitude(uq);
+		PageInfo<University> result = new PageInfo<University>(list);
+		return result;
+	}
+	
 }

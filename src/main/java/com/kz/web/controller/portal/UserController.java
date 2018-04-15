@@ -54,7 +54,7 @@ public class UserController {
 		}
 	}
 	/**
-	 * @Title: login
+	 * @Title: userinfoByKeyUpdate
 	 * @Description: 根据id修改用户信息
 	 * @param: @param
 	 *             uuid
@@ -73,7 +73,7 @@ public class UserController {
 	 *             
 	 * @return: 没有返回值
 	 */
-	@RequestMapping(value = "userinfoByKeyUpdate.do")
+	@RequestMapping(value = "userinfoByKeyUpdate.do", method = RequestMethod.POST)
 	public void userinfoByKeyUpdate(User u, HttpServletResponse response,HttpSession session) {
 		Long long1 = iUserService.updateByKeyInfo(u);
 		try {
@@ -117,7 +117,7 @@ public class UserController {
 	 * @param: @return
 	 * @return: ServerResponse<User> 返回值类型
 	 */
-	@RequestMapping("login.do")
+	@RequestMapping(value="login.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<User> login(String username, String password, HttpSession session) {
 		ServerResponse<User> response = iUserService.login(username, password);
@@ -137,7 +137,7 @@ public class UserController {
 	 * @param: @return
 	 * @return: ServerResponse<User> 返回值类型
 	 */
-	@RequestMapping("IsNotAdministrator.do")
+	@RequestMapping(value="IsNotAdministrator.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<User> IsNotAdministrator(String username, HttpSession session) {
 		ServerResponse<User> response = iUserService.IsNotAdministrator(username);

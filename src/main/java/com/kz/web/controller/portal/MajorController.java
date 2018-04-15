@@ -3,6 +3,7 @@ package com.kz.web.controller.portal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
@@ -29,7 +30,7 @@ public class MajorController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping("list.do")
+	@RequestMapping(value="list.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<PageInfo> list(MajorQuery mq){
 		PageInfo pageInfo = iMajorService.getByConditionPage(mq);
@@ -48,7 +49,7 @@ public class MajorController {
 	 * @param: @return
 	 * @return: ServerResponse<MajorUniversity> 返回值类型
 	 */
-	@RequestMapping("major_by_university.do")
+	@RequestMapping(value="major_by_university.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<MajorUniversity> findByUniversityId(int universityId, int majorId) {
 		MajorUniversity majorUniversity = iMajorService.findByUniversityId(universityId, majorId);

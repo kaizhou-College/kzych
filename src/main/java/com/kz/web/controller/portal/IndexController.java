@@ -2,6 +2,7 @@ package com.kz.web.controller.portal;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/")
@@ -13,7 +14,7 @@ public class IndexController {
 	 * @param: @return
 	 * @return: String 返回值类型
 	 */
-	@RequestMapping("index.do")
+	@RequestMapping(value="index.do", method = RequestMethod.POST)
 	public String toIndex(){
 		return "index";
 	}
@@ -23,7 +24,7 @@ public class IndexController {
 	 * @param: @return
 	 * @return: String 返回值类型
 	 */
-	@RequestMapping("settingApp.do")
+	@RequestMapping(value="settingApp.do", method = RequestMethod.POST)
 	public String toSettingApp(){
 		return "setting_app";
 	}

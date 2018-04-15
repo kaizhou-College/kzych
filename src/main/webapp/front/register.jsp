@@ -334,7 +334,7 @@
 			 //查看选择添加的用户是否存在  （我就直接在判断是不是管理员了  因为如果返回的data是管理员或者有用户的话就不不能让该用户填写这个名字了）
 			if($("#username").val().trim().length>0){
 				$.ajax({
-				    type:"get",
+				    type:"post",
 		  			url:host+"/user/IsNotAdministrator.do",
 		  			data:{"username":$("#username").val()},
 		  			success:function(data){

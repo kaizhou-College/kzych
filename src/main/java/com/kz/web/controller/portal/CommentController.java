@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
@@ -30,7 +31,7 @@ public class CommentController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping("create.do")
+	@RequestMapping(value="create.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<PageInfo> commentAdd(CommentWithBLOBs co,HttpSession session){
 		User attribute = (User)session.getAttribute(Const.CURRENT_USER);

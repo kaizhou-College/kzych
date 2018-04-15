@@ -60,6 +60,10 @@ public class University extends BaseModel{
     
     private String schoolCoverimg;
     
+    private Integer schoolLongitude;
+
+    private Integer schoolLatitude;
+    
 	public String getCheckedInfo() {
 		return checkedInfo;
 	}
@@ -274,6 +278,22 @@ public class University extends BaseModel{
 
 	public void setSchoolCoverimg(String schoolCoverimg) {
 		this.schoolCoverimg = schoolCoverimg;
+	}
+
+	public Integer getSchoolLongitude() {
+		return schoolLongitude;
+	}
+
+	public void setSchoolLongitude(Integer schoolLongitude) {
+		this.schoolLongitude = schoolLongitude;
+	}
+
+	public Integer getSchoolLatitude() {
+		return schoolLatitude;
+	}
+
+	public void setSchoolLatitude(Integer schoolLatitude) {
+		this.schoolLatitude = schoolLatitude;
 	}
 
 

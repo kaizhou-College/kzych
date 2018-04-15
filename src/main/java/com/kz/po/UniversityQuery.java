@@ -17,8 +17,23 @@ public class UniversityQuery extends BaseQueryModel  {
     //----文本输入的值
     private String search_key;
     
+    //查看学校是否热门
+    private Integer isHot;
+    
+    //经度
+    private Integer schoolLongitude;
+    //纬度
+    private Integer schoolLatitude;
     
     
+	public Integer getIsHot() {
+		return isHot;
+	}
+
+	public void setIsHot(Integer isHot) {
+		this.isHot = isHot;
+	}
+
 	public Integer getPublishStatus() {
 		return publishStatus;
 	}
@@ -79,10 +94,22 @@ public class UniversityQuery extends BaseQueryModel  {
 		this.name = name;
 	}
 
-	@Override
-	public String toString() {
-		return "UniversityQuery [categoryid=" + categoryid + ", name=" + name + ", provid=" + provid + ", cityid="
-				+ cityid + ", areaid=" + areaid + ", search_key=" + search_key + "]";
+	public Integer getSchoolLongitude() {
+		return schoolLongitude;
 	}
+
+	public void setSchoolLongitude(Integer schoolLongitude) {
+		this.schoolLongitude = schoolLongitude;
+	}
+
+	public Integer getSchoolLatitude() {
+		return schoolLatitude;
+	}
+
+	public void setSchoolLatitude(Integer schoolLatitude) {
+		this.schoolLatitude = schoolLatitude;
+	}
+
+	
     
 }

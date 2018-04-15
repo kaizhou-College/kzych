@@ -21,4 +21,6 @@ public interface IUniversityService extends IBaseService<University, UniversityQ
 	Long updateByKeySelective(University m);
 	List<University> schoolByUserIdList(University m);
 	Long schoolByUserIdUpdate(University m);
+	PageInfo<University> schoolByIsNotHotList(UniversityQuery hq);
+	PageInfo<University> schoolAddressList(UniversityQuery hq);
 }
