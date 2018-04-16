@@ -210,8 +210,10 @@ public class UniversityController {
 		// 由于页面加载时级需要查询状态所以就在在里做查询了
 		User u = (User) session.getAttribute(Const.CURRENT_USER);
 		University un = new University();
-		long userid = u.getUuid();
-		un.setUserId((int) userid);
+		if(u!=null){
+			long userid = u.getUuid();
+			un.setUserId((int) userid);
+		}
 		List<University> result = iUniversityService.schoolByUserIdList(un);
 		if(result.size()>0){
 			session.setAttribute("publicStatus", result.get(0).getPublishStatus());

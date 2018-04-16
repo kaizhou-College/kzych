@@ -182,9 +182,7 @@ public class UserController {
 		ServerResponse<String> register = iUserService.register(user);
 		//注册之后就去获取该用户的信息
 		ServerResponse<User> response = iUserService.login(user.getUsername(),user.getPassword());
-		if (response.isSuccess()) {
-			session.setAttribute(Const.CURRENT_USER, response.getData());
-		}
+		session.setAttribute(Const.CURRENT_USER, response.getData());
 		return register;
 	}
 
