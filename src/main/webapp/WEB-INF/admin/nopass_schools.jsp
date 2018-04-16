@@ -273,7 +273,7 @@ app.init(function($){
 		  form.on('submit(formDemo)', function(data){
 			  $.ajax({
 		  			type:"get",
-		  			url:host+"kzych/university/dimListPage.do",
+		  			url:host+"university/dimListPage.do",
 		  			data:{"provid":$("#provid").val(),
 		  					"cityid":$("#cityid").val(),
 		  					"areaid":$("#areaid").val(),
