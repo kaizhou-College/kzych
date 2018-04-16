@@ -178,10 +178,12 @@ public class UserController {
 			user.setPassword(u.getPassword());
 			user.setCellphone(u.getCellphone());
 		}
+		//因为如果这个对象拿去添加完成后它的密码会被加密所有用这个变量先啦接受这个值
+		String password = user.getPassword();
 		//注册
 		ServerResponse<String> register = iUserService.register(user);
 		//注册之后就去获取该用户的信息
-		ServerResponse<User> response = iUserService.login(user.getUsername(),user.getPassword());
+		ServerResponse<User> response = iUserService.login(user.getUsername(),password);
 		session.setAttribute(Const.CURRENT_USER, response.getData());
 		return register;
 	}

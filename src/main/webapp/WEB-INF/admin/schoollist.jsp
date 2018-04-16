@@ -22,7 +22,7 @@
   <script src="${basePath}admin/layui.js?t=1515376178709" charset="utf-8"></script>
   <script src="${basePath}admin/app.js?t=1515376178709" charset="utf-8"></script>
   <script src="${basePath}admin/lay/modules/jquery.js"></script>
-  <link rel="stylesheet" href="${basePath}admin/css/layui.css" />
+  <link rel="stylesheet"  href="${basePath}admin/css/layui.css" />
   <script type="text/javascript" src="${basePath}admin/data.js"></script>
   <script type="text/javascript" src="${basePath}admin/province.js"></script>
   <script type="text/javascript">

@@ -430,7 +430,7 @@ var userId="${User_list.id}";
 		
 		//页面已加载时就需要查询该用户有没有开通学校的原因（通过用户id查询学校）
 		$.ajax({
-  			type:"get",
+  			type:"post",
   			url:host+"/university/schoolByUserIdList.do",
   			data:{"userId":uuid},
   			success:function(data){

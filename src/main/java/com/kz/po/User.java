@@ -152,6 +152,16 @@ public class User {
 	public void setUserAvatar(String userAvatar) {
 		this.userAvatar = userAvatar;
 	}
-    
+
+	@Override
+	public String toString() {
+		return "User [uuid=" + uuid + ", realName=" + realName + ", username=" + username + ", password=" + password
+				+ ", cellphone=" + cellphone + ", sex=" + sex + ", idcard=" + idcard + ", originPlace=" + originPlace
+				+ ", school=" + school + ", signMessage=" + signMessage + ", profile=" + profile + ", userType="
+				+ userType + ", createTime=" + createTime + ", lastloginTime=" + lastloginTime + ", userAvatar="
+				+ userAvatar + "]";
+	}
+
+
     
 }
