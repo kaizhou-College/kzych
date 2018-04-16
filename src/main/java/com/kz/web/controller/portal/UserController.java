@@ -173,9 +173,11 @@ public class UserController {
 	public ServerResponse<String> register(User user,HttpSession session) {
 		//登入时的数据
 		User u =(User) session.getAttribute("userInfo");
-		user.setUsername(u.getUsername());
-		user.setPassword(u.getPassword());
-		user.setCellphone(u.getCellphone());
+		if(u!=null){
+			user.setUsername(u.getUsername());
+			user.setPassword(u.getPassword());
+			user.setCellphone(u.getCellphone());
+		}
 		//注册
 		ServerResponse<String> register = iUserService.register(user);
 		//注册之后就去获取该用户的信息
