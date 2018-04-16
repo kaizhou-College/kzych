@@ -7,8 +7,8 @@
                                          ]},
  {"name":"学校管理","action":"/university/index.do","children":[],"side_nav":[
                                             {"name":"所有学校","action":"/university/index.do","children":[]},
-                                            {"name":"待审学校","action":"/university/schoolAuditTo.do","children":[]},
-                                            {"name":"末通过学校","action":"/university/schoolNopassTo.do","children":[]}
+                                            {"name":"待审学校","action":"/university/toSchoolAudit.do","children":[]},
+                                            {"name":"末通过学校","action":"/university/toSchoolNopass.do","children":[]}
                                             ]},
  {"name":"用户管理","action":"/admin/userlist.html","children":[],"side_nav":[]},
  {"name":"内容管理","action":"/admin/content.html","children":[],"side_nav":[]}

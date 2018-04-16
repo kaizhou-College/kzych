@@ -44,7 +44,7 @@ public class UserController {
 	
 	//用户注册时跳往用户设置权限页面
 	@RequestMapping(value = "userTypeTO.do", method = RequestMethod.POST)
-	public void userTypeTO(HttpSession session,HttpServletResponse response,User user) {
+	public void tOUserType(HttpSession session,HttpServletResponse response,User user) {
 		session.setAttribute("userInfo",user);
 		try {
 			response.sendRedirect("/front/usertype.jsp");
@@ -78,7 +78,7 @@ public class UserController {
 		Long long1 = iUserService.updateByKeyInfo(u);
 		try {
 			if (long1 == 1l) {
-				response.sendRedirect("/user/userinfoTo.do");
+				response.sendRedirect("/user/toUserInfo.do");
 				//response.sendRedirect("/kzych/user/userinfoTo.do");
 			} else {
 				response.sendRedirect("/user/error.do");
@@ -96,8 +96,8 @@ public class UserController {
 	 *             session
 	 * @return: String 返回值类型
 	 */
-	@RequestMapping(value = "userinfoTo.do", method = RequestMethod.GET)
-	public String userinfoTo(HttpSession session) {
+	@RequestMapping(value = "toUserInfo.do", method = RequestMethod.GET)
+	public String toUserInfo(HttpSession session) {
 		//由于在userinfo页面修改信息后session中的用户信息还没有更新Const.CURRENT_USER 所以在这里需要把session中的值更新成最新的
 		User user=(User) session.getAttribute(Const.CURRENT_USER);
 		ServerResponse<User> login = iUserService.getInformation(user.getUuid());
@@ -137,9 +137,9 @@ public class UserController {
 	 * @param: @return
 	 * @return: ServerResponse<User> 返回值类型
 	 */
-	@RequestMapping(value="IsNotAdministrator.do", method = RequestMethod.POST)
+	@RequestMapping(value="isNotAdministrator.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<User> IsNotAdministrator(String username, HttpSession session) {
+	public ServerResponse<User> isNotAdministrator(String username, HttpSession session) {
 		ServerResponse<User> response = iUserService.IsNotAdministrator(username);
 		return response;
 	}

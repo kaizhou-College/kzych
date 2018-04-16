@@ -312,7 +312,7 @@
 		  				}
 	  				}else{
 	  					if(data.status==0){
-		  					location.href=host+"/university/productTO.do";
+		  					location.href=host+"/university/toProduct.do";
 		  				}else{
 		  					alert("添加失败,可能是用户名重复");
 		  				}

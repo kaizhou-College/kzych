@@ -205,7 +205,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: String 返回值类型
 	 */
-	@RequestMapping(value = "productTO.do", method = RequestMethod.GET)
+	@RequestMapping(value = "toProduct.do", method = RequestMethod.GET)
 	public String productTO(HttpSession session) {
 		// 由于页面加载时级需要查询状态所以就在在里做查询了
 		User u = (User) session.getAttribute(Const.CURRENT_USER);
@@ -242,7 +242,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: String 返回值类型
 	 */
-	@RequestMapping(value = "schoolAuditTo.do", method = RequestMethod.GET)
+	@RequestMapping(value = "toSchoolAudit.do", method = RequestMethod.GET)
 	public String SchoolAudit() {
 		return "school_audit";
 	}
@@ -253,7 +253,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: String 返回值类型
 	 */
-	@RequestMapping(value = "schoolNopassTo.do", method = RequestMethod.GET)
+	@RequestMapping(value = "toSchoolNopass.do", method = RequestMethod.GET)
 	public String SchoolNopass() {
 		return "nopass_schools";
 	}

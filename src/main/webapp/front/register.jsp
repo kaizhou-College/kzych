@@ -335,7 +335,7 @@
 			if($("#username").val().trim().length>0){
 				$.ajax({
 				    type:"post",
-		  			url:host+"/user/IsNotAdministrator.do",
+		  			url:host+"/user/isNotAdministrator.do",
 		  			data:{"username":$("#username").val()},
 		  			success:function(data){
 		  				if(data.msg=="用户不存在"){

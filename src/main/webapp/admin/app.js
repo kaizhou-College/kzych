@@ -127,9 +127,9 @@ app.loadSideNav = function(mod_name,d,$){
        	  //设置选中哪个选项
        	  if(d[i].action != ''&& window.location.href.indexOf("index.do")!=-1&& d[i].action.indexOf("index.do")!=-1){
        		  select_class = 'layui-this';
-       	  }else if(d[i].action != ''&& window.location.href.indexOf("schoolAuditTo.do")!=-1&& d[i].action.indexOf("schoolAuditTo.do")!=-1){
+       	  }else if(d[i].action != ''&& window.location.href.indexOf("toSchoolAudit.do")!=-1&& d[i].action.indexOf("toSchoolAudit.do")!=-1){
        		  select_class = 'layui-this';
-       	  }else if(d[i].action != ''&& window.location.href.indexOf("schoolNopassTo.do")!=-1&& d[i].action.indexOf("schoolNopassTo.do")!=-1){
+       	  }else if(d[i].action != ''&& window.location.href.indexOf("toSchoolNopass.do")!=-1&& d[i].action.indexOf("toSchoolNopass.do")!=-1){
        		  select_class = 'layui-this';
        	  }
        	  
@@ -171,7 +171,7 @@ app.loadTopNav = function ($){
 	  //异步请求看该用户是否管理员
 	  $.ajax({
 		    type:"post",//47.104.135.201
-			url:host+"/user/IsNotAdministrator.do",
+			url:host+"/user/isNotAdministrator.do",
 			data:{"username":username},
 			success:function(data){
 				//判断该用户是否管理员 （0不是管理员1是管理员）

@@ -108,7 +108,7 @@ var host="${host}";
 			 //异步请求 看该用户是否管理员
 			 $.ajax({
 				    type:"post",
-		  			url:host+"/user/IsNotAdministrator.do",
+		  			url:host+"/user/isNotAdministrator.do",
 		  			data:{"username":token},
 		  			success:function(data){
 		  				if(token == data.data.username&data.data.userType==1){
