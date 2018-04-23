@@ -397,8 +397,37 @@
       school_Latitude = #{schoolLatitude,jdbcType=INTEGER}
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <resultMap id="universityMajorMap" type="com.kz.po.University"
-		extends="BaseResultMap">
+  
+  <resultMap id="universityMajorMap" type="com.kz.po.University" extends="BaseResultMap">
+    <id column="kz_university.ID" property="id" jdbcType="BIGINT" />
+    <result column="CODE" property="code" jdbcType="BIGINT" />
+    <result column="PROFILE" property="profile" jdbcType="VARCHAR" />
+    <result column="AGREEMENTS" property="agreements" jdbcType="VARCHAR" />
+    <result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+    <result column="GRANTS" property="grants" jdbcType="DECIMAL" />
+    <result column="coupon" property="coupon" jdbcType="DECIMAL" />
+    <result column="CATEGORYID" property="categoryid" jdbcType="BIGINT" />
+    <result column="PUBLISH_STATUS" property="publishStatus" jdbcType="INTEGER" />
+    <result column="School_license" property="schoolLicense" jdbcType="VARCHAR" />
+    <result column="kz_university.NAME" property="name" jdbcType="LONGVARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="LONGVARCHAR" />
+    <result column="EMPLOYMENT_INFO" property="employmentInfo" jdbcType="LONGVARCHAR" />
+    <result column="BROCHURE" property="brochure" jdbcType="LONGVARCHAR" />
+    <result column="INTRODUCTION" property="introduction" jdbcType="LONGVARCHAR" />
+    
+    <result column="Legal_person_name" property="legalPersonName" jdbcType="VARCHAR" />
+    <result column="Legal_person_Card" property="legalPersonCard" jdbcType="VARCHAR" />
+    <result column="Legal_person_Phone" property="legalPersonPhone" jdbcType="VARCHAR" />
+    <result column="Administrator_Account" property="administratorAccount" jdbcType="VARCHAR" />
+    <result column="Administrator_Name" property="administratorName" jdbcType="VARCHAR" />
+    <result column="Administrator_Phone" property="administratorPhone" jdbcType="VARCHAR" />
+    <result column="USER_id" property="userId" jdbcType="INTEGER" />
+    <result column="University_Type" property="universityType" jdbcType="INTEGER" />
+    <result column="University_Nature" property="universityNature" jdbcType="INTEGER" />
+    <result column="checked_info" property="checkedInfo" jdbcType="VARCHAR" />
+    <result column="school_CoverImg" property="schoolCoverimg" jdbcType="VARCHAR" />
+    <result column="school_Longitude" property="schoolLongitude" jdbcType="INTEGER" />
+    <result column="school_Latitude" property="schoolLatitude" jdbcType="INTEGER" />
 		<collection property="majors" ofType="com.kz.po.Major">
 			<id column="major_id" property="id"></id>
 			<result column="major_category_id" property="majorCategoryId" />
@@ -413,7 +442,10 @@
 		kz_university.ID, CODE, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, coupon,
 		CATEGORYID,
 		PUBLISH_STATUS,
-		kz_university.NAME, ADDRESS, EMPLOYMENT_INFO, BROCHURE, INTRODUCTION
+		kz_university.NAME, ADDRESS, EMPLOYMENT_INFO, BROCHURE, INTRODUCTION,
+		Legal_person_name,Legal_person_Card,Legal_person_Phone,Administrator_Account,
+		Administrator_Name,Administrator_Phone,USER_id,University_Type,University_Nature,
+		checked_info,school_CoverImg,school_Longitude,school_Latitude
 	</sql>
 	<select id="selectMajorsPageById" parameterType="long"
 		resultMap="universityMajorMap">
@@ -429,6 +461,8 @@
 		kz_university_major.id
 		um_id,
 		kz_major.description
+		
+		
 		from
 		kz_university,
 		kz_university_major,

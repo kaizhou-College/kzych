@@ -413,7 +413,7 @@ public class UniversityController {
 		}*/
 		// 3，根据学校的id查询该学校的所有专业信息
 		University university = iUniversityService.selectMajorsPageById(universityId, pageNum, pageSize);
-
+		
 		// 页面显示数据
 		return ServerResponse.createBySuccess("查询成功", university);
 	}
