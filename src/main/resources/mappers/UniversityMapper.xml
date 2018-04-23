@@ -539,15 +539,31 @@
 		<include refid="Blob_Column_List" />
 		from kz_university
 		<where>
+		    1=1 
 			<if test="categoryid!=0 &amp;&amp;categoryid > 0">
 				and categoryid=#{categoryid}
 			</if>
+			<!-- 名字 -->
 			<if test="name!=null &amp;&amp; name!=''">
 				and name like '%${name}%'
 			</if>
+			<!-- 经伪度 -->
 			<if test="schoolLongitude!=null &amp;&amp; schoolLongitude!='' &amp;&amp; schoolLatitude!='' &amp;&amp; schoolLatitude!=''">
 				and school_Latitude =#{schoolLatitude} 
 				and school_Longitude =#{schoolLongitude} 
+			</if>
+			<!-- 地址 -->
+			<if test="provid!=null &amp;&amp; provid!='' ">
+				and address like '%${cityid}%' 
+			</if>
+			<if test="cityid!=null &amp;&amp; cityid!='' ">
+				and address like '%${cityid}%' 
+			</if>
+			<if test="areaid!=null &amp;&amp; areaid!='' ">
+				and  address like '%${areaid}%' 
+			</if>
+			<if test="search_key!=null &amp;&amp; search_key!='' ">
+				and  address like '%${search_key}%' 
 			</if>
 		</where>
 	</select>
@@ -562,15 +578,17 @@
 			<if test="publishStatus!=null &amp;&amp; publishStatus!='' ">
 				publish_Status=#{publishStatus} and
 			</if>
-
+			<if test="provid!=null &amp;&amp; provid!='' ">
+				address like '%${cityid}%' and 
+			</if>
 			<if test="cityid!=null &amp;&amp; cityid!='' ">
-				address like '%${cityid}%' and
+				address like '%${cityid}%' and 
 			</if>
 			<if test="areaid!=null &amp;&amp; areaid!='' ">
-				address like '%${areaid}%' and
+				address like '%${areaid}%' and 
 			</if>
 			<if test="search_key!=null &amp;&amp; search_key!='' ">
-				address like '%${search_key}%' and
+				address like '%${search_key}%' and 
 			</if>
 			1=1
 		</where>

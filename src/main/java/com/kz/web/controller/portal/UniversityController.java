@@ -347,6 +347,7 @@ public class UniversityController {
 		qu.setCityid(cityid);
 		qu.setAreaid(areaid);
 		qu.setSearch_key(search_key);
+		
 		PageInfo pageInfo = iUniversityService.listKeyPublishStatus(qu);
 		return pageInfo;
 	}
@@ -364,7 +365,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping("schoolList.do")
+	@RequestMapping(value="schoolList.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<PageInfo> list(UniversityQuery uq,HttpSession session) {
 		/*User user = (User) session.getAttribute(Const.CURRENT_USER);
