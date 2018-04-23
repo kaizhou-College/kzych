@@ -1,6 +1,8 @@
 package com.kz.po;
 
-public class MajorCategory {
+import com.kz.core.po.BaseModel;
+
+public class MajorCategory{
     private Long majorCategoryId;
 
     private String majorCategoryName;
