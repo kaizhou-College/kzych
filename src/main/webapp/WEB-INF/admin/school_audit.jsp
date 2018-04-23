@@ -414,7 +414,7 @@
 			  form.on('submit(demo2)', function(data){
 					//异步请求更改该学校的状态
 						$.ajax({
-							type:"get",
+							type:"post",
 				  			url:host+"/university/updatePublicStatus.do",
 				  			data:{"id":$("#id_school").val(),"publishStatus":2},
 				  			success:function(data){

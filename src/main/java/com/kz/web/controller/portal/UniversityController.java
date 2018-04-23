@@ -123,7 +123,7 @@ public class UniversityController {
 	 * @param: @param
 	 *             re
 	 */
-	@RequestMapping("updatePublicStatus.do")
+	@RequestMapping(value="updatePublicStatus.do", method = RequestMethod.POST)
 	public void universityUpdatePublicString(University m, HttpServletResponse re) {
 		PrintWriter out = null;
 		try {
@@ -420,7 +420,7 @@ public class UniversityController {
 	/**
 	 * 
 	 * @Title: schoolAddressList
-	 * @Description: 按照用户id来查找该学校
+	 * @Description: 按照地理位置来查找
 	 * @param: @param
 	 *             pageSiz
 	 * @param: @param

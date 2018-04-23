@@ -35,12 +35,17 @@ public class CommentController {
 	@ResponseBody
 	public ServerResponse<PageInfo> commentAdd(CommentWithBLOBs co,HttpSession session){
 		User attribute = (User)session.getAttribute(Const.CURRENT_USER);
-		co.setNickName(attribute.getUsername());
-		Long addComment = iCommentService.accordingNewsIdAddComment(co);
-		if(addComment>0){
-			return ServerResponse.createBySuccessMessage("评论成功");
+		if(attribute!=null){
+			co.setNickName(attribute.getUsername());
+			Long addComment = iCommentService.accordingNewsIdAddComment(co);
+			if(addComment>0){
+				return ServerResponse.createBySuccessMessage("评论成功");
+			}else{
+				return ServerResponse.createBySuccessMessage("评论失败");
+			}
 		}else{
-			return ServerResponse.createBySuccessMessage("评论失败");
+			return ServerResponse.createBySuccessMessage("请先登入");
 		}
+		
 	}
 }
