@@ -545,6 +545,10 @@
 			<if test="name!=null &amp;&amp; name!=''">
 				and name like '%${name}%'
 			</if>
+			<if test="schoolLongitude!=null &amp;&amp; schoolLongitude!='' &amp;&amp; schoolLatitude!='' &amp;&amp; schoolLatitude!=''">
+				and school_Latitude =#{schoolLatitude} 
+				and school_Longitude =#{schoolLongitude} 
+			</if>
 		</where>
 	</select>
 	<select id="listKeyPublishStatus" parameterType="com.kz.po.UniversityQuery"
