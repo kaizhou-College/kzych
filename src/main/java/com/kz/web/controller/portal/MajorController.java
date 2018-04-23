@@ -1,12 +1,18 @@
 package com.kz.web.controller.portal;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 import com.kz.core.common.ServerResponse;
+import com.kz.dao.MajorCategoryMapper;
+import com.kz.po.MajorCategory;
+import com.kz.po.MajorCategoryQuery;
 import com.kz.po.MajorQuery;
 import com.kz.po.MajorUniversity;
 import com.kz.service.IMajorService;
@@ -17,8 +23,39 @@ public class MajorController {
 
 	@Autowired
 	private IMajorService iMajorService;
-
-	@RequestMapping("list.do")
+	
+	
+	
+	/**
+	 * 
+	 * @Title: majorCategoryList
+	 * @Description: 分页查询专业类别
+	 * @param: @param
+	 *             pageSiz
+	 * @param: @param
+	 *             pageNum
+	 * @param: @return
+	 * @return: ServerResponse<PageInfo> 返回值类型
+	 */
+	@RequestMapping(value="majorCategoryList.do", method = RequestMethod.GET)
+	@ResponseBody
+	public ServerResponse majorCategorylist(MajorCategoryQuery qm){
+		PageInfo<MajorCategory> pageInfo = iMajorService.majorCategorylist(qm);
+		return ServerResponse.createBySuccess("查询成功", pageInfo);
+	}
+	
+	/**
+	 * 
+	 * @Title: list
+	 * @Description: 分页查询专业信息
+	 * @param: @param
+	 *             pageSiz
+	 * @param: @param
+	 *             pageNum
+	 * @param: @return
+	 * @return: ServerResponse<PageInfo> 返回值类型
+	 */
+	@RequestMapping(value="list.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<PageInfo> list(MajorQuery mq){
 		PageInfo pageInfo = iMajorService.getByConditionPage(mq);
@@ -37,7 +74,7 @@ public class MajorController {
 	 * @param: @return
 	 * @return: ServerResponse<MajorUniversity> 返回值类型
 	 */
-	@RequestMapping("major_by_university.do")
+	@RequestMapping(value="major_by_university.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<MajorUniversity> findByUniversityId(int universityId, int majorId) {
 		MajorUniversity majorUniversity = iMajorService.findByUniversityId(universityId, majorId);

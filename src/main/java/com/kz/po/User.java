@@ -2,11 +2,10 @@ package com.kz.po;
 
 import java.util.Date;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
-import com.kz.core.po.BaseModel;
-public class User extends BaseModel{
+public class User {
     private Long uuid;
+
+    private String realName;
 
     private String username;
 
@@ -25,12 +24,14 @@ public class User extends BaseModel{
     private String signMessage;
 
     private String profile;
-    /*角色0-普通用户,1-管理员',*/
+    /*角色0-普通用户,1-管理员',3-学生*/
     private Integer userType;
 
     private Date createTime;
 
-    private Date lastLoginTime;
+    private Date lastloginTime;
+    
+    private String userAvatar;
 
     public Long getUuid() {
         return uuid;
@@ -38,6 +39,14 @@ public class User extends BaseModel{
 
     public void setUuid(Long uuid) {
         this.uuid = uuid;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName == null ? null : realName.trim();
     }
 
     public String getUsername() {
@@ -128,13 +137,31 @@ public class User extends BaseModel{
         this.createTime = createTime;
     }
 
-	public Date getLastLoginTime() {
-		return lastLoginTime;
+    public Date getLastloginTime() {
+        return lastloginTime;
+    }
+
+    public void setLastloginTime(Date lastloginTime) {
+        this.lastloginTime = lastloginTime;
+    }
+
+	public String getUserAvatar() {
+		return userAvatar;
 	}
 
-	public void setLastLoginTime(Date lastLoginTime) {
-		this.lastLoginTime = lastLoginTime;
+	public void setUserAvatar(String userAvatar) {
+		this.userAvatar = userAvatar;
 	}
 
-   
+	@Override
+	public String toString() {
+		return "User [uuid=" + uuid + ", realName=" + realName + ", username=" + username + ", password=" + password
+				+ ", cellphone=" + cellphone + ", sex=" + sex + ", idcard=" + idcard + ", originPlace=" + originPlace
+				+ ", school=" + school + ", signMessage=" + signMessage + ", profile=" + profile + ", userType="
+				+ userType + ", createTime=" + createTime + ", lastloginTime=" + lastloginTime + ", userAvatar="
+				+ userAvatar + "]";
+	}
+
+
+    
 }

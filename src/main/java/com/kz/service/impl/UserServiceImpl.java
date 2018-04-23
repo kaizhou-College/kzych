@@ -1,5 +1,7 @@
 package com.kz.service.impl;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +17,7 @@ import com.kz.utils.MD5Util;
 
 @Service
 @Transactional
-public class UserServiceImpl extends BaseService<User, UserQuery>implements IUserService {
+public class UserServiceImpl extends BaseService<User, UserQuery> implements IUserService {
 	private UserMapper userMapper = null;
 
 	@Autowired
@@ -23,6 +25,7 @@ public class UserServiceImpl extends BaseService<User, UserQuery>implements IUse
 		this.userMapper = mapper;
 		super.setMapper(mapper);
 	}
+
 	public ServerResponse<User> login(String username, String password) {
 		int resultCount = userMapper.checkUsername(username);
 		if (resultCount == 0) {
@@ -30,6 +33,7 @@ public class UserServiceImpl extends BaseService<User, UserQuery>implements IUse
 		}
 		String md5Password = MD5Util.MD5EncodeUtf8(password);
 		User user = userMapper.selectLogin(username, md5Password);
+		System.out.println("username:"+username+"md5Password:"+md5Password);
 		if (user == null) {
 			return ServerResponse.createByErrorMessage("密码错误");
 		}
@@ -47,10 +51,10 @@ public class UserServiceImpl extends BaseService<User, UserQuery>implements IUse
 		if (!validResponse.isSuccess()) {
 			return validResponse;
 		}
-		user.setUserType(Const.UserTYPE.TYPE_CUSTOMER);
+		//user.setUserType(Const.UserTYPE.TYPE_CUSTOMER);
 		// MD5加密
 		user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
-		Long resultCount = userMapper.insert(user);
+		Long resultCount = userMapper.insertSelectiveRegister(user);
 		if (resultCount == 0) {
 			return ServerResponse.createByErrorMessage("注册失败");
 		}
@@ -94,7 +98,7 @@ public class UserServiceImpl extends BaseService<User, UserQuery>implements IUse
 		updateUser.setOriginPlace(user.getOriginPlace());
 		updateUser.setSchool(user.getSchool());
 		updateUser.setSignMessage(user.getSignMessage());
-		updateUser.setLastLoginTime(user.getLastLoginTime());
+		updateUser.setLastloginTime(user.getLastloginTime());
 
 		Long updateCount = userMapper.updateByPrimaryKeySelective(updateUser);
 		if (updateCount > 0) {
@@ -123,6 +127,25 @@ public class UserServiceImpl extends BaseService<User, UserQuery>implements IUse
 			return ServerResponse.createBySuccess();
 		}
 		return ServerResponse.createByError();
+	}
+
+	@Override
+	public ServerResponse<User> IsNotAdministrator(String username) {
+		int resultCount = userMapper.checkUsername(username);
+		if (resultCount == 0) {
+			ServerResponse.createByErrorMessage("用户不存在!");
+		}
+		User user = userMapper.selectAdministrator(username);
+		if (user == null) {
+			return ServerResponse.createByErrorMessage("用户不存在");
+		}
+		return ServerResponse.createBySuccess("登陆成功！！", user);
+	}
+
+	@Override
+	public Long updateByKeyInfo(User u) {
+		u.setUsername(null);
+		return userMapper.updateByKeyInfo(u);
 	}
 
 }

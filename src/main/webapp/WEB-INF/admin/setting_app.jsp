@@ -46,7 +46,7 @@
           <dd><a href="">安全设置</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="">退了</a></li>
+      <li class="layui-nav-item"><a href="javascript:exit();">退出</a></li>
     </ul>
   </div>
   
@@ -70,7 +70,7 @@
 			    <p id="errText1"></p>
 			  </div>
 			</div>  
-      <button type="button" class="layui-btn">保存</button>
+      <button type="button" class="layui-btn" id="btu_01">保存</button>
       
     </div>
         <div style="padding: 15px;" id="carousel-figure-box">
@@ -87,7 +87,7 @@
         <div class="layui-upload-list" id="carousel-figure-view"></div>
       </blockquote>
 			</div>  
-      <button type="button" class="layui-btn">保存</button>
+      <button type="button" class="layui-btn" id="btu_02">保存</button>
       
     </div>
   </div>
@@ -101,14 +101,18 @@
 	
 	
 //JavaScript代码区域
-
+var username ="${currentUser.username}";
 var cur_mod="系统管理";
 var basePath ="${basePath}" ;
+var host="${host}";
 app.init(function($){
 	  //上传开机画面
   var uploadInst = app.upload.render({
     elem: '#start-img'
-    ,url: '/upload/'
+    ,url: '/university/save.do'
+    ,auto: false //选择文件后不自动上传
+    ,bindAction: '#btu_01' //指向一个按钮触发上传
+    ,field: 'upload_file'
     ,before: function(obj){
       //预读本地文件示例，不支持ie8
       obj.preview(function(index, file, result){
@@ -136,7 +140,10 @@ app.init(function($){
   //上传轮播图
   app.upload.render({
     elem: '#carousel-figure'
-    ,url: '/upload/'
+    ,url: '/university/save.do'
+    ,auto: false //选择文件后不自动上传
+    ,bindAction: '#btu_02' //指向一个按钮触发上传
+    ,field: 'upload_file'
     ,multiple: true
     ,before: function(obj){
       //预读本地文件示例，不支持ie8
@@ -151,6 +158,18 @@ app.init(function($){
   
 	
 });
+
+//退出
+function exit(){
+	$.ajax({
+			type:"post",
+			url:host+"/user/logout.do",
+			success:function(data){
+				location.href="/front/";
+			},
+			error:function(){alert("退出失败");}
+	});
+}
 </script>
 
 </body>

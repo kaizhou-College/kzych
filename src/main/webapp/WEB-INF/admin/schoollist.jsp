@@ -22,7 +22,7 @@
   <script src="${basePath}admin/layui.js?t=1515376178709" charset="utf-8"></script>
   <script src="${basePath}admin/app.js?t=1515376178709" charset="utf-8"></script>
   <script src="${basePath}admin/lay/modules/jquery.js"></script>
-  <link rel="stylesheet" href="${basePath}admin/css/layui.css" />
+  <link rel="stylesheet"  href="${basePath}admin/css/layui.css" />
   <script type="text/javascript" src="${basePath}admin/data.js"></script>
   <script type="text/javascript" src="${basePath}admin/province.js"></script>
   <script type="text/javascript">
@@ -57,7 +57,7 @@
           <dd><a href="">安全设置</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="">退了</a></li>
+      <li class="layui-nav-item"><a href="javascript:exit();" >退了</a></li>
     </ul>
   </div>
  <div class="layui-side layui-bg-black" id="side-nav">
@@ -75,23 +75,23 @@
 						<label class="layui-form-label">选择地区</label>
 						<div class="layui-input-inline">
 							<select name="provid" id="provid" lay-filter="provid">
-								<option value="">请选择省</option>
+								<option value="1">请选择省</option>
 							</select>
 						</div>
 						<div class="layui-input-inline">
 							<select name="cityid" id="cityid" lay-filter="cityid">
-								<option value="">请选择市</option>
+								<option value="2">请选择市</option>
 							</select>
 						</div>
 						<div class="layui-input-inline">
 							<select class="layui-select" name="areaid" id="areaid"
 								lay-filter="areaid">
-								<option value="">请选择县/区</option>
+								<option value="3">请选择县/区</option>
 							</select>
 						</div>
 						<div class="layui-input-inline">
 							<input name="search_key" placeholder="请输入" autocomplete="off"
-								class="layui-input" type="text">
+								class="layui-input" type="text" id="search_key">
 						</div>
 						<div class="layui-input-inline">
 							<button class="layui-btn" lay-submit lay-filter="formDemo"id="but_submit">查找</button>
@@ -203,8 +203,11 @@
 
 </html>
 <script>
+	var username ="${currentUser.username}";
+	var host="host";
 	cur_mod="学校管理";
 	var basePath ="${basePath}" ;
+	var host="${host}";
 	app.init(function($){
 		 
 		layui.use('form', function(){
@@ -214,7 +217,7 @@
 			  form.on('submit(formDemo)', function(data){
 				  $.ajax({
 			  			type:"get",
-			  			url:"http://localhost:8080/kzych/university/dimListPage.do",
+			  			url:host+"/university/dimListPage.do",
 			  			data:{"provid":$("#provid").val(),
 			  					"cityid":$("#cityid").val(),
 			  					"areaid":$("#areaid").val(),
@@ -236,7 +239,7 @@
 										var currentPage = obj.curr;//获取点击的页码 
 										var limit = obj.limit;
 										//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-										$.get("http://localhost:8080/kzych/university/schoolListPageWithConditions.do?&pageNum="
+										$.get(host+"/university/schoolListPageWithConditions.do?&pageNum="
 																+ currentPage
 																+ "&pageSize="
 																+ limit
@@ -255,7 +258,7 @@
 																	.empty();
 															for ( var i in list) {
 																   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-											        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+											        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='ftp://47.104.135.201/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
 											    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 																		+ list[i].name
 																		+ '</lable></div>';
@@ -284,7 +287,7 @@
 			  				$("#school_list").empty();
 							for ( var i in list) {
 								   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-			        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+			        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='ftp://47.104.135.201/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
 			    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 							}
 							//加载
@@ -306,7 +309,7 @@
 		});
 		
 		
-    	$.get("http://localhost:8080/kzych/university/schoolList.do",function(schoollist){
+    	$.get(host+"/university/schoolList.do",function(schoollist){
     		   var ele = '';
     		   function loadData(list){
     			   //清空
@@ -324,7 +327,7 @@
     			   $("#school_list").empty();
     			   for(var i in list){
     				   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='ftp://47.104.135.201/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
     		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
         		   	/*    ele += '<div style="width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;" schoolid="' + list[i].id + '"> ';
         		   	   ele += '<img  onmouseup="showScoolInfo('+JSON.stringify(list[i])+')" src="' + list[i].profile + '" style="width:160px;height:120px;float:left;"/>';
@@ -352,7 +355,7 @@
 					    	 var currentPage = obj.curr;//获取点击的页码 
 					    	 var limit = obj.limit;
                              //window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-                             $.get("http://localhost:8080/kzych/university/schoolList.do?pageNum="+currentPage+"&pageSize="+limit,function(schoollist){
+                             $.get(host+"/university/schoolList.do?pageNum="+currentPage+"&pageSize="+limit,function(schoollist){
                             	 var ele = '';
                             	 var list = schoollist.data.list;
                             	
@@ -360,7 +363,7 @@
                   			   $("#school_list").empty();
                   			   for(var i in list){
                   				 ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-                  		   	  	 ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+                  		   	  	 ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='ftp://47.104.135.201/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
               		           	 ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
                   		         
                       		   }
@@ -409,12 +412,23 @@
 	function showScoolInfo(list){
 		$("#school_Name").val(list.name);
 		$("#school_Address").val(list.address);
-		$("#school_License").attr("src",list.schoolLicense);
+		$("#school_License").attr("src","ftp://47.104.135.201/"+list.schoolLicense);
 		$("#legal_person_Name").val(list.legalPersonName);
 		$("#legal_person_Card").val(list.legalPersonCard);
 		$("#legal_person_Phone").val(list.legalPersonPhone);
 		$("#administrator_Account").val(list.administratorAccount);
 		$("#administrator_Name").val(list.administratorName);
 		$("#administrator_Phone").val(list.administratorPhone);
+	}
+	//退出
+	function exit(){
+		$.ajax({
+  			type:"post",
+  			url:host+"/user/logout.do",
+  			success:function(data){
+  				location.href="/front/";
+  			},
+  			error:function(){alert("退出失败");}
+		});
 	}
 </script>

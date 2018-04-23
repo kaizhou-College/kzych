@@ -16,7 +16,6 @@ layui.define(['jquery', 'form'], function () {
     treeSelect(defaults);
 });
 function treeSelect(config) {
-	
     config.v1 = config.v1 ? config.v1 : 110000;
     config.v2 = config.v2 ? config.v2 : 110100;
     config.v3 = config.v3 ? config.v3 : 110101;
@@ -72,6 +71,7 @@ function treeSelect(config) {
         });
         form.render();
         form.on('select(' + config.s3 + ')', function (data) { });
+        
     }
     function appendOptionTo($o, k, v, d) {
         var $opt = $("<option>").text(k).val(v);

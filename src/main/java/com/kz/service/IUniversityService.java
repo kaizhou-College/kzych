@@ -14,6 +14,14 @@ import com.kz.po.UserQuery;
 
 public interface IUniversityService extends IBaseService<University, UniversityQuery>{
 
-	University selectMajorsPageById(Long id, int pageNum, int pageSize);
+	List<University> selectMajorsPageById(Long id, int pageNum, int pageSize);
 	PageInfo listKeyPublishStatus(UniversityQuery qu);
+	List categoryList(); 
+	Long insertSelectiveSequence(University m);
+	Long updateByKeySelective(University m);
+	List<University> schoolByUserIdList(University m);
+	Long schoolByUserIdUpdate(University m);
+	PageInfo<University> schoolByIsNotHotList(UniversityQuery hq);
+	PageInfo<University> schoolAddressList(UniversityQuery hq);
+	PageInfo<University> selectByMajorCategoryId(UniversityQuery qu);
 }

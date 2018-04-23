@@ -1,213 +1,215 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.kz.dao.UserMapper">
-	<resultMap id="BaseResultMap" type="com.kz.po.User">
-		<id column="UUID" property="uuid" jdbcType="BIGINT" />
-		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
-		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
-		<result column="CELLPHONE" property="cellphone" jdbcType="VARCHAR" />
-		<result column="SEX" property="sex" jdbcType="VARCHAR" />
-		<result column="IDCARD" property="idcard" jdbcType="VARCHAR" />
-		<result column="ORIGIN_PLACE" property="originPlace" jdbcType="VARCHAR" />
-		<result column="SCHOOL" property="school" jdbcType="VARCHAR" />
-		<result column="SIGN_MESSAGE" property="signMessage" jdbcType="VARCHAR" />
-		<result column="PROFILE" property="profile" jdbcType="VARCHAR" />
-		<result column="USER_TYPE" property="userType" jdbcType="INTEGER" />
-		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
-		<result column="LASTLOGIN_TIME" property="lastLoginTime"
-			jdbcType="TIMESTAMP" />
-	</resultMap>
-	<sql id="Base_Column_List">
-		UUID, USERNAME, PASSWORD, CELLPHONE, SEX, IDCARD,
-		ORIGIN_PLACE, SCHOOL,
-		SIGN_MESSAGE,
-		PROFILE, USER_TYPE, CREATE_TIME,
-		LASTLOGIN_TIME
-	</sql>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Long">
-		select
-		<include refid="Base_Column_List" />
-		from kz_user
-		where UUID = #{uuid,jdbcType=BIGINT}
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from
-		kz_user
-		where UUID = #{uuid,jdbcType=BIGINT}
-	</delete>
-	<insert id="insert" parameterType="com.kz.po.User">
-		insert into kz_user (UUID,
-		USERNAME, PASSWORD,
-		CELLPHONE, SEX, IDCARD,
-		ORIGIN_PLACE, SCHOOL,
-		SIGN_MESSAGE,
-		PROFILE, USER_TYPE, CREATE_TIME,
-		LASTLOGIN_TIME)
-		values
-		(#{uuid,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR},
-		#{password,jdbcType=VARCHAR},
-		#{cellphone,jdbcType=VARCHAR},
-		#{sex,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR},
-		#{originPlace,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR},
-		#{signMessage,jdbcType=VARCHAR},
-		#{profile,jdbcType=VARCHAR},
-		#{userType,jdbcType=INTEGER}, now(),
-		now())
-	</insert>
-	<insert id="insertSelective" parameterType="com.kz.po.User">
-		insert into kz_user
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="uuid != null">
-				UUID,
-			</if>
-			<if test="username != null">
-				USERNAME,
-			</if>
-			<if test="password != null">
-				PASSWORD,
-			</if>
-			<if test="cellphone != null">
-				CELLPHONE,
-			</if>
-			<if test="sex != null">
-				SEX,
-			</if>
-			<if test="idcard != null">
-				IDCARD,
-			</if>
-			<if test="originPlace != null">
-				ORIGIN_PLACE,
-			</if>
-			<if test="school != null">
-				SCHOOL,
-			</if>
-			<if test="signMessage != null">
-				SIGN_MESSAGE,
-			</if>
-			<if test="profile != null">
-				PROFILE,
-			</if>
-			<if test="userType != null">
-				USER_TYPE,
-			</if>
-			<if test="createTime != null">
-				CREATE_TIME,
-			</if>
-			<if test="lastLoginTime != null">
-				LASTLOGIN_TIME,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="uuid != null">
-				#{uuid,jdbcType=BIGINT},
-			</if>
-			<if test="username != null">
-				#{username,jdbcType=VARCHAR},
-			</if>
-			<if test="password != null">
-				#{password,jdbcType=VARCHAR},
-			</if>
-			<if test="cellphone != null">
-				#{cellphone,jdbcType=VARCHAR},
-			</if>
-			<if test="sex != null">
-				#{sex,jdbcType=VARCHAR},
-			</if>
-			<if test="idcard != null">
-				#{idcard,jdbcType=VARCHAR},
-			</if>
-			<if test="originPlace != null">
-				#{originPlace,jdbcType=VARCHAR},
-			</if>
-			<if test="school != null">
-				#{school,jdbcType=VARCHAR},
-			</if>
-			<if test="signMessage != null">
-				#{signMessage,jdbcType=VARCHAR},
-			</if>
-			<if test="profile != null">
-				#{profile,jdbcType=VARCHAR},
-			</if>
-			<if test="userType != null">
-				#{userType,jdbcType=INTEGER},
-			</if>
-			<if test="createTime != null">
-				now(),
-			</if>
-			<if test="lastLoginTime != null">
-				now(),
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.kz.po.User">
-		update kz_user
-		<set>
-			<if test="username != null">
-				USERNAME = #{username,jdbcType=VARCHAR},
-			</if>
-			<if test="password != null">
-				PASSWORD = #{password,jdbcType=VARCHAR},
-			</if>
-			<if test="cellphone != null">
-				CELLPHONE = #{cellphone,jdbcType=VARCHAR},
-			</if>
-			<if test="sex != null">
-				SEX = #{sex,jdbcType=VARCHAR},
-			</if>
-			<if test="idcard != null">
-				IDCARD = #{idcard,jdbcType=VARCHAR},
-			</if>
-			<if test="originPlace != null">
-				ORIGIN_PLACE = #{originPlace,jdbcType=VARCHAR},
-			</if>
-			<if test="school != null">
-				SCHOOL = #{school,jdbcType=VARCHAR},
-			</if>
-			<if test="signMessage != null">
-				SIGN_MESSAGE = #{signMessage,jdbcType=VARCHAR},
-			</if>
-			<if test="profile != null">
-				PROFILE = #{profile,jdbcType=VARCHAR},
-			</if>
-			<if test="userType != null">
-				USER_TYPE = #{userType,jdbcType=INTEGER},
-			</if>
-			<if test="createTime != null">
-				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="lastLoginTime != null">
-				LASTLOGIN_TIME = now(),
-			</if>
-		</set>
-		where UUID = #{uuid,jdbcType=BIGINT}
-	</update>
-
-	<update id="updateByPrimaryKey" parameterType="com.kz.po.User">
-		update kz_user
-		set
-		USERNAME = #{username,jdbcType=VARCHAR},
-		PASSWORD =
-		#{password,jdbcType=VARCHAR},
-		CELLPHONE =
-		#{cellphone,jdbcType=VARCHAR},
-		SEX = #{sex,jdbcType=VARCHAR},
-		IDCARD =
-		#{idcard,jdbcType=VARCHAR},
-		ORIGIN_PLACE =
-		#{originPlace,jdbcType=VARCHAR},
-		SCHOOL = #{school,jdbcType=VARCHAR},
-		SIGN_MESSAGE = #{signMessage,jdbcType=VARCHAR},
-		PROFILE =
-		#{profile,jdbcType=VARCHAR},
-		USER_TYPE = #{userType,jdbcType=INTEGER},
-		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-		LASTLOGIN_TIME =now()
-		where UUID =
-		#{uuid,jdbcType=BIGINT}
-	</update>
-	<select id="checkUsername" parameterType="string" resultType="int">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kz.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.kz.po.User" >
+    <id column="UUID" property="uuid" jdbcType="BIGINT" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="CELLPHONE" property="cellphone" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="IDCARD" property="idcard" jdbcType="VARCHAR" />
+    <result column="ORIGIN_PLACE" property="originPlace" jdbcType="VARCHAR" />
+    <result column="SCHOOL" property="school" jdbcType="VARCHAR" />
+    <result column="SIGN_MESSAGE" property="signMessage" jdbcType="VARCHAR" />
+    <result column="PROFILE" property="profile" jdbcType="VARCHAR" />
+    <result column="USER_TYPE" property="userType" jdbcType="INTEGER" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="LASTLOGIN_TIME" property="lastloginTime" jdbcType="TIMESTAMP" />
+    <result column="user_avatar" property="userAvatar" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UUID, real_name, USERNAME, PASSWORD, CELLPHONE, SEX, IDCARD, ORIGIN_PLACE, SCHOOL, 
+    SIGN_MESSAGE, PROFILE, USER_TYPE, CREATE_TIME, LASTLOGIN_TIME, user_avatar
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from kz_user
+    where UUID = #{uuid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from kz_user
+    where UUID = #{uuid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.kz.po.User" >
+    insert into kz_user (UUID, real_name, USERNAME, 
+      PASSWORD, CELLPHONE, SEX, 
+      IDCARD, ORIGIN_PLACE, SCHOOL, 
+      SIGN_MESSAGE, PROFILE, USER_TYPE, 
+      CREATE_TIME, LASTLOGIN_TIME, user_avatar
+      )
+    values (#{uuid,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{idcard,jdbcType=VARCHAR}, #{originPlace,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, 
+      #{signMessage,jdbcType=VARCHAR}, #{profile,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastloginTime,jdbcType=TIMESTAMP}, #{userAvatar,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kz.po.User" >
+    insert into kz_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="cellphone != null" >
+        CELLPHONE,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="idcard != null" >
+        IDCARD,
+      </if>
+      <if test="originPlace != null" >
+        ORIGIN_PLACE,
+      </if>
+      <if test="school != null" >
+        SCHOOL,
+      </if>
+      <if test="signMessage != null" >
+        SIGN_MESSAGE,
+      </if>
+      <if test="profile != null" >
+        PROFILE,
+      </if>
+      <if test="userType != null" >
+        USER_TYPE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="lastloginTime != null" >
+        LASTLOGIN_TIME,
+      </if>
+      <if test="userAvatar != null" >
+        user_avatar,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=BIGINT},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="originPlace != null" >
+        #{originPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="signMessage != null" >
+        #{signMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="profile != null" >
+        #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastloginTime != null" >
+        #{lastloginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAvatar != null" >
+        #{userAvatar,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.User" >
+    update kz_user
+    <set >
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        CELLPHONE = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        IDCARD = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="originPlace != null" >
+        ORIGIN_PLACE = #{originPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        SCHOOL = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="signMessage != null" >
+        SIGN_MESSAGE = #{signMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="profile != null" >
+        PROFILE = #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        USER_TYPE = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastloginTime != null" >
+        LASTLOGIN_TIME = #{lastloginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAvatar != null" >
+        user_avatar = #{userAvatar,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kz.po.User" >
+    update kz_user
+    set real_name = #{realName,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      CELLPHONE = #{cellphone,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      IDCARD = #{idcard,jdbcType=VARCHAR},
+      ORIGIN_PLACE = #{originPlace,jdbcType=VARCHAR},
+      SCHOOL = #{school,jdbcType=VARCHAR},
+      SIGN_MESSAGE = #{signMessage,jdbcType=VARCHAR},
+      PROFILE = #{profile,jdbcType=VARCHAR},
+      USER_TYPE = #{userType,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      LASTLOGIN_TIME = #{lastloginTime,jdbcType=TIMESTAMP},
+      user_avatar = #{userAvatar,jdbcType=VARCHAR}
+    where UUID = #{uuid,jdbcType=BIGINT}
+  </update>
+  <select id="checkUsername" parameterType="string" resultType="int">
 		select count(1) from kz_user
 		where username=#{username}
 	</select>
@@ -227,5 +229,56 @@
 		select count(1) from kz_user
 		where idcard=#{idcard} and uuid=#{uuid}
 	</select>
-
+	<select id="selectAdministrator" parameterType="string" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from kz_user
+		where username=#{username}
+	</select>
+	<update id="updateByKeyInfo" parameterType="com.kz.po.User" >
+    update kz_user
+    <set >
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userAvatar != null" >
+        user_Avatar = #{userAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        CELLPHONE = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        IDCARD = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="originPlace != null" >
+        ORIGIN_PLACE = #{originPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        SCHOOL = #{school,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=BIGINT}
+  </update>
+   <insert id="insertSelectiveRegister" parameterType="com.kz.po.User" >
+    insert into kz_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        UUID,
+        USERNAME,
+        PASSWORD,
+        user_Type,
+		CELLPHONE,
+		CREATE_TIME,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+		null,
+        #{username,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR},
+        #{userType,jdbcType=INTEGER},
+		#{cellphone,jdbcType=VARCHAR},
+		utc_timestamp(),
+    </trim>
+  </insert>
 </mapper>

@@ -27,7 +27,7 @@ public class University extends BaseModel{
     private String name;
 
     private String address;
-
+    
     private String employmentInfo;
 
     private String brochure;
@@ -49,8 +49,28 @@ public class University extends BaseModel{
     private String administratorName;
 
     private String administratorPhone;
+
+    private Integer userId;
+
+    private Integer universityType;
+
+    private Integer universityNature;
     
+    private String checkedInfo;
     
+    private String schoolCoverimg;
+    
+    private Integer schoolLongitude;
+
+    private Integer schoolLatitude;
+    
+	public String getCheckedInfo() {
+		return checkedInfo;
+	}
+
+	public void setCheckedInfo(String checkedInfo) {
+		this.checkedInfo = checkedInfo;
+	}
 
 	public String getSchoolLicense() {
 		return schoolLicense;
@@ -227,5 +247,56 @@ public class University extends BaseModel{
     public void setPublishStatus(Integer publishStatus) {
         this.publishStatus = publishStatus;
     }
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public Integer getUniversityType() {
+		return universityType;
+	}
+
+	public void setUniversityType(Integer universityType) {
+		this.universityType = universityType;
+	}
+
+	public Integer getUniversityNature() {
+		return universityNature;
+	}
+
+	public void setUniversityNature(Integer universityNature) {
+		this.universityNature = universityNature;
+	}
+	
+	public String getSchoolCoverimg() {
+		return schoolCoverimg;
+	}
+
+	public void setSchoolCoverimg(String schoolCoverimg) {
+		this.schoolCoverimg = schoolCoverimg;
+	}
+
+	public Integer getSchoolLongitude() {
+		return schoolLongitude;
+	}
+
+	public void setSchoolLongitude(Integer schoolLongitude) {
+		this.schoolLongitude = schoolLongitude;
+	}
+
+	public Integer getSchoolLatitude() {
+		return schoolLatitude;
+	}
+
+	public void setSchoolLatitude(Integer schoolLatitude) {
+		this.schoolLatitude = schoolLatitude;
+	}
+
+
+	
     
 }

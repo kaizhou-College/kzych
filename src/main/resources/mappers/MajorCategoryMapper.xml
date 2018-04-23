@@ -68,4 +68,9 @@
       CATEGORY_PARENT_ID = #{categoryParentId,jdbcType=INTEGER}
     where MAJOR_CATEGORY_ID = #{majorCategoryId,jdbcType=BIGINT}
   </update>
+  <select id="getByConditionPage" resultMap="BaseResultMap" parameterType="com.kz.po.MajorCategoryQuery">
+    select  
+    <include refid="Base_Column_List" />
+    from kz_major_category
+  </select>
 </mapper>

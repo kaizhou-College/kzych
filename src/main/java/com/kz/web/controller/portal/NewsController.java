@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
@@ -20,27 +21,75 @@ public class NewsController {
 	@Autowired
 	private INewsService  iNewsService;
 	
-	@RequestMapping("list.do")
+	
+	/**
+	 * @Title: list
+	 * @Description: 一开始的分页
+	 * @param: @param
+	 *             pageSize
+	 * @param: @param
+	 *             pageNum
+	 * @param: @return
+	 * @return: ServerResponse<PageInfo> 返回值类型
+	 */
+	@RequestMapping(value="list.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<PageInfo> list(NewsQuery uq) {
 		PageInfo pageInfo = iNewsService.getByConditionPage(uq);
 		// 页面显示数据
-		return ServerResponse.createBySuccess("查询成功", pageInfo);
+		if(pageInfo.getList().size()>0){
+			return ServerResponse.createBySuccess("查询成功", pageInfo);
+		}else{
+			return ServerResponse.createBySuccess("查询失败", pageInfo);
+		}
+		
 	}
-	@RequestMapping("accordingKeyList.do")
+	/**
+	 * @Title: listKey
+	 * @Description: 单个查询（按照id）   点击进入显示单个详细详细
+	 * @param: @param
+	 *             id
+	 * @param: @return
+	 * @return: ServerResponse<PageInfo> 返回值类型
+	 */
+	@RequestMapping(value="accordingKeyList.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<News> listKey(News co){
 		News content = iNewsService.selectByPrimaryKey(co.getId());
-		return ServerResponse.createBySuccess("单个查询成功",content);
+		if(content!=null){
+			return ServerResponse.createBySuccess("单个查询成功",content);
+		}else{
+			return ServerResponse.createBySuccess("单个查询失败没有该id",content);
+		}
+		
 	}
-	
-	@RequestMapping("dimListPage.do")
+	/**
+	 * @Title: dimListPage
+	 * @Description: 按照标题模糊查询  并且分页
+	 * @param: @param
+	 *             title
+	 * @param: @param
+	 *             pageSize
+	 * @param: @param
+	 *             pageNum
+	 * @param: @return
+	 * @return: ServerResponse 返回值类型
+	 */
+	@RequestMapping(value="dimListPage.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse dimListPage(NewsQuery co){
 		List contentPage = iNewsService.dimContentPage(co);
-		return ServerResponse.createBySuccess("单个查询成功",contentPage);
+		return ServerResponse.createBySuccess("模糊询成功",contentPage);
 	}
-	@RequestMapping("hit.do")
+	/**
+	 * @Title: hit
+	 * @Description: 点赞  按照id 添加一个赞
+	 * @param: @param
+	 *             id
+	 * @param: @return
+	 * @return: ServerResponse<PageInfo> 返回值类型
+	 */
+	@RequestMapping(value="hit.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<PageInfo> hit(News co){
 		Long whileKeyUpdateHit = iNewsService.whileKeyUpdateHit(co);

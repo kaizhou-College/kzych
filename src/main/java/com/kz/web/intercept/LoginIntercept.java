@@ -27,17 +27,17 @@ public class LoginIntercept implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 		String uri = request.getRequestURI();
-		if(uri.indexOf("login.do")>0){
-			return true;
+		if(uri.indexOf("order/create.do")>0||uri.indexOf("order/pay.do")>0){
+			HttpSession session=request.getSession();
+			User attribute =(User)session.getAttribute(Const.CURRENT_USER);
+			if(attribute!=null){
+				return true;
+			}else{
+//				response.sendRedirect("/kzych/user/login.do");
+				response.sendRedirect("/front/login.jsp");
+			}
 		}
-		HttpSession session=request.getSession();
-		User attribute =(User)session.getAttribute(Const.CURRENT_USER);
-		if(attribute!=null){
-			return true;
-		}else{
-			response.sendRedirect("/kzych/user/login.do");
-		}
-		return false;
+		return true;
 	}
 
 }

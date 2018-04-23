@@ -18,5 +18,9 @@ public interface IUserService extends IBaseService<User, UserQuery>{
 	ServerResponse<User> getInformation(Long uuid);
 
 	ServerResponse checkAdminRole(User user);
+	
+	ServerResponse<User> IsNotAdministrator(String username);
+	
+	Long updateByKeyInfo(User u);
 
 }

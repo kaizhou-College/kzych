@@ -8,6 +8,8 @@ public class Order {
 
     private Long uuid;
 
+    private Long orderNo;
+
     private BigDecimal payment;
 
     private Integer status;
@@ -38,6 +40,14 @@ public class Order {
 
     public void setUuid(Long uuid) {
         this.uuid = uuid;
+    }
+
+    public Long getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(Long orderNo) {
+        this.orderNo = orderNo;
     }
 
     public BigDecimal getPayment() {

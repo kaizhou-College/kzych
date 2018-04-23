@@ -1,11 +1,13 @@
 package com.kz.core.po;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
 @SuppressWarnings("serial")
 public class BaseModel implements java.io.Serializable{
-	
+	 @JsonIgnore
 	private Long uuid;
 	//private int pageNum;
 	//private int pageSize;
