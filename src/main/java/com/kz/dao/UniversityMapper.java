@@ -11,8 +11,8 @@ import com.kz.po.UniversityQuery;
 
 @Repository
 public interface UniversityMapper extends BaseMapper<University, UniversityQuery>{
-
-	University selectMajorsPageById(Long id);
+	
+	List<University> selectMajorsPageById(Long id);
 	List<University> listKeyPublishStatus(UniversityQuery uq);
 	Long insertSelectiveSequence(University m);
 	Long updateByKeySelective(University m);

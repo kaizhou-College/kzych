@@ -400,7 +400,7 @@ public class UniversityController {
 	 */
 	@RequestMapping(value="university_detail.do", method = RequestMethod.GET)
 	@ResponseBody
-	public ServerResponse<University> list(HttpSession session ,Long universityId, int pageNum, int pageSize) {
+	public ServerResponse list(HttpSession session ,Long universityId, int pageNum, int pageSize) {
 		if (pageNum == 0) {
 			pageNum = 1;
 		}
@@ -412,7 +412,7 @@ public class UniversityController {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
 		}*/
 		// 3，根据学校的id查询该学校的所有专业信息
-		University university = iUniversityService.selectMajorsPageById(universityId, pageNum, pageSize);
+		List<University> university = iUniversityService.selectMajorsPageById(universityId, pageNum, pageSize);
 		
 		// 页面显示数据
 		return ServerResponse.createBySuccess("查询成功", university);

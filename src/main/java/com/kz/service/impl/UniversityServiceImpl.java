@@ -28,7 +28,7 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 	}
 	@Autowired
 	private UniversityCategoryMapper mapperC;
-	public University selectMajorsPageById(Long id,int pageNum,int pageSize) {
+	public List<University> selectMajorsPageById(Long id,int pageNum,int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		return mapper.selectMajorsPageById(id);
 		
