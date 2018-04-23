@@ -25,7 +25,8 @@ public class UniversityQuery extends BaseQueryModel  {
     //纬度
     private Integer schoolLatitude;
     
-    
+    //专业类别
+    private String majorCategoryName;
 	public Integer getIsHot() {
 		return isHot;
 	}
@@ -108,6 +109,14 @@ public class UniversityQuery extends BaseQueryModel  {
 
 	public void setSchoolLatitude(Integer schoolLatitude) {
 		this.schoolLatitude = schoolLatitude;
+	}
+
+	public String getMajorCategoryName() {
+		return majorCategoryName;
+	}
+
+	public void setMajorCategoryName(String majorCategoryName) {
+		this.majorCategoryName = majorCategoryName;
 	}
 
 	

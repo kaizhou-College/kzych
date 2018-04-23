@@ -801,6 +801,23 @@
     from kz_university
     where school_Longitude = #{schoolLongitude} 
     and  school_Latitude =#{schoolLongitude}
-    
   </select>
+  <select id="selectByMajorCategoryId" resultMap="ResultMapWithBLOBs"  parameterType="com.kz.po.UniversityQuery" >
+      select 
+		u.*  
+	from 
+		kz_university u,
+		kz_university_major um,
+		kz_major m,
+		kz_major_category mc
+	where 
+		u.id=um.university_id and 
+		um.major_id=m.id and 
+		m.major_category_id=mc.major_category_id and
+		<if test="majorCategoryName != null">
+			mc.major_category_name like '%${majorCategoryName}%' and
+		</if>
+		1=1
+  </select>
+  
 </mapper>
