@@ -97,5 +97,12 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 		PageInfo<University> result = new PageInfo<University>(list);
 		return result;
 	}
+	@Override
+	public PageInfo<University> selectByMajorCategoryId(UniversityQuery qu) {
+		PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
+		List<University> list = mapper.selectByMajorCategoryId(qu);
+		PageInfo<University> result = new PageInfo<University>(list);
+		return result;
+	}
 	
 }

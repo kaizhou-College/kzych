@@ -25,6 +25,7 @@ import com.google.common.collect.Maps;
 import com.kz.core.common.Const;
 import com.kz.core.common.ResponseCode;
 import com.kz.core.common.ServerResponse;
+import com.kz.po.MajorCategoryQuery;
 import com.kz.po.University;
 import com.kz.po.UniversityCategory;
 import com.kz.po.UniversityQuery;
@@ -49,7 +50,20 @@ public class UniversityController {
 	@Autowired
 	private IFileService iFileService;
 	
-	
+	/**
+	 * @Title: selectByMajorCategoryId
+	 * @Description: 按照专业类别来查找学校
+	 * @param: @param
+	 *             session
+	 * @param: @return
+	 * @return: String 返回值类型
+	 */
+	@RequestMapping(value="selectByMajorCategoryId.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ServerResponse<PageInfo> selectByMajorCategoryId(UniversityQuery qu) {
+		PageInfo pageInfo = iUniversityService.selectByMajorCategoryId(qu);
+		return ServerResponse.createBySuccess("查询成功", pageInfo);
+	}
 	/**
 	 * 
 	 * @Title: schoolByUserIdUpdate
@@ -333,6 +347,7 @@ public class UniversityController {
 		qu.setCityid(cityid);
 		qu.setAreaid(areaid);
 		qu.setSearch_key(search_key);
+		
 		PageInfo pageInfo = iUniversityService.listKeyPublishStatus(qu);
 		return pageInfo;
 	}
@@ -350,7 +365,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping("schoolList.do")
+	@RequestMapping(value="schoolList.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<PageInfo> list(UniversityQuery uq,HttpSession session) {
 		/*User user = (User) session.getAttribute(Const.CURRENT_USER);

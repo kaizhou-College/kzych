@@ -20,4 +20,5 @@ public interface UniversityMapper extends BaseMapper<University, UniversityQuery
 	Long schoolByUserIdUpdate(University m);
 	List<University> schoolByIsNotHotList(Integer isHot);
 	List<University> selectByPrimaryLongitudeAndLatitude(UniversityQuery uq);
+	List<University> selectByMajorCategoryId(UniversityQuery uq);
 }
