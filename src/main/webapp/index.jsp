@@ -17,8 +17,10 @@
 	<br/>
 	
 	<div id="container">
-		<a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a>
-		<a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a>
+		<button id="selectfiles"  class='btn'>选择文件</button>
+		<button id="postfiles"  class='btn'>开始上传</button>
+		
+		<img id="img_01" src="111">
 	</div>
 	
 	<pre id="console"></pre>
@@ -33,5 +35,6 @@
 </body>
 <script type="text/javascript"
 	src="oss/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
-<script type="text/javascript" src="oss/upload.js"></script>
+<script type="text/javascript" src="oss/upload.js">
+</script>
 </html>

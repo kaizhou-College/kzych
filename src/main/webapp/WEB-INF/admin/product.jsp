@@ -171,30 +171,459 @@
 									    <label class="layui-form-label">机构封面图:</label>
 									    <div class="layui-input-block">
 									     
-											  <div class="layui-upload">
-												  <button type="button" class="layui-btn" id="start-img2">上传图片</button>
+											  <div id="container" class="layui-upload">
+												  <button id="selectbackfiles"  class='layui-btn'>选择文件</button>
+												  <button id="postbackfiles"  class='layui-btn'>开始上传</button>
 												  <div class="layui-upload-list">
-												    <img class="layui-upload-img" id="start-img-view2" style="height:100px;">
+												    <img class="layui-upload-img"  id="start-img-view2" style="height:100px;">
 												    <p id="errText2"></p>
 												  </div>
-												</div> 	
-												<input type="hidden" name="schoolCoverimg" id="schoolCoverimg" value="">							   
+												  <input type="hidden" name="schoolCoverimg" id="schoolCoverimg" value="">
+											  </div> 	
 										 </div>
 							     </div>
+							     
+							     .
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     .......
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
+							     
 							     
 							     <div class="layui-inline">
 							      	
 							      	 <label class="layui-form-label">办学许可证/营业执照:</label>
 									    <div class="layui-input-block">
 									     
-											  <div class="layui-upload">
-												  <button type="button" class="layui-btn" id="start-img3">上传图片</button>
+											  <div id="container" class="layui-upload">
+												  <button id="selectpaperfiles" class='layui-btn'>选择文件</button>
+												  <button id="postpaperfiles"  class='layui-btn'>开始上传</button>
 												  <div class="layui-upload-list">
 												    <img class="layui-upload-img" id="start-img-view3" style="height:100px;">
 												    <p id="errText3"></p>
 												  </div>
+												  <input type="hidden" name="schoolLicense" id="schoolLicense" value="">
 												</div>
-												<input type="hidden" name="schoolLicense" id="schoolLicense" value="">
 									    </div>
 							     </div>
 							</div>
@@ -253,8 +682,6 @@
     © www.iychua.com - 湖南油菜花网络科技有限公司
   </div>
 </div>
-</body>
-</html>
 <script src="${basePath}admin/layui.js?t=1515376178709" charset="utf-8"></script>
 <script src="${basePath}admin/app.js?t=1515376178709" charset="utf-8"></script>
 <script type="text/javascript" src="${basePath}admin/js/jquery.min.js"></script>
@@ -263,7 +690,11 @@
 <script type="text/javascript" src="${basePath}admin/js/hotkeys.min.js"></script>
 <script type="text/javascript" src="${basePath}admin/js/uploader.min.js"></script>
 <script type="text/javascript" src="${basePath}admin/js/simditor.js"></script>
-<script>
+<script type="text/javascript" src="${basePath}oss/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="${basePath}oss/upload.js"></script>
+</body>
+</html> 
+<script  type="text/javascript">
 
 //用户名称
 var username ="${currentUser.username}";
@@ -274,7 +705,7 @@ var uuid="${currentUser.uuid}";
 var checkedInfo="初始值";
 //该用户的状态（PublicStatus）
 var status="${publicStatus}";
-var host="${host}";
+var host_kzych="${host}";
 var basePath = "${basePath}";
 var userId="${User_list.id}";
 	cur_mod="个人中心";
@@ -286,9 +717,9 @@ var userId="${User_list.id}";
 			      
 			$("#name_p").val("${User_list.name}");
 			$("#address_p").val("${User_list.address}");
-			$("#start-img-view2").val("${User_list.schoolCoverimg}");
+			$("#start-img-view2").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/${User_list.schoolCoverimg}");
 			$("#schoolCoverimg").val("${User_list.schoolCoverimg}");
-			$("#start-img-view3").val("${User_list.schoolLicense}");
+			$("#start-img-view3").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/${User_list.schoolLicense}");
 			$("#schoolLicense").val("${User_list.schoolLicense}");
 			$("#legalPersonName_p").val("${User_list.legalPersonName}");
 			$("#legalPersonCard_p").val("${User_list.legalPersonCard}");
@@ -328,8 +759,6 @@ var userId="${User_list.id}";
 		}else{
 			$("#school-auth-ok").on("click",function(){
 				  // 通过ajax提交
-				  
-				  
 	    		var isNotPass=0;
 				
 				//验证  机构信息	
@@ -406,7 +835,7 @@ var userId="${User_list.id}";
 				if(isNotPass==11){
 					$.ajax({
 		  				type:"post",
-		  				url:host+"/university/universityAdd.do",
+		  				url:host_kzych+"/university/universityAdd.do",
 		  				data:{"name":$("#name_p").val(),"universityType":$("#universityType_p").val(),
 		  					"universityNature":$("#universityNature_p").val(),"categoryid":$("#categoryid_p").val(),
 		  					"address":$("#address_p").val(),"legalPersonName":$("#legalPersonName_p").val(),
@@ -431,7 +860,7 @@ var userId="${User_list.id}";
 		//页面已加载时就需要查询该用户有没有开通学校的原因（通过用户id查询学校）
 		$.ajax({
   			type:"post",
-  			url:host+"/university/schoolByUserIdList.do",
+  			url:host_kzych+"/university/schoolByUserIdList.do",
   			data:{"userId":uuid},
   			success:function(data){
   				checkedInfo=data;
@@ -445,7 +874,7 @@ var userId="${User_list.id}";
 		//通过ajax来给学校等级（下拉框加上值）
 		$.ajax({
   			type:"get",
-  			url:host+"/university/categoryList.do",
+  			url:host_kzych+"/university/categoryList.do",
   			success:function(data){
   				var html_category=$("#category_id");
   				for(var i=0;i<data.length;i++){
@@ -527,62 +956,7 @@ var userId="${User_list.id}";
 		
 		
 		
-		
-		var uploadInst1 = app.upload.render({
-		    elem: '#start-img2'
-		    ,url: host+'/university/save1.do'
-		    ,field: 'upload_file'
-		    ,before: function(obj){
-		      //预读本地文件示例，不支持ie8
-		      obj.preview(function(index, file, result){
-		        $('#start-img-view2').attr('src', result); //图片链接（base64）
-		      });
-		    }
-		    ,done: function(res){
-		      //如果上传失败
-		      if(res.code > 0){
-		        return layer.msg('上传失败');
-		      }
-		      //上传成功
-				$("#schoolCoverimg").val(res.data.uri);
-		    }
-		    ,error: function(){
-		      //演示失败状态，并实现重传
-		      var errText1 = $('#errText2');
-		      errText1.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-		      errText1.find('.demo-reload').on('click', function(){
-		        uploadInst.upload();
-		      });
-		    }
-     });
      
-     var uploadInst2 = app.upload.render({
-		    elem: '#start-img3'
-		    ,url: host+'/university/save1.do'
-			,field: 'upload_file'
-		    ,before: function(obj){
-		      //预读本地文件示例，不支持ie8
-		      obj.preview(function(index, file, result){
-		        $('#start-img-view3').attr('src', result); //图片链接（base64）
-		      });
-		    }
-		    ,done: function(res){
-		      //如果上传失败
-		      if(res.code > 0){
-		        return layer.msg('上传失败');
-		      }
-		      //上传成功
-		      $("#schoolLicense").val(res.data.uri);
-		    }
-		    ,error: function(){
-		      //演示失败状态，并实现重传
-		      var errText1 = $('#errText3');
-		      errText1.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-		      errText1.find('.demo-reload').on('click', function(){
-		        uploadInst.upload();
-		      });
-		    }
-     });
      
       toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough',
             'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|',
@@ -608,7 +982,7 @@ var userId="${User_list.id}";
 	function exit(){
 		$.ajax({
   			type:"post",
-  			url:host+"/user/logout.do",
+  			url:host_kzych+"/user/logout.do",
   			success:function(data){
   				location.href="/front/";
   			},

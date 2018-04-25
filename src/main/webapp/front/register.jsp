@@ -210,7 +210,7 @@
 		
 			<div ID="login-box">
 				   <h3 class="login-title">用户注册</h3>
-				   <form action="${host }/user/userTypeTO.do" method="post" onsubmit="return testRegister();" id="form">
+				   <form action="${host_kzych }/user/userTypeTO.do" method="post" onsubmit="return testRegister();" id="form">
 				   	  
 				   	<div class="layui-form-item">
 					    <label class="layui-form-label">帐号:</label>
@@ -317,7 +317,7 @@
 <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
 <script src="layui.js?t=1515376178709" charset="utf-8"></script>
 	<script type="text/javascript">
-		 var host="${host}";
+		 var host_kzych="${host}";
 		 var isNotPass=0;//接收符合条件的数量
 		$(document).ready(function() {
 		
@@ -335,7 +335,7 @@
 			if($("#username").val().trim().length>0){
 				$.ajax({
 				    type:"post",
-		  			url:host+"/user/isNotAdministrator.do",
+		  			url:host_kzych+"/user/isNotAdministrator.do",
 		  			data:{"username":$("#username").val()},
 		  			success:function(data){
 		  				if(data.msg=="用户不存在"){

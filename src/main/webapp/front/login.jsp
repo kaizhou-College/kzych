@@ -290,7 +290,7 @@
 <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
 <script src="layui.js?t=1515376178709" charset="utf-8"></script>
 	<script type="text/javascript">
-		var host = "${host}";
+		var host_kzych = "${host}";
 		$(document).ready(function() {
 		
 			layui.use(['form','layedit'], function(){
@@ -316,7 +316,7 @@
 			  //异步请求 看该用户是否管理员
 			 $.ajax({
 				    type:"post",
-		  			url:host+"/user/login.do",
+		  			url:host_kzych+"/user/login.do",
 		  			data:{"username":$("#username").val(),"password":$("#password").val()},
 		  			success:function(data){
 		  				if(data.status==0){
@@ -329,7 +329,7 @@
 				  			  	   setCookie("token",data.data.username,"d1");
 				  			 /* }*/
 				  			//location.href = "/front/index.jsp";
-				  			location.href = host+"/front/index.jsp";
+				  			location.href = host_kzych+"/front/index.jsp";
 		  				}else{
 		  					layer.msg('密码或者账号错误');
 		  				}

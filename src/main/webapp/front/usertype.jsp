@@ -286,7 +286,7 @@
 <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
 <script src="layui.js?t=1515376178709" charset="utf-8"></script>
 	<script type="text/javascript">
-		 var host="${host}";
+		 var host_kzych="${host}";
 		$(document).ready(function() {
 		
 			layui.use(['form','layedit'], function(){
@@ -299,18 +299,18 @@
 		function register(id){
 			$.ajax({
 	  			type:"post",
-	  			url:host+"/user/register.do",
+	  			url:host_kzych+"/user/register.do",
 	  			data:{"userType":id},
 	  			success:function(data){
 	  				if(id==2){
 	  					if(data.status==0){
-		  					location.href=host+"/front/";
+		  					location.href=host_kzych+"/front/";
 		  				}else{
 		  					alert("添加失败,可能是用户名重复");
 		  				}
 	  				}else{
 	  					if(data.status==0){
-		  					location.href=host+"/university/toProduct.do";
+		  					location.href=host_kzych+"/university/toProduct.do";
 		  				}else{
 		  					alert("添加失败,可能是用户名重复");
 		  				}

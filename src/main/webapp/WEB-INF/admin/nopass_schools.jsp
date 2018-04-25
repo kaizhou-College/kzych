@@ -262,7 +262,7 @@
 <script>
 cur_mod="学校管理";
 var basePath ="${basePath}" ;
-var host="${host}";
+var host_kzych="${host}";
 var username ="${currentUser.username}";
 app.init(function($){
 	
@@ -273,7 +273,7 @@ app.init(function($){
 		  form.on('submit(formDemo)', function(data){
 			  $.ajax({
 		  			type:"get",
-		  			url:host+"university/dimListPage.do",
+		  			url:host_kzych+"university/dimListPage.do",
 		  			data:{"provid":$("#provid").val(),
 		  					"cityid":$("#cityid").val(),
 		  					"areaid":$("#areaid").val(),
@@ -296,7 +296,7 @@ app.init(function($){
 									var currentPage = obj.curr;//获取点击的页码 
 									var limit = obj.limit;
 									//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-									$.get(host+"university/schoolListPageWithConditions.do?&pageNum="
+									$.get(host_kzych+"university/schoolListPageWithConditions.do?&pageNum="
 															+ currentPage
 															+ "&pageSize="
 															+ limit
@@ -363,7 +363,7 @@ app.init(function($){
 	});
 	
 	
-	$.get(host+"university/schoolListPageWithConditions.do?publishStatus=3",function(schoollist){
+	$.get(host_kzych+"university/schoolListPageWithConditions.do?publishStatus=3",function(schoollist){
 		   var ele = '';
 		   function loadData(list){
 			   //清空
@@ -395,7 +395,7 @@ app.init(function($){
 				    	 var currentPage = obj.curr;//获取点击的页码 
 				    	 var limit = obj.limit;
                          //window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-                         $.get(host+"university/schoolListPageWithConditions.do?publishStatus=3&pageNum="+currentPage+"&pageSize="+limit,function(schoollist){
+                         $.get(host_kzych+"university/schoolListPageWithConditions.do?publishStatus=3&pageNum="+currentPage+"&pageSize="+limit,function(schoollist){
                         	 var ele = '';
                         	 var list = schoollist.data.list;
                         	
@@ -506,7 +506,7 @@ function showScoolInfo(list){
 function exit(){
 	$.ajax({
 			type:"post",
-			url:host+"/user/logout.do",
+			url:host_kzych+"/user/logout.do",
 			success:function(data){
 				location.href="/front/";
 			},

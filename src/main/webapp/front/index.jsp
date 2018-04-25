@@ -37,7 +37,7 @@
 <script type="text/javascript" src="js/move-top.js"></script>
 <script type="text/javascript" src="js/easing.js"></script>
 <script type="text/javascript">
-var host="${host}";
+var host_kzych="${host}";
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
 			event.preventDefault();
@@ -108,7 +108,7 @@ var host="${host}";
 			 //异步请求 看该用户是否管理员
 			 $.ajax({
 				    type:"post",
-		  			url:host+"/user/isNotAdministrator.do",
+		  			url:host_kzych+"/user/isNotAdministrator.do",
 		  			data:{"username":token},
 		  			success:function(data){
 		  				if(token == data.data.username&data.data.userType==1){
@@ -160,7 +160,7 @@ var host="${host}";
 			var cval=getCookie("token");
 			if(cval!=null)
 			document.cookie= "token" + "="+ '' +";expires="+exp.toGMTString() + ";path=/;";
-			location.href = host+"/front";
+			location.href = host_kzych+"/front";
 
     });
 	});
@@ -359,12 +359,12 @@ var host="${host}";
 			                				</div>
 			                				<div class="more-hover-content hover-box">
 			                					<ul id="nologin">
-			                						<li><a href="${host }/front/register.jsp" class="track-signup" aria-label="Create an account">注册</a></li>
+			                						<li><a href="${host}/front/register.jsp" class="track-signup" aria-label="Create an account">注册</a></li>
 			                						<li><a href="" class="track-help" data-noajax="" aria-label="Help">帮助</a></li>
 			                					</ul>
 			                					<ul id="logined" style="display:none;">
-			                						<!-- <li><a href="/university/productTO.do">控制台</a></li> -->
-			                						<li><a href="${host }/university/productTO.do"  class="kzt">控制台</a></li>
+			                						<!-- <li><a href="/university/toProduct.do">控制台</a></li> -->
+			                						<li><a href="${host}/university/toProduct.do"  class="kzt">控制台</a></li>
 			                					
 			                						<li class="quit"><a  class="track-signup " aria-label="Sign out" href="javascript:exit();">退出</a></li>
 			                						
@@ -720,7 +720,7 @@ var host="${host}";
 <!-- //footer -->
 <!-- smooth scrolling -->
 	<script type="text/javascript">
-	var host="${host}";
+	var host_kzych="${host}";
 		$(document).ready(function() {
 		/*
 			var defaults = {
@@ -737,7 +737,7 @@ var host="${host}";
 		function exit(){
 			$.ajax({
 	  			type:"post",
-	  			url:host+"/user/logout.do",
+	  			url:host_kzych+"/user/logout.do",
 	  			success:function(data){
 	  				location.href="/front/";
 	  			},

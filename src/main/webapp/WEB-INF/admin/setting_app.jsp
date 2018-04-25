@@ -104,7 +104,7 @@
 var username ="${currentUser.username}";
 var cur_mod="系统管理";
 var basePath ="${basePath}" ;
-var host="${host}";
+var host_kzych="${host}";
 app.init(function($){
 	  //上传开机画面
   var uploadInst = app.upload.render({
@@ -163,7 +163,7 @@ app.init(function($){
 function exit(){
 	$.ajax({
 			type:"post",
-			url:host+"/user/logout.do",
+			url:host_kzych+"/user/logout.do",
 			success:function(data){
 				location.href="/front/";
 			},

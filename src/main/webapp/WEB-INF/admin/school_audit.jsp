@@ -274,12 +274,10 @@
 </body>
 
 </html>
-<script>
-
-	var host="host";	
+<script>	
 	cur_mod = "学校管理";
 	var basePath = "${basePath}";
-	var host="${host}";
+	var host_kzych="${host}";
 	var username ="${currentUser.username}";
 	app.init(function($) {
 		
@@ -290,7 +288,7 @@
 			  form.on('submit(formDemo)', function(data){
 				  $.ajax({
 			  			type:"get",
-			  			url:host+"university/dimListPage.do",
+			  			url:host_kzych+"university/dimListPage.do",
 			  			data:{"provid":$("#provid").val(),
 			  					"cityid":$("#cityid").val(),
 			  					"areaid":$("#areaid").val(),
@@ -313,7 +311,7 @@
 										var currentPage = obj.curr;//获取点击的页码 
 										var limit = obj.limit;
 										//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-										$.get(host+"/university/schoolListPageWithConditions.do?&pageNum="
+										$.get(host_kzych+"/university/schoolListPageWithConditions.do?&pageNum="
 																+ currentPage
 																+ "&pageSize="
 																+ limit
@@ -415,7 +413,7 @@
 					//异步请求更改该学校的状态
 						$.ajax({
 							type:"post",
-				  			url:host+"/university/updatePublicStatus.do",
+				  			url:host_kzych+"/university/updatePublicStatus.do",
 				  			data:{"id":$("#id_school").val(),"publishStatus":2},
 				  			success:function(data){
 				  				setCookie("zhaosheng_service_status"+data,"2","d1"); 
@@ -433,7 +431,7 @@
 					//异步请求更改该学校的状态
 						$.ajax({
 				  			type:"post",
-				  			url:host+"/university/updatePublicStatus.do",
+				  			url:host_kzych+"/university/updatePublicStatus.do",
 				  			data:{"id":$("#id_school").val(),"publishStatus":3,"checkedInfo":$("#checkedInfo").val()},
 				  			success:function(data){
 				  				setCookie("zhaosheng_service_status"+data,"3","d1"); 
@@ -454,7 +452,7 @@
 		
 		
 		//分页跳转 ajax
-		$.get(host+"/university/schoolListPageWithConditions.do?publishStatus=1",
+		$.get(host_kzych+"/university/schoolListPageWithConditions.do?publishStatus=1",
 		function(schoollist) {
 			var ele = '';
 			function loadData(list) {
@@ -491,7 +489,7 @@
 							//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
 							$
 									.get(
-											host+"/university/schoolListPageWithConditions.do?publishStatus=1&pageNum="
+											host_kzych+"/university/schoolListPageWithConditions.do?publishStatus=1&pageNum="
 													+ currentPage
 													+ "&pageSize="
 													+ limit,
@@ -611,7 +609,7 @@
 	function exit(){
 		$.ajax({
   			type:"post",
-  			url:host+"/user/logout.do",
+  			url:host_kzych+"/user/logout.do",
   			success:function(data){
   				location.href="/front/";
   			},

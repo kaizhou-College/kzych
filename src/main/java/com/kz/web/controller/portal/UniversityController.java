@@ -295,7 +295,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping(value="schoolListPageWithConditions.do", method = RequestMethod.POST)
+	@RequestMapping("schoolListPageWithConditions.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> listKeyPublishStatus(UniversityQuery qu) {
 		// 按条件分页查询
@@ -336,18 +336,25 @@ public class UniversityController {
 		String areaid = qu.getAreaid();
 		String search_key = qu.getSearch_key();
 		try {
-			provid = new String(provid.getBytes("iso-8859-1"), "UTF-8");
-			cityid = new String(cityid.getBytes("iso-8859-1"), "UTF-8");
-			areaid = new String(areaid.getBytes("iso-8859-1"), "UTF-8");
-			search_key = new String(search_key.getBytes("iso-8859-1"), "UTF-8");
+			if(provid!=null){
+				provid = new String(provid.getBytes("iso-8859-1"), "UTF-8");
+				qu.setProvid(provid);
+			}
+			if(cityid!=null){
+				cityid = new String(cityid.getBytes("iso-8859-1"), "UTF-8");
+				qu.setCityid(cityid);
+			}
+			if(areaid!=null){
+				areaid = new String(areaid.getBytes("iso-8859-1"), "UTF-8");
+				qu.setAreaid(areaid);
+			}
+			if(search_key!=null){
+				search_key = new String(search_key.getBytes("iso-8859-1"), "UTF-8");
+				qu.setSearch_key(search_key);
+			}
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		qu.setProvid(provid);
-		qu.setCityid(cityid);
-		qu.setAreaid(areaid);
-		qu.setSearch_key(search_key);
-		
 		PageInfo pageInfo = iUniversityService.listKeyPublishStatus(qu);
 		return pageInfo;
 	}
@@ -365,13 +372,14 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping(value="schoolList.do", method = RequestMethod.POST)
+	@RequestMapping("schoolList.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> list(UniversityQuery uq,HttpSession session) {
 		/*User user = (User) session.getAttribute(Const.CURRENT_USER);
 		if (user == null) {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
 		}*/
+		
 		PageInfo pageInfo = iUniversityService.getByConditionPage(uq);
 		// 页面显示数据
 		return ServerResponse.createBySuccess("查询成功", pageInfo);

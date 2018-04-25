@@ -77,13 +77,14 @@
 							    <label class="layui-form-label">头像:</label>
 							    <div class="layui-input-block">
 							     
-									  <div class="layui-upload">
-										  <button type="button" class="layui-btn" id="start-img1">上传图片</button>
+									  <div id="container" class="layui-upload">
+										<button id="selectbackfiles"  class='layui-btn'>选择文件</button>
+										<button id="postbackfiles"  class='layui-btn'>开始上传</button>
 										  <div class="layui-upload-list">
-										    <img class="layui-upload-img" id="start-img-view1" src="ftp://47.104.135.201/${currentUser.userAvatar }" style="height:100px;">
+										    <img class="layui-upload-img" id="start-img-view1" src="https://kzych.oss-cn-qingdao.aliyuncs.com/${currentUser.userAvatar }" style="height:100px;">
 										    <p id="errText1"></p>
 										  </div>
-										  <input type="hidden" value="${currentUser.userAvatar }" id="userAvatar" name="userAvatar">
+										<input type="hidden" value="${currentUser.userAvatar }" id="userAvatar" name="userAvatar">
 										</div> 
 							    </div>
 							</div>
@@ -199,10 +200,11 @@
 									    <label class="layui-form-label">机构封面图:</label>
 									    <div class="layui-input-block">
 									     
-											  <div class="layui-upload">
-												  <button type="button" class="layui-btn" id="start-img2">上传图片</button>
+											  <div id="container" class="layui-upload">
+												  <button id="selectbackfiles"  class='layui-btn'>选择文件</button>
+												  <button id="postbackfiles"  class='layui-btn'>开始上传</button>
 												  <div class="layui-upload-list">
-												    <img  src="ftp://47.104.135.201/${User_list.schoolCoverimg}"  class="layui-upload-img" id="start-img-view2" style="height:100px;">
+												    <img  src="https://kzych.oss-cn-qingdao.aliyuncs.com/${User_list.schoolCoverimg}"  class="layui-upload-img" id="start-img-view2" style="height:100px;">
 												    <p id="errText2"></p>
 												  </div>
 												  <input type="hidden" name="schoolCoverimg" id="schoolCoverimg" value="${User_list.schoolCoverimg}"> 
@@ -215,10 +217,11 @@
 							      	 <label class="layui-form-label">办学许可证/营业执照:</label>
 									    <div class="layui-input-block">
 									     
-											  <div class="layui-upload">
-												  <button type="button" class="layui-btn" id="start-img3">上传图片</button>
+											  <div id="container" class="layui-upload">
+												  <button id="selectbackfiles"  class='layui-btn'>选择文件</button>
+												  <button id="postbackfiles"  class='layui-btn'>开始上传</button>
 												  <div class="layui-upload-list">
-												    <img src="ftp://47.104.135.201/${User_list.schoolLicense}" class="layui-upload-img" id="start-img-view3" style="height:100px;">
+												    <img src="https://kzych.oss-cn-qingdao.aliyuncs.com/${User_list.schoolLicense}" class="layui-upload-img" id="start-img-view3" style="height:100px;">
 												    <p id="errText3"></p>
 												  </div>
 												  <input type="hidden" name="schoolLicense" id="schoolLicense" value="${User_list.schoolLicense}">
@@ -294,17 +297,19 @@
 <script type="text/javascript" src="${basePath}admin/js/hotkeys.min.js"></script>
 <script type="text/javascript" src="${basePath}admin/js/uploader.min.js"></script>
 <script type="text/javascript" src="${basePath}admin/js/simditor.js"></script>
+<script type="text/javascript" src="${basePath}oss/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="${basePath}oss/upload.js"></script>
 <script>
 //用户名称
 var username ="${currentUser.username}";
 var basePath = "${basePath}";
-var host="${host}";
+var host_kzych="${host}";
 	cur_mod="个人中心";
 	
 	app.init(function($){
 			var uploadInst = app.upload.render({
 		    elem: '#start-img1'
-		    ,url: host+'/user/save.do'
+		    ,url: host_kzych+'/user/save.do'
 		    ,field: 'upload_file'
 		    ,before: function(obj){
 		      //预读本地文件示例，不支持ie8
@@ -333,7 +338,7 @@ var host="${host}";
      
      		var uploadInst1 = app.upload.render({
 		    elem: '#start-img2'
-		    ,url: host+'/university/save1.do'
+		    ,url: host_kzych+'/university/save1.do'
 		    ,field: 'upload_file'
 		    ,before: function(obj){
 		      //预读本地文件示例，不支持ie8
@@ -361,7 +366,7 @@ var host="${host}";
      
      var uploadInst2 = app.upload.render({
 		    elem: '#start-img3'
-		    ,url: host+'/university/save1.do'
+		    ,url: host_kzych+'/university/save1.do'
 		    ,field: 'upload_file'
 		    ,before: function(obj){
 		      //预读本地文件示例，不支持ie8
@@ -423,53 +428,52 @@ var host="${host}";
       	layui.use('form', function(){
         	  var form = layui.form;
         	  form.on('submit(demo1)', function(data){
-        		  var isNotPass=false;
+        		  var isNotPass=0;
         		  //验证身份证
         		  var isIDCard1=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/; //15位的身份证
         		  var isIDCard2=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$/;//18位  身份证的正则表达式
 				  if(isIDCard2.test($("#default_1").val())||isIDCard1.test($("#default_1"))){
-					  isNotPass=true;
+					  isNotPass=isNotPass+1;
 				  }else{
-					  isNotPass=false;
 					  alert("亲请输入正确的身份证号");
 				  }
         		  //验证电话 
         		  var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
         		  if(phone.test($("#cellphone").val())){
-        			  isNotPass=true;
+        			  isNotPass=isNotPass+1;
         		  }else{
-        			  isNotPass=false;
         			  alert("亲请输入正确的电话号");
         		  }
         		  //验证学校是否为空 
         		  if($("#default_2").val().trim().length>0&&$("#default_2").val()!=info){
-        			  isNotPass=true;
+        			  isNotPass=isNotPass+1;
         		  }else{
-        			  isNotPass=false;
         			  alert("亲请输入学校名称");
         		  }
         		  //验证家庭住址是为空
         		  if($("#default_3").val().trim().length>0&&$("#default_3").val()!=info){
-        			  isNotPass=true;
+        			  isNotPass=isNotPass+1;
         		  }else{
-        			  isNotPass=false;
         			  alert("亲请输入家庭住址");
         		  }
         		  //验证姓名是否为空 
         		  if($("#realName").val().trim().length){
-        			  isNotPass=true;
+        			  isNotPass=isNotPass+1;
         		  }else{
-        			  isNotPass=false;
         			  alert("亲请输入真实姓名");
         		  }
         		  //验证
         		  if($("#userAvatar").val().trim().length>0){
-        			  isNotPass=true;
+        			  isNotPass=isNotPass+1;
         		  }else{
-        			  isNotPass=false;
         			  alert("亲请上传头像");
         		  }
-        		  return isNotPass;
+        		  if(isNotPass>=6){
+          			return true;
+          		}else{
+          			return false;
+          		}
+        		
         	    }); 
         	    form.on('submit(demo2)', function(data){
         	    	var isNotPass=0;
@@ -640,7 +644,7 @@ var host="${host}";
 	function exit(){
 		$.ajax({
   			type:"post",
-  			url:host+"/user/logout.do",
+  			url:host_kzych+"/user/logout.do",
   			success:function(data){
   				location.href="/front/";
   			},
