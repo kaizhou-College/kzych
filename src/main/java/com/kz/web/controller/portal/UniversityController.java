@@ -374,14 +374,40 @@ public class UniversityController {
 	 */
 	@RequestMapping("schoolList.do")
 	@ResponseBody
-	public ServerResponse<PageInfo<University>> list(UniversityQuery uq,HttpSession session,HttpServletRequest re) {
+	public ServerResponse<PageInfo> list(UniversityQuery uq,HttpSession session,HttpServletRequest re) {
 		/*User user = (User) session.getAttribute(Const.CURRENT_USER);
 		if (user == null) {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
 		}*/
-//		String requestURI = re.getreq;
+		String method = re.getMethod();
+		if(method.equals("GET")){
+			String provid = uq.getProvid();
+			String cityid = uq.getCityid();
+			String areaid = uq.getAreaid();
+			String search_key = uq.getSearch_key();
+			try {
+				if(provid!=null){
+					provid = new String(provid.getBytes("iso-8859-1"), "UTF-8");
+					uq.setProvid(provid);
+				}
+				if(cityid!=null){
+					cityid = new String(cityid.getBytes("iso-8859-1"), "UTF-8");
+					uq.setCityid(cityid);
+				}
+				if(areaid!=null){
+					areaid = new String(areaid.getBytes("iso-8859-1"), "UTF-8");
+					uq.setAreaid(areaid);
+				}
+				if(search_key!=null){
+					search_key = new String(search_key.getBytes("iso-8859-1"), "UTF-8");
+					uq.setSearch_key(search_key);
+				}
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
 		
-		PageInfo<University> pageInfo = iUniversityService.getByConditionPage(uq);
+		PageInfo pageInfo = iUniversityService.getByConditionPage(uq);
 		// 页面显示数据
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}

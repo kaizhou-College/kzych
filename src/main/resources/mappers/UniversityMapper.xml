@@ -554,7 +554,7 @@
 			</if>
 			<!-- 地址 -->
 			<if test="provid!=null &amp;&amp; provid!='' ">
-				and address like '%${cityid}%' 
+				and address like '%${provid}%' 
 			</if>
 			<if test="cityid!=null &amp;&amp; cityid!='' ">
 				and address like '%${cityid}%' 
