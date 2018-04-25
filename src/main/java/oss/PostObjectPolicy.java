@@ -36,7 +36,7 @@ public class PostObjectPolicy extends HttpServlet{
         String host = "http://" + bucket + "." + endpoint;
         OSSClient client = new OSSClient(endpoint, accessId, accessKey);
         try { 	
-        	long expireTime = 30;
+        	long expireTime = 50;
         	long expireEndTime = System.currentTimeMillis() + expireTime * 1000;
             Date expiration = new Date(expireEndTime);
             PolicyConditions policyConds = new PolicyConditions();
