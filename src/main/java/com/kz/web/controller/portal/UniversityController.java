@@ -374,13 +374,14 @@ public class UniversityController {
 	 */
 	@RequestMapping("schoolList.do")
 	@ResponseBody
-	public ServerResponse<PageInfo> list(UniversityQuery uq,HttpSession session) {
+	public ServerResponse<PageInfo<University>> list(UniversityQuery uq,HttpSession session,HttpServletRequest re) {
 		/*User user = (User) session.getAttribute(Const.CURRENT_USER);
 		if (user == null) {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
 		}*/
+//		String requestURI = re.getreq;
 		
-		PageInfo pageInfo = iUniversityService.getByConditionPage(uq);
+		PageInfo<University> pageInfo = iUniversityService.getByConditionPage(uq);
 		// 页面显示数据
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}

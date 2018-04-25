@@ -72,7 +72,7 @@ function get_signature()
         return true;
     }
     return false;
-};
+}
 
 function random_string(len) {
 　　len = len || 32;
