@@ -99,7 +99,7 @@ public class OssSignatureController {
 		df.setTimeZone(tz);
 		Date nowAsISO = null;
 		try {
-			nowAsISO = df.parse(df.format(date));
+			nowAsISO = df.parse(date.toString());
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
