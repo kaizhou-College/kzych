@@ -178,11 +178,11 @@ var uploader = new plupload.Uploader({
 	            _this=this;
 	            return false;
 			};
-			document.getElementById('postpaperfiles').onclick = function() {
+			/*document.getElementById('postpaperfiles').onclick = function() {
 	            set_upload_param(uploader, '', false);
 	            _this=this;
 	            return false;
-			};
+			};*/
 		},
 
 		/*FilesAdded: function(up, files) {
