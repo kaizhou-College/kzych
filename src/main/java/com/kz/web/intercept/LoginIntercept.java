@@ -29,7 +29,7 @@ public class LoginIntercept implements HandlerInterceptor {
 		String uri = request.getRequestURI();
 		if(uri.indexOf("order/create.do")>0
 				||uri.indexOf("order/pay.do")>0
-				||uri.indexOf("")){
+				){
 			HttpSession session=request.getSession();
 			User attribute =(User)session.getAttribute(Const.CURRENT_USER);
 			if(attribute!=null){
