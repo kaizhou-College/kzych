@@ -6,7 +6,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,9 +46,6 @@ public class OssSignatureController {
         	long expireTime = 30;
         	long expireEndTime = System.currentTimeMillis() + expireTime * 1000;
             Date expiration = new Date(expireEndTime);
-          //转为ISO8601 GMT
-			expiration = formatISO8601Date2(expiration);
-            logger.debug("expiration22==="+expiration);
             PolicyConditions policyConds = new PolicyConditions();
             policyConds.addConditionItem(PolicyConditions.COND_CONTENT_LENGTH_RANGE, 0, 1048576000);
             policyConds.addConditionItem(MatchMode.StartWith, PolicyConditions.COND_KEY, dir);
@@ -62,11 +61,10 @@ public class OssSignatureController {
             respMap.put("accessid", accessId);
             respMap.put("policy", encodedPolicy);
             respMap.put("signature", postSignature);
-            //respMap.put("expire", formatISO8601Date(expiration));
-            
+            respMap.put("expire", getIso8601DateFormat().format(expiration));
             respMap.put("dir", dir);
             respMap.put("host", host);
-            respMap.put("expire", String.valueOf(expireEndTime / 1000));
+            //respMap.put("expire", String.valueOf(expireEndTime / 1000));
             JSONObject ja1 = JSONObject.fromObject(respMap);
             System.out.println(ja1.toString());
             response.setHeader("Access-Control-Allow-Origin", "*");
@@ -86,23 +84,11 @@ public class OssSignatureController {
 		response.setStatus(HttpServletResponse.SC_OK);
         response.flushBuffer();
 	}
-	public  String formatISO8601Date(Date date) {
-		TimeZone tz = TimeZone.getTimeZone("UTC");
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-		df.setTimeZone(tz);
-		String nowAsISO = df.format(date);
-		return nowAsISO;
-	}
-	public  Date formatISO8601Date2(Date date) {
-		TimeZone tz = TimeZone.getTimeZone("UTC");
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-		df.setTimeZone(tz);
-		Date nowAsISO = null;
-		try {
-			nowAsISO = df.parse(date.toString());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return nowAsISO;
-	}
+	private static DateFormat getIso8601DateFormat() {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
+        df.setTimeZone(new SimpleTimeZone(0, "GMT"));
+        return df;
+    }
+
+	
 }
