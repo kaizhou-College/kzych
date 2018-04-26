@@ -35,8 +35,8 @@ public class OssSignatureController {
 	@RequestMapping("signature.do")
 	public void getOssSignature(HttpServletRequest request, HttpServletResponse response){
 		String endpoint = "oss-cn-qingdao-internal.aliyuncs.com";
-        String accessId = "LTAIe4jYRoVaB8re";
-        String accessKey = "6eqYthKa2LTOnEvD3ufqpM0TPC6UgB";
+        String accessId = "LTAILNFFs4Ss2LTR";
+        String accessKey = "jeLsGaTB2esrrGA57s0iDRNbVaIS7D";
         String bucket = "kzych";
         //上传文件的前缀
         String dir = "kzych-dir/";
