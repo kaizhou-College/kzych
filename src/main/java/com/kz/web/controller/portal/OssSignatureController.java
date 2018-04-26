@@ -59,6 +59,7 @@ public class OssSignatureController {
             respMap.put("policy", encodedPolicy);
             respMap.put("signature", postSignature);
             respMap.put("expire", formatISO8601Date(expiration));
+            logger.debug("expire==="+formatISO8601Date(expiration));
             respMap.put("dir", dir);
             respMap.put("host", host);
             //respMap.put("expire", String.valueOf(expireEndTime / 1000));
