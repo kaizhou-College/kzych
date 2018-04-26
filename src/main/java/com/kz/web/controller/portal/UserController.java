@@ -100,6 +100,7 @@ public class UserController {
 	public String toUserInfo(HttpSession session) {
 		//由于在userinfo页面修改信息后session中的用户信息还没有更新Const.CURRENT_USER 所以在这里需要把session中的值更新成最新的
 		User user=(User) session.getAttribute(Const.CURRENT_USER);
+		//TODO 要做非空判断
 		ServerResponse<User> login = iUserService.getInformation(user.getUuid());
 		session.setAttribute(Const.CURRENT_USER, login.getData());
 		return "userinfo";
