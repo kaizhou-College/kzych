@@ -34,7 +34,7 @@ public class OssSignatureController {
 
 	@RequestMapping("signature.do")
 	public void getOssSignature(HttpServletRequest request, HttpServletResponse response){
-		String endpoint = "oss-cn-qingdao-internal.aliyuncs.com";
+		String endpoint = "oss-cn-qingdao.aliyuncs.com";
         String accessId = "LTAILNFFs4Ss2LTR";
         String accessKey = "jeLsGaTB2esrrGA57s0iDRNbVaIS7D";
         String bucket = "kzych";
