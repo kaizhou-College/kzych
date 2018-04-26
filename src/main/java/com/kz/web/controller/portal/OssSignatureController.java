@@ -1,9 +1,12 @@
 package com.kz.web.controller.portal;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,7 +58,7 @@ public class OssSignatureController {
             respMap.put("accessid", accessId);
             respMap.put("policy", encodedPolicy);
             respMap.put("signature", postSignature);
-            //respMap.put("expire", formatISO8601Date(expiration));
+            respMap.put("expire", formatISO8601Date(expiration));
             respMap.put("dir", dir);
             respMap.put("host", host);
             respMap.put("expire", String.valueOf(expireEndTime / 1000));
@@ -77,5 +80,12 @@ public class OssSignatureController {
 			response.getWriter().println(callbackFunName + "( "+results+" )");
 		response.setStatus(HttpServletResponse.SC_OK);
         response.flushBuffer();
+	}
+	public  String formatISO8601Date(Date date) {
+		TimeZone tz = TimeZone.getTimeZone("UTC");
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		df.setTimeZone(tz);
+		String nowAsISO = df.format(date);
+		return nowAsISO;
 	}
 }
