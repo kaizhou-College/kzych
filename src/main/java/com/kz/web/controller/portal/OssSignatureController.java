@@ -40,7 +40,7 @@ public class OssSignatureController {
         String host = "http://" + bucket + "." + endpoint;
         OSSClient client = new OSSClient(endpoint, accessId, accessKey);
         try { 	
-        	long expireTime = 50;
+        	long expireTime = 30;
         	long expireEndTime = System.currentTimeMillis() + expireTime * 1000;
             Date expiration = new Date(expireEndTime);
             logger.debug("expiration==="+expiration);
