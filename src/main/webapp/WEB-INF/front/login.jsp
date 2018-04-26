@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="common/taglib.jsp" %>
+<%@include file="../common/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,17 +12,17 @@
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/iconeffects.css" rel='stylesheet' type='text/css' />
-<link rel="stylesheet" type="text/css" href="css/jquery-ui1.css">
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
- <link rel="stylesheet" href="css/layui.css?t=1515376178709"  media="all">
+<link href="${host}/front/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${host}/front/css/iconeffects.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" type="text/css" href="${host}/front/css/jquery-ui1.css">
+<link href="${host}/front/css/style.css" rel="stylesheet" type="text/css" media="all" />
+ <link rel="stylesheet" href="${host}/front/css/layui.css?t=1515376178709"  media="all">
 <!-- js -->
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <!-- //js -->
 <!--animate-->
-<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
-<script src="js/wow.min.js"></script>
+<link href="${host}/front/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="${host}/front/js/wow.min.js"></script>
 	<script>
 		 new WOW().init();
 	</script>
@@ -34,8 +34,8 @@
 	.layui-input-block{margin-left:95px;}
 	
   #login-box{
-	    width: 31.5rem;
-			height: 29rem;
+	    width: 25rem;
+			height: 25rem;
 			padding: 3rem 3rem 1rem 0;
 			border: 1px solid #eee;
 			margin: auto;
@@ -44,15 +44,12 @@
 			background: #fff;
 			border-radius: 10px;
   }
-  
-  .layui-form-label{width:94px;}
   .login-title{text-align:center;color:#EA675C;}
   #login-box form{margin-top:20px;}
-  
 </style>
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="${host}/front/js/move-top.js"></script>
+<script type="text/javascript" src="${host}/front/js/easing.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -183,7 +180,7 @@
 			                				<div class="chg-hdr-notifications embed-js" id="notifications-component"></div>
 			                		</div>
 			                		<div id="eggshell-24" class="C-global-cheggheader-rightsection-usermenu">
-			                			<a href="login.jsp" class="signin-item nav-item track-signin">登录</a>
+			                			<a href="login.do" class="signin-item nav-item track-signin">登录</a>
 			                			<div class="more-item nav-item">
 			                				<div class="header" role="button" tabindex="0" aria-label="More Menu, has sub menu" aria-expanded="false">更多 <span class="icon-chegg-chevron"></span></div>
 			                				<div class="carrot">
@@ -192,7 +189,7 @@
 			                				<div class="more-hover-content hover-box">
 			                					<ul>
 			                						<li><a href="" class="track-help" data-noajax="" aria-label="Help">帮助</a></li>
-			                						<li><a href="" class="track-signup" aria-label="Create an account">注册</a></li>
+			                						<li><a href="${host}/front/register.do" class="track-signup" aria-label="Create an account">注册</a></li>
 			                						<li><a href="" class="track-signin hide-initially" aria-label="Sign in">登录</a></li>
 			                					</ul>
 			                				</div>
@@ -209,61 +206,37 @@
 	<div class="banner-info ">
 		
 			<div ID="login-box">
-				   <h3 class="login-title">用户注册</h3>
-				   <form action="${host_kzych }/user/userTypeTO.do" method="post" onsubmit="return testRegister();" id="form">
+				   <h3 class="login-title">用户登录</h3>
+				   <form action="#" onsubmit="return testLogin();" id="form">
 				   	  
 				   	<div class="layui-form-item">
 					    <label class="layui-form-label">帐号:</label>
 					    <div class="layui-input-block">
-					      <input name="username" id="username" onblur="isNotUser();" lay-verify="required" placeholder="用户名／手机" autocomplete="off" class="layui-input" type="text">
+					      <input name="username" id="username" lay-verify="required" placeholder="用户名／手机" autocomplete="off" class="layui-input" type="text">
 					    </div>
 					  </div>
 					  <div class="layui-form-item">
 					    <label class="layui-form-label">密码:</label>
 					    <div class="layui-input-block">
-					      <input  lay-verify="required" id="password1" placeholder="" autocomplete="off" class="layui-input" type="password">
+					      <input name="password" id="password" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" type="password">
 					    </div>
 					  </div>
-					  <div class="layui-form-item">
-					    <label class="layui-form-label">密码确认:</label>
+					  <div class="layui-form-item" pane="">
+					    <label class="layui-form-label"></label>
 					    <div class="layui-input-block">
-					      <input name="password" id="password2" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" type="password">
-					    </div>
-					  </div>
-					  <div class="layui-form-item">
-					   
-					      <div class="layui-inline">
-						      <label class="layui-form-label">手机</label>
-						      <div class="layui-input-inline">
-						        <input name="cellphone" id="cellphone" lay-verify="required|phone" autocomplete="off" class="layui-input" type="tel">
-						      </div>
-						    </div>
-						    <div class="layui-inline">
-						      <button class="layui-btn layui-btn-fluid" style="margin-left: 1.5rem;" >获取验证码</button>
-						    </div>
-					  </div>
-					  
-					  <div class="layui-form-item">
-					    <label class="layui-form-label">验证码:</label>
-					    <div class="layui-input-block">
-					      <input name="cellphone_yzm" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" type="text">
+					      <input name="remember" lay-skin="primary" title="记住我" checked="" type="checkbox">记住我
+					     
 					    </div>
 					  </div>
 					  
 					  <div class="layui-form-item">
 					   
-					    <button class="layui-btn layui-btn-fluid" style="margin-left: 1.5rem;" >同意条款并注册</button>
+					    
+					    <button class="layui-btn layui-btn-fluid" style="margin-left: 1.5rem;" >登录</button>
 					  </div>
-					  
-					      <div style="float:left;margin-left: 26px;">
-                    <input name="agreement" lay-skin="primary" title="" checked="" type="checkbox">
-                    <a href="javascript:void(0);">《油菜花网络平台服务协议》</a>
-                
-               </div>
-					  
 					   
 				   </form>
-				  
+				   <div style="width:100%;padding-left:1.5rem;box-sizing: border-box;"><a href="javascript:void(0);" style="float:left;color:#5097e8">忘记密码</a><span style="float:right;margin-right: -1.5rem;">还没有帐号？<a href="javascript:void(0);" style="color:#5097e8;">马上注册</a></span></div>
 		       
 		  </div>
 				   	  
@@ -302,89 +275,67 @@
 				</ul>
 			</div>
 			-->
-			<div class="clearfix"></div>
+			<div class="clearfix" ></div>
 		</div>
 	</div>
 </div>
 <!-- //footer -->
 <!-- smooth scrolling -->
-
-
-
 </body>
 </html>
 
-<script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
-<script src="layui.js?t=1515376178709" charset="utf-8"></script>
+<script type="text/javascript" src="${host}/front/js/bootstrap-3.1.1.min.js"></script>
+<script type="text/javascript" src="${host}/front/layui.js" charset="utf-8"></script>
 	<script type="text/javascript">
-		 var host_kzych="${host}";
-		 var isNotPass=0;//接收符合条件的数量
+		var host_kzych = "${host}";
 		$(document).ready(function() {
 		
-			layui.use(['form','layedit'], function(){
+		layui.use(['form','layedit'], function(){
 	     var form = layui.form
 	     ,layer = layui.layer
 	     ,layedit = layui.layedit
-	     
 	   });
 		});
 		
-		function isNotUser(){
-			isNotPass=0;//初始化
-			 //查看选择添加的用户是否存在  （我就直接在判断是不是管理员了  因为如果返回的data是管理员或者有用户的话就不不能让该用户填写这个名字了）
-			if($("#username").val().trim().length>0){
-				$.ajax({
+		//本代码只是用于测试
+		function testLogin(){
+			 
+			  if(form.username.value ==  ''){
+			     shotMsg("请输入用户名");
+			     return false;
+			  }
+			  
+			  if(form.password.value ==  ''){
+				  shotMsg("请输入用户密码");	
+			     return false;
+			  }
+			  //异步请求 看该用户是否管理员
+			 $.ajax({
 				    type:"post",
-		  			url:host_kzych+"/user/isNotAdministrator.do",
-		  			data:{"username":$("#username").val()},
+		  			url:host_kzych+"/user/login.do",
+		  			data:{"username":$("#username").val(),"password":$("#password").val()},
 		  			success:function(data){
-		  				if(data.msg=="用户不存在"){
-		  					isNotPass=isNotPass+1;
+		  				if(data.status==0){
+		  					 /* //管理员
+				  			  if(data.data.userType == 1){
+				  			  	   setCookie("token",data.data.username,"d1");
+				  			  }
+				  			   //普通用户
+				  			  else{*/
+				  			  	   setCookie("token",data.data.username,"d1");
+				  			 /* }*/
+				  			//location.href = "/front/index.jsp";
+				  			location.href = host_kzych+"/front/index.do";
 		  				}else{
-		  					alert("亲该用户名已被注册过了");
+		  					layer.msg('密码或者账号错误');
 		  				}
 		  			},
 		  			error:function(){
-		  				alert("请求失败")
+		  				layer.msg("重新登入");
 		  			}
-			 });
-			}else{
-				alert("亲请输入用户名");
-			}
-			 
+			  });
+			  return false;
 		}
-		//本代码只是用于测试
-		function testRegister(){
-			if(isNotPass>1){//初始化
-				isNotPass=1
-			}
-			 //查看输入的密码是否符合要求（俩次密码要一样  最大长度不能大于20 最小长度不能小于3 ）
-			 if($("#password1").val().trim().length>=3&&$("#password1").val().trim().length<=20){
-				 isNotPass=isNotPass+1;
-			 }else{
-				 alert("亲密码最大长度20 最小长度3");
-			 }
-			 //查看输入的俩次密码是否一样
-			 if($("#password1").val().trim()==$("#password2").val().trim()){
-				 isNotPass=isNotPass+1;
-			 }else{
-				 alert("亲第二次密码不符");
-			 }
-			 //判断电话是否是乱输入的
-			 var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
-			  	if(phone.test($("#cellphone").val())){
-			  		isNotPass=isNotPass+1;
-			  	}else{
-				  	alert("亲请输入正确的电话号");
-			  	}
-			 if(isNotPass==4){
-				 return true; 
-			 }else{
-				 return false;
-			 }
-			
-		}
-		
 		
 		
 		function setCookie(name,value,time)
@@ -394,7 +345,7 @@
 		exp.setTime(exp.getTime() + strsec*1);
 		document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString() + ";path=/;";
 		
-	
+		
 		}
 		
 		function getsec(str)
@@ -416,5 +367,12 @@
 			}
     }
 		
-		
+	//弹  未满足的条件
+	function shotMsg(string){
+		layui.use(['layer', 'form'], function(){
+  	 	 	var layer = layui.layer
+  	  		,form = layui.form;
+  	  		layer.msg(string);
+  		});
+	}
 	</script>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="common/taglib.jsp" %>
+<%@include file="../common/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +38,7 @@
           <dd><a href="">安全设置</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="">退了</a></li>
+      <li class="layui-nav-item"><a href="javascript:exit();">退了</a></li>
     </ul>
   </div>
   
@@ -112,6 +112,28 @@
 	  2.el表达式必须使用加""或者''才可以使用
 	*/
 	var basePath = "${basePath}";
+	var host_kzych="${host}";
+	//退出
+	function exit(){
+		$.ajax({
+				type:"post",
+				url:host_kzych+"/user/logout.do",
+				success:function(data){
+	  				location.href=host_kzych+"/front/index.do";
+	  			},
+	  			error:function(){
+	  				location.reload();
+	  			}
+		});
+	}
+	//弹  未满足的条件
+	function shotMsg(string){
+		layui.use(['layer', 'form'], function(){
+  	 	 	var layer = layui.layer
+  	  		,form = layui.form;
+  	  		layer.msg(string);
+  		});
+	}
 </script>
 
 </body>

@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@include file="common/taglib.jsp"%>
+<%@include file="../common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -182,434 +182,6 @@
 											  </div> 	
 										 </div>
 							     </div>
-							     
-							     .
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     .......
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
-							     
 							     <div class="layui-inline">
 							      	
 							      	 <label class="layui-form-label">办学许可证/营业执照:</label>
@@ -766,49 +338,49 @@ var userId="${User_list.id}";
 				if($("#name_p").val().trim().length>0&&$("#name_p").val()!="请输入学校名称"){
 					isNotPass=isNotPass+1
 	    		}else{
-	    			alert("亲请输入学校名称");
+	    			shotMsg("亲请输入学校名称");
 	    		}
 				//机构类型
 				if($("#universityType_p").val()>0){
 					isNotPass=isNotPass+1
 	    		}else{
-	    			alert("亲请选择机构类型");
+	    			shotMsg("亲请选择机构类型");
 	    		}
 				//机构性质
 				if($("#universityNature_p").val()>0){
 					isNotPass=isNotPass+1
 	    		}else{
-	    			alert("亲请选择机构性质");
+	    			shotMsg("亲请选择机构性质");
 	    		}
 				//学校等级
 				if($("#categoryid_p").val()>0){
 					isNotPass=isNotPass+1
 	    		}else{
-	    			alert("亲请选择学校等级");
+	    			shotMsg("亲请选择学校等级");
 	    		}
 				//机构地址
 				if($("#address_p").val().trim().length>0&&$("#address_p").val()!="请输入学校地址"){
 					isNotPass=isNotPass+1
 	    		}else{
-	    			alert("亲请输入机构地址");
+	    			shotMsg("亲请输入机构地址");
 	    		}
 				//封面图片 $("#schoolCoverimg")
 				if($("#schoolCoverimg").val().trim().length>0){
 					isNotPass=isNotPass+1
 	    		}else{
-	    			alert("亲请上传封面图片");
+	    			shotMsg("亲请上传封面图片");
 	    		}
 				//办学许可证  $("#schoolLicense")
 				if($("#schoolLicense").val().trim().length>0){
 					isNotPass=isNotPass+1
 	    		}else{
-	    			alert("亲请上传办学许可证");
+	    			shotMsg("亲请上传办学许可证");
 	    		}
 				//法人姓名 $("#legalPersonName_p").val()
 				if($("#legalPersonName_p").val().trim().length>0&&$("#legalPersonName_p").val()!="请输入法人姓名"){
 					isNotPass=isNotPass+1
 	    		}else{
-	    			alert("亲请输入法人姓名");
+	    			shotMsg("亲请输入法人姓名");
 	    		}
 				//法人身份证$("#legalPersonCard_p").val()
 	  		 	var isIDCard1=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/; //15位的身份证
@@ -816,20 +388,21 @@ var userId="${User_list.id}";
 				  	if(isIDCard2.test($("#legalPersonCard_p").val())||isIDCard1.test($("#default_1"))){
 				  		isNotPass=isNotPass+1;
 				  	}else{
-					  	alert("亲请输入正确的身份证号");
+				  		shotMsg("亲请输入正确的身份证号");
 				  	}
 				//法人电话$("#legalPersonPhone_p").val()
 				var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
 			  	if(phone.test($("#legalPersonPhone_p").val())){
 			  		isNotPass=isNotPass+1;
 			  	}else{
-				  	alert("亲请输入正确的电话号");
+			  		shotMsg("亲请输入正确的电话号");
 			  	}
 				//机构简历$("#detail").val()
 				if($("#detail").val().trim().length>0&&$("#detail").val()!="请输入机构简历"){
 					isNotPass=isNotPass+1;
 			  	}else{
-				  	alert("亲请输入机构简历");
+				  	shotMsg("亲请输入机构简历");
+				  	
 			  	}
 				//isNot如果等于11 那么说明客户填的信息符合条件
 				if(isNotPass==11){
@@ -843,13 +416,11 @@ var userId="${User_list.id}";
 		  					"introduction":$("#detail").val(),"userId":uuid,"schoolCoverimg":$("#schoolCoverimg").val(),
 		  					"schoolLicense":$("#schoolLicense").val()},
 		  				success:function(data){
-		  					alert("请求成功");
-		  					alert(data);
 		  					setCookie("zhaosheng_service_status"+uuid,"1","d1"); //这是测试代码，正试逻辑要删除。状态：0表示没有开通，1表示开通中，2表示已开通，3表示被拒决
 		  					location.reload();
 		  				},
 		  				error:function(){
-		  					alert("请求失败");
+		  					location.reload();
 		  				}		
 					});
 				}
@@ -867,7 +438,7 @@ var userId="${User_list.id}";
   				$("#checkedInfo").html(checkedInfo);//放入未通过原因
   			},
   			error:function(){
-  				alert("请求失败");
+  				location.reload();
   			}		
 		});
 		
@@ -888,7 +459,7 @@ var userId="${User_list.id}";
   				});
   			},
   			error:function(){
-  				alert("请求失败");
+  				location.reload();
   			}		
 		});
 		var a=getCookie("zhaosheng_service_status"+uuid);
@@ -984,10 +555,19 @@ var userId="${User_list.id}";
   			type:"post",
   			url:host_kzych+"/user/logout.do",
   			success:function(data){
-  				location.href="/front/";
+  				location.href=host_kzych+"/front/index.do";
   			},
-  			error:function(){alert("退出失败");}
+  			error:function(){
+  				location.reload();
+  			}
 		});
 	}
-	
+	//弹  未满足的条件
+	function shotMsg(string){
+		layui.use(['layer', 'form'], function(){
+  	 	 	var layer = layui.layer
+  	  		,form = layui.form;
+  	  		layer.msg(string);
+  		});
+	}
 </script>

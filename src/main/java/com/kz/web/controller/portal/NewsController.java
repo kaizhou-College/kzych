@@ -32,7 +32,7 @@ public class NewsController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping(value="list.do", method = RequestMethod.POST)
+	@RequestMapping(value="list.do", method = RequestMethod.GET)
 	@ResponseBody
 	public ServerResponse<PageInfo> list(NewsQuery uq) {
 		PageInfo pageInfo = iNewsService.getByConditionPage(uq);
@@ -52,7 +52,7 @@ public class NewsController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping(value="accordingKeyList.do", method = RequestMethod.POST)
+	@RequestMapping(value="accordingKeyList.do", method = RequestMethod.GET)
 	@ResponseBody
 	public ServerResponse<News> listKey(News co){
 		News content = iNewsService.selectByPrimaryKey(co.getId());
@@ -89,7 +89,7 @@ public class NewsController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping(value="hit.do", method = RequestMethod.POST)
+	@RequestMapping(value="hit.do", method = RequestMethod.GET)
 	@ResponseBody
 	public ServerResponse<PageInfo> hit(News co){
 		Long whileKeyUpdateHit = iNewsService.whileKeyUpdateHit(co);

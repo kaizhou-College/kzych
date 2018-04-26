@@ -55,7 +55,7 @@ public class MajorController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping(value="list.do", method = RequestMethod.POST)
+	@RequestMapping(value="list.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> list(MajorQuery mq){
 		PageInfo pageInfo = iMajorService.getByConditionPage(mq);

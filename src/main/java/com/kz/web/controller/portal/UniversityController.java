@@ -58,7 +58,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: String 返回值类型
 	 */
-	@RequestMapping(value="selectByMajorCategoryId.do", method = RequestMethod.POST)
+	@RequestMapping(value="selectByMajorCategoryId.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> selectByMajorCategoryId(UniversityQuery qu) {
 		PageInfo pageInfo = iUniversityService.selectByMajorCategoryId(qu);
@@ -95,7 +95,7 @@ public class UniversityController {
 
 		try {
 //			response.sendRedirect("/kzych/user/userinfoTo.do");
-			response.sendRedirect("/user/userinfoTo.do");
+			response.sendRedirect("/user/toUserinfo.do");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -236,7 +236,7 @@ public class UniversityController {
 			session.setAttribute("User_list",un);
 			session.setAttribute("publicStatus",un);
 		}
-		return "product";
+		return "/admin/product";
 	}
 
 
@@ -249,7 +249,7 @@ public class UniversityController {
 	 */
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String SchoolIndex() {
-		return "schoollist";
+		return "/admin/schoollist";
 	}
 	/**
 	 * 
@@ -260,7 +260,7 @@ public class UniversityController {
 	 */
 	@RequestMapping(value = "toSchoolAudit.do", method = RequestMethod.GET)
 	public String SchoolAudit() {
-		return "school_audit";
+		return "/admin/school_audit";
 	}
 	/**
 	 * 
@@ -271,7 +271,7 @@ public class UniversityController {
 	 */
 	@RequestMapping(value = "toSchoolNopass.do", method = RequestMethod.GET)
 	public String SchoolNopass() {
-		return "nopass_schools";
+		return "/admin/nopass_schools";
 	}
 
 
@@ -426,7 +426,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: ServerResponse<University> 返回值类型
 	 */
-	@RequestMapping(value="schoolByIsNotHotList.do", method = RequestMethod.POST)
+	@RequestMapping(value="schoolByIsNotHotList.do")
 	@ResponseBody
 	public PageInfo<University> schoolByIsNotHotList(UniversityQuery hq){
 		PageInfo<University> hotList = iUniversityService.schoolByIsNotHotList(hq);
@@ -436,7 +436,7 @@ public class UniversityController {
 	/**
 	 * 
 	 * @Title: university_detail
-	 * @Description: 按照universityId 分页查询学校信息
+	 * @Description: 按照universityId 分页查询学校专业
 	 * @param: @param
 	 *             pageSiz
 	 * @param: @param
