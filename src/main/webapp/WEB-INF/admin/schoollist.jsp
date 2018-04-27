@@ -214,6 +214,7 @@
 			  
 			  //监听提交  (省份筛选)
 			  form.on('submit(formDemo)', function(data){
+				  alert($("#provid").val()+"="+$("#cityid").val()+"="+$("#areaid").val()+"="+$("#search_key").val()+"=");
 				  $.ajax({
 			  			type:"get",
 			  			url:host_kzych+"/university/dimListPage.do",
