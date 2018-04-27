@@ -238,7 +238,7 @@
 										var currentPage = obj.curr;//获取点击的页码 
 										var limit = obj.limit;
 										//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-										$.get(host_kzych+"/university/schoolListPageWithConditions.do?&pageNum="
+										$.get(host_kzych+"/university/dimListPage.do?&pageNum="
 																+ currentPage
 																+ "&pageSize="
 																+ limit
@@ -312,17 +312,6 @@
     		   var ele = '';
     		   function loadData(list){
     			   //清空
-    			   /*
-    			   	alert($("#school_Name").val()+"-"+
-					$("#school_Address").val()+"-"+
-					$("#school_License").val()+"-"+
-					$("#legal_person_Name").val()+"-"+
-					$("#legal_person_Card").val()+"-"+
-					$("#legal_person_Phone").val()+"-"+
-					$("#administrator_Account").val()+"-"+
-					$("#administrator_Name").val()+"-"+
-					$("#administrator_Phone").val());
-    			   */
     			   $("#school_list").empty();
     			   for(var i in list){
     				   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";

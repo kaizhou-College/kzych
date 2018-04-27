@@ -95,7 +95,7 @@
 							</select>
 						</div>
 						<div class="layui-input-inline">
-							<input name="search_key" placeholder="请输入" autocomplete="off"
+							<input name="search_key" id="search_key" placeholder="请输入" autocomplete="off"
 								class="layui-input" type="text">
 						</div>
 						<div class="layui-input-inline">
@@ -311,7 +311,7 @@
 										var currentPage = obj.curr;//获取点击的页码 
 										var limit = obj.limit;
 										//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-										$.get(host_kzych+"/university/schoolListPageWithConditions.do?&pageNum="
+										$.get(host_kzych+"/university/dimListPage.do?&pageNum="
 																+ currentPage
 																+ "&pageSize="
 																+ limit
@@ -452,7 +452,7 @@
 		
 		
 		//分页跳转 ajax
-		$.get(host_kzych+"/university/schoolListPageWithConditions.do?publishStatus=1",
+		$.get(host_kzych+"/university/dimListPage.do?publishStatus=1",
 		function(schoollist) {
 			var ele = '';
 			function loadData(list) {
@@ -468,8 +468,8 @@
 			}
 		app.laypage.render({
 					elem : 'page',
-					limit : schoollist.data.pageSize,
-					count : schoollist.data.total//数据总数
+					limit : schoollist.pageSize,
+					count : schoollist.total//数据总数
 					,
 					jump : function(obj, first) {//点跳转触发
 						//console.log(obj);
@@ -489,14 +489,14 @@
 							//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
 							$
 									.get(
-											host_kzych+"/university/schoolListPageWithConditions.do?publishStatus=1&pageNum="
+											host_kzych+"/university/dimListPage.do?publishStatus=1&pageNum="
 													+ currentPage
 													+ "&pageSize="
 													+ limit,
 											function(
 													schoollist) {
 												var ele = '';
-												var list = schoollist.data.list;
+												var list = schoollist.list;
 
 												//清空
 												$(
@@ -526,15 +526,8 @@
 						}
 					}
 				});
-		var list = schoollist.data.list;
+		var list = schoollist.list;
 		loadData(list);
-		/*  for(var i in list){
-		 	   ele += '<div style="width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;" schoolid="' + list[i].id + '"> ';
-		 	   ele += '<img src="' + list[i].profile + '" style="width:160px;height:120px;float:left;"/>';
-		   	 ele += '<lable style="float:left;">' + list[i].name + '</lable></div>';
-	   
-		 }
-		 $("#school_list").append(ele); */
 		 //单击图片显示单个信息  隐藏其他学校图片
 		$("#school_list div").on("click",
 				function() {

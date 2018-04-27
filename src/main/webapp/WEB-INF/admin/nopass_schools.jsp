@@ -90,7 +90,7 @@
 							</select>
 						</div>
 						<div class="layui-input-inline">
-							<input name="search_key" placeholder="请输入" autocomplete="off"
+							<input name="search_key" id="search_key" placeholder="请输入" autocomplete="off"
 								class="layui-input" type="text">
 						</div>
 						<div class="layui-input-inline">
@@ -296,7 +296,7 @@ app.init(function($){
 									var currentPage = obj.curr;//获取点击的页码 
 									var limit = obj.limit;
 									//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-									$.get(host_kzych+"university/schoolListPageWithConditions.do?&pageNum="
+									$.get(host_kzych+"university/dimListPage.do?&pageNum="
 															+ currentPage
 															+ "&pageSize="
 															+ limit
@@ -308,7 +308,7 @@ app.init(function($){
 													function(
 															schoollist) {
 														var ele = '';
-														var list = schoollist.data.list;
+														var list = schoollist.list;
 
 														//清空
 														$(
@@ -363,7 +363,7 @@ app.init(function($){
 	});
 	
 	
-	$.get(host_kzych+"university/schoolListPageWithConditions.do?publishStatus=3",function(schoollist){
+	$.get(host_kzych+"university/dimListPage.do?publishStatus=3",function(schoollist){
 		   var ele = '';
 		   function loadData(list){
 			   //清空
@@ -379,8 +379,8 @@ app.init(function($){
 		   }
 		   app.laypage.render({
 				    elem: 'page'
-				    ,limit:schoollist.data.pageSize
-				    ,count: schoollist.data.total//数据总数
+				    ,limit:schoollist.pageSize
+				    ,count: schoollist.total//数据总数
 				    ,jump: function(obj,first){
 				      //console.log(obj);
 				      /* if(first!=true){//是否首次进入页面  
@@ -395,9 +395,9 @@ app.init(function($){
 				    	 var currentPage = obj.curr;//获取点击的页码 
 				    	 var limit = obj.limit;
                          //window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-                         $.get(host_kzych+"university/schoolListPageWithConditions.do?publishStatus=3&pageNum="+currentPage+"&pageSize="+limit,function(schoollist){
+                         $.get(host_kzych+"university/dimListPage.do?publishStatus=3&pageNum="+currentPage+"&pageSize="+limit,function(schoollist){
                         	 var ele = '';
-                        	 var list = schoollist.data.list;
+                        	 var list = schoollist.list;
                         	
                         	 //清空
               			   $("#school_list").empty();
@@ -423,7 +423,7 @@ app.init(function($){
                       }
 				    }
 				  });
-		   var list = schoollist.data.list;
+		   var list = schoollist.list;
 		   loadData(list);
 		  /*  for(var i in list){
 		   	   ele += '<div style="width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;" schoolid="' + list[i].id + '"> ';
