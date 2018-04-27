@@ -287,7 +287,7 @@
 			  //监听提交  (省份筛选)
 			  form.on('submit(formDemo)', function(data){
 				  $.ajax({
-			  			type:"get",
+			  			type:"post",
 			  			url:host_kzych+"university/dimListPage.do",
 			  			data:{"provid":$("#provid").val(),
 			  					"cityid":$("#cityid").val(),
