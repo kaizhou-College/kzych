@@ -342,22 +342,22 @@ public class UniversityController {
 				if(provid!=null){
 					provid = new String(provid.getBytes("iso-8859-1"), "UTF-8");
 					qu.setProvid(provid);
-					aa.append("a");
+					aa.append("a"+provid);
 				}
 				if(cityid!=null){
 					cityid = new String(cityid.getBytes("iso-8859-1"), "UTF-8");
 					qu.setCityid(cityid);
-					aa.append("b");
+					aa.append("b"+cityid);
 				}
 				if(areaid!=null){
 					areaid = new String(areaid.getBytes("iso-8859-1"), "UTF-8");
 					qu.setAreaid(areaid);
-					aa.append("c");
+					aa.append("c"+areaid);
 				}
 				if(search_key!=null){
 					search_key = new String(search_key.getBytes("iso-8859-1"), "UTF-8");
 					qu.setSearch_key(search_key);
-					aa.append("d");
+					aa.append("d"+search_key);
 				}
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
