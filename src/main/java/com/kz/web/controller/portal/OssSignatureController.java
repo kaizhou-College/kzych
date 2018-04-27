@@ -1,9 +1,15 @@
 package com.kz.web.controller.portal;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.SimpleTimeZone;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,15 +35,15 @@ public class OssSignatureController {
 	@RequestMapping("signature.do")
 	public void getOssSignature(HttpServletRequest request, HttpServletResponse response){
 		String endpoint = "oss-cn-qingdao.aliyuncs.com";
-        String accessId = "LTAIe4jYRoVaB8re";
-        String accessKey = "6eqYthKa2LTOnEvD3ufqpM0TPC6UgB";
+        String accessId = "LTAILNFFs4Ss2LTR";
+        String accessKey = "jeLsGaTB2esrrGA57s0iDRNbVaIS7D";
         String bucket = "kzych";
         //上传文件的前缀
         String dir = "kzych-dir/";
         String host = "http://" + bucket + "." + endpoint;
         OSSClient client = new OSSClient(endpoint, accessId, accessKey);
         try { 	
-        	long expireTime = 50;
+        	long expireTime = 30;
         	long expireEndTime = System.currentTimeMillis() + expireTime * 1000;
             Date expiration = new Date(expireEndTime);
             PolicyConditions policyConds = new PolicyConditions();
@@ -55,10 +61,10 @@ public class OssSignatureController {
             respMap.put("accessid", accessId);
             respMap.put("policy", encodedPolicy);
             respMap.put("signature", postSignature);
-            //respMap.put("expire", formatISO8601Date(expiration));
+            respMap.put("expire", getIso8601DateFormat().format(expiration));
             respMap.put("dir", dir);
             respMap.put("host", host);
-            respMap.put("expire", String.valueOf(expireEndTime / 1000));
+            //respMap.put("expire", String.valueOf(expireEndTime / 1000));
             JSONObject ja1 = JSONObject.fromObject(respMap);
             System.out.println(ja1.toString());
             response.setHeader("Access-Control-Allow-Origin", "*");
@@ -78,4 +84,11 @@ public class OssSignatureController {
 		response.setStatus(HttpServletResponse.SC_OK);
         response.flushBuffer();
 	}
+	private static DateFormat getIso8601DateFormat() {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
+        df.setTimeZone(new SimpleTimeZone(0, "GMT"));
+        return df;
+    }
+
+	
 }

@@ -27,7 +27,9 @@ public class LoginIntercept implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 		String uri = request.getRequestURI();
-		if(uri.indexOf("order/create.do")>0||uri.indexOf("order/pay.do")>0){
+		if(uri.indexOf("order/create.do")>0
+				||uri.indexOf("order/pay.do")>0
+				){
 			HttpSession session=request.getSession();
 			User attribute =(User)session.getAttribute(Const.CURRENT_USER);
 			if(attribute!=null){
