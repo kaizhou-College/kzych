@@ -116,7 +116,7 @@
 	//退出
 	function exit(){
 		$.ajax({
-				type:"post",
+				type:"get",
 				url:host_kzych+"/user/logout.do",
 				success:function(data){
 	  				location.href=host_kzych+"/front/index.do";
