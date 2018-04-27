@@ -359,7 +359,7 @@ public class UniversityController {
 			}
 		}
 		PageInfo pageInfo = iUniversityService.listKeyPublishStatus(qu);
-		req.setAttribute("a",qu.getProvid()+qu.getCityid()+qu.getAreaid());
+		req.setAttribute("a",qu.getProvid()+"="+qu.getCityid()+"="+qu.getAreaid());
 		return pageInfo;
 	}
 
