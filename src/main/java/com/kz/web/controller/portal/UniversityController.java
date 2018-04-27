@@ -326,7 +326,7 @@ public class UniversityController {
 	 * @return: ServerResponse 返回值类型
 	 */
 	@RequestMapping(value="dimListPage.do", method = RequestMethod.GET)
-	//@ResponseBody
+	@ResponseBody
 	public String dimListPage(HttpSession sess,HttpServletRequest req,HttpServletResponse resp, UniversityQuery qu) {
 		// ajax 按地址分页
 
