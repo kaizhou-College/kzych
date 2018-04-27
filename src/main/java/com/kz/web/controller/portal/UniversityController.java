@@ -365,7 +365,7 @@ public class UniversityController {
 		}
 		PageInfo pageInfo = iUniversityService.listKeyPublishStatus(qu);
 		//sess.setAttribute("a_sss",qu.getProvid()+"="+qu.getCityid()+"="+qu.getAreaid());
-		return method+"="+qu.getProvid()+"="+qu.getCityid()+"="+qu.getAreaid();
+		return aa+"="+method+"="+qu.getProvid()+"="+qu.getCityid()+"="+qu.getAreaid();
 	}
 
 	/**
