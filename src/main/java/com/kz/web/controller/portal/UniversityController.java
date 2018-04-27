@@ -332,6 +332,7 @@ public class UniversityController {
 
 		// 解决乱码问题
 		String method = req.getMethod();
+		StringBuffer aa=new StringBuffer();
 		if(method.equals("GET")){
 			String provid = qu.getProvid();
 			String cityid = qu.getCityid();
@@ -341,18 +342,22 @@ public class UniversityController {
 				if(provid!=null){
 					provid = new String(provid.getBytes("iso-8859-1"), "UTF-8");
 					qu.setProvid(provid);
+					aa.append("a");
 				}
 				if(cityid!=null){
 					cityid = new String(cityid.getBytes("iso-8859-1"), "UTF-8");
 					qu.setCityid(cityid);
+					aa.append("b");
 				}
 				if(areaid!=null){
 					areaid = new String(areaid.getBytes("iso-8859-1"), "UTF-8");
 					qu.setAreaid(areaid);
+					aa.append("c");
 				}
 				if(search_key!=null){
 					search_key = new String(search_key.getBytes("iso-8859-1"), "UTF-8");
 					qu.setSearch_key(search_key);
+					aa.append("d");
 				}
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
