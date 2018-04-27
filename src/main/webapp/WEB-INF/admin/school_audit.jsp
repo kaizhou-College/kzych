@@ -331,7 +331,7 @@
 																	.empty();
 															for ( var i in list) {
 																   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-											        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='ftp://47.104.135.201/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+											        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
 											    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 
 															}
@@ -357,7 +357,7 @@
 			  				$("#school_list").empty();
 							for ( var i in list) {
 								   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-			        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='ftp://47.104.135.201/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+			        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
 			    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 							}
 							//加载
@@ -460,7 +460,7 @@
 				$("#school_list").empty();
 				for ( var i in list) {
 					 ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-      		   	     ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='ftp://47.104.135.201/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+      		   	     ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
   		             ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 				}
 				//加载
@@ -504,7 +504,7 @@
 														.empty();
 												for ( var i in list) {
 													   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-								        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='ftp://47.104.135.201/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+								        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
 								    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 
 												}
