@@ -174,6 +174,10 @@ app.loadTopNav = function ($){
 			url:host_kzych+"/user/isNotAdministrator.do",
 			data:{"username":username},
 			success:function(data){
+				//如果要是用户没有登入的话这里就会跳往登入页面
+				if(data.data==null||data.data==''){
+					location=basePath+"front/login.do"
+				}
 				//判断该用户是否管理员 （0不是管理员1是管理员）
 				if(data.data.userType==0){
 					nav_url =  basePath+"admin/testdata/user-nav.json";

@@ -3,6 +3,7 @@ package com.kz.web.controller.portal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +36,8 @@ import com.kz.service.IUniversityService;
 import com.kz.service.IUserService;
 import com.kz.utils.PropertiesUtil;
 
-import alipay.api.domain.Data;
+
+import java.lang.reflect.Field;
 
 
 @Controller
@@ -555,4 +557,5 @@ public class UniversityController {
 			fileMap.put("url", url);
 			return ServerResponse.createBySuccess(fileMap);
 	}
+
 }
