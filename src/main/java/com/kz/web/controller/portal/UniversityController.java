@@ -327,12 +327,11 @@ public class UniversityController {
 	 */
 	@RequestMapping(value="dimListPage.do")
 	@ResponseBody
-	public String dimListPage(HttpSession sess,HttpServletRequest req,HttpServletResponse resp, UniversityQuery qu) {
+	public PageInfo dimListPage(HttpServletRequest req,HttpServletResponse resp, UniversityQuery qu) {
 		// ajax 按地址分页
 
 		// 解决乱码问题
 		String method = req.getMethod();
-		StringBuffer aa=new StringBuffer();
 		if(method.equals("GET")){
 			String provid = qu.getProvid();
 			String cityid = qu.getCityid();
@@ -342,30 +341,25 @@ public class UniversityController {
 				if(provid!=null){
 					provid = new String(provid.getBytes("iso-8859-1"), "UTF-8");
 					qu.setProvid(provid);
-					aa.append("a"+provid);
 				}
 				if(cityid!=null){
 					cityid = new String(cityid.getBytes("iso-8859-1"), "UTF-8");
 					qu.setCityid(cityid);
-					aa.append("b"+cityid);
 				}
 				if(areaid!=null){
 					areaid = new String(areaid.getBytes("iso-8859-1"), "UTF-8");
 					qu.setAreaid(areaid);
-					aa.append("c"+areaid);
 				}
 				if(search_key!=null){
 					search_key = new String(search_key.getBytes("iso-8859-1"), "UTF-8");
 					qu.setSearch_key(search_key);
-					aa.append("d"+search_key);
 				}
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
 		}
 		PageInfo pageInfo = iUniversityService.listKeyPublishStatus(qu);
-		//sess.setAttribute("a_sss",qu.getProvid()+"="+qu.getCityid()+"="+qu.getAreaid());
-		return aa+"="+method+"="+qu.getProvid()+"="+qu.getCityid()+"="+qu.getAreaid();
+		return pageInfo;
 	}
 
 	/**
