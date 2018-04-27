@@ -238,47 +238,44 @@
 										var currentPage = obj.curr;//获取点击的页码 
 										var limit = obj.limit;
 										//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-										$.get(host_kzych+"/university/dimListPage.do?&pageNum="
-																+ currentPage
-																+ "&pageSize="
-																+ limit
-																+ "&provid="+$("#provid").val()
-																+ "&cityid="+$("#cityid").val()
-																+ "&areaid="+$("#areaid").val()
-																+ "&search_key="+$("#search_key").val(),
-														function(
-																schoollist) {
-															var ele = '';
-															var list = schoollist.list;
+										$.ajax({
+								  			type:"post",
+								  			url:host_kzych+"university/dimListPage.do",
+								  			data:{"provid":$("#provid").val(),
+								  					"cityid":$("#cityid").val(),
+								  					"areaid":$("#areaid").val(),
+								  					"search_key":$("#search_key").val(),
+								  					"pageNum":currentPage,
+								  					"pageSize":limit
+								  					},
+								  			success:function(schoollist){
+								  				var ele = '';
+												var list = schoollist.list;
 
-															//清空
-															$(
-																	"#school_list")
-																	.empty();
-															for ( var i in list) {
-																   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-											        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
-											    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
-																		+ list[i].name
-																		+ '</lable></div>';
+												//清空
+												$(
+														"#school_list")
+														.empty();
+												for ( var i in list) {
+													   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
+								        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+								    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 
-															}
-															//加载
-															$("#school_list").append(ele);
-															//显示单个信息
-															 //单击图片显示单个信息  隐藏其他学校图片
-															$("#school_list div").on("click",function(){
-							                  		       		  $("#main").hide();
-							                  		      		  $("#detail").show();
-							                  		      	   });
-															//单击返回隐藏单个学校学校 显示其他学校图片
-							                  		   		  $(".layui-tab i").on("click",function(){
-							                  		   	 		  $("#main").show();
-							                  		     		  $("#detail").hide();
-							                  		   		  });
-															
-
-														});
+												}
+												//加载
+												$("#school_list").append(ele);
+												$("#school_list div").on("click",function(){
+				                  		       		  $("#main").hide();
+				                  		      		  $("#detail").show();
+				                  		      	   });
+				                  		   
+				                  		   		  $(".layui-tab i").on("click",function(){
+				                  		   	 		  $("#main").show();
+				                  		     		  $("#detail").hide();
+				                  		   		  });
+								  			}
+								  					
+									 });
 									}
 								}
 							});
