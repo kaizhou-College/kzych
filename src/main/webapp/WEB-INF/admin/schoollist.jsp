@@ -307,6 +307,7 @@
 		
     	$.get(host_kzych+"university/schoolList.do",function(schoollist){
     		   var ele = '';
+    		   alert(1);
     		   alert(schoollist+"="+schoollist.data);
     		   function loadData(list){
     			   //清空
