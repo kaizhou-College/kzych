@@ -214,7 +214,6 @@
 			  
 			  //监听提交  (省份筛选)
 			  form.on('submit(formDemo)', function(data){
-				  alert($("#provid").val()+"="+$("#cityid").val()+"="+$("#areaid").val()+"="+$("#search_key").val()+"=");
 				  $.ajax({
 			  			type:"post",
 			  			url:host_kzych+"/university/dimListPage.do",
@@ -223,7 +222,6 @@
 			  					"areaid":$("#areaid").val(),
 			  					"search_key":$("#search_key").val()},
 			  			success:function(data){
-			  				alert(data);
 			  				//数据返回时
 			  				$("#school_list").empty();
 			  				var ele = '';
