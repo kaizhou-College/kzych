@@ -225,7 +225,7 @@
 			  				//数据返回时
 			  				$("#school_list").empty();
 			  				var ele = '';
-			  				alert(data.pageSize+"=="+data.pageSize+"=="+data.total);
+			  				alert(data.pageNum+"=="+data.pageSize+"=="+data.total+"-"+$("#areaid").val()+$("#cityid").val()+$("#provid").val());
 			  				app.laypage.render({
 								elem : 'page',
 								limit : data.pageSize,
