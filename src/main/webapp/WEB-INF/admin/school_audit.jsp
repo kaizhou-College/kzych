@@ -217,7 +217,7 @@
 						  <div class="layui-form-item">
 						    <label class="layui-form-label">法人电话:</label>
 						    <div class="layui-input-block">
-						      <input type="text" name="" value="13882821234" autocomplete="off" id="legal_person_Phone" disabled class="layui-input">
+						      <input  type="text" name="" value="13882821234" autocomplete="off" id="legal_person_Phone" disabled class="layui-input">
 						    </div>
 						  </div>
 						  <div class="layui-form-item">
