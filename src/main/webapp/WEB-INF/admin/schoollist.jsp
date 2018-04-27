@@ -222,6 +222,7 @@
 			  					"areaid":$("#areaid").val(),
 			  					"search_key":$("#search_key").val()},
 			  			success:function(data){
+			  				alert(data);
 			  				//数据返回时
 			  				$("#school_list").empty();
 			  				var ele = '';
