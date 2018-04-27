@@ -216,7 +216,7 @@
 			  form.on('submit(formDemo)', function(data){
 				  alert($("#provid").val()+"="+$("#cityid").val()+"="+$("#areaid").val()+"="+$("#search_key").val()+"=");
 				  $.ajax({
-			  			type:"get",
+			  			type:"post",
 			  			url:host_kzych+"/university/dimListPage.do",
 			  			data:{"provid":$("#provid").val(),
 			  					"cityid":$("#cityid").val(),
