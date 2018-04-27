@@ -326,8 +326,8 @@ public class UniversityController {
 	 * @return: ServerResponse 返回值类型
 	 */
 	@RequestMapping(value="dimListPage.do", method = RequestMethod.GET)
-	@ResponseBody
-	public PageInfo dimListPage(HttpSession sess,HttpServletRequest req,HttpServletResponse resp, UniversityQuery qu) {
+	//@ResponseBody
+	public String dimListPage(HttpSession sess,HttpServletRequest req,HttpServletResponse resp, UniversityQuery qu) {
 		// ajax 按地址分页
 
 		// 解决乱码问题
@@ -360,7 +360,7 @@ public class UniversityController {
 		}
 		PageInfo pageInfo = iUniversityService.listKeyPublishStatus(qu);
 		//sess.setAttribute("a_sss",qu.getProvid()+"="+qu.getCityid()+"="+qu.getAreaid());
-		return pageInfo;
+		return qu.getProvid()+"="+qu.getCityid()+"="+qu.getAreaid();
 	}
 
 	/**
