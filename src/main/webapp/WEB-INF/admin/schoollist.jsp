@@ -226,6 +226,7 @@
 			  				$("#school_list").empty();
 			  				var ele = '';
 			  				alert(data.pageNum+"=="+data.pageSize+"=="+data.total+"-"+$("#areaid").val()+$("#cityid").val()+$("#provid").val());
+			  				alert("${a}");
 			  				app.laypage.render({
 								elem : 'page',
 								limit : data.pageSize,
