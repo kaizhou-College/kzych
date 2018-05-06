@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="common/taglib.jsp" %>
+<%@include file="../common/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,16 +12,16 @@
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/iconeffects.css" rel='stylesheet' type='text/css' />
-<link rel="stylesheet" type="text/css" href="css/jquery-ui1.css">
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
- <link rel="stylesheet" href="css/layui.css?t=1515376178709"  media="all">
+<link href="${host}/front/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${host}/front/css/iconeffects.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" type="text/css" href="${host}/front/css/jquery-ui1.css">
+<link href="${host}/front/css/style.css" rel="stylesheet" type="text/css" media="all" />
+ <link rel="stylesheet" href="${host}/front/css/layui.css?t=1515376178709"  media="all">
 <!-- js -->
-<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="${host}/front/js/jquery-2.1.4.min.js"></script>
 <!-- //js -->
 <!--animate-->
-<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
+<link href="${host}/front/css/animate.css" rel="stylesheet" type="text/css" media="all">
 <script src="js/wow.min.js"></script>
 	<script>
 		 new WOW().init();
@@ -63,8 +63,8 @@
   
 </style>
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="${host}/front/js/move-top.js"></script>
+<script type="text/javascript" src="${host}/front/js/easing.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -204,7 +204,7 @@
 			                				<div class="more-hover-content hover-box">
 			                					<ul>
 			                						<li><a href="" class="track-help" data-noajax="" aria-label="Help">帮助</a></li>
-			                						<li><a href="/front/register.html" class="track-signup" aria-label="Create an account">注册</a></li>
+			                						<li><a href="/front/register.do" class="track-signup" aria-label="Create an account">注册</a></li>
 			                						<li><a href="" class="track-signin hide-initially" aria-label="Sign in">登录</a></li>
 			                					</ul>
 			                				</div>
@@ -283,8 +283,8 @@
 </body>
 </html>
 
-<script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
-<script src="layui.js?t=1515376178709" charset="utf-8"></script>
+<script type="text/javascript" src="${host}/front/js/bootstrap-3.1.1.min.js"></script>
+<script src="${host}/front/layui.js?t=1515376178709" charset="utf-8"></script>
 	<script type="text/javascript">
 		 var host_kzych="${host}";
 		$(document).ready(function() {
@@ -306,19 +306,19 @@
 	  					if(data.status==0){
 		  					location.href=host_kzych+"/front/";
 		  				}else{
-		  					alert("添加失败,可能是用户名重复");
+		  					shotMsg("添加失败,可能是用户名重复");
 		  				}
 	  				}else{
 	  					if(data.status==0){
 		  					location.href=host_kzych+"/university/toProduct.do";
 		  				}else{
-		  					alert("添加失败,可能是用户名重复");
+		  					shotMsg("添加失败,可能是用户名重复");
 		  				}
 	  				}
 	  				
 	  			}
 	  			,error:function(){
-	  				alert("请求失败");
+	  				shotMsg("请求失败");
 	  			}
 			});
 			
@@ -362,4 +362,13 @@
 			return str1*24*60*60*1000;
 			}
     }
+		
+		//弹  未满足的条件
+		function shotMsg(string){
+			layui.use(['layer', 'form'], function(){
+	  	 	 	var layer = layui.layer
+	  	  		,form = layui.form;
+	  	  		layer.msg(string);
+	  		});
+		}
 	</script>

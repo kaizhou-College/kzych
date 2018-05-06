@@ -43,11 +43,11 @@ public class UserController {
 	private IFileService iFileService;
 	
 	//用户注册时跳往用户设置权限页面
-	@RequestMapping(value = "userTypeTO.do", method = RequestMethod.POST)
+	@RequestMapping(value = "toUserType.do", method = RequestMethod.POST)
 	public void tOUserType(HttpSession session,HttpServletResponse response,User user) {
 		session.setAttribute("userInfo",user);
 		try {
-			response.sendRedirect("/front/usertype.jsp");
+			response.sendRedirect("/front/usertype.do");
 //			response.sendRedirect("/kzych/front/usertype.jsp");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -103,7 +103,7 @@ public class UserController {
 		//TODO 要做非空判断
 		ServerResponse<User> login = iUserService.getInformation(user.getUuid());
 		session.setAttribute(Const.CURRENT_USER, login.getData());
-		return "userinfo";
+		return "/admin/userinfo";
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class UserController {
 	 * @return: ServerResponse<String> 返回值类型
 	 */
 
-	@RequestMapping(value = "logout.do", method = RequestMethod.POST)
+	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
 	@ResponseBody
 	public ServerResponse<String> logout(HttpSession session) {
 		session.removeAttribute(Const.CURRENT_USER);

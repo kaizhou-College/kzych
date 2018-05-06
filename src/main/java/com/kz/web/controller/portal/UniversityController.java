@@ -3,6 +3,7 @@ package com.kz.web.controller.portal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +36,8 @@ import com.kz.service.IUniversityService;
 import com.kz.service.IUserService;
 import com.kz.utils.PropertiesUtil;
 
-import alipay.api.domain.Data;
+
+import java.lang.reflect.Field;
 
 
 @Controller
@@ -58,7 +60,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: String 返回值类型
 	 */
-	@RequestMapping(value="selectByMajorCategoryId.do", method = RequestMethod.POST)
+	@RequestMapping(value="selectByMajorCategoryId.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> selectByMajorCategoryId(UniversityQuery qu) {
 		PageInfo pageInfo = iUniversityService.selectByMajorCategoryId(qu);
@@ -95,7 +97,7 @@ public class UniversityController {
 
 		try {
 //			response.sendRedirect("/kzych/user/userinfoTo.do");
-			response.sendRedirect("/user/userinfoTo.do");
+			response.sendRedirect("/user/toUserinfo.do");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -236,7 +238,7 @@ public class UniversityController {
 			session.setAttribute("User_list",un);
 			session.setAttribute("publicStatus",un);
 		}
-		return "product";
+		return "/admin/product";
 	}
 
 
@@ -249,7 +251,7 @@ public class UniversityController {
 	 */
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String SchoolIndex() {
-		return "schoollist";
+		return "/admin/schoollist";
 	}
 	/**
 	 * 
@@ -260,7 +262,7 @@ public class UniversityController {
 	 */
 	@RequestMapping(value = "toSchoolAudit.do", method = RequestMethod.GET)
 	public String SchoolAudit() {
-		return "school_audit";
+		return "/admin/school_audit";
 	}
 	/**
 	 * 
@@ -271,7 +273,7 @@ public class UniversityController {
 	 */
 	@RequestMapping(value = "toSchoolNopass.do", method = RequestMethod.GET)
 	public String SchoolNopass() {
-		return "nopass_schools";
+		return "/admin/nopass_schools";
 	}
 
 
@@ -325,35 +327,38 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: ServerResponse 返回值类型
 	 */
-	@RequestMapping(value="dimListPage.do", method = RequestMethod.GET)
+	@RequestMapping(value="dimListPage.do")
 	@ResponseBody
-	public PageInfo dimListPage(HttpServletResponse resp, UniversityQuery qu) {
+	public PageInfo dimListPage(HttpServletRequest req,HttpServletResponse resp, UniversityQuery qu) {
 		// ajax 按地址分页
 
 		// 解决乱码问题
-		String provid = qu.getProvid();
-		String cityid = qu.getCityid();
-		String areaid = qu.getAreaid();
-		String search_key = qu.getSearch_key();
-		try {
-			if(provid!=null){
-				provid = new String(provid.getBytes("iso-8859-1"), "UTF-8");
-				qu.setProvid(provid);
+		String method = req.getMethod();
+		if(method.equals("GET")){
+			String provid = qu.getProvid();
+			String cityid = qu.getCityid();
+			String areaid = qu.getAreaid();
+			String search_key = qu.getSearch_key();
+			try {
+				if(provid!=null){
+					provid = new String(provid.getBytes("iso-8859-1"), "UTF-8");
+					qu.setProvid(provid);
+				}
+				if(cityid!=null){
+					cityid = new String(cityid.getBytes("iso-8859-1"), "UTF-8");
+					qu.setCityid(cityid);
+				}
+				if(areaid!=null){
+					areaid = new String(areaid.getBytes("iso-8859-1"), "UTF-8");
+					qu.setAreaid(areaid);
+				}
+				if(search_key!=null){
+					search_key = new String(search_key.getBytes("iso-8859-1"), "UTF-8");
+					qu.setSearch_key(search_key);
+				}
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
 			}
-			if(cityid!=null){
-				cityid = new String(cityid.getBytes("iso-8859-1"), "UTF-8");
-				qu.setCityid(cityid);
-			}
-			if(areaid!=null){
-				areaid = new String(areaid.getBytes("iso-8859-1"), "UTF-8");
-				qu.setAreaid(areaid);
-			}
-			if(search_key!=null){
-				search_key = new String(search_key.getBytes("iso-8859-1"), "UTF-8");
-				qu.setSearch_key(search_key);
-			}
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
 		}
 		PageInfo pageInfo = iUniversityService.listKeyPublishStatus(qu);
 		return pageInfo;
@@ -426,7 +431,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: ServerResponse<University> 返回值类型
 	 */
-	@RequestMapping(value="schoolByIsNotHotList.do", method = RequestMethod.POST)
+	@RequestMapping(value="schoolByIsNotHotList.do")
 	@ResponseBody
 	public PageInfo<University> schoolByIsNotHotList(UniversityQuery hq){
 		PageInfo<University> hotList = iUniversityService.schoolByIsNotHotList(hq);
@@ -436,7 +441,7 @@ public class UniversityController {
 	/**
 	 * 
 	 * @Title: university_detail
-	 * @Description: 按照universityId 分页查询学校信息
+	 * @Description: 按照universityId 分页查询学校专业
 	 * @param: @param
 	 *             pageSiz
 	 * @param: @param
@@ -552,4 +557,5 @@ public class UniversityController {
 			fileMap.put("url", url);
 			return ServerResponse.createBySuccess(fileMap);
 	}
+
 }

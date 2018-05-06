@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@include file="common/taglib.jsp"%>
+<%@include file="../common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +64,7 @@
 			  </ul>
 			  <div class="layui-tab-content">
 			    <div class="layui-tab-item layui-show">
-			             <form  class="layui-form" id="form1" action="/user/userinfoByKeyUpdate.do" method="post">
+			             <form  class="layui-form" id="form1" action="${host}/user/userinfoByKeyUpdate.do" method="post">
 			    	<!-- <form  class="layui-form" id="form1" action="/kzych/user/userinfoByKeyUpdate.do" method="post"> -->
 			    	 <input type="hidden" name="uuid" value="${currentUser.uuid}">
 			        <div class="layui-form-item">
@@ -138,7 +138,7 @@
 			    
 			    
 			    <div class="layui-tab-item">
-			    	     <form class="layui-form" action="/university/schoolByUserIdUpdate.do" method="post">
+			    	     <form class="layui-form" action="${host}/university/schoolByUserIdUpdate.do" method="post">
 			    	<!-- <form class="layui-form" action="/kzych/university/schoolByUserIdUpdate.do" method="post"> -->
 			    		<div class="layui-form-item">
 						    <label class="layui-form-label">机构名称:</label>
@@ -435,38 +435,44 @@ var host_kzych="${host}";
 				  if(isIDCard2.test($("#default_1").val())||isIDCard1.test($("#default_1"))){
 					  isNotPass=isNotPass+1;
 				  }else{
-					  alert("亲请输入正确的身份证号");
+					  shotMsg("亲请输入正确的身份证号");
+					  return false;
 				  }
         		  //验证电话 
         		  var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
         		  if(phone.test($("#cellphone").val())){
         			  isNotPass=isNotPass+1;
         		  }else{
-        			  alert("亲请输入正确的电话号");
+        			  shotMsg("亲请输入正确的电话号");
+        			  return false;
         		  }
         		  //验证学校是否为空 
         		  if($("#default_2").val().trim().length>0&&$("#default_2").val()!=info){
         			  isNotPass=isNotPass+1;
         		  }else{
-        			  alert("亲请输入学校名称");
+        			  shotMsg("亲请输入学校名称");
+        			  return false;
         		  }
         		  //验证家庭住址是为空
         		  if($("#default_3").val().trim().length>0&&$("#default_3").val()!=info){
         			  isNotPass=isNotPass+1;
         		  }else{
-        			  alert("亲请输入家庭住址");
+        			  shotMsg("亲请输入家庭住址");
+        			  return false;
         		  }
         		  //验证姓名是否为空 
         		  if($("#realName").val().trim().length){
         			  isNotPass=isNotPass+1;
         		  }else{
-        			  alert("亲请输入真实姓名");
+        			  shotMsg("亲请输入真实姓名");
+        			  return false;
         		  }
         		  //验证
         		  if($("#userAvatar").val().trim().length>0){
         			  isNotPass=isNotPass+1;
         		  }else{
-        			  alert("亲请上传头像");
+        			  shotMsg("亲请上传头像");
+        			  return false;
         		  }
         		  if(isNotPass>=6){
           			return true;
@@ -481,43 +487,50 @@ var host_kzych="${host}";
         	    	if($("#universityType_seelct_01").val()!=0){
         	    		isNotPass=isNotPass+1;
         	    	}else{
-        	    		alert("亲请选择机构类型");
+        	    		shotMsg("亲请选择机构类型");
+        	    		return false;
         	    	}
         	    	//验证机构性质是否选择 
         	    	if($("#universityNature_seelct_02").val()!=0){
         	    		isNotPass=isNotPass+1;
         	    	}else{
-        	    		alert("亲请选择机构性质");
+        	    		shotMsg("亲请选择机构性质");
+        	    		return false;
         	    	}
         	    	//验证学校等级是否选择 
         	    	if($("#categoryid_seelct_03").val()!=0){
         	    		isNotPass=isNotPass+1;
         	    	}else{
-        	    		alert("亲请选择学校等级");
+        	    		shotMsg("亲请选择学校等级");
+        	    		return false;
         	    	}
         	    	//验证机构地址是否填写
         	    	if($("#address").val().trim().length>0){
         	    		isNotPass=isNotPass+1;
         	    	}else{
-        	    		alert("亲请输入机构地址");
+        	    		shotMsg("亲请输入机构地址");
+        	    		return false;
         	    	}
         	    	//验证机构封面图片是否上传 
         	    	if($("#schoolCoverimg").val().trim().length>0){
         	    		isNotPass=isNotPass+1;
         	    	}else{
-        	    		alert("亲请上传机构封面图片");
+        	    		shotMsg("亲请上传机构封面图片");
+        	    		return false;
         	    	}
         	    	//验证办学许可证是否上传 
         	    	if($("#schoolLicense").val().trim().length>0){
         	    		isNotPass=isNotPass+1;
         	    	}else{
-        	    		alert("亲请上传办学许可证");
+        	    		shotMsg("亲请上传办学许可证");
+        	    		return false;
         	    	}
         	    	//验证法人姓名是否填入 
         	    	if($("#legalPersonName").val().trim().length>0){
         	    		isNotPass=isNotPass+1;
         	    	}else{
-        	    		alert("亲请输入法人姓名");
+        	    		shotMsg("亲请输入法人姓名");
+        	    		return false;
         	    	}
         	    	//验证法人身份证格式是否正确 
           		 	var isIDCard1=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/; //15位的身份证
@@ -525,20 +538,23 @@ var host_kzych="${host}";
   				  	if(isIDCard2.test($("#legalPersonCard").val())||isIDCard1.test($("#default_1"))){
   				  		isNotPass=isNotPass+1;
   				  	}else{
-  					  	alert("亲请输入正确的身份证号");
+  				  		shotMsg("亲请输入正确的身份证号");
+  				  		return false;
   				  	}
         	    	//验证法人电话格式是否正确 
   				  	var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
         		  	if(phone.test($("#legalPersonPhone").val())){
         		  		isNotPass=isNotPass+1;
         		  	}else{
-        			  	alert("亲请输入正确的电话号");
+        		  		shotMsg("亲请输入正确的电话号");
+        		  		return false;
         		  	}
         	    	//验证机构简历是否为空 
         	    	if($("#detail").val().trim().length>0){
         	    		isNotPass=isNotPass+1;
         	    	}else{
-        	    		alert("亲请输入机构简历");
+        	    		shotMsg("亲请输入机构简历");
+        	    		return false;
         	    	}
             		if(isNotPass>=10){
             			return true;
@@ -643,13 +659,22 @@ var host_kzych="${host}";
 	//退出
 	function exit(){
 		$.ajax({
-  			type:"post",
+  			type:"get",
   			url:host_kzych+"/user/logout.do",
   			success:function(data){
-  				location.href="/front/";
+  				location.href=host_kzych+"/front/index.do";
   			},
-  			error:function(){alert("退出失败");}
+  			error:function(){
+  				location.reload();
+  			}
 		});
 	}
-	
+	//弹  未满足的条件
+	function shotMsg(string){
+		layui.use(['layer', 'form'], function(){
+  	 	 	var layer = layui.layer
+  	  		,form = layui.form;
+  	  		layer.msg(string);
+  		});
+	}
 </script>

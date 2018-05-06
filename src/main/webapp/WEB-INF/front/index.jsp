@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="../common/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,21 +12,21 @@
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/iconeffects.css" rel='stylesheet' type='text/css' />
-<link rel="stylesheet" type="text/css" href="css/jquery-ui1.css">
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${host}/front/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="${host}/front/css/iconeffects.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" type="text/css" href="${host}/admin/css/jquery-ui1.css">
+<link href="${host}/front/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!-- js -->
-<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="${host}/front/js/jquery-2.1.4.min.js"></script>
 <!-- //js -->
 <!--animate-->
-<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
-<script src="js/wow.min.js"></script>
+<link href="${host}/front/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="${host}/front/js/wow.min.js"></script>
 	<script>
 		 new WOW().init();
 	</script>
 <!--//end-animate-->
-<link rel="stylesheet" href="css/layui.css?t=1515376178709"  media="all">
+<link rel="stylesheet" href="${host}/front/css/layui.css?t=1515376178709"  media="all">
 
 <style>
 	.sep{height:25px;}
@@ -31,9 +34,10 @@
 </style>
 
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="${host}/front/js/move-top.js"></script>
+<script type="text/javascript" src="${host}/front/js/easing.js"></script>
 <script type="text/javascript">
+var host_kzych="${host}";
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
 			event.preventDefault();
@@ -95,31 +99,46 @@
     checkUserLogin();
     //测试代码
     function checkUserLogin(){
-    	 var token = '' ;
-    	 var arr,reg=new RegExp("(^| )"+"token" +"=([^;]*)(;|$)");
+    	 var token = "${currentUser.username}" ;
+    	 
+    	  /*var arr,reg=new RegExp("(^| )"+"token" +"=([^;]*)(;|$)");
 			if(arr=document.cookie.match(reg)){
 			    token = unescape(arr[2])
-			 
-			}
-			
-			if(token == "admin"){
-				  $("#admin_logined").show();
-				  $("#logined").hide();
-				  $("#nologin").hide();
-				  $("#login1").attr("href","javascript:void(0);");
-				  $("#login1").text("admin");
-				  
-			}
-			else if(token == "user"){
-				   
-				  $("#admin_logined").hide();
-				  $("#logined").show();
-				  $("#nologin").hide();
-				  $("#login1").attr("href","javascript:void(0);");
-				  $("#login1").text("user");
-			}
-			
-			
+			} */
+			 //异步请求 看该用户是否管理员
+			 $.ajax({
+				    type:"post",
+		  			url:host_kzych+"/user/isNotAdministrator.do",
+		  			data:{"username":token},
+		  			success:function(data){
+		  				if(token == data.data.username&data.data.userType==1){
+		  				  $("#admin_logined").show();
+		  				  $("#logined").hide();
+		  				  $("#nologin").hide();
+		  				  $("#login1").attr("href","javascript:exit();");
+		  				  $("#login1").text(data.data.username);
+		  				  
+		  				}
+		  				else if(token == data.data.username&data.data.userType==0){
+		  				   
+		  				  $("#admin_logined").hide();
+		  				  $("#logined").show();
+		  				  $("#nologin").hide();
+		  				  $("#login1").attr("href","javascript:exit();");
+		  				  $("#login1").text(data.data.username);
+		  				}else if(token == data.data.username&data.data.userType==2){
+		  					  $("#admin_logined").hide();
+			  				  $("#logined").show();
+			  				  $("#nologin").hide();
+			  				  $(".kzt").hide();
+			  				  $("#login1").attr("href","javascript:exit();");
+			  				  $("#login1").text(data.data.username);
+		  				}
+		  			},
+		  			error:function(){
+		  				location.reload();
+		  			}
+			  });
     	
     }
     
@@ -140,8 +159,8 @@
 			exp.setTime(exp.getTime() - 1);
 			var cval=getCookie("token");
 			if(cval!=null)
-			document.cookie= "token" + "="+ '' +";expires="+exp.toGMTString();
-			location.href = "/front";
+			document.cookie= "token" + "="+ '' +";expires="+exp.toGMTString() + ";path=/;";
+			location.href = host_kzych+"/front";
 
     });
 	});
@@ -332,7 +351,7 @@
 			                				<div class="chg-hdr-notifications embed-js" id="notifications-component"></div>
 			                		</div>
 			                		<div id="eggshell-24" class="C-global-cheggheader-rightsection-usermenu">
-			                			<a href="login.html" id="login1" class="signin-item nav-item track-signin">登录</a>
+			                			<a href="login.do" id="login1" class="signin-item nav-item track-signin">登录</a>
 			                			<div class="more-item nav-item">
 			                				<div class="header" role="button" tabindex="0" aria-label="More Menu, has sub menu" aria-expanded="false">更多 <span class="icon-chegg-chevron"></span></div>
 			                				<div class="carrot">
@@ -340,34 +359,24 @@
 			                				</div>
 			                				<div class="more-hover-content hover-box">
 			                					<ul id="nologin">
-			                						
-			                						<li><a href="" class="track-signup" aria-label="Create an account">注册</a></li>
+			                						<li><a href="${host}/front/register.do" class="track-signup" aria-label="Create an account">注册</a></li>
 			                						<li><a href="" class="track-help" data-noajax="" aria-label="Help">帮助</a></li>
-			                						
 			                					</ul>
 			                					<ul id="logined" style="display:none;">
+			                						<!-- <li><a href="/university/toProduct.do">控制台</a></li> -->
+			                						<li><a href="${host}/university/toProduct.do"  class="kzt">控制台</a></li>
+			                					
+			                						<li class="quit"><a  class="track-signup " aria-label="Sign out" href="javascript:exit();">退出</a></li>
 			                						
-			                						<li><a href="" class="track-signup" aria-label="Create an account">用户信息</a></li>
-			                						<li><a href="" class="track-help" data-noajax="" aria-label="Help">帮助</a></li>
-			                						<li class="quit"><a href="" class="track-signup " aria-label="Sign out">退出</a></li>
 			                						
-			                						<li class="sep" class="track-signup" >
-			                							<fieldset class="layui-elem-field layui-field-title" style="border-color: #009688 !important;">
-																		  <legend>产品</legend>
-																		</fieldset>
-																	</li>
-																	
-			                						<li><a href="/admin/my_school.html"   class="track-signup" aria-label="Create an account">校园招生</a></li>
-			                						<li><a href=""    class="track-signup" aria-label="Create an account">企业招聘</a></li>
-			                						<li><a href=""   class="track-signup" aria-label="Create an account">油菜园</a></li>
 			                						
 			                						
 			                					</ul>
 			                					<ul id="admin_logined" style="display:none;">
+			                						 <!--<li><a href="/university/index.do">控制台</a></li> -->
+			                						<li><a href="${host}/university/index.do" class="kzt">控制台</a></li>
 			                						
-			                						<li><a href="/admin/index.html">后台管理</a></li>
-			                						
-			                						<li class="quit"><a href="" class="track-signout hide-initially" aria-label="Sign out">退出</a></li>
+			                						<li class="quit"><a href="javascript:exit();" class="track-signout hide-initially" aria-label="Sign out">退出</a></li>
 			                					</ul>
 			                				</div>
 			                			</div>
@@ -711,6 +720,7 @@
 <!-- //footer -->
 <!-- smooth scrolling -->
 	<script type="text/javascript">
+	var host_kzych="${host}";
 		$(document).ready(function() {
 		/*
 			var defaults = {
@@ -722,9 +732,23 @@
 		*/								
 		$().UItoTop({ easingType: 'easeOutQuart' });
 		});
+		
+		//退出
+		function exit(){
+			$.ajax({
+	  			type:"get",
+	  			url:host_kzych+"/user/logout.do",
+	  			success:function(data){
+	  				location.href=host_kzych+"/front/index.do";
+	  			},
+	  			error:function(){
+	  				location.reload();
+	  			}
+			});
+		}
 	</script>
 	<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 <!-- //smooth scrolling -->
-<script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+<script type="text/javascript" src="${host}/front/js/bootstrap-3.1.1.min.js"></script>
 </body>
 </html>
