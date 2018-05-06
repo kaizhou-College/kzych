@@ -27,7 +27,7 @@ function send_request()
   
     if (xmlhttp!=null)
     {//47.104.135.201
-        serverUrl = 'http://47.104.135.201:8080/oss/signature.do'
+        serverUrl = 'http://www.iychua.com:8080/oss/signature.do'
         xmlhttp.open( "GET", serverUrl, false );
         xmlhttp.send( null );
         return xmlhttp.responseText
