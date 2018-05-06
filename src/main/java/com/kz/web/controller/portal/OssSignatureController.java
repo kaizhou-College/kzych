@@ -34,7 +34,7 @@ public class OssSignatureController {
 
 	@RequestMapping("signature.do")
 	public void getOssSignature(HttpServletRequest request, HttpServletResponse response){
-		String endpoint = "oss-cn-qingdao.aliyuncs.com";
+		String endpoint = "vpc100-oss-cn-qingdao.aliyuncs.com";
         String accessId = "LTAILNFFs4Ss2LTR";
         String accessKey = "jeLsGaTB2esrrGA57s0iDRNbVaIS7D";
         String bucket = "kzych";
@@ -61,10 +61,10 @@ public class OssSignatureController {
             respMap.put("accessid", accessId);
             respMap.put("policy", encodedPolicy);
             respMap.put("signature", postSignature);
-            respMap.put("expire", getIso8601DateFormat().format(expiration));
+            //respMap.put("expire", getIso8601DateFormat().format(expiration));
             respMap.put("dir", dir);
             respMap.put("host", host);
-            //respMap.put("expire", String.valueOf(expireEndTime / 1000));
+            respMap.put("expire", String.valueOf(expireEndTime / 1000));
             JSONObject ja1 = JSONObject.fromObject(respMap);
             System.out.println(ja1.toString());
             response.setHeader("Access-Control-Allow-Origin", "*");
