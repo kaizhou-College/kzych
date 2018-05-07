@@ -178,11 +178,11 @@ var uploader = new plupload.Uploader({
 	            _this=this;
 	            return false;
 			};
-			/*document.getElementById('postpaperfiles').onclick = function() {
+			document.getElementById('postpaperfiles').onclick = function() {
 	            set_upload_param(uploader, '', false);
 	            _this=this;
 	            return false;
-			};*/
+			};
 		},
 
 		FilesAdded: function(up, files) {
@@ -218,10 +218,18 @@ var uploader = new plupload.Uploader({
             	//alert("1="+get_uploaded_object_name(file.name)); 
             	
             		var p = _this.parentNode.children;
-            		p[2].innerHTML="<img src='https://kzych.oss-cn-qingdao.aliyuncs.com/"+get_uploaded_object_name(file.name)+
-            					   "' class='layui-upload-img'  id='start-img-view2' style='height:100px;'>"+
-            					   "<p id='errText2'></p>"
-            		p[3].setAttribute("value",get_uploaded_object_name(file.name));
+            		for(var i=0;i<p.length;i++){
+            			alert(p[i].innerHTML);
+            			
+            		}
+            		if(p.length>3){
+            			if(p[0].innerHTML=="选择文件"&&p[1].innerHTML=="开始上传"){
+            				p[2].innerHTML="<img src='https://kzych.oss-cn-qingdao.aliyuncs.com/"+get_uploaded_object_name(file.name)+
+     					    "' class='layui-upload-img'  id='start-img-view2' style='height:100px;'>"+
+     					    "<p id='errText2'></p>"
+     					    p[3].setAttribute("value",get_uploaded_object_name(file.name));
+            			}
+            		}
             		//alert(p[2].innerHTML+"="+img.innerHTML);
             		shotMsg("上传成功");
             }
