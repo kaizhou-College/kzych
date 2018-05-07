@@ -61,10 +61,10 @@ public class OssSignatureController {
             respMap.put("accessid", accessId);
             respMap.put("policy", encodedPolicy);
             respMap.put("signature", postSignature);
-            respMap.put("expire", getIso8601DateFormat().format(expiration));
+            //respMap.put("expire", getIso8601DateFormat().format(expiration));
             respMap.put("dir", dir);
             respMap.put("host", host);
-            //respMap.put("expire", String.valueOf(expireEndTime / 1000));
+            respMap.put("expire", String.valueOf(expireEndTime / 1000));
             JSONObject ja1 = JSONObject.fromObject(respMap);
             System.out.println(ja1.toString());
             response.setHeader("Access-Control-Allow-Origin", "*");
