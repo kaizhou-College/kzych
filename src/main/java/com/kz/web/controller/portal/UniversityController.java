@@ -97,7 +97,7 @@ public class UniversityController {
 
 		try {
 //			response.sendRedirect("/kzych/user/userinfoTo.do");
-			response.sendRedirect("/user/toUserinfo.do");
+			response.sendRedirect("/user/toUserInfo.do");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
