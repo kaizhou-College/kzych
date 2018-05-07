@@ -218,10 +218,6 @@ var uploader = new plupload.Uploader({
             	//alert("1="+get_uploaded_object_name(file.name)); 
             	
             		var p = _this.parentNode.children;
-            		for(var i=0;i<p.length;i++){
-            			alert(p[i].innerHTML);
-            			
-            		}
             		if(p.length>3){
             			if(p[0].innerHTML=="选择文件"&&p[1].innerHTML=="开始上传"){
             				p[2].innerHTML="<img src='https://kzych.oss-cn-qingdao.aliyuncs.com/"+get_uploaded_object_name(file.name)+
