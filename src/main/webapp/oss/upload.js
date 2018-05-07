@@ -13,6 +13,13 @@ g_object_name_type = ''
 now = timestamp = Date.parse(new Date()) / 1000; 
 _this='';
 _selectfiles = '';
+_selectFilesArray=[];//用于存放选择文件的按钮
+var selectFilesByName=document.getElementsByName("selectFiles");//通过name获取到使用选择文件的元素
+for(var i=0;i<selectFilesByName.length;i++){
+	//需要先给该元素加上id
+	selectFilesByName[i].setAttribute("id","selectFiles_0"+i);
+	_selectFilesArray[i]=("selectFiles_0"+i);
+}
 function send_request()
 {
     var xmlhttp = null;
@@ -154,7 +161,7 @@ function set_upload_param(up, filename, ret)
 
 var uploader = new plupload.Uploader({
 	runtimes : 'html5,flash,silverlight,html4',
-	browse_button : ['selectbackfiles','selectpaperfiles'], 
+	browse_button : _selectFilesArray, 
     //multi_selection: false,
 	container: document.getElementById('container'),
 	flash_swf_url : 'lib/plupload-2.1.2/js/Moxie.swf',
@@ -173,16 +180,25 @@ var uploader = new plupload.Uploader({
 	init: {
 		PostInit: function() {
 			//document.getElementById('ossfile').innerHTML = '';
-			document.getElementById('postbackfiles').onclick = function() {
+			//通过name获取到所有的元素
+			var postFileByName=document.getElementsByName("postFiles");
+			for(var i=0;i<postFileByName.length;i++){//循环给美国元素加上事件
+				postFileByName[i].onclick = function() {
+		            set_upload_param(uploader, '', false);
+		            _this=this;
+		            return false;
+				};
+			}
+			/*document.getElementById('postpaperfiles').onclick = function() {
 	            set_upload_param(uploader, '', false);
 	            _this=this;
 	            return false;
-			};
-			document.getElementById('postpaperfiles').onclick = function() {
+			};selectbackfiles1
+			document.getElementById('postbackfiles1').onclick = function() {
 	            set_upload_param(uploader, '', false);
 	            _this=this;
 	            return false;
-			};
+			};*/
 		},
 
 		FilesAdded: function(up, files) {
@@ -259,3 +275,4 @@ var uploader = new plupload.Uploader({
 });
 
 uploader.init();
+

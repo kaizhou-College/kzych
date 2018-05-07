@@ -17,8 +17,8 @@
 	<br/>
 	
 	<div id="container">
-		<button id="selectbackfiles"  class='btn'>选择文件</button>
-		<button id="postbackfiles"  class='btn'>开始上传</button>
+		<button class='btn selectFile' name="selectFiles">选择文件</button>
+		<button class='btn postFile' name="postFiles">开始上传</button>
 	</div>
 	
 	<pre id="console"></pre>

@@ -172,8 +172,8 @@
 									    <div class="layui-input-block">
 									     
 											  <div id="container" class="layui-upload">
-												  <button id="selectbackfiles"  class='layui-btn'>选择文件</button>
-												  <button id="postbackfiles"  class='layui-btn'>开始上传</button>
+												  <button name="selectFiles" class='layui-btn'>选择文件</button>
+												  <button name="postFiles" class='layui-btn'>开始上传</button>
 												  <div class="layui-upload-list">
 												    <img class="layui-upload-img"  id="start-img-view2" style="height:100px;">
 												    <p id="errText2"></p>
@@ -188,8 +188,8 @@
 									    <div class="layui-input-block">
 									     
 											  <div id="container" class="layui-upload">
-												  <button id="selectpaperfiles" class='layui-btn'>选择文件</button>
-												  <button id="postpaperfiles"  class='layui-btn'>开始上传</button>
+												  <button  name="selectFiles" class='layui-btn'>选择文件</button>
+												  <button name="postFiles" class='layui-btn'>开始上传</button>
 												  <div class="layui-upload-list">
 												    <img class="layui-upload-img" id="start-img-view3" style="height:100px;">
 												    <p id="errText3"></p>
