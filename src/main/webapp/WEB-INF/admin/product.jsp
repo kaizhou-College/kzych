@@ -44,7 +44,7 @@
         </dl>
         -->
       </li>
-      <li class="layui-nav-item quit"><a href="javascript:exit();">退出</a></li>
+     <li class="layui-nav-item"><a href="javascript:exit();" >退出</a></li>
     </ul>
   </div>
   
