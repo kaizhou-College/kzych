@@ -34,7 +34,7 @@ function send_request()
     }
     else
     {
-        alert("Your browser does not support XMLHTTP.");
+        shotMsg("Your browser does not support XMLHTTP.");
     }
 };
 
@@ -185,34 +185,36 @@ var uploader = new plupload.Uploader({
 			};*/
 		},
 
-		/*FilesAdded: function(up, files) {
+		FilesAdded: function(up, files) {
 			plupload.each(files, function(file) {
 				
-				document.getElementById('ossfile').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ')<b></b>'
+				/*document.getElementById('ossfile').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ')<b></b>'
 				+'<div class="progress"><div class="progress-bar" style="width: 0%"></div></div>'
-				+'</div>';
+				+'</div>';*/
+				shotMsg("添加文件");
 			});
-		},*/
+		},
 
 		BeforeUpload: function(up, file) {
             check_object_radio();
             set_upload_param(up, file.name, true);
         },
 
-		/*UploadProgress: function(up, file) {
-			var d = document.getElementById(file.id);
+		UploadProgress: function(up, file) {
+			/*var d = document.getElementById(file.id);
 			d.getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
             var prog = d.getElementsByTagName('div')[0];
 			var progBar = prog.getElementsByTagName('div')[0]
 			progBar.style.width= 2*file.percent+'px';
-			progBar.setAttribute('aria-valuenow', file.percent);
-		},*/
+			progBar.setAttribute('aria-valuenow', file.percent);*/
+			shotMsg("上传中"+ file.percent);
+		},
 
 		FileUploaded: function(up, file, info) {
             if (info.status == 200)
             {
                 //document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = 'upload to oss success, object name:' + get_uploaded_object_name(file.name);
-            	//alert(_this.innerHTML); 
+            	//shotMsg(_this.innerHTML); 
             	//alert("1="+get_uploaded_object_name(file.name)); 
             	
             		var p = _this.parentNode.children;
@@ -221,31 +223,32 @@ var uploader = new plupload.Uploader({
             					   "<p id='errText2'></p>"
             		p[3].setAttribute("value",get_uploaded_object_name(file.name));
             		//alert(p[2].innerHTML+"="+img.innerHTML);
+            		shotMsg("上传成功");
             }
             else
             {
                 //document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = info.response;
-            	alert(info.response);
+            	shotMsg(info.response);
             } 
 		},
 
 		Error: function(up, err) {
             if (err.code == -600) {
                // document.getElementById('console').appendChild(document.createTextNode("\n选择的文件太大了,可以根据应用情况，在upload.js 设置一下上传的最大大小"));
-            	alert("\n选择的文件太大了,可以根据应用情况，在upload.js 设置一下上传的最大大小");
+            	shotMsg("\n选择的文件太大了,可以根据应用情况，在upload.js 设置一下上传的最大大小");
             }
             else if (err.code == -601) {
                 //document.getElementById('console').appendChild(document.createTextNode("\n选择的文件后缀不对,可以根据应用情况，在upload.js进行设置可允许的上传文件类型"));
-                alert("\n选择的文件后缀不对,可以根据应用情况，在upload.js进行设置可允许的上传文件类型");
+                shotMsg("\n选择的文件后缀不对,可以根据应用情况，在upload.js进行设置可允许的上传文件类型");
             }
             else if (err.code == -602) {
                 //document.getElementById('console').appendChild(document.createTextNode("\n这个文件已经上传过一遍了"));
-                alert("\n这个文件已经上传过一遍了");
+                shotMsg("\n这个文件已经上传过一遍了");
             }
             else 
             {
                 //document.getElementById('console').appendChild(document.createTextNode("\nError xml:" + err.response));
-                alert("\nError xml:" + err.response);
+                shotMsg("\nError xml:" + err.response);
             }
 		}
 	}

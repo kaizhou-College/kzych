@@ -33,8 +33,17 @@
 		<input type="submit" value="富文本图片上传文件" />
 	</form>
 </body>
-<script type="text/javascript"
-	src="oss/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
-<script type="text/javascript" src="oss/upload.js">
+<script type="text/javascript" src="oss/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="oss/upload.js"></script>
+<script type="text/javascript" src="admin/layui.js"></script>
+<script type="text/javascript">
+//弹  未满足的条件
+function shotMsg(string){
+	layui.use(['layer', 'form'], function(){
+	 	 	var layer = layui.layer
+	  		,form = layui.form;
+	  		layer.msg(string);
+		});
+}
 </script>
 </html>
