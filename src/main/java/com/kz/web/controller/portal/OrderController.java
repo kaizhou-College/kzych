@@ -59,7 +59,7 @@ public class OrderController {
 		//TODO 测试用
 		User curUser = new User();
 		curUser.setUuid(1L);
-		order.setUuid(curUser.getUuid());
+		order.setUserId(curUser.getUuid());
 		order.setPaymentType(orderVo.getPaymentType());
 		order.setStatus(Const.OrderStatusEnum.NO_PAY.getCode());
 		//2.2创建订单详情

@@ -1,5 +1,7 @@
 package com.kz.po;
 
+import java.util.List;
+
 import com.kz.core.po.BaseModel;
 
 public class Major extends BaseModel{
@@ -14,7 +16,12 @@ public class Major extends BaseModel{
     private Integer ishot;
 
     private String description;
-
+    
+    //在university 中myResultMap还缺一个字段  cost(花费,学费)；
+    private Integer cost;
+    
+    private List<University> university;
+    
     public Long getId() {
         return id;
     }
@@ -62,4 +69,22 @@ public class Major extends BaseModel{
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
+
+	public Integer getCost() {
+		return cost;
+	}
+
+	public void setCost(Integer cost) {
+		this.cost = cost;
+	}
+
+	public List<University> getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(List<University> university) {
+		this.university = university;
+	}
+
+    
 }

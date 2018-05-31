@@ -41,11 +41,11 @@ public class MajorUniversity extends Major{
 	}
 
 
-	public int getCost() {
+	public Integer getCost() {
 		return cost;
 	}
 
-	public void setCost(int cost) {
+	public void setCost(Integer cost) {
 		this.cost = cost;
 	}
 

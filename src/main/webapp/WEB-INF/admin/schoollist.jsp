@@ -397,7 +397,7 @@
 	function showScoolInfo(list){
 		$("#school_Name").val(list.name);
 		$("#school_Address").val(list.address);
-		$("#school_License").attr("src","ftp://47.104.135.201/"+list.schoolLicense);
+		$("#school_License").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.schoolLicense);
 		$("#legal_person_Name").val(list.legalPersonName);
 		$("#legal_person_Card").val(list.legalPersonCard);
 		$("#legal_person_Phone").val(list.legalPersonPhone);

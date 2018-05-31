@@ -248,6 +248,7 @@ var uploader = new plupload.Uploader({
             else
             {
                 //document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = info.response;
+            	
             	shotMsg(info.response);
             } 
 		},

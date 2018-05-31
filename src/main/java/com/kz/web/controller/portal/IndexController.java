@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/")
 public class IndexController {
 	
-	
-	
+
 	@RequestMapping(value="front/index.do")
 	public String toFrontIndex(){
 		return "/front/index";

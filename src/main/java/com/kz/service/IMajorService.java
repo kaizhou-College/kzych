@@ -7,10 +7,15 @@ import com.kz.po.MajorCategory;
 import com.kz.po.MajorCategoryQuery;
 import com.kz.po.MajorQuery;
 import com.kz.po.MajorUniversity;
+import com.kz.po.University;
 
 public interface IMajorService extends IBaseService<Major, MajorQuery>{
 
 	MajorUniversity findByUniversityId(int universityId, int majorId);
 
 	PageInfo<MajorCategory> majorCategorylist(MajorCategoryQuery qm);
+	
+	
+	
+	
 }

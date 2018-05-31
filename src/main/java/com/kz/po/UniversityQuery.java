@@ -3,10 +3,12 @@ package com.kz.po;
 import com.kz.core.web.BaseQueryModel;
 
 public class UniversityQuery extends BaseQueryModel  {
+	
 	 //默认是查询本科类学校
     private Long categoryid = 1L;
     
     private String name;
+    
     
     private Integer publishStatus;
     //查询时的地址
@@ -27,6 +29,18 @@ public class UniversityQuery extends BaseQueryModel  {
     
     //专业类别
     private String majorCategoryName;
+    
+    //majorID
+    private Long majorId;
+    
+    //学校类别id
+    private Long categoryId;
+    
+    //univeraistyId;
+    private Long universityId;
+    
+    
+    
 	public Integer getIsHot() {
 		return isHot;
 	}
@@ -119,6 +133,31 @@ public class UniversityQuery extends BaseQueryModel  {
 		this.majorCategoryName = majorCategoryName;
 	}
 
+	public Long getMajorId() {
+		return majorId;
+	}
+
+	public void setMajorId(Long majorId) {
+		this.majorId = majorId;
+	}
+
+	public Long getUniversityId() {
+		return universityId;
+	}
+
+	public void setUniversityId(Long universityId) {
+		this.universityId = universityId;
+	}
+
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
 	
-    
+
+
 }

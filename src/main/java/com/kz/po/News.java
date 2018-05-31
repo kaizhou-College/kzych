@@ -28,6 +28,8 @@ public class News {
     private Integer isdelete;
 
     private Integer status;
+    
+    private String thumb;
 
 	public Long getId() {
 		return id;
@@ -131,6 +133,14 @@ public class News {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getThumb() {
+		return thumb;
+	}
+
+	public void setThumb(String thumb) {
+		this.thumb = thumb;
 	}
 
     

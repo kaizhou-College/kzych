@@ -119,7 +119,7 @@
     where ID = #{id,jdbcType=BIGINT}
   </update>
   <select id="getByConditionPage" parameterType="com.kz.po.MajorQuery"
-		resultType="com.kz.po.Major">
+		resultMap="ResultMapWithBLOBs" >
 		select
 		<include refid="Base_Column_List" />
 		,
@@ -166,5 +166,5 @@
   		kz_university_major.university_id=#{universityId}
   	
   </select>
- 
+
 </mapper>

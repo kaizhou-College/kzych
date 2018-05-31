@@ -451,14 +451,14 @@ app.init(function($){
 function showScoolInfo(list){
 	$("#school_Name").val(list.name);
 	$("#school_Address").val(list.address);
-	$("#school_License").attr("src","ftp://47.104.135.201/"+list.schoolLicense);
+	$("#school_License").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.schoolLicense);
 	$("#legal_person_Name").val(list.legalPersonName);
 	$("#legal_person_Card").val(list.legalPersonCard);
 	$("#legal_person_Phone").val(list.legalPersonPhone);
 	$("#administrator_Account").val(list.administratorAccount);
 	$("#administrator_Name").val(list.administratorName);
 	$("#administrator_Phone").val(list.administratorPhone);
-	$("#school_coverImge").attr("src",list.schoolCoverimg);
+	$("#school_coverImge").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.schoolCoverimg);
 	$("#checkedInfo").html("原因是："+list.checkedInfo);
   	//设置下拉框的默认值
   	//机构类型 

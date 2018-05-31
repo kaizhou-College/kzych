@@ -3,8 +3,7 @@
 <mapper namespace="com.kz.dao.OrderMapper" >
   <resultMap id="BaseResultMap" type="com.kz.po.Order" >
     <id column="ID" property="id" jdbcType="BIGINT" />
-    <result column="UUID" property="uuid" jdbcType="BIGINT" />
-    <result column="order_No" property="orderNo" jdbcType="BIGINT" />
+    <result column="User_ID" property="userId" jdbcType="BIGINT" />
     <result column="PAYMENT" property="payment" jdbcType="DECIMAL" />
     <result column="STATUS" property="status" jdbcType="INTEGER" />
     <result column="PAYMENT_TYPE" property="paymentType" jdbcType="INTEGER" />
@@ -15,8 +14,8 @@
     <result column="PLAYMENT_TIME" property="playmentTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, UUID, order_No, PAYMENT, STATUS, PAYMENT_TYPE, CREATE_TIME, UPDATE_TIME, END_TIME, 
-    CLOSE_TIME, PLAYMENT_TIME
+    ID, User_ID, PAYMENT, STATUS, PAYMENT_TYPE, CREATE_TIME, UPDATE_TIME, END_TIME, CLOSE_TIME, 
+    PLAYMENT_TIME
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -29,14 +28,14 @@
     where ID = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.kz.po.Order" >
-    insert into kz_order (ID, UUID, order_No, 
-      PAYMENT, STATUS, PAYMENT_TYPE, 
-      CREATE_TIME, UPDATE_TIME, END_TIME, 
-      CLOSE_TIME, PLAYMENT_TIME)
-    values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=BIGINT}, #{orderNo,jdbcType=BIGINT}, 
-      #{payment,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, #{paymentType,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
-      #{closeTime,jdbcType=TIMESTAMP}, #{playmentTime,jdbcType=TIMESTAMP})
+    insert into kz_order (ID, User_ID, PAYMENT, 
+      STATUS, PAYMENT_TYPE, CREATE_TIME, 
+      UPDATE_TIME, END_TIME, CLOSE_TIME, 
+      PLAYMENT_TIME)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{payment,jdbcType=DECIMAL}, 
+      #{status,jdbcType=INTEGER}, #{paymentType,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, 
+      #{playmentTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.kz.po.Order" >
     insert into kz_order
@@ -44,11 +43,8 @@
       <if test="id != null" >
         ID,
       </if>
-      <if test="uuid != null" >
-        UUID,
-      </if>
-      <if test="orderNo != null" >
-        order_No,
+      <if test="userId != null" >
+        User_ID,
       </if>
       <if test="payment != null" >
         PAYMENT,
@@ -79,11 +75,8 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="uuid != null" >
-        #{uuid,jdbcType=BIGINT},
-      </if>
-      <if test="orderNo != null" >
-        #{orderNo,jdbcType=BIGINT},
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
       </if>
       <if test="payment != null" >
         #{payment,jdbcType=DECIMAL},
@@ -114,11 +107,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.Order" >
     update kz_order
     <set >
-      <if test="uuid != null" >
-        UUID = #{uuid,jdbcType=BIGINT},
-      </if>
-      <if test="orderNo != null" >
-        order_No = #{orderNo,jdbcType=BIGINT},
+      <if test="userId != null" >
+        User_ID = #{userId,jdbcType=BIGINT},
       </if>
       <if test="payment != null" >
         PAYMENT = #{payment,jdbcType=DECIMAL},
@@ -149,8 +139,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.kz.po.Order" >
     update kz_order
-    set UUID = #{uuid,jdbcType=BIGINT},
-      order_No = #{orderNo,jdbcType=BIGINT},
+    set User_ID = #{userId,jdbcType=BIGINT},
       PAYMENT = #{payment,jdbcType=DECIMAL},
       STATUS = #{status,jdbcType=INTEGER},
       PAYMENT_TYPE = #{paymentType,jdbcType=INTEGER},
@@ -162,7 +151,8 @@
     where ID = #{id,jdbcType=BIGINT}
   </update>
   
-  <!-- 自己添加的方法 -->
+  
+    <!-- 自己添加的方法 -->
   
    <select id="selectByOrderNo" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 

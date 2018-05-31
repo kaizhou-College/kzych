@@ -1,6 +1,5 @@
 
 app = function(){
-
    	//var $;
    	var layer;
    	var tpl;
@@ -45,8 +44,6 @@ app.loadTopNav = function ($){
 	  if(cur_mod == '我的学校'){
 	       	nav_url =  basePath+'admin/testdata/myschool-nav.json';
 	  }
-	  
-    
 	  $.ajax({
             url: nav_url,
             type: "get",
@@ -189,7 +186,6 @@ app.loadTopNav = function ($){
 		            dataType: "json",
 		            global: true,
 		            success: function (navlist) {
-					    	  
 					    	  var ele = '';
 						  	  for(var i in navlist){
 						  	   if(typeof(navlist[i].action) == "undefined" || navlist[i].action == ''){
@@ -197,10 +193,10 @@ app.loadTopNav = function ($){
 						  	   }
 						  	   
 						  	   //---------测试代码，正试写时写法不一样 begin ------------------
-						  	   if(navlist[i].name == "招生" && getCookie("zhaosheng_service_status") != 2){
-						  	   	    continue;
-						  	   }
-						  	   if(navlist[i].name == "招聘" && getCookie("recruit_service_status") != 2){
+						  	 /*if(navlist[i].name == "招生" && getCookie("zhaosheng_service_status") != 2){
+						  		   continue;
+						  	   }*/
+						  	  if(navlist[i].name == "招聘" && getCookie("recruit_service_status") != 2){
 						  	   	    continue;
 						  	   }
 						  	   if(navlist[i].name == "油菜园" && getCookie("ycy_service_status") != 2){

@@ -38,7 +38,7 @@
             base : "../../../js/" //address.js的路径  
         }).use([ 'layer', 'jquery', "address" ], function() {  
             var layer = layui.layer, $ = layui.jquery, address = layui.address();  
-  
         });  
+        
     </script>  
 <html>

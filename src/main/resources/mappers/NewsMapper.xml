@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.kz.dao.NewsMapper" >
- <resultMap id="BaseResultMap" type="com.kz.po.News" >
+  <resultMap id="BaseResultMap" type="com.kz.po.News" >
     <id column="ID" property="id" jdbcType="BIGINT" />
     <result column="CHANNELID" property="channelid" jdbcType="BIGINT" />
     <result column="TITLE" property="title" jdbcType="VARCHAR" />
@@ -15,6 +15,7 @@
     <result column="COMEFROM" property="comefrom" jdbcType="VARCHAR" />
     <result column="ISDELETE" property="isdelete" jdbcType="INTEGER" />
     <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="thumb" property="thumb" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.kz.po.NewsWithBLOBs" extends="BaseResultMap" >
     <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
@@ -24,7 +25,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     ID, CHANNELID, TITLE, AUTHOR, PUBLISHDATE, IMG, HIT, comment_Num, ISTOP, ISCOMMENT, 
-    COMEFROM, ISDELETE, STATUS
+    COMEFROM, ISDELETE, STATUS, thumb
   </sql>
   <sql id="Blob_Column_List" >
     CONTENT, KEYWORD, STATICURL, SOURCEURL
@@ -44,16 +45,18 @@
   <insert id="insert" parameterType="com.kz.po.NewsWithBLOBs" >
     insert into kz_news (ID, CHANNELID, TITLE, 
       AUTHOR, PUBLISHDATE, IMG, 
-      HIT, ISTOP,comment_Num, ISCOMMENT, 
-      COMEFROM, ISDELETE, STATUS, 
-      CONTENT, KEYWORD, STATICURL, 
-      SOURCEURL)
+      HIT, comment_Num, ISTOP, 
+      ISCOMMENT, COMEFROM, ISDELETE, 
+      STATUS, thumb, CONTENT, 
+      KEYWORD, STATICURL, SOURCEURL
+      )
     values (#{id,jdbcType=BIGINT}, #{channelid,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
       #{author,jdbcType=VARCHAR}, #{publishdate,jdbcType=TIMESTAMP}, #{img,jdbcType=VARCHAR}, 
-      #{hit,jdbcType=BIGINT}, #{istop,jdbcType=INTEGER}, #{commentNum,jdbcType=INTEGER}, #{iscomment,jdbcType=INTEGER}, 
-      #{comefrom,jdbcType=VARCHAR}, #{isdelete,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{content,jdbcType=LONGVARCHAR}, #{keyword,jdbcType=LONGVARCHAR}, #{staticurl,jdbcType=LONGVARCHAR}, 
-      #{sourceurl,jdbcType=LONGVARCHAR})
+      #{hit,jdbcType=BIGINT}, #{commentNum,jdbcType=BIGINT}, #{istop,jdbcType=INTEGER}, 
+      #{iscomment,jdbcType=INTEGER}, #{comefrom,jdbcType=VARCHAR}, #{isdelete,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{thumb,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, 
+      #{keyword,jdbcType=LONGVARCHAR}, #{staticurl,jdbcType=LONGVARCHAR}, #{sourceurl,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.kz.po.NewsWithBLOBs" >
     insert into kz_news
@@ -79,11 +82,11 @@
       <if test="hit != null" >
         HIT,
       </if>
-      <if test="istop != null" >
-        ISTOP,
-      </if>
       <if test="commentNum != null" >
         comment_Num,
+      </if>
+      <if test="istop != null" >
+        ISTOP,
       </if>
       <if test="iscomment != null" >
         ISCOMMENT,
@@ -96,6 +99,9 @@
       </if>
       <if test="status != null" >
         STATUS,
+      </if>
+      <if test="thumb != null" >
+        thumb,
       </if>
       <if test="content != null" >
         CONTENT,
@@ -132,11 +138,11 @@
       <if test="hit != null" >
         #{hit,jdbcType=BIGINT},
       </if>
+      <if test="commentNum != null" >
+        #{commentNum,jdbcType=BIGINT},
+      </if>
       <if test="istop != null" >
         #{istop,jdbcType=INTEGER},
-      </if>
-      <if test="commentNum != null">
-        #{comment_Num,jdbcType=INTEGER},
       </if>
       <if test="iscomment != null" >
         #{iscomment,jdbcType=INTEGER},
@@ -149,6 +155,9 @@
       </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="thumb != null" >
+        #{thumb,jdbcType=VARCHAR},
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
@@ -185,11 +194,11 @@
       <if test="hit != null" >
         HIT = #{hit,jdbcType=BIGINT},
       </if>
+      <if test="commentNum != null" >
+        comment_Num = #{commentNum,jdbcType=BIGINT},
+      </if>
       <if test="istop != null" >
         ISTOP = #{istop,jdbcType=INTEGER},
-      </if>
-      <if test="commentNum != null">
-        comment_Num = #{commentNum,jdbcType=INTEGER},
       </if>
       <if test="iscomment != null" >
         ISCOMMENT = #{iscomment,jdbcType=INTEGER},
@@ -202,6 +211,9 @@
       </if>
       <if test="status != null" >
         STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="thumb != null" >
+        thumb = #{thumb,jdbcType=VARCHAR},
       </if>
       <if test="content != null" >
         CONTENT = #{content,jdbcType=LONGVARCHAR},
@@ -218,11 +230,6 @@
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeycommentNum" parameterType="com.kz.po.News">
-       update kz_news
-       set comment_Num = comment_Num+1
-       where ID = #{id,jdbcType=BIGINT}
-  </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.kz.po.NewsWithBLOBs" >
     update kz_news
     set CHANNELID = #{channelid,jdbcType=BIGINT},
@@ -231,12 +238,13 @@
       PUBLISHDATE = #{publishdate,jdbcType=TIMESTAMP},
       IMG = #{img,jdbcType=VARCHAR},
       HIT = #{hit,jdbcType=BIGINT},
+      comment_Num = #{commentNum,jdbcType=BIGINT},
       ISTOP = #{istop,jdbcType=INTEGER},
-      comment_Num = #{commentNum,jdbcType=INTEGER},
       ISCOMMENT = #{iscomment,jdbcType=INTEGER},
       COMEFROM = #{comefrom,jdbcType=VARCHAR},
       ISDELETE = #{isdelete,jdbcType=INTEGER},
       STATUS = #{status,jdbcType=INTEGER},
+      thumb = #{thumb,jdbcType=VARCHAR},
       CONTENT = #{content,jdbcType=LONGVARCHAR},
       KEYWORD = #{keyword,jdbcType=LONGVARCHAR},
       STATICURL = #{staticurl,jdbcType=LONGVARCHAR},
@@ -251,15 +259,18 @@
       PUBLISHDATE = #{publishdate,jdbcType=TIMESTAMP},
       IMG = #{img,jdbcType=VARCHAR},
       HIT = #{hit,jdbcType=BIGINT},
+      comment_Num = #{commentNum,jdbcType=BIGINT},
       ISTOP = #{istop,jdbcType=INTEGER},
-      comment_Num = #{commentNum,jdbcType=INTEGER},
       ISCOMMENT = #{iscomment,jdbcType=INTEGER},
       COMEFROM = #{comefrom,jdbcType=VARCHAR},
       ISDELETE = #{isdelete,jdbcType=INTEGER},
-      STATUS = #{status,jdbcType=INTEGER}
+      STATUS = #{status,jdbcType=INTEGER},
+      thumb = #{thumb,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <select id="getByConditionPage" parameterType="com.kz.po.NewsQuery"
+  
+  <!-- 我自己写的方法 -->
+    <select id="getByConditionPage" parameterType="com.kz.po.NewsQuery"
 		resultType="com.kz.po.News">
 		select
 		<include refid="Base_Column_List" />
@@ -285,4 +296,9 @@
 	    set  HIT=HIT+1
 	    where ID = #{id,jdbcType=BIGINT}
 	</update>
+	 <update id="updateByPrimaryKeycommentNum" parameterType="com.kz.po.News">
+       update kz_news
+       set comment_Num = comment_Num+1
+       where ID = #{id,jdbcType=BIGINT}
+     </update>
 </mapper>

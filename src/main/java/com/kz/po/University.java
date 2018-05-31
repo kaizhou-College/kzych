@@ -25,6 +25,8 @@ public class University extends BaseModel{
     private Integer publishStatus;
     
     private String name;
+    
+    private String introduction;
 
     private String address;
     
@@ -32,9 +34,11 @@ public class University extends BaseModel{
 
     private String brochure;
 
-    private String introduction;
-    
     private List<Major> majors;
+    
+    private Address addre;
+    
+    private Introduce introduce;
     
     private String schoolLicense;
 
@@ -63,6 +67,8 @@ public class University extends BaseModel{
     private Integer schoolLongitude;
 
     private Integer schoolLatitude;
+    
+    private Long introduceId;
     
 	public String getCheckedInfo() {
 		return checkedInfo;
@@ -296,7 +302,28 @@ public class University extends BaseModel{
 		this.schoolLatitude = schoolLatitude;
 	}
 
+	public Long getIntroduceId() {
+		return introduceId;
+	}
 
-	
-    
+	public void setIntroduceId(Long introduceId) {
+		this.introduceId = introduceId;
+	}
+
+	public Address getAddre() {
+		return addre;
+	}
+
+	public void setAddre(Address addre) {
+		this.addre = addre;
+	}
+
+	public Introduce getIntroduce() {
+		return introduce;
+	}
+
+	public void setIntroduce(Introduce introduce) {
+		this.introduce = introduce;
+	}
+
 }

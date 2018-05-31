@@ -13,6 +13,7 @@ import com.github.pagehelper.PageInfo;
 import com.kz.core.service.BaseService;
 import com.kz.dao.UniversityCategoryMapper;
 import com.kz.dao.UniversityMapper;
+import com.kz.po.RecruitStudents;
 import com.kz.po.University;
 import com.kz.po.UniversityQuery;
 import com.kz.service.IUniversityService;
@@ -101,6 +102,61 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 	public PageInfo<University> selectByMajorCategoryId(UniversityQuery qu) {
 		PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
 		List<University> list = mapper.selectByMajorCategoryId(qu);
+		PageInfo<University> result = new PageInfo<University>(list);
+		return result;
+	}
+	@Override
+	public Long updateByTelephone(University u) {
+		Long updateByTelephone = mapper.updateByTelephone(u);
+		return updateByTelephone;
+	}
+	@Override
+	public List<RecruitStudents> selectByUniversityId(int universityId) {
+		List list = mapper.selectByUniversityId(universityId);
+		return list;
+	}
+	@Override
+	public PageInfo selectByMajorId(UniversityQuery qu) {
+		PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
+		List<University> list = mapper.selectByMajorId(qu);
+		PageInfo<University> result = new PageInfo<University>(list);
+		return result;
+	}
+	@Override
+	public PageInfo schoolByIntroduceInfo(UniversityQuery u) {
+		List<University> info = mapper.schoolByIntroduceInfo(u);
+		PageInfo<University> result = new PageInfo<University>(info);
+		return result;
+	}
+	@Override
+	public PageInfo schollByTypeList(UniversityQuery qu) {
+		PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
+		List<University> list =mapper.schollByTypeList(qu);
+		PageInfo<University> result = new PageInfo<University>(list);
+		return result;
+	}
+	@Override
+	public PageInfo schollAndAddressList(UniversityQuery qu) {
+		List<University> list =mapper.schollAndAddressList(qu.getUniversityId());
+		PageInfo<University> result = new PageInfo<University>(list);
+		return result;
+	}
+	@Override
+	public PageInfo schollByMajor(UniversityQuery qu) {
+		List<University> list =mapper.schollByMajor(qu.getUniversityId());
+		PageInfo<University> result = new PageInfo<University>(list);
+		return result;
+	}
+	@Override
+	public PageInfo schollByIntroduce(UniversityQuery qu) {
+		List<University> list =mapper.schollByIntroduce(qu.getUniversityId());
+		PageInfo<University> result = new PageInfo<University>(list);
+		return result;
+	}
+	
+	@Override
+	public PageInfo schollByRecruit(UniversityQuery qu) {
+		List<University> list =mapper.schollByRecruit(qu.getUniversityId());
 		PageInfo<University> result = new PageInfo<University>(list);
 		return result;
 	}

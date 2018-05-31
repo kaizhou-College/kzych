@@ -17,10 +17,11 @@
     <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="LASTLOGIN_TIME" property="lastloginTime" jdbcType="TIMESTAMP" />
     <result column="user_avatar" property="userAvatar" jdbcType="VARCHAR" />
+    <result column="credits" property="credits" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     UUID, real_name, USERNAME, PASSWORD, CELLPHONE, SEX, IDCARD, ORIGIN_PLACE, SCHOOL, 
-    SIGN_MESSAGE, PROFILE, USER_TYPE, CREATE_TIME, LASTLOGIN_TIME, user_avatar
+    SIGN_MESSAGE, PROFILE, USER_TYPE, CREATE_TIME, LASTLOGIN_TIME, user_avatar, credits
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -37,14 +38,14 @@
       PASSWORD, CELLPHONE, SEX, 
       IDCARD, ORIGIN_PLACE, SCHOOL, 
       SIGN_MESSAGE, PROFILE, USER_TYPE, 
-      CREATE_TIME, LASTLOGIN_TIME, user_avatar
-      )
+      CREATE_TIME, LASTLOGIN_TIME, user_avatar, 
+      credits)
     values (#{uuid,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
       #{idcard,jdbcType=VARCHAR}, #{originPlace,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, 
       #{signMessage,jdbcType=VARCHAR}, #{profile,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{lastloginTime,jdbcType=TIMESTAMP}, #{userAvatar,jdbcType=VARCHAR}
-      )
+      #{createTime,jdbcType=TIMESTAMP}, #{lastloginTime,jdbcType=TIMESTAMP}, #{userAvatar,jdbcType=VARCHAR}, 
+      #{credits,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.kz.po.User" >
     insert into kz_user
@@ -94,6 +95,9 @@
       <if test="userAvatar != null" >
         user_avatar,
       </if>
+      <if test="credits != null" >
+        credits,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
@@ -140,6 +144,9 @@
       </if>
       <if test="userAvatar != null" >
         #{userAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="credits != null" >
+        #{credits,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="userAvatar != null" >
         user_avatar = #{userAvatar,jdbcType=VARCHAR},
       </if>
+      <if test="credits != null" >
+        credits = #{credits,jdbcType=VARCHAR},
+      </if>
     </set>
     where UUID = #{uuid,jdbcType=BIGINT}
   </update>
@@ -206,10 +216,13 @@
       USER_TYPE = #{userType,jdbcType=INTEGER},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       LASTLOGIN_TIME = #{lastloginTime,jdbcType=TIMESTAMP},
-      user_avatar = #{userAvatar,jdbcType=VARCHAR}
+      user_avatar = #{userAvatar,jdbcType=VARCHAR},
+      credits = #{credits,jdbcType=VARCHAR}
     where UUID = #{uuid,jdbcType=BIGINT}
   </update>
-  <select id="checkUsername" parameterType="string" resultType="int">
+  
+  <!-- 下面是我自己写的方法  -->
+    <select id="checkUsername" parameterType="string" resultType="int">
 		select count(1) from kz_user
 		where username=#{username}
 	</select>

@@ -6,7 +6,7 @@ import java.util.Date;
 public class Order {
     private Long id;
 
-    private Long uuid;
+    private Long userId;
 
     private Long orderNo;
 
@@ -34,19 +34,21 @@ public class Order {
         this.id = id;
     }
 
-    public Long getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(Long uuid) {
-        this.uuid = uuid;
-    }
+   
 
     public Long getOrderNo() {
         return orderNo;
     }
 
-    public void setOrderNo(Long orderNo) {
+    public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public void setOrderNo(Long orderNo) {
         this.orderNo = orderNo;
     }
 

@@ -64,7 +64,7 @@
 							<a href="">安全设置</a>
 						</dd>
 					</dl></li>
-				<li class="layui-nav-item"><a href="">退了</a></li>
+				<li class="layui-nav-item"><a href="javascript:exit();">退了</a></li>
 			</ul>
 		</div>
 		<div class="layui-side layui-bg-black" id="side-nav"></div>
@@ -427,7 +427,7 @@
 				  return false;
 			  });
 			  form.on('submit(demo1)', function(data){
-				  if($("#checkedInfo").val()!=null&&$("#checkedInfo").val().trim.length>0){
+				  if($("#checkedInfo").val()!=null&&$("#checkedInfo").val().trim().length>0){
 					//异步请求更改该学校的状态
 						$.ajax({
 				  			type:"post",
@@ -443,6 +443,7 @@
 				  			}		
 						});
 				  }else{
+					  alert($("#checkedInfo").val().trim.length>0);
 					  shotMsg("请输入不通过原因");
 				  }
 				  return false;
@@ -546,15 +547,16 @@
 	function showScoolInfo(list){
 		$("#school_Name").val(list.name);
 		$("#school_Address").val(list.address);
-		$("#school_License").attr("src","ftp://47.104.135.201/"+list.schoolLicense);
+		$("#school_License").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.schoolLicense);
 		$("#legal_person_Name").val(list.legalPersonName);
 		$("#legal_person_Card").val(list.legalPersonCard);
 		$("#legal_person_Phone").val(list.legalPersonPhone);
 		$("#administrator_Account").val(list.administratorAccount);
 		$("#administrator_Name").val(list.administratorName);
 		$("#administrator_Phone").val(list.administratorPhone);
-		$("#school_coverImge").attr("src",list.schoolCoverimg);
-	  	//设置下拉框的默认值
+		$("#school_coverImge").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.schoolCoverimg);
+	  	$("#id_school").val(list.id);
+		//设置下拉框的默认值
 	  	//机构类型 
 	  	var universityType=$("#universityType_seelct_01").html().split("<option value=\"");
 	  //机构性质
@@ -585,11 +587,11 @@
 	      			//如果不符合上面的条件就给size加上1
 	      			size=size+1;
 	      		}
-	      		//如果size等于option的个数的话就需要重新设置个option
-	      		if(size==(list.length-1)){
-	      			$("#"+select_id).html("<option value='0'>未选择</option>");
-	      		}	
 	      	}
+	  		//如果size等于option的个数的话就需要重新设置个option
+      		if(size==(list.length-1)){
+      			$("#"+select_id).html("<option value='0'>未选择</option>");
+      		}	
 	  	}
 	  	
 		layui.use('form', function(){

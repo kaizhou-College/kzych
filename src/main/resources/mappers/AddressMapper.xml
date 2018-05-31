@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kz.dao.AddressMapper" >
+  <resultMap id="BaseResultMap" type="com.kz.po.Address" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="provice" property="provice" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="county" property="county" jdbcType="VARCHAR" />
+    <result column="addrDetail" property="addrdetail" jdbcType="VARCHAR" />
+    <result column="university_id" property="universityId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.kz.po.Address" extends="BaseResultMap" >
+    <result column="latitude" property="latitude" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, longitude, provice, city, county, addrDetail, university_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    latitude
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from kz_address
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from kz_address
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.kz.po.Address" >
+    insert into kz_address (id, longitude, provice, 
+      city, county, addrDetail, 
+      university_id, latitude)
+    values (#{id,jdbcType=BIGINT}, #{longitude,jdbcType=VARCHAR}, #{provice,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, #{addrdetail,jdbcType=VARCHAR}, 
+      #{universityId,jdbcType=BIGINT}, #{latitude,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kz.po.Address" >
+    insert into kz_address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="provice != null" >
+        provice,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="county != null" >
+        county,
+      </if>
+      <if test="addrdetail != null" >
+        addrDetail,
+      </if>
+      <if test="universityId != null" >
+        university_id,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="provice != null" >
+        #{provice,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="addrdetail != null" >
+        #{addrdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="universityId != null" >
+        #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.Address" >
+    update kz_address
+    <set >
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="provice != null" >
+        provice = #{provice,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        county = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="addrdetail != null" >
+        addrDetail = #{addrdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="universityId != null" >
+        university_id = #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.kz.po.Address" >
+    update kz_address
+    set longitude = #{longitude,jdbcType=VARCHAR},
+      provice = #{provice,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      county = #{county,jdbcType=VARCHAR},
+      addrDetail = #{addrdetail,jdbcType=VARCHAR},
+      university_id = #{universityId,jdbcType=BIGINT},
+      latitude = #{latitude,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kz.po.Address" >
+    update kz_address
+    set longitude = #{longitude,jdbcType=VARCHAR},
+      provice = #{provice,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      county = #{county,jdbcType=VARCHAR},
+      addrDetail = #{addrdetail,jdbcType=VARCHAR},
+      university_id = #{universityId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

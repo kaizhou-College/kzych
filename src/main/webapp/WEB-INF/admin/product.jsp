@@ -119,6 +119,7 @@
 						    <label class="layui-form-label">机构名称:</label>
 						    <div class="layui-input-block">
 						      <input id="name_p" type="text" name="" value="请输入学校名称" autocomplete="off"  class="layui-input">
+						      <input id="id_p" type="hidden" name="" >
 						    </div>
 						  </div>
 						  
@@ -128,8 +129,8 @@
 						      <div class="layui-input-inline">
 						        <select id="universityType_p" name="interest" lay-filter="aihao">
 							        <option value="0"></option>
-							        <option value="1" >学校</option>
-							        <option value="2" >企业</option>
+							        <option value="1">学校</option>
+							        <option value="2">企业</option>
 							        <option value="3">事业单位</option>
 							        <option value="4">政府机关</option>
 							        <option value="5">社会团体</option>
@@ -144,7 +145,6 @@
 							        <option value="0"></option>
 							        <option value="1">公办</option>
 							        <option value="2" >民办</option>
-							        
 							      </select>
 						      </div>
 						    </div>
@@ -154,6 +154,10 @@
 						      <div class="layui-input-inline">
 						        <select id="categoryid_p" name="interest">
 							        <option value="0"></option>
+							        <option value="1">本科</option>
+							        <option value="2" >大专</option>
+							        <option value="3" >中专</option>
+							        <option value="4" >培训</option>
 							    </select>
 						      </div>
 						    </div>
@@ -199,10 +203,6 @@
 									    </div>
 							     </div>
 							</div>
-						  
-						  
-              
-							
 							<div class="layui-form-item">
 						    <div class="layui-inline">
 						      <label class="layui-form-label">法人姓名</label>
@@ -285,8 +285,9 @@ var userId="${User_list.id}";
 	function init_page($){
 		//判断该用户是否开通过学校
 		//如果开通过但没有通过的话  那还是需要把你本来填写的值给放进去的
+		
 		if(userId.trim().length>0){
-			      
+			$("#id_p").val("${User_list.id}");   
 			$("#name_p").val("${User_list.name}");
 			$("#address_p").val("${User_list.address}");
 			$("#start-img-view2").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/${User_list.schoolCoverimg}");
@@ -300,111 +301,57 @@ var userId="${User_list.id}";
 			
 			//设置下拉框的默认值
 		  	//机构类型 
-		  	var universityType=$("#universityNature_p").html().split("<option value=\"");
+		  	var universityType=$("#universityType_p").html().split("<option value=\"");
 		  //机构性质
-		  	var universityNature=$("#categoryid_p").html().split("<option value=\"");
+		  	var universityNature=$("#universityNature_p").html().split("<option value=\"");
 		  //学校等级
-		  	var categoryname=$("#universityType_p").html().split("<option value=\"");
+		  	var categoryname=$("#categoryid_p").html().split("<option value=\"");
 		  //机构类型的设置默认值
 		  	settingsSelected(universityType,"${User_list.universityType}","universityType_p");
 		  //机构性质设置默认值
 		  	settingsSelected(universityNature,"${User_list.universityNature}","universityNature_p");
 		  //学校等级的设置默认值 
 		  	settingsSelected(categoryname,"${User_list.categoryid}","categoryid_p");
-		  	function settingsSelected(list,id,select_id){
+		  function settingsSelected(list,id,select_id){
 		      	var size=0;
 		  		for(var i=1;i<list.length;i++){
 		      		if(list[i].substring(0,1)==id){
 		      			$("#"+select_id+" option[value="+(i-1)+"]").attr("selected","selected");
-		      		}else{
-		      			//如果不符合上面的条件就给size加上1
-		      			size=size+1;
 		      		}
 		      	}
 		  	}
-		  	
 			layui.use('form', function(){
 				var form = layui.form;
 				//由于设置了下拉框的初始值所以需要重新渲染一次select
 			    form.render('select');
 			});
+			$("#school-auth-ok").on("click",function(){
+			var isNotPass=isNotNull();
+			if(isNotPass==11){
+				$.ajax({
+	  				type:"post",
+	  				url:host_kzych+"/university/updateByKeyId.do",
+	  				data:{"id":$("#id_p").val(),"name":$("#name_p").val(),"universityType":$("#universityType_p").val(),
+	  					"universityNature":$("#universityNature_p").val(),"categoryid":$("#categoryid_p").val(),
+	  					"address":$("#address_p").val(),"legalPersonName":$("#legalPersonName_p").val(),
+	  					"legalPersonCard":$("#legalPersonCard_p").val(),"legalPersonPhone":$("#legalPersonPhone_p").val(),
+	  					"introduction":$("#detail").val(),"schoolCoverimg":$("#schoolCoverimg").val(),
+	  					"schoolLicense":$("#schoolLicense").val(),"publishStatus":1},
+	  				success:function(data){
+	  					setCookie("zhaosheng_service_status"+uuid,"1","d1"); //这是测试代码，正试逻辑要删除。状态：0表示没有开通，1表示开通中，2表示已开通，3表示被拒决
+	  					location.reload();
+	  				},
+	  				error:function(){
+	  					location.reload();
+	  				}		
+				});
+			}
+			});
 		}else{
 			$("#school-auth-ok").on("click",function(){
 				  // 通过ajax提交
-	    		var isNotPass=0;
-				
-				//验证  机构信息	
-				//机构名称
-				if($("#name_p").val().trim().length>0&&$("#name_p").val()!="请输入学校名称"){
-					isNotPass=isNotPass+1
-	    		}else{
-	    			shotMsg("亲请输入学校名称");
-	    		}
-				//机构类型
-				if($("#universityType_p").val()>0){
-					isNotPass=isNotPass+1
-	    		}else{
-	    			shotMsg("亲请选择机构类型");
-	    		}
-				//机构性质
-				if($("#universityNature_p").val()>0){
-					isNotPass=isNotPass+1
-	    		}else{
-	    			shotMsg("亲请选择机构性质");
-	    		}
-				//学校等级
-				if($("#categoryid_p").val()>0){
-					isNotPass=isNotPass+1
-	    		}else{
-	    			shotMsg("亲请选择学校等级");
-	    		}
-				//机构地址
-				if($("#address_p").val().trim().length>0&&$("#address_p").val()!="请输入学校地址"){
-					isNotPass=isNotPass+1
-	    		}else{
-	    			shotMsg("亲请输入机构地址");
-	    		}
-				//封面图片 $("#schoolCoverimg")
-				if($("#schoolCoverimg").val().trim().length>0){
-					isNotPass=isNotPass+1
-	    		}else{
-	    			shotMsg("亲请上传封面图片");
-	    		}
-				//办学许可证  $("#schoolLicense")
-				if($("#schoolLicense").val().trim().length>0){
-					isNotPass=isNotPass+1
-	    		}else{
-	    			shotMsg("亲请上传办学许可证");
-	    		}
-				//法人姓名 $("#legalPersonName_p").val()
-				if($("#legalPersonName_p").val().trim().length>0&&$("#legalPersonName_p").val()!="请输入法人姓名"){
-					isNotPass=isNotPass+1
-	    		}else{
-	    			shotMsg("亲请输入法人姓名");
-	    		}
-				//法人身份证$("#legalPersonCard_p").val()
-	  		 	var isIDCard1=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/; //15位的身份证
-	  		  	var isIDCard2=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$/;//18位  身份证的正则表达式
-				  	if(isIDCard2.test($("#legalPersonCard_p").val())||isIDCard1.test($("#default_1"))){
-				  		isNotPass=isNotPass+1;
-				  	}else{
-				  		shotMsg("亲请输入正确的身份证号");
-				  	}
-				//法人电话$("#legalPersonPhone_p").val()
-				var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
-			  	if(phone.test($("#legalPersonPhone_p").val())){
-			  		isNotPass=isNotPass+1;
-			  	}else{
-			  		shotMsg("亲请输入正确的电话号");
-			  	}
-				//机构简历$("#detail").val()
-				if($("#detail").val().trim().length>0&&$("#detail").val()!="请输入机构简历"){
-					isNotPass=isNotPass+1;
-			  	}else{
-				  	shotMsg("亲请输入机构简历");
-				  	
-			  	}
 				//isNot如果等于11 那么说明客户填的信息符合条件
+				var isNotPass=isNotNull();
 				if(isNotPass==11){
 					$.ajax({
 		  				type:"post",
@@ -414,7 +361,7 @@ var userId="${User_list.id}";
 		  					"address":$("#address_p").val(),"legalPersonName":$("#legalPersonName_p").val(),
 		  					"legalPersonCard":$("#legalPersonCard_p").val(),"legalPersonPhone":$("#legalPersonPhone_p").val(),
 		  					"introduction":$("#detail").val(),"userId":uuid,"schoolCoverimg":$("#schoolCoverimg").val(),
-		  					"schoolLicense":$("#schoolLicense").val()},
+		  					"schoolLicense":$("#schoolLicense").val() },
 		  				success:function(data){
 		  					setCookie("zhaosheng_service_status"+uuid,"1","d1"); //这是测试代码，正试逻辑要删除。状态：0表示没有开通，1表示开通中，2表示已开通，3表示被拒决
 		  					location.reload();
@@ -427,6 +374,81 @@ var userId="${User_list.id}";
 			});
 		}
 		
+		//非空验证
+		function isNotNull(){
+			var isNotPass=0;
+			//验证  机构信息	
+			//机构名称
+			if($("#name_p").val().trim().length>0&&$("#name_p").val()!="请输入学校名称"){
+				isNotPass=isNotPass+1
+    		}else{
+    			shotMsg("亲请输入学校名称");
+    		}
+			//机构类型
+			if($("#universityType_p").val()>0){
+				isNotPass=isNotPass+1
+    		}else{
+    			shotMsg("亲请选择机构类型");
+    		}
+			//机构性质
+			if($("#universityNature_p").val()>0){
+				isNotPass=isNotPass+1
+    		}else{
+    			shotMsg("亲请选择机构性质");
+    		}
+			//学校等级
+			if($("#categoryid_p").val()>0){
+				isNotPass=isNotPass+1
+    		}else{
+    			shotMsg("亲请选择学校等级");
+    		}
+			//机构地址
+			if($("#address_p").val().trim().length>0&&$("#address_p").val()!="请输入学校地址"){
+				isNotPass=isNotPass+1
+    		}else{
+    			shotMsg("亲请输入机构地址");
+    		}
+			//封面图片 $("#schoolCoverimg")
+			if($("#schoolCoverimg").val().trim().length>0){
+				isNotPass=isNotPass+1
+    		}else{
+    			shotMsg("亲请上传封面图片");
+    		}
+			//办学许可证  $("#schoolLicense")
+			if($("#schoolLicense").val().trim().length>0){
+				isNotPass=isNotPass+1
+    		}else{
+    			shotMsg("亲请上传办学许可证");
+    		}
+			//法人姓名 $("#legalPersonName_p").val()
+			if($("#legalPersonName_p").val().trim().length>0&&$("#legalPersonName_p").val()!="请输入法人姓名"){
+				isNotPass=isNotPass+1
+    		}else{
+    			shotMsg("亲请输入法人姓名");
+    		}
+			//法人身份证$("#legalPersonCard_p").val()
+  		 	var isIDCard1=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/; //15位的身份证
+  		  	var isIDCard2=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$/;//18位  身份证的正则表达式
+			  	if(isIDCard2.test($("#legalPersonCard_p").val())||isIDCard1.test($("#default_1"))){
+			  		isNotPass=isNotPass+1;
+			  	}else{
+			  		shotMsg("亲请输入正确的身份证号");
+			  	}
+			//法人电话$("#legalPersonPhone_p").val()
+			var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
+		  	if(phone.test($("#legalPersonPhone_p").val())){
+		  		isNotPass=isNotPass+1;
+		  	}else{
+		  		shotMsg("亲请输入正确的电话号");
+		  	}
+			//机构简历$("#detail").val()
+			if($("#detail").val().trim().length>0&&$("#detail").val()!="请输入机构简历"){
+				isNotPass=isNotPass+1;
+		  	}else{
+			  	shotMsg("亲请输入机构简历");
+		  	}
+			return isNotPass;
+		}
 		
 		//页面已加载时就需要查询该用户有没有开通学校的原因（通过用户id查询学校）
 		$.ajax({
@@ -442,26 +464,6 @@ var userId="${User_list.id}";
   			}		
 		});
 		
-		//通过ajax来给学校等级（下拉框加上值）
-		$.ajax({
-  			type:"get",
-  			url:host_kzych+"/university/categoryList.do",
-  			success:function(data){
-  				var html_category=$("#category_id");
-  				for(var i=0;i<data.length;i++){
-  					$("#categoryid_p").append("<option value='"+data[i].id+"'>"+data[i].categoryName+"</option>");
-  				}
-  				//由于这个jsp是先加载页面然后再渲染接着才开始追加$("#category_id") 里面的<optiin> 所以需要重新渲染一次
-  				  layui.use(['layer', 'form'], function(){
-  				  var layer = layui.layer
-  				    ,form = layui.form;
-  					form.render('select');
-  				});
-  			},
-  			error:function(){
-  				location.reload();
-  			}		
-		});
 		var a=getCookie("zhaosheng_service_status"+uuid);
 		  var zhaosheng_service_status = getCookie("zhaosheng_service_status"+uuid); //
 		  var recruit_service_status = getCookie("recruit_service_status"+uuid);

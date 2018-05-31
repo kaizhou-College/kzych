@@ -1,3 +1,5 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@include file="../common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +13,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="format-detection" content="telephone=no">
   
-  <link rel="stylesheet" href="css/layui.css?t=1515376178709"  media="all">
-  <link rel="stylesheet" href="css/global.css?t=1515376178709"  media="all">
-  <link rel="stylesheet" href="css/simditor.css?t=1515376178709"  media="all">
+  <link rel="stylesheet" href="${basePath}admin/css/layui.css?t=1515376178709"  media="all">
+  <link rel="stylesheet" href="${basePath}admin/css/global.css?t=1515376178709"  media="all">
+  <link rel="stylesheet" href="${basePath}admin/css/simditor.css?t=1515376178709"  media="all">
   
   <style>
   	.layui-tab i:hover{cursor:pointer;}
@@ -114,7 +116,7 @@
 									
 									<div  style="margin:30px 0 0 0;width:100%;">
 								 			  
-												<table class="layui-table" lay-data="{ height:300, url:'/admin/testdata/enroll_list.json',page:true}"  id="enroll_list" lay-filter="enroll">
+												<table class="layui-table" lay-data="{ height:300, url:'${basePath}/admin/testdata/enroll_list.json',page:true}"  id="enroll_list" lay-filter="enroll">
 											  <thead>
 											    <tr>
 											    
@@ -257,26 +259,27 @@
 </body>
 
 </html>
-<script src="layui.js?t=1515376178709" charset="utf-8"></script>
-<script src="app.js?t=1515376178709" charset="utf-8"></script>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/module.min.js"></script>
+<script src="${basePath}admin/layui.js?t=1515376178709" charset="utf-8"></script>
+<script src="${basePath}admin/app.js?t=1515376178709" charset="utf-8"></script>
+<script type="text/javascript" src="${basePath}admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="${basePath}admin/js/module.min.js"></script>
 
-<script type="text/javascript" src="js/hotkeys.min.js"></script>
-<script type="text/javascript" src="js/uploader.min.js"></script>
-<script type="text/javascript" src="js/simditor.js"></script>
+<script type="text/javascript" src="${basePath}admin/js/hotkeys.min.js"></script>
+<script type="text/javascript" src="${basePath}admin/js/uploader.min.js"></script>
+<script type="text/javascript" src="${basePath}admin/js/simditor.js"></script>
 <script>
 	cur_mod="招生";
-	
+	var username ="${currentUser.username}";
+	var basePath = "${basePath}";
+	var host_kzych="${host}";
 	app.init(function($){
-		
 		     toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough',
             'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|',
             'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment'
         ];
         
        
-       
+      ///////////表 
         $(".back").on("click",function(){
         	
         	  $("#main").show();

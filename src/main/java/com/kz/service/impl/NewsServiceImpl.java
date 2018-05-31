@@ -19,11 +19,11 @@ import com.kz.service.INewsService;
 @Transactional
 public class NewsServiceImpl extends BaseService<News, NewsQuery> implements INewsService{
 	private NewsMapper mapper;
+	
 	@Autowired
 	public void setMapper(NewsMapper mapper){
 		this.mapper = mapper;
 		super.setMapper(mapper);
-		
 	}
 	@Override
 	public List<News> dimContentPage(NewsQuery qu) {

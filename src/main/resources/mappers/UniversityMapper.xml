@@ -25,6 +25,7 @@
     <result column="school_CoverImg" property="schoolCoverimg" jdbcType="VARCHAR" />
     <result column="school_Longitude" property="schoolLongitude" jdbcType="INTEGER" />
     <result column="school_Latitude" property="schoolLatitude" jdbcType="INTEGER" />
+    <result column="introduce_id" property="introduceId" jdbcType="BIGINT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.kz.po.universityWithBLOBs" extends="BaseResultMap" >
     <result column="NAME" property="name" jdbcType="LONGVARCHAR" />
@@ -37,7 +38,7 @@
     ID, CODE, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, coupon, CATEGORYID, PUBLISH_STATUS, 
     School_license, Legal_person_name, Legal_person_Card, Legal_person_Phone, Administrator_Account, 
     Administrator_Name, Administrator_Phone, USER_id, University_Type, University_Nature, 
-    checked_info, school_CoverImg, school_Longitude, school_Latitude
+    checked_info, school_CoverImg, school_Longitude, school_Latitude, introduce_id
   </sql>
   <sql id="Blob_Column_List" >
     NAME, ADDRESS, EMPLOYMENT_INFO, BROCHURE, INTRODUCTION
@@ -63,9 +64,9 @@
       Administrator_Name, Administrator_Phone, 
       USER_id, University_Type, University_Nature, 
       checked_info, school_CoverImg, school_Longitude, 
-      school_Latitude, NAME, ADDRESS, 
-      EMPLOYMENT_INFO, BROCHURE, INTRODUCTION
-      )
+      school_Latitude, introduce_id, NAME, 
+      ADDRESS, EMPLOYMENT_INFO, BROCHURE, 
+      INTRODUCTION)
     values (#{id,jdbcType=BIGINT}, #{code,jdbcType=BIGINT}, #{profile,jdbcType=VARCHAR}, 
       #{agreements,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{grants,jdbcType=DECIMAL}, 
       #{coupon,jdbcType=DECIMAL}, #{categoryid,jdbcType=BIGINT}, #{publishStatus,jdbcType=INTEGER}, 
@@ -74,9 +75,9 @@
       #{administratorName,jdbcType=VARCHAR}, #{administratorPhone,jdbcType=VARCHAR}, 
       #{userId,jdbcType=INTEGER}, #{universityType,jdbcType=INTEGER}, #{universityNature,jdbcType=INTEGER}, 
       #{checkedInfo,jdbcType=VARCHAR}, #{schoolCoverimg,jdbcType=VARCHAR}, #{schoolLongitude,jdbcType=INTEGER}, 
-      #{schoolLatitude,jdbcType=INTEGER}, #{name,jdbcType=LONGVARCHAR}, #{address,jdbcType=LONGVARCHAR}, 
-      #{employmentInfo,jdbcType=LONGVARCHAR}, #{brochure,jdbcType=LONGVARCHAR}, #{introduction,jdbcType=LONGVARCHAR}
-      )
+      #{schoolLatitude,jdbcType=INTEGER}, #{introduceId,jdbcType=BIGINT}, #{name,jdbcType=LONGVARCHAR}, 
+      #{address,jdbcType=LONGVARCHAR}, #{employmentInfo,jdbcType=LONGVARCHAR}, #{brochure,jdbcType=LONGVARCHAR}, 
+      #{introduction,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.kz.po.universityWithBLOBs" >
     insert into kz_university
@@ -149,6 +150,9 @@
       </if>
       <if test="schoolLatitude != null" >
         school_Latitude,
+      </if>
+      <if test="introduceId != null" >
+        introduce_id,
       </if>
       <if test="name != null" >
         NAME,
@@ -236,6 +240,9 @@
       <if test="schoolLatitude != null" >
         #{schoolLatitude,jdbcType=INTEGER},
       </if>
+      <if test="introduceId != null" >
+        #{introduceId,jdbcType=BIGINT},
+      </if>
       <if test="name != null" >
         #{name,jdbcType=LONGVARCHAR},
       </if>
@@ -322,6 +329,9 @@
       <if test="schoolLatitude != null" >
         school_Latitude = #{schoolLatitude,jdbcType=INTEGER},
       </if>
+      <if test="introduceId != null" >
+        introduce_id = #{introduceId,jdbcType=BIGINT},
+      </if>
       <if test="name != null" >
         NAME = #{name,jdbcType=LONGVARCHAR},
       </if>
@@ -364,6 +374,7 @@
       school_CoverImg = #{schoolCoverimg,jdbcType=VARCHAR},
       school_Longitude = #{schoolLongitude,jdbcType=INTEGER},
       school_Latitude = #{schoolLatitude,jdbcType=INTEGER},
+      introduce_id = #{introduceId,jdbcType=BIGINT},
       NAME = #{name,jdbcType=LONGVARCHAR},
       ADDRESS = #{address,jdbcType=LONGVARCHAR},
       EMPLOYMENT_INFO = #{employmentInfo,jdbcType=LONGVARCHAR},
@@ -394,11 +405,14 @@
       checked_info = #{checkedInfo,jdbcType=VARCHAR},
       school_CoverImg = #{schoolCoverimg,jdbcType=VARCHAR},
       school_Longitude = #{schoolLongitude,jdbcType=INTEGER},
-      school_Latitude = #{schoolLatitude,jdbcType=INTEGER}
+      school_Latitude = #{schoolLatitude,jdbcType=INTEGER},
+      introduce_id = #{introduceId,jdbcType=BIGINT}
     where ID = #{id,jdbcType=BIGINT}
   </update>
   
-  <resultMap id="universityMajorMap" type="com.kz.po.University" extends="BaseResultMap">
+  <!-- 下面是我自己写的方法 -->
+  
+   <resultMap id="universityMajorMap" type="com.kz.po.University" extends="BaseResultMap">
     <id column="kz_university.ID" property="id" jdbcType="BIGINT" />
     <result column="CODE" property="code" jdbcType="BIGINT" />
     <result column="PROFILE" property="profile" jdbcType="VARCHAR" />
@@ -531,6 +545,8 @@
 		and
 		kz_major.ISHOT=#{id}
 	</select>
+	
+	
 	<select id="getByConditionPage" parameterType="com.kz.po.UniversityQuery"
 		resultMap="ResultMapWithBLOBs">
 		select
@@ -648,6 +664,12 @@
 			</if>
 			<if test="schoolCoverimg != null">
 				school_Coverimg = #{schoolCoverimg,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="publishStatus != null">
+				PUBLISH_STATUS = #{publishStatus,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where ID = #{id,jdbcType=BIGINT}
@@ -820,6 +842,61 @@
     where school_Longitude = #{schoolLongitude} 
     and  school_Latitude =#{schoolLongitude}
   </select>
+  <sql id="myColumnList" >
+    kz_university.id as universityId,
+    kz_university.NAME as universityName,
+    kz_university.PROFILE ,
+    
+    kz_major.id as majojrId,
+    kz_major.NAME as majorName,
+    major_Code,
+    
+    kz_address.id as addressId,
+    longitude,
+    latitude,
+    provice,
+    city,
+    county,
+    addrDetail
+  </sql>  
+  <resultMap id="myResultMap" type="com.kz.po.Major" >
+    <id column="majojrId" property="id" />
+    <result column="majorName" property="name" />
+    <result column="major_Code" property="majorCode"/>
+  		<collection property="university" ofType="com.kz.po.University">
+			<id column="universityId" property="id"></id>
+			<result column="universityName" property="name" />
+			<result column="PROFILE" property="profile"/>
+			<association property="addre" javaType="com.kz.po.Address">
+			    <id column="addressId" property="id"/>
+			    <result column="longitude" property="longitude"/>
+			    <result column="latitude" property="latitude"/>
+			    <result column="provice" property="provice"/>
+			    <result column="city" property="city"/>
+			    <result column="county" property="county"/>
+			    <result column="addrDetail" property="addrdetail"/>
+			</association>
+		</collection>
+  </resultMap>
+  
+  <select id="selectByMajorId" resultMap="myResultMap" parameterType="com.kz.po.UniversityQuery" >
+    select 
+    <include refid="myColumnList" />
+    ,
+    <include refid="myColumnList" /> 
+	from 
+		kz_university,
+		kz_address,
+		kz_major,
+		kz_university_major
+	where 
+		kz_university.id=kz_address.university_id and
+		kz_university_major.university_id=kz_university.id and
+		kz_university_major.major_id=kz_major.id
+		<if test="majorId != null">
+			and kz_major.id=#{majorId}
+		</if>
+  </select>
   <select id="selectByMajorCategoryId" resultMap="ResultMapWithBLOBs"  parameterType="com.kz.po.UniversityQuery" >
       select 
 		u.*  
@@ -835,7 +912,239 @@
 		<if test="majorCategoryName != null">
 			mc.major_category_name like '%${majorCategoryName}%' and
 		</if>
+		<if test="majorCategoryName != null">
+			mc.major_category_name like '%${majorCategoryName}%' and
+		</if>
 		1=1
   </select>
-  
+  <!--<resultMap id="" type="com.kz.po.universityWithBLOBs" extends="BaseResultMap" >
+    <result column="NAME" property="name" jdbcType="LONGVARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="LONGVARCHAR" />
+    <result column="EMPLOYMENT_INFO" property="employmentInfo" jdbcType="LONGVARCHAR" />
+    <result column="BROCHURE" property="brochure" jdbcType="LONGVARCHAR" />
+    <result column="INTRODUCTION" property="introduction" jdbcType="LONGVARCHAR" />
+  </resultMap>-->
+  <select id="selectByUniversityId" resultMap="ResultMapWithBLOBs"  parameterType="int" > 
+	select  
+		*   
+	from 	
+		kz_university kz_u,
+		kz_university_category kz_u_c,
+		kz_university_major kz_u_m,
+		kz_major kz_m,
+		kz_orderdetail kz_o,
+		kz_major_category kz_m_c
+	where 
+		kz_u.CATEGORYID=kz_u_c.id and 
+		kz_u.id = kz_u_m.UNIVERSITY_ID and 
+		kz_m.id = kz_u_m.MAJOR_ID and  
+		kz_u.id = kz_o.UNIVERSITY_ID and 
+		kz_o.major_id = kz_m.id and
+		kz_m.MAJOR_CATEGORY_ID=kz_m_c.MAJOR_CATEGORY_ID and 
+		kz_u.id=#{id}
+  </select>	
+  	<update id="updateByTelephone" parameterType="com.kz.po.University">
+		update kz_university
+		<set>
+			<if test="telephone != null">
+				telephone = #{telephone,jdbcType=BIGINT},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+	<resultMap id="myResultMap_02" type="com.kz.po.University" >
+    	<id column="universityId" property="id" />
+   		<result column="universityName" property="name" />
+  		<result column="INTRODUCTION" property="introduction"/>
+  			<association property="introduce" javaType="com.kz.po.Introduce">
+				<id property="introId" column="id" />
+				<result property="intrpDetail" column="detail" />
+				<association property="video" javaType="com.kz.po.Video">
+				    <id column="videoId" property="id"/>
+					<result column="url" property="url"/>
+					<result column="duration" property="duration"/>
+					<result column="thumb" property="thumb"/>
+				</association>
+			</association>
+			<collection property="majors" ofType="com.kz.po.Major">
+			    <id column="majorId" property="id"/>
+				<result column="MAJOR_CODE" property="majorCode"/>
+			</collection>
+   </resultMap>
+	<select id="schoolByIntroduceInfo" resultMap="myResultMap_02" parameterType="com.kz.po.UniversityQuery" >
+	    select 
+		 	kz_university.id as universityId ,
+			kz_university.NAME as universityName ,
+			INTRODUCTION,
+			
+			kz_video.id as videoId,
+			url,
+			duration,
+			thumb,
+			
+			kz_introduce.id as introId,
+			kz_introduce.detail as intrpDetail,
+			
+			kz_major.id as majorId,
+			MAJOR_CODE
+		from 
+			kz_university,
+			kz_introduce,
+			kz_video ,
+			kz_university_major,
+			kz_major
+		where 
+			kz_university.introduce_id=kz_introduce.id and 
+			kz_introduce.id=kz_video.intro_id and 
+			kz_university_major.university_id=kz_university.id and
+			kz_university_major.major_id=kz_major.id 
+			<if test="universityId != null">
+				and kz_university.id=#{universityId}
+			</if>
+			<if test="majorId != null">
+				and kz_major.id=#{majorId}
+			</if>
+  	</select>
+  	<resultMap type="com.kz.po.University" id="myResultMap_03">
+  	    <id column="universityId" property="id"/>
+  	    <result column="universityName" property="name"/>
+  	    <association property="addre" javaType="com.kz.po.Address">
+  	        <id column="addressId" property="id"/>
+  	        <result column="longitude" property="longitude"/>
+			    <result column="latitude" property="latitude"/>
+			    <result column="provice" property="provice"/>
+			    <result column="city" property="city"/>
+			    <result column="county" property="county"/>
+			    <result column="addrDetail" property="addrdetail"/>
+  	    </association>
+  	</resultMap>
+  	<select id="schollByTypeList" resultMap="myResultMap_03" parameterType="com.kz.po.UniversityQuery" >
+  	    select 
+			kz_university.id as universityId,
+			kz_university.name as universityName,
+			
+			kz_address.id as addressId,
+			longitude,
+		    latitude,
+		    provice,
+		    city,
+		    county,
+		    addrDetail
+		from
+			kz_university ,
+			kz_address,
+			kz_university_CATEGORY
+		where 
+			kz_university.id=kz_address.university_id and
+			kz_university.CATEGORYID=kz_university_CATEGORY.id and
+			kz_university_CATEGORY.id=#{categoryId}
+  	</select>
+  	
+  	<resultMap type="com.kz.po.University" id="myResultMap_04">
+  	    <id property="id" column="universityId"/>
+  	    <result property="name" column="universityName"/>
+  	    <result property="telephone" column="TELEPHONE"/>
+  	    	<association property="addre" javaType="com.kz.po.Address">
+  	    	    <id column="addressId" property="id"/>
+  	        	<result column="longitude" property="longitude"/>
+			    <result column="latitude" property="latitude"/>
+			    <result column="provice" property="provice"/>
+			    <result column="city" property="city"/>
+			    <result column="county" property="county"/>
+			    <result column="addrDetail" property="addrdetail"/>
+  	    	</association>
+  	</resultMap>
+  	
+  	<select id="schollAndAddressList" resultMap="myResultMap_04" parameterType="Long" >
+  	    select
+			kz_university.id as universityId,
+			kz_university.name as universityName,
+			TELEPHONE,
+			
+			kz_address.id as addressId,
+			longitude,
+			latitude,
+			provice,
+			city,
+			county,
+			addrDetail
+			
+		from
+			kz_university,
+			kz_address
+		where 
+			kz_university.id=kz_address.university_id
+			and kz_university.id=#{universityId}
+  	</select>
+  	<resultMap type="com.kz.po.Major" id="myResultMap_05">
+  	    <id column="majorId" property="id"/>
+  	    <result column="majorCategoryId" property="majorCategoryId"/>
+  	    <result column="majorName" property="name"/>
+  	    <result column="majorCode" property="majorCode"/>
+  	    <result column="majorIsHot" property="ishot"/>
+  	    <result column="majorDescription" property="description"/>
+  	</resultMap>
+  	<select id="schollByMajor" resultMap="myResultMap_05" parameterType="Long" >
+  	    select 
+			kz_major.id as majorId,
+			kz_major.MAJOR_CATEGORY_ID as majorCategoryId,
+			kz_major.NAME as majorName,
+			kz_major.MAJOR_CODE as majorCode,
+			kz_major.ISHOT as majorIsHot,
+			kz_major.DESCRIPTION as majorDescription
+		from 
+			kz_university,
+			kz_major,
+			kz_university_major
+		where 
+			kz_university_major.university_id=kz_university.id and
+			kz_university_major.major_id=kz_major.id
+			and kz_university.id=#{universityId}
+  	</select>
+  	<resultMap type="com.kz.po.Introduce" id="myResultMap_06">
+  	    <id column="introId" property="id"/>
+  	    <result column="introDetail" property="detail"/>
+  	    <association property="video" javaType="com.kz.po.Video">
+  	        <id column="videoId" property="id"/>
+  	        <result column="videoUrl" property="url"/>
+  	        <result column="videoDuration" property="duration"/>
+  	        <result column="videoThumb" property="thumb"/>
+  	    </association>
+  	</resultMap>
+  	<select id="schollByIntroduce" resultMap="myResultMap_06" parameterType="Long" >
+  	    select 
+			kz_Introduce.id as introId,
+			kz_Introduce.detail as introDetail,
+			kz_video.id as videoId,
+			kz_video.url as videoUrl,
+			kz_video.duration as videoDuration,
+			kz_video.thumb as videoThumb
+		from 
+			kz_university ,	 
+			kz_Introduce , 
+			kz_video 
+		where 
+			kz_university.introduce_id=kz_Introduce.id and 
+			kz_Introduce.id=kz_video.intro_id and
+			kz_university.id=#{universityId}
+  	</select>
+  	<resultMap type="com.kz.po.RecruitStudents" id="myResultMap_07">
+  	    <id column="rsId" property="rsId"/>
+  	    <result column="RsTitle" property="rsTitle"/>
+  	    <result column="RsDetaTime" property="rsDatetime"/>
+  	    <result column="RsContent" property="rsContent"/>
+  	</resultMap>
+  	<select id="schollByRecruit" resultMap="myResultMap_07" parameterType="Long" >
+  	    select 
+			kz_recruit_students.rs_id as rsId,
+			kz_recruit_students.rs_title as RsTitle,
+			kz_recruit_students.rs_datetime as RsDetaTime,
+			kz_recruit_students.rs_content as RsContent
+		from
+			kz_university ,
+			kz_recruit_students 
+		where 
+			kz_university.id=kz_recruit_students.university_id and
+			kz_university.id=#{universityId}
+  	</select>
 </mapper>

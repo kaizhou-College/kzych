@@ -16,6 +16,7 @@ import com.kz.po.MajorCategory;
 import com.kz.po.MajorCategoryQuery;
 import com.kz.po.MajorQuery;
 import com.kz.po.MajorUniversity;
+import com.kz.po.University;
 import com.kz.service.IMajorService;
 
 @Service
@@ -43,4 +44,5 @@ public class MajorServiceImpl extends BaseService<Major, MajorQuery> implements 
 		PageInfo<MajorCategory> result = new PageInfo<MajorCategory>(list);
 		return result;
 	}
+
 }

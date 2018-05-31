@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.kz.core.common.ServerResponse;
 import com.kz.dao.MajorCategoryMapper;
+import com.kz.po.Major;
 import com.kz.po.MajorCategory;
 import com.kz.po.MajorCategoryQuery;
 import com.kz.po.MajorQuery;
@@ -81,8 +82,11 @@ public class MajorController {
 		if (majorUniversity == null) {
 			ServerResponse.createByErrorMessage("本校还未开此专业！！");
 		}
-
+		
 		return ServerResponse.createBySuccess("查询成功！", majorUniversity);
 	}
+	
 
+	
+	
 }

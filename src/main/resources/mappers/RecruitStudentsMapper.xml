@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kz.dao.RecruitStudentsMapper" >
+  <resultMap id="BaseResultMap" type="com.kz.po.RecruitStudents" >
+    <id column="rs_id" property="rsId" jdbcType="BIGINT" />
+    <result column="rs_title" property="rsTitle" jdbcType="VARCHAR" />
+    <result column="rs_datetime" property="rsDatetime" jdbcType="DATE" />
+    <result column="rs_content" property="rsContent" jdbcType="VARCHAR" />
+    <result column="university_id" property="universityId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rs_id, rs_title, rs_datetime, rs_content, university_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from kz_recruit_students
+    where rs_id = #{rsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from kz_recruit_students
+    where rs_id = #{rsId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.kz.po.RecruitStudents" >
+    insert into kz_recruit_students (rs_id, rs_title, rs_datetime, 
+      rs_content, university_id)
+    values (#{rsId,jdbcType=BIGINT}, #{rsTitle,jdbcType=VARCHAR}, #{rsDatetime,jdbcType=DATE}, 
+      #{rsContent,jdbcType=VARCHAR}, #{universityId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kz.po.RecruitStudents" >
+    insert into kz_recruit_students
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rsId != null" >
+        rs_id,
+      </if>
+      <if test="rsTitle != null" >
+        rs_title,
+      </if>
+      <if test="rsDatetime != null" >
+        rs_datetime,
+      </if>
+      <if test="rsContent != null" >
+        rs_content,
+      </if>
+      <if test="universityId != null" >
+        university_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rsId != null" >
+        #{rsId,jdbcType=BIGINT},
+      </if>
+      <if test="rsTitle != null" >
+        #{rsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="rsDatetime != null" >
+        #{rsDatetime,jdbcType=DATE},
+      </if>
+      <if test="rsContent != null" >
+        #{rsContent,jdbcType=VARCHAR},
+      </if>
+      <if test="universityId != null" >
+        #{universityId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.RecruitStudents" >
+    update kz_recruit_students
+    <set >
+      <if test="rsTitle != null" >
+        rs_title = #{rsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="rsDatetime != null" >
+        rs_datetime = #{rsDatetime,jdbcType=DATE},
+      </if>
+      <if test="rsContent != null" >
+        rs_content = #{rsContent,jdbcType=VARCHAR},
+      </if>
+      <if test="universityId != null" >
+        university_id = #{universityId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where rs_id = #{rsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kz.po.RecruitStudents" >
+    update kz_recruit_students
+    set rs_title = #{rsTitle,jdbcType=VARCHAR},
+      rs_datetime = #{rsDatetime,jdbcType=DATE},
+      rs_content = #{rsContent,jdbcType=VARCHAR},
+      university_id = #{universityId,jdbcType=BIGINT}
+    where rs_id = #{rsId,jdbcType=BIGINT}
+  </update>
+  <!-- 自己的 -->
+   <select id="selectByUniversityId" parameterType="int" resultMap="BaseResultMap">
+      select 
+      <include refid="Base_Column_List" />
+	  from 
+	  	kz_recruit_students
+	  where
+	  	university_id=#{id,jdbcType=BIGINT}  
+  </select>
+  
+   <insert id="addSelective" parameterType="com.kz.po.RecruitStudents" >
+    insert into kz_recruit_students
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      
+        rs_id,
+
+      <if test="rsTitle != null" >
+        rs_title,
+      </if>
+      <if test="rsDatetime != null" >
+        rs_datetime,
+      </if>
+      <if test="rsContent != null" >
+        rs_content,
+      </if>
+      <if test="universityId != null" >
+        university_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+   		null,
+      <if test="rsTitle != null" >
+        #{rsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="rsDatetime != null" >
+        #{rsDatetime,jdbcType=DATE},
+      </if>
+      <if test="rsContent != null" >
+        #{rsContent,jdbcType=VARCHAR},
+      </if>
+      <if test="universityId != null" >
+        #{universityId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>
