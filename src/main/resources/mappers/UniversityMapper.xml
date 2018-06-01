@@ -1030,14 +1030,14 @@
 		    city,
 		    county,
 		    addrDetail
-		from
+		from  
 			kz_university ,
 			kz_address,
-			kz_university_CATEGORY
+			kz_university_category
 		where 
 			kz_university.id=kz_address.university_id and
-			kz_university.CATEGORYID=kz_university_CATEGORY.id and
-			kz_university_CATEGORY.id=#{categoryid}
+			kz_university.CATEGORYID=kz_university_category.id and
+			kz_university_category.id=#{categoryid}
   	</select>
   	
   	<resultMap type="com.kz.po.University" id="myResultMap_04">
