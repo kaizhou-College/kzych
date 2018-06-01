@@ -556,8 +556,8 @@
 		from kz_university
 		<where>
 		    1=1 
-			<if test="categoryid!=0 &amp;&amp;categoryid > 0">
-				and categoryid=#{categoryid}
+			<if test="categoryId!=0 &amp;&amp;categoryId > 0">
+				and categoryid=#{categoryId}
 			</if>
 			<!-- 名字 -->
 			<if test="name!=null &amp;&amp; name!=''">
