@@ -1030,10 +1030,10 @@
 		    city,
 		    county,
 		    addrDetail
-		from
+		from  
 			kz_university ,
 			kz_address,
-			kz_university_CATEGORY
+			kz_university_category
 		where 
 			kz_university.id=kz_address.university_id and
 			kz_university.CATEGORYID=kz_university_CATEGORY.id and
