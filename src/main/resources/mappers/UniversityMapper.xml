@@ -1113,19 +1113,19 @@
   	</resultMap>
   	<select id="schollByIntroduce" resultMap="myResultMap_06" parameterType="Long" >
   	    select 
-			kz_Introduce.id as introId,
-			kz_Introduce.detail as introDetail,
+			kz_introduce.id as introId,
+			kz_introduce.detail as introDetail,
 			kz_video.id as videoId,
 			kz_video.url as videoUrl,
 			kz_video.duration as videoDuration,
 			kz_video.thumb as videoThumb
 		from 
 			kz_university ,	 
-			kz_Introduce , 
+			kz_introduce , 
 			kz_video 
 		where 
-			kz_university.introduce_id=kz_Introduce.id and 
-			kz_Introduce.id=kz_video.intro_id and
+			kz_university.introduce_id=kz_introduce.id and 
+			kz_introduce.id=kz_video.intro_id and
 			kz_university.id=#{universityId}
   	</select>
   	<resultMap type="com.kz.po.RecruitStudents" id="myResultMap_07">

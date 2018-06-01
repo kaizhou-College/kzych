@@ -143,6 +143,7 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 	}
 	@Override
 	public PageInfo schollByMajor(UniversityQuery qu) {
+		PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
 		List<University> list =mapper.schollByMajor(qu.getUniversityId());
 		PageInfo<University> result = new PageInfo<University>(list);
 		return result;
