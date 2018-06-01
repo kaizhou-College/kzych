@@ -205,7 +205,7 @@ public class UniversityController {
 	/**
 	 * 
 	 * @Title: categoryList
-	 * @Description: 查询学校的全部等级（kz_university_category）
+	 * @Description: 查询学校的全部等级（categoryList）
 	 * @param: @return
 	 * @return: List<UniversityCategory> 返回值类型
 	 */
@@ -623,6 +623,7 @@ public class UniversityController {
 		}
 	}
 	
+	
 	//招生简章的数据返回 Enrollment Guide
 		@RequestMapping(value="/selectByUniversityId.do")
 		@ResponseBody
@@ -658,7 +659,7 @@ public class UniversityController {
 		 *http://localhost:8080/kzych/university/schollByIntroduceInfo.do?universityId=71&majorId=1
 		 **/
 		
-		//三 《通过专业列表来查找学校   
+		//三 《通过专业id来查找学校   
 		@RequestMapping(value="selectByMajorId.do") 
 		@ResponseBody 
 		public ServerResponse<PageInfo> selectByMajorId(UniversityQuery qu) {

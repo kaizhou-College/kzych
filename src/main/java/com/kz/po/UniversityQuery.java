@@ -33,8 +33,6 @@ public class UniversityQuery extends BaseQueryModel  {
     //majorID
     private Long majorId;
     
-    //学校类别id
-    private Long categoryId;
     
     //univeraistyId;
     private Long universityId;
@@ -149,15 +147,6 @@ public class UniversityQuery extends BaseQueryModel  {
 		this.universityId = universityId;
 	}
 
-	public Long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	
 
 
 }
