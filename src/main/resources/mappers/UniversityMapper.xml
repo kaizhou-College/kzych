@@ -419,7 +419,7 @@
     <result column="CATEGORYID" property="categoryid" jdbcType="BIGINT" />
     <result column="PUBLISH_STATUS" property="publishStatus" jdbcType="INTEGER" />
     <result column="School_license" property="schoolLicense" jdbcType="VARCHAR" />
-    <result column="kz_university.NAME" property="name" jdbcType="LONGVARCHAR" />
+    <result column="universityName" property="name" jdbcType="LONGVARCHAR" />
     <result column="EMPLOYMENT_INFO" property="employmentInfo" jdbcType="LONGVARCHAR" />
     <result column="BROCHURE" property="brochure" jdbcType="LONGVARCHAR" />
     <result column="INTRODUCTION" property="introduction" jdbcType="LONGVARCHAR" />
@@ -449,7 +449,7 @@
 		kz_university.ID, CODE, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, coupon,
 		CATEGORYID,
 		PUBLISH_STATUS,
-		kz_university.NAME, EMPLOYMENT_INFO, BROCHURE, INTRODUCTION,
+		kz_university.NAME as universityName, EMPLOYMENT_INFO, BROCHURE, INTRODUCTION,
 		Legal_person_name,Legal_person_Card,Legal_person_Phone,Administrator_Account,
 		Administrator_Name,Administrator_Phone,USER_id,University_Type,University_Nature,
 		checked_info,school_CoverImg
@@ -1156,6 +1156,19 @@
   	    <result column="RsContent" property="rsContent"/>
   	</resultMap>
   	<select id="schollByRecruit" resultMap="myResultMap_07" parameterType="Long" >
+  	    select 
+			kz_recruit_students.rs_id as rsId,
+			kz_recruit_students.rs_title as RsTitle,
+			kz_recruit_students.rs_datetime as RsDetaTime,
+			kz_recruit_students.rs_content as RsContent
+		from
+			kz_university ,
+			kz_recruit_students 
+		where 
+			kz_university.id=kz_recruit_students.university_id and
+			kz_university.id=#{universityId}
+  	</select>
+  	<select id="schoolByMajorInfo" resultMap="myResultMap_07" parameterType="Long" >
   	    select 
 			kz_recruit_students.rs_id as rsId,
 			kz_recruit_students.rs_title as RsTitle,
