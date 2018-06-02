@@ -80,7 +80,7 @@
 						<label class="layui-form-label">选择地区</label>
 						<div class="layui-input-inline">
 							<select name="provid" id="provid" lay-filter="provid">
-								<option value="1">请选择省</option>
+								<option value="">请选择省</option>
 							</select>
 						</div>
 						<div class="layui-input-inline">
@@ -289,10 +289,10 @@
 				  $.ajax({
 			  			type:"post",
 			  			url:host_kzych+"university/dimListPage.do",
-			  			data:{"provid":$("#provid").val(),
-			  					"cityid":$("#cityid").val(),
-			  					"areaid":$("#areaid").val(),
-			  					"search_key":$("#search_key").val(),
+			  			data:{"provice":$("#provid").val(),
+			  					"city":$("#cityid").val(),
+			  					"county":$("#areaid").val(),
+			  					"addrdetail":$("#search_key").val(),
 			  					"publishStatus":"1"},
 			  			success:function(data){
 			  				//数据返回时
@@ -314,10 +314,10 @@
 										$.ajax({
 								  			type:"post",
 								  			url:host_kzych+"university/dimListPage.do",
-								  			data:{"provid":$("#provid").val(),
-								  					"cityid":$("#cityid").val(),
-								  					"areaid":$("#areaid").val(),
-								  					"search_key":$("#search_key").val(),
+								  			data:{"provice":$("#provid").val(),
+							  						"city":$("#cityid").val(),
+							  						"county":$("#areaid").val(),
+							  						"addrdetail":$("#search_key").val(),
 								  					"publishStatus":"1",
 								  					"pageNum":currentPage,
 								  					"pageSize":limit
@@ -570,15 +570,6 @@
 	  //学校等级的设置默认值 
 	  	settingsSelected(categoryname,list.categoryid,"categoryid_seelct_03");
 	  	function settingsSelected(list,id,select_id){
-	  		/* var size=0;
-	  		for(var i=1;0<list.length;i++){
-	      		if(list[i].substring(0,1)==id){
-	      			$("#"+select_id+" option[value="+(i-1)+"]").attr("selected","selected");
-	      		}else{
-	      			size=size+1;
-	      		}
-	      		alert(size+"--=："+(list.length-1)+"-=-=："+list[i].substring(0,1));
-	      	} */
 	      	var size=0;
 	  		for(var i=1;i<list.length;i++){
 	      		if(list[i].substring(0,1)==id){

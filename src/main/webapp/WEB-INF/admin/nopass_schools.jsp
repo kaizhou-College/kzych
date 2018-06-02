@@ -75,7 +75,7 @@
 						<label class="layui-form-label">选择地区</label>
 						<div class="layui-input-inline">
 							<select name="provid" id="provid" lay-filter="provid">
-								<option value="1">请选择省</option>
+								<option value="">请选择省</option>
 							</select>
 						</div>
 						<div class="layui-input-inline">
@@ -274,10 +274,10 @@ app.init(function($){
 			  $.ajax({
 		  			type:"post",
 		  			url:host_kzych+"university/dimListPage.do",
-		  			data:{"provid":$("#provid").val(),
-		  					"cityid":$("#cityid").val(),
-		  					"areaid":$("#areaid").val(),
-		  					"search_key":$("#search_key").val(),
+		  			data:{"provice":$("#provid").val(),
+	  						"city":$("#cityid").val(),
+	  						"county":$("#areaid").val(),
+	  						"addrdetail":$("#search_key").val(),
 		  					"publishStatus":"3"},
 		  			success:function(data){
 		  				//数据返回时  
@@ -299,10 +299,10 @@ app.init(function($){
 									$.ajax({
 							  			type:"post",
 							  			url:host_kzych+"university/dimListPage.do",
-							  			data:{"provid":$("#provid").val(),
-							  					"cityid":$("#cityid").val(),
-							  					"areaid":$("#areaid").val(),
-							  					"search_key":$("#search_key").val(),
+							  			data:{"provice":$("#provid").val(),
+						  						"city":$("#cityid").val(),
+						  						"county":$("#areaid").val(),
+						  						"addrdetail":$("#search_key").val(),
 							  					"publishStatus":"3",
 							  					"pageNum":currentPage,
 							  					"pageSize":limit

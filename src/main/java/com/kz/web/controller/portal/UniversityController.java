@@ -96,7 +96,6 @@ public class UniversityController {
 	@RequestMapping(value="schoolByUserIdUpdate.do", method = RequestMethod.POST)
 	public void schoolByUserIdUpdate(University m, HttpServletResponse response,HttpServletRequest request) {
 		Long result = iUniversityService.schoolByUserIdUpdate(m);
-
 		try {
 //			response.sendRedirect("/kzych/user/userinfoTo.do");
 			response.sendRedirect("/user/toUserInfo.do");
