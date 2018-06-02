@@ -28,8 +28,6 @@ public class University extends BaseModel{
     
     private String introduction;
 
-    private String address;
-    
     private String employmentInfo;
 
     private String brochure;
@@ -63,10 +61,6 @@ public class University extends BaseModel{
     private String checkedInfo;
     
     private String schoolCoverimg;
-    
-    private Integer schoolLongitude;
-
-    private Integer schoolLatitude;
     
     private Long introduceId;
     
@@ -148,14 +142,6 @@ public class University extends BaseModel{
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
     }
 
     public String getEmploymentInfo() {
@@ -286,21 +272,6 @@ public class University extends BaseModel{
 		this.schoolCoverimg = schoolCoverimg;
 	}
 
-	public Integer getSchoolLongitude() {
-		return schoolLongitude;
-	}
-
-	public void setSchoolLongitude(Integer schoolLongitude) {
-		this.schoolLongitude = schoolLongitude;
-	}
-
-	public Integer getSchoolLatitude() {
-		return schoolLatitude;
-	}
-
-	public void setSchoolLatitude(Integer schoolLatitude) {
-		this.schoolLatitude = schoolLatitude;
-	}
 
 	public Long getIntroduceId() {
 		return introduceId;

@@ -12,20 +12,21 @@ public class UniversityQuery extends BaseQueryModel  {
     
     private Integer publishStatus;
     //查询时的地址
-    //----下拉框选中的值
-    private String provid;
-    private String cityid;
-    private String areaid;
-    //----文本输入的值
-    private String search_key;
+    private String longitude;
+
+    private String provice;
+
+    private String city;
+
+    private String county;
+
+    private String addrdetail;
+
+    private String latitude;
     
     //查看学校是否热门
     private Integer isHot;
     
-    //经度
-    private Integer schoolLongitude;
-    //纬度
-    private Integer schoolLatitude;
     
     //专业类别
     private String majorCategoryName;
@@ -55,42 +56,7 @@ public class UniversityQuery extends BaseQueryModel  {
 		this.publishStatus = publishStatus;
 	}
 
-	public String getProvid() {
-		return provid;
-	}
-
-	public void setProvid(String provid) {
-		this.provid = provid;
-	}
-
-	public String getCityid() {
-		return cityid;
-	}
-
-	public void setCityid(String cityid) {
-		this.cityid = cityid;
-	}
-
-	public String getAreaid() {
-		return areaid;
-	}
-
-	public void setAreaid(String areaid) {
-		this.areaid = areaid;
-	}
-
-	public String getSearch_key() {
-		return search_key;
-	}
-
-	public void setSearch_key(String search_key) {
-		if(search_key.equals("undefined")){
-			this.search_key =null;
-		}else{
-			this.search_key = search_key;
-		}
-	}
-
+	
 
 
 	public Long getCategoryId() {
@@ -109,20 +75,54 @@ public class UniversityQuery extends BaseQueryModel  {
 		this.name = name;
 	}
 
-	public Integer getSchoolLongitude() {
-		return schoolLongitude;
+	
+
+	public String getLongitude() {
+		return longitude;
 	}
 
-	public void setSchoolLongitude(Integer schoolLongitude) {
-		this.schoolLongitude = schoolLongitude;
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 
-	public Integer getSchoolLatitude() {
-		return schoolLatitude;
+	public String getProvice() {
+		return provice;
 	}
 
-	public void setSchoolLatitude(Integer schoolLatitude) {
-		this.schoolLatitude = schoolLatitude;
+	public void setProvice(String provice) {
+		this.provice = provice;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCounty() {
+		return county;
+	}
+
+	public void setCounty(String county) {
+		this.county = county;
+	}
+
+	public String getAddrdetail() {
+		return addrdetail;
+	}
+
+	public void setAddrdetail(String addrdetail) {
+		this.addrdetail = addrdetail;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
 	}
 
 	public String getMajorCategoryName() {

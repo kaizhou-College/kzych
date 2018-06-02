@@ -338,26 +338,26 @@ public class UniversityController {
 		// 解决乱码问题
 		String method = req.getMethod();
 		if(method.equals("GET")){
-			String provid = qu.getProvid();
-			String cityid = qu.getCityid();
-			String areaid = qu.getAreaid();
-			String search_key = qu.getSearch_key();
+			String provid = qu.getProvice();
+			String cityid = qu.getCity();
+			String areaid = qu.getCounty();
+			String search_key = qu.getAddrdetail();
 			try {
 				if(provid!=null){
 					provid = new String(provid.getBytes("iso-8859-1"), "UTF-8");
-					qu.setProvid(provid);
+					qu.setProvice(provid);
 				}
 				if(cityid!=null){
 					cityid = new String(cityid.getBytes("iso-8859-1"), "UTF-8");
-					qu.setCityid(cityid);
+					qu.setCity(cityid);
 				}
 				if(areaid!=null){
 					areaid = new String(areaid.getBytes("iso-8859-1"), "UTF-8");
-					qu.setAreaid(areaid);
+					qu.setCounty(areaid);
 				}
 				if(search_key!=null){
 					search_key = new String(search_key.getBytes("iso-8859-1"), "UTF-8");
-					qu.setSearch_key(search_key);
+					qu.setAddrdetail(search_key);
 				}
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
@@ -389,26 +389,26 @@ public class UniversityController {
 		}*/
 		String method = re.getMethod();
 		if(method.equals("GET")){
-			String provid = uq.getProvid();
-			String cityid = uq.getCityid();
-			String areaid = uq.getAreaid();
-			String search_key = uq.getSearch_key();
+			String provid = uq.getProvice();
+			String cityid = uq.getCity();
+			String areaid = uq.getCounty();
+			String search_key = uq.getAddrdetail();
 			try {
 				if(provid!=null){
 					provid = new String(provid.getBytes("iso-8859-1"), "UTF-8");
-					uq.setProvid(provid);
+					uq.setProvice(provid);
 				}
 				if(cityid!=null){
 					cityid = new String(cityid.getBytes("iso-8859-1"), "UTF-8");
-					uq.setCityid(cityid);
+					uq.setCity(cityid);
 				}
 				if(areaid!=null){
 					areaid = new String(areaid.getBytes("iso-8859-1"), "UTF-8");
-					uq.setAreaid(areaid);
+					uq.setCounty(areaid);
 				}
 				if(search_key!=null){
 					search_key = new String(search_key.getBytes("iso-8859-1"), "UTF-8");
-					uq.setSearch_key(search_key);
+					uq.setAddrdetail(search_key);
 				}
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
@@ -490,7 +490,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: ServerResponse 返回值类型
 	 */
-	@RequestMapping(value="schoolAddressList1.do", method = RequestMethod.POST)
+	@RequestMapping(value="schoolAddressList.do", method = RequestMethod.POST)
 	@ResponseBody
 	public PageInfo<University> schoolAddressList(UniversityQuery hq){
 		PageInfo<University> hotList = iUniversityService.schoolAddressList(hq);
