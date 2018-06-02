@@ -34,7 +34,7 @@ public class University extends BaseModel{
 
     private List<Major> majors;
     
-    private Address addre;
+    private Address address;
     
     private Introduce introduce;
     
@@ -281,12 +281,12 @@ public class University extends BaseModel{
 		this.introduceId = introduceId;
 	}
 
-	public Address getAddre() {
-		return addre;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setAddre(Address addre) {
-		this.addre = addre;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public Introduce getIntroduce() {
