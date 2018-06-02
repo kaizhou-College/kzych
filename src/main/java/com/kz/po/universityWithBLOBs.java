@@ -3,8 +3,6 @@ package com.kz.po;
 public class universityWithBLOBs extends University {
     private String name;
 
-    private String address;
-
     private String employmentInfo;
 
     private String brochure;
@@ -17,14 +15,6 @@ public class universityWithBLOBs extends University {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
     }
 
     public String getEmploymentInfo() {
