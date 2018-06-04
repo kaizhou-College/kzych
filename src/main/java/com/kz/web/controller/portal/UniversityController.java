@@ -676,6 +676,7 @@ public class UniversityController {
 		
 		//===**附件学校
 		//一，按照学校类别来查找学校
+		//http://localhost:8080/kzych/university/schollByTypeList.do?categoryId=2
 		//二，然后通过学校id来查找 该学校所有专业  和 学校信息（学校视频及学校图片）以及学校招生动态
 		
 		/*二（1）通过id查找学校以及地址
@@ -683,7 +684,7 @@ public class UniversityController {
 		 *二（2）通过学校id查找该学校所有专业
 		 *http://localhost:8080/kzych/university/schollByMajor.do?universityId=71
 		 *二（3）通过学校id查找该学校的概况
-		 *
+		 *http://localhost:8080/kzych/university/schollByIntroduce.do?universityId=71
 		 *二（4）通过学校id查找该学校的动态
 		 *http://localhost:8080/kzych/university/schollByRecruit.do?universityId=71
 		 * */

@@ -90,7 +90,7 @@ public class UserController {
 	}
 
 	/**
-	 * @Title: login
+	 * @Title: toUserInfo
 	 * @Description: 跳往用户信息
 	 * @param: @param
 	 *             session

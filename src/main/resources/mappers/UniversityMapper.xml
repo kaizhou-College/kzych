@@ -443,6 +443,15 @@
 			<result column="ishot" property="ishot" />
 			<result column="description" property="description" />
 		</collection>
+		<collection property="address" javaType="com.kz.po.Address">
+		    <id column="addressId" property="id"/>
+  	        <result column="longitude" property="longitude"/>
+			<result column="latitude" property="latitude"/>
+			<result column="provice" property="provice"/>
+			<result column="city" property="city"/>
+			<result column="county" property="county"/>
+			<result column="addrDetail" property="addrdetail"/>
+		</collection>
 	</resultMap>
 
 	<sql id="kzBase_Column_List">
@@ -1062,7 +1071,7 @@
 		where 
 			kz_university.id=kz_address.university_id and
 			kz_university.CATEGORYID=kz_university_category.id and
-			kz_university_category.id=#{categoryid}
+			kz_university_category.id=#{categoryId}
   	</select>
   	
   	<resultMap type="com.kz.po.University" id="myResultMap_04">
