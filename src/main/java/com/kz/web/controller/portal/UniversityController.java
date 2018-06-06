@@ -30,9 +30,9 @@ import com.kz.core.common.ResponseCode;
 import com.kz.core.common.ServerResponse;
 import com.kz.po.Address;
 import com.kz.po.MajorCategoryQuery;
-import com.kz.po.RecruitStudents;
 import com.kz.po.University;
 import com.kz.po.UniversityCategory;
+import com.kz.po.UniversityDynamic;
 import com.kz.po.UniversityQuery;
 import com.kz.po.User;
 import com.kz.service.IFileService;
@@ -643,7 +643,7 @@ public class UniversityController {
 		@ResponseBody
 		public JSONObject schoolByProfession(int universityId,HttpSession session,HttpServletResponse response){
 			StringBuffer json=new StringBuffer("{\"code\": 0,\"msg\": \"\",\"count\": 2,\"data\": [");
-			List<RecruitStudents> list = iUniversityService.selectByUniversityId(universityId);
+			List<UniversityDynamic> list = iUniversityService.selectByUniversityId(universityId);
 			for(int i=0;i<list.size();i++){
 				if(i==0){
 					json.append("{");
@@ -724,16 +724,16 @@ public class UniversityController {
 			PageInfo pageInfo = iUniversityService.schollByMajor(qu);
 			return ServerResponse.createBySuccess("查询成功", pageInfo);
 		}
-		
+		 
 		 //*二（3）通过学校id查找该学校的概况
-		@RequestMapping(value="schollByIntroduce.do") 
+		@RequestMapping(value="university_detail_Introduce.do") 
 		@ResponseBody 
 		public ServerResponse<PageInfo> schollByIntroduce(UniversityQuery qu) {
 			PageInfo pageInfo = iUniversityService.schollByIntroduce(qu);
 			return ServerResponse.createBySuccess("查询成功", pageInfo);
 		}
 		 //*二（4）通过学校id查找该学校的动态 
-		@RequestMapping(value="schollByRecruit.do") 
+		@RequestMapping(value="university_detail_dynamic.do") 
 		@ResponseBody 
 		public ServerResponse<PageInfo> schollByRecruit(UniversityQuery qu) {
 			PageInfo pageInfo = iUniversityService.schollByRecruit(qu);

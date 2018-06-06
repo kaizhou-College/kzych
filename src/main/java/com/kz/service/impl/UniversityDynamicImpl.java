@@ -8,26 +8,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kz.core.service.BaseService;
-import com.kz.dao.RecruitStudentsMapper;
-import com.kz.po.RecruitStudents;
-import com.kz.po.RecruitStudentsQuery;
-import com.kz.service.IRecruitStudents;
+import com.kz.dao.UniversityDynamicMapper;
+import com.kz.po.UniversityDynamic;
+import com.kz.po.UniversityDynamicQuery;
+import com.kz.service.IUniversityDynamic;
 @Service
 @Transactional
-public class RecruitStudentsImpl extends BaseService<RecruitStudents, RecruitStudentsQuery> implements IRecruitStudents  {
-	private RecruitStudentsMapper mapper;
+public class UniversityDynamicImpl extends BaseService<UniversityDynamic, UniversityDynamicQuery> implements IUniversityDynamic  {
+	private UniversityDynamicMapper mapper;
 	@Autowired
-	public void setMapper(RecruitStudentsMapper mapper){
+	public void setMapper(UniversityDynamicMapper mapper){
 		this.mapper = mapper;
 		super.setMapper(mapper);
 	}
 	@Override
 	public List selectByUniversityId(int id) {
-		List<RecruitStudents> selectByUniversityId = mapper.selectByUniversityId(id);
+		List<UniversityDynamic> selectByUniversityId = mapper.selectByUniversityId(id);
 		return selectByUniversityId;
 	}
 	@Override
-	public Long addSelective(RecruitStudents re) {
+	public Long addSelective(UniversityDynamic re) {
 		Long addSelective = mapper.addSelective(re);
 		return addSelective;
 	}

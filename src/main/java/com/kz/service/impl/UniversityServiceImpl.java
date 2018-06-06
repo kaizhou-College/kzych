@@ -15,8 +15,8 @@ import com.kz.dao.AddressMapper;
 import com.kz.dao.UniversityCategoryMapper;
 import com.kz.dao.UniversityMapper;
 import com.kz.po.Address;
-import com.kz.po.RecruitStudents;
 import com.kz.po.University;
+import com.kz.po.UniversityDynamic;
 import com.kz.po.UniversityQuery;
 import com.kz.service.IUniversityService;
 
@@ -115,7 +115,7 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 		return updateByTelephone;
 	}
 	@Override
-	public List<RecruitStudents> selectByUniversityId(int universityId) {
+	public List<UniversityDynamic> selectByUniversityId(int universityId) {
 		List list = mapper.selectByUniversityId(universityId);
 		return list;
 	}

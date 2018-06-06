@@ -16,22 +16,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kz.core.common.Const;
-import com.kz.po.RecruitStudents;
 import com.kz.po.University;
+import com.kz.po.UniversityDynamic;
 import com.kz.po.User;
-import com.kz.service.IRecruitStudents;
+import com.kz.service.IUniversityDynamic;
 import com.kz.service.IUniversityService;
 
 import net.sf.json.JSONObject;
 
 
 @Controller
-@RequestMapping("/recruit/")
-public class RecruitStudentsController {
+@RequestMapping("/dynamic/")
+public class UniversityDynamicController {
 	@Autowired
 	private IUniversityService universityService;
 	@Autowired
-	private IRecruitStudents recruitStudents;
+	private IUniversityDynamic IUniversityDynamic;
 	
 	/**
 	 * @Title: selectByMajorCategoryId
@@ -77,7 +77,7 @@ public class RecruitStudentsController {
 	@ResponseBody
 	public JSONObject selectByUniversityId(int universityId,HttpSession session,HttpServletResponse response){
 		StringBuffer json=new StringBuffer("{\"code\": 0,\"msg\": \"\",\"count\": 2,\"data\": [");
-		List<RecruitStudents> list = recruitStudents.selectByUniversityId(universityId);
+		List<UniversityDynamic> list = IUniversityDynamic.selectByUniversityId(universityId);
 		for(int i=0;i<list.size();i++){
 			if(i==0){
 				json.append("{");
@@ -96,9 +96,9 @@ public class RecruitStudentsController {
 	}
 	//添加
 	@RequestMapping(value="/addRS.do")
-	public void addRS(RecruitStudents rs,HttpServletResponse re){
+	public void addRS(UniversityDynamic rs,HttpServletResponse re){
 		rs.setRsDatetime(new Date());
-		Long long1 = recruitStudents.addSelective(rs);
+		Long long1 = IUniversityDynamic.addSelective(rs);
 		PrintWriter out = null;
 		try {
 			out = re.getWriter();
@@ -114,7 +114,7 @@ public class RecruitStudentsController {
 	//添加
 	@RequestMapping(value="/delRS.do")
 	public void delRS(Long rsId,HttpServletResponse re){
-		Long deleteByPrimaryKey = recruitStudents.deleteByPrimaryKey(rsId);
+		Long deleteByPrimaryKey = IUniversityDynamic.deleteByPrimaryKey(rsId);
 		
 		PrintWriter out = null;
 		try {

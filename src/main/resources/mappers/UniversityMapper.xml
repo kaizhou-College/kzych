@@ -1143,7 +1143,7 @@
 			kz_introduce.id=kz_video.intro_id and
 			kz_university.id=#{universityId}
   	</select>
-  	<resultMap type="com.kz.po.RecruitStudents" id="myResultMap_07">
+  	<resultMap type="com.kz.po.UniversityDynamic" id="myResultMap_07">
   	    <id column="rsId" property="rsId"/>
   	    <result column="RsTitle" property="rsTitle"/>
   	    <result column="RsDetaTime" property="rsDatetime"/>
@@ -1151,28 +1151,28 @@
   	</resultMap>
   	<select id="schollByRecruit" resultMap="myResultMap_07" parameterType="Long" >
   	    select 
-			kz_recruit_students.rs_id as rsId,
-			kz_recruit_students.rs_title as RsTitle,
-			kz_recruit_students.rs_datetime as RsDetaTime,
-			kz_recruit_students.rs_content as RsContent
+			kz_university_dynamic.rs_id as rsId,
+			kz_university_dynamic.rs_title as RsTitle,
+			kz_university_dynamic.rs_datetime as RsDetaTime,
+			kz_university_dynamic.rs_content as RsContent
 		from
 			kz_university ,
-			kz_recruit_students 
+			kz_university_dynamic 
 		where 
-			kz_university.id=kz_recruit_students.university_id and
+			kz_university.id=kz_university_dynamic.university_id and
 			kz_university.id=#{universityId}
   	</select>
   	<select id="schoolByMajorInfo" resultMap="myResultMap_07" parameterType="Long" >
   	    select 
-			kz_recruit_students.rs_id as rsId,
-			kz_recruit_students.rs_title as RsTitle,
-			kz_recruit_students.rs_datetime as RsDetaTime,
-			kz_recruit_students.rs_content as RsContent
+			kz_university_dynamic.rs_id as rsId,
+			kz_university_dynamic.rs_title as RsTitle,
+			kz_university_dynamic.rs_datetime as RsDetaTime,
+			kz_university_dynamic.rs_content as RsContent
 		from
 			kz_university ,
-			kz_recruit_students 
+			kz_university_dynamic 
 		where 
-			kz_university.id=kz_recruit_students.university_id and
+			kz_university.id=kz_university_dynamic.university_id and
 			kz_university.id=#{universityId}
   	</select>
   	<resultMap type="com.kz.po.University" id="mySchoolMajorInfoMap" extends="ResultMapWithBLOBs">

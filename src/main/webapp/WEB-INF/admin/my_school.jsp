@@ -51,7 +51,7 @@
 		 <div class="layui-body" id="main">
 		    <!-- 内容主体区域 -->
 		    
-		   	  <div class="layui-tab" lay-filter="recruit-tab" style="margin-left:20px;">
+		   	  <div class="layui-tab" lay-filter="dynamic-tab" style="margin-left:20px;">
 		   	  	
 					  <ul class="layui-tab-title" id="default_01">
 					  
@@ -98,7 +98,7 @@
 									<div  style="margin:30px 0 0 0;width:100%;">
 								 			  <span style="float:right;"><button id="add-regulations" class="layui-btn"><i class="layui-icon" style="font-size: 20px; ">&#xe654;</i>增加</button></span>
 												<hr class="layui-bg-green">
-												<table class="layui-table" lay-data="{ height:300, url:'${basePath}/recruit/selectByUniversityId.do?universityId=${schoolInfo.id}'}" id="table2" lay-filter="regulations">
+												<table class="layui-table" lay-data="{ height:300, url:'${basePath}/dynamic/selectByUniversityId.do?universityId=${schoolInfo.id}'}" id="table2" lay-filter="regulations">
 											  <thead>
 											    <tr>
 											    
@@ -131,7 +131,7 @@
 									<div  style="margin:30px 0 0 0;width:100%;">
 								 			  <span style="float:right;"><button id="add-notice" class="layui-btn "><i class="layui-icon " style="font-size: 20px; ">&#xe654;</i>增加</button></span>
 												<hr class="layui-bg-green">
-												<table class="layui-table" lay-data="{ height:300, url:'${basePath}/recruit/selectByUniversityId.do?universityId=${schoolInfo.id}'}" id="table3" lay-filter="notice">
+												<table class="layui-table" lay-data="{ height:300, url:'${basePath}/dynamic/selectByUniversityId.do?universityId=${schoolInfo.id}'}" id="table3" lay-filter="notice">
 											  <thead>
 											    <tr>
 											    
@@ -433,7 +433,7 @@
 		$("#majar-save").on("click",function(){
 			$.ajax({
 	  			type:"post",
-	  			url:host_kzych+"/recruit/addRS.do",
+	  			url:host_kzych+"/dynamic/addRS.do",
 	  			data:{"rsTitle":$("#rsTitle").val(),"rsContent":$("#detail").val(),"universityId":"${schoolInfo.id}"},  
 	  			success:function(data){
 	  				if(data.substring(0,4)=="添加成功"){
@@ -475,7 +475,7 @@
   		});
 	}
 	function delRS(del_id){
-		$.get(host_kzych+"/recruit/delRS.do?rsId="+del_id,
+		$.get(host_kzych+"/dynamic/delRS.do?rsId="+del_id,
 			  function(data){
 			shotMsg(data);
 		});

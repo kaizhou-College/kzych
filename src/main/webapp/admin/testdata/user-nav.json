@@ -1,16 +1,16 @@
-[{"name":"个人中心","action":"/university/toProduct.do","children":[],
+[{"name":"个人中心","action":"/kzych/university/toProduct.do","children":[],
                                          "side_nav":[
-                                            {"name":"产品与服务","action":"/university/toProduct.do","children":[]},
+                                            {"name":"产品与服务","action":"/kzych/university/toProduct.do","children":[]},
                                             {"name":"我的优惠券","action":"","children":[]},
                                             {"name":"我的定单","action":"","children":[]},
-                                            {"name":"用户信息","action":"/user/toUserInfo.do","children":[]},
+                                            {"name":"用户信息","action":"/kzych/user/toUserInfo.do","children":[]},
                                             {"name":"安全设置","action":"","children":[]}
                                          ]},
- {"name":"招生","action":"/recruit/mySchool.do","children":[],
+ {"name":"招生","action":"/kzych/dynamic/mySchool.do","children":[],
                                          "side_nav":[
-                                            {"name":"招生信息","action":"/recruit/mySchool.do","children":[]},
+                                            {"name":"招生信息","action":"/kzych/dynamic/mySchool.do","children":[]},
                                             
-                                            {"name":"报名管理","action":"/recruit/enrollManager.do","children":[]}
+                                            {"name":"报名管理","action":"/kzych/dynamic/enrollManager.do","children":[]}
                                            
                                          ]},
                                          

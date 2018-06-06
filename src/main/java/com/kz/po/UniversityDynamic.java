@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.kz.core.po.BaseModel;
 
-public class RecruitStudents extends BaseModel {
+public class UniversityDynamic extends BaseModel {
     private Long rsId;
 
     private String rsTitle;

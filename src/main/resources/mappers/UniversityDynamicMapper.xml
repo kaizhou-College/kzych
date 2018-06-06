@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.kz.dao.RecruitStudentsMapper" >
-  <resultMap id="BaseResultMap" type="com.kz.po.RecruitStudents" >
+<mapper namespace="com.kz.dao.UniversityDynamicMapper" >
+  <resultMap id="BaseResultMap" type="com.kz.po.UniversityDynamic" >
     <id column="rs_id" property="rsId" jdbcType="BIGINT" />
     <result column="rs_title" property="rsTitle" jdbcType="VARCHAR" />
     <result column="rs_datetime" property="rsDatetime" jdbcType="DATE" />
@@ -14,21 +14,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from kz_recruit_students
+    from kz_university_dynamic
     where rs_id = #{rsId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from kz_recruit_students
+    delete from kz_university_dynamic
     where rs_id = #{rsId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.kz.po.RecruitStudents" >
-    insert into kz_recruit_students (rs_id, rs_title, rs_datetime, 
+  <insert id="insert" parameterType="com.kz.po.UniversityDynamic" >
+    insert into kz_university_dynamic (rs_id, rs_title, rs_datetime, 
       rs_content, university_id)
     values (#{rsId,jdbcType=BIGINT}, #{rsTitle,jdbcType=VARCHAR}, #{rsDatetime,jdbcType=DATE}, 
       #{rsContent,jdbcType=VARCHAR}, #{universityId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.kz.po.RecruitStudents" >
-    insert into kz_recruit_students
+  <insert id="insertSelective" parameterType="com.kz.po.UniversityDynamic" >
+    insert into kz_university_dynamic
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="rsId != null" >
         rs_id,
@@ -64,8 +64,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.RecruitStudents" >
-    update kz_recruit_students
+  <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.UniversityDynamic" >
+    update kz_university_dynamic
     <set >
       <if test="rsTitle != null" >
         rs_title = #{rsTitle,jdbcType=VARCHAR},
@@ -82,8 +82,8 @@
     </set>
     where rs_id = #{rsId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.kz.po.RecruitStudents" >
-    update kz_recruit_students
+  <update id="updateByPrimaryKey" parameterType="com.kz.po.UniversityDynamic" >
+    update kz_university_dynamic
     set rs_title = #{rsTitle,jdbcType=VARCHAR},
       rs_datetime = #{rsDatetime,jdbcType=DATE},
       rs_content = #{rsContent,jdbcType=VARCHAR},
@@ -95,13 +95,13 @@
       select 
       <include refid="Base_Column_List" />
 	  from 
-	  	kz_recruit_students
+	  	kz_university_dynamic
 	  where
 	  	university_id=#{id,jdbcType=BIGINT}  
   </select>
   
-   <insert id="addSelective" parameterType="com.kz.po.RecruitStudents" >
-    insert into kz_recruit_students
+   <insert id="addSelective" parameterType="com.kz.po.UniversityDynamic" >
+    insert into kz_university_dynamic
     <trim prefix="(" suffix=")" suffixOverrides="," >
       
         rs_id,
