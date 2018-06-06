@@ -1,19 +1,13 @@
 package com.kz.dao;
 
+import org.springframework.stereotype.Repository;
+
+import com.kz.core.dao.BaseMapper;
 import com.kz.po.Address;
+import com.kz.po.AddressQuery;
 
-public interface AddressMapper {
-    int deleteByPrimaryKey(Long id);
-
-    int insert(Address record);
-
-    int insertSelective(Address record);
-
-    Address selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(Address record);
-
-    int updateByPrimaryKeyWithBLOBs(Address record);
-
-    int updateByPrimaryKey(Address record);
+@Repository
+public interface AddressMapper extends BaseMapper<Address,AddressQuery>{
+   
+	
 }

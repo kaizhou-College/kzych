@@ -30,5 +30,5 @@ public interface UniversityMapper extends BaseMapper<University, UniversityQuery
 	List<University> schollByMajor(Long universityId);
 	List<University> schollByIntroduce(Long universityId);
 	List<University> schollByRecruit(Long universityId);
-	
+	List<University> mySchoolMajorInfo(Long universityId);
 }

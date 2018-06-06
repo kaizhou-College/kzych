@@ -34,8 +34,8 @@
 	    <ul class="layui-nav layui-layout-right">
 	      <li class="layui-nav-item">
 	        <a href="javascript:;">
-	          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-	          贤心
+	          <img src="https://kzych.oss-cn-qingdao.aliyuncs.com/${currentUser.userAvatar }" class="layui-nav-img">
+           	  ${currentUser.username }
 	        </a>
 	        
 	      </li>

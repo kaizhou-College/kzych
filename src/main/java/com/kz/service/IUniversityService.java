@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.kz.core.common.ServerResponse;
 import com.kz.core.service.IBaseService;
+import com.kz.po.Address;
 import com.kz.po.Major;
 import com.kz.po.RecruitStudents;
 import com.kz.po.University;
@@ -15,13 +16,13 @@ import com.kz.po.UserQuery;
 
 public interface IUniversityService extends IBaseService<University, UniversityQuery>{
 
-	List<University> selectMajorsPageById(Long id, int pageNum, int pageSize);
+	List<University> selectMajorsPageById(UniversityQuery qu);
 	PageInfo listKeyPublishStatus(UniversityQuery qu);
 	List categoryList(); 
 	Long insertSelectiveSequence(University m);
 	Long updateByKeySelective(University m);
 	List<University> schoolByUserIdList(University m);
-	Long schoolByUserIdUpdate(University m);
+	Long schoolByUserIdUpdate(University qu);
 	PageInfo<University> schoolByIsNotHotList(UniversityQuery hq);
 	PageInfo<University> schoolAddressList(UniversityQuery hq);
 	PageInfo<University> selectByMajorCategoryId(UniversityQuery qu);
@@ -34,4 +35,8 @@ public interface IUniversityService extends IBaseService<University, UniversityQ
 	PageInfo schollByMajor(UniversityQuery qu);
 	PageInfo schollByIntroduce(UniversityQuery qu);
 	PageInfo schollByRecruit(UniversityQuery qu);
+	Long prodectAdd(University m,Address address);
+	Long prodectUpdate(UniversityQuery qu);
+	Long userInfoSchool(UniversityQuery qu);
+	List<University> mySchoolMajorInfo(UniversityQuery qu);
 }

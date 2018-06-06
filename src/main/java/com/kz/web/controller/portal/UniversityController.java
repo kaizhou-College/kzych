@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +28,7 @@ import com.google.common.collect.Maps;
 import com.kz.core.common.Const;
 import com.kz.core.common.ResponseCode;
 import com.kz.core.common.ServerResponse;
+import com.kz.po.Address;
 import com.kz.po.MajorCategoryQuery;
 import com.kz.po.RecruitStudents;
 import com.kz.po.University;
@@ -94,11 +97,27 @@ public class UniversityController {
 	 *             re
 	 */
 	@RequestMapping(value="schoolByUserIdUpdate.do", method = RequestMethod.POST)
-	public void schoolByUserIdUpdate(University m, HttpServletResponse response,HttpServletRequest request) {
-		Long result = iUniversityService.schoolByUserIdUpdate(m);
+	public void schoolByUserIdUpdate(UniversityQuery qu, HttpServletResponse response,HttpServletRequest request,HttpSession session) {
+		Long result = iUniversityService.userInfoSchool(qu);
+		//用户更改完成后session里面也需要更改
+		User u = (User) session.getAttribute(Const.CURRENT_USER);
+		University un = new University();
+		if(u!=null){
+			long userid = u.getUuid();
+			un.setUserId((int) userid);
+		}
+		List<University> resultUniversity = iUniversityService.schoolByUserIdList(un);
+		if(resultUniversity.size()>0){
+			session.setAttribute("publicStatus", resultUniversity.get(0).getPublishStatus());
+			session.setAttribute("User_list", resultUniversity.get(0));
+		}
 		try {
 //			response.sendRedirect("/kzych/user/userinfoTo.do");
-			response.sendRedirect("/user/toUserInfo.do");
+			if(result==2L){
+				response.sendRedirect("/user/toUserInfo.do");
+			}else{
+				response.sendRedirect("/error.do");
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -112,7 +131,8 @@ public class UniversityController {
 	 * @param: @param
 	 *             re
 	 */
-	@RequestMapping(value="schoolByUserIdList.do", method = RequestMethod.POST)
+	@RequestMapping(value="schoolByUserIdList.do")
+	@ResponseBody
 	public void schoolByUserIdList(University m, HttpServletResponse re) {
 		PrintWriter out = null;
 		try {
@@ -123,7 +143,7 @@ public class UniversityController {
 		List<University> result = iUniversityService.schoolByUserIdList(m);
 		if (result.size()>0) {
 			out.print(result.get(0).getCheckedInfo());
-		} else {
+		} else { 
 			out.print("失败");
 		}
 	}
@@ -186,14 +206,14 @@ public class UniversityController {
 	 *             re
 	 */
 	@RequestMapping(value="universityAdd.do", method = RequestMethod.POST)
-	public void universityAdd(University m, HttpServletResponse re) {
+	public void universityAdd(Address address,University m, HttpServletResponse re) {
 		PrintWriter out = null;
 		try {
 			out = re.getWriter();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Long long1 = iUniversityService.insertSelectiveSequence(m);
+		Long long1 = iUniversityService.prodectAdd(m, address);
 		if (long1 == 1L) {
 			out.print("请求成功");
 		} else {
@@ -362,6 +382,7 @@ public class UniversityController {
 				e.printStackTrace();
 			}
 		}
+		@SuppressWarnings("rawtypes")
 		PageInfo pageInfo = iUniversityService.listKeyPublishStatus(qu);
 		return pageInfo;
 	}
@@ -381,7 +402,7 @@ public class UniversityController {
 	 */
 	@RequestMapping("schoolList.do")
 	@ResponseBody
-	public ServerResponse<PageInfo> list(UniversityQuery uq,HttpSession session,HttpServletRequest re) {
+	public ServerResponse<PageInfo<University>> list(UniversityQuery uq,HttpSession session,HttpServletRequest re) {
 		/*User user = (User) session.getAttribute(Const.CURRENT_USER);
 		if (user == null) {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
@@ -414,7 +435,7 @@ public class UniversityController {
 			}
 		}
 		
-		PageInfo pageInfo = iUniversityService.getByConditionPage(uq);
+		PageInfo<University> pageInfo = iUniversityService.getByConditionPage(uq);
 		// 页面显示数据
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}
@@ -457,19 +478,13 @@ public class UniversityController {
 	 */
 	@RequestMapping(value="university_detail.do", method = RequestMethod.GET)
 	@ResponseBody
-	public ServerResponse list(HttpSession session ,Long universityId, int pageNum, int pageSize) {
-		if (pageNum == 0) {
-			pageNum = 1;
-		}
-		if (pageSize == 0) {
-			pageSize = 8;
-		}
+	public ServerResponse list(HttpSession session ,UniversityQuery qu) {
 		/*User user = (User) session.getAttribute(Const.CURRENT_USER);
 		if (user == null) {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
 		}*/
 		// 3，根据学校的id查询该学校的所有专业信息
-		List<University> university = iUniversityService.selectMajorsPageById(universityId, pageNum, pageSize);
+		List<University> university = iUniversityService.selectMajorsPageById(qu);
 		
 		// 页面显示数据
 		return ServerResponse.createBySuccess("查询成功", university);
@@ -590,15 +605,15 @@ public class UniversityController {
 	 *             re
 	 */
 	@RequestMapping(value="updateByKeyId.do")
-	public void updateByKeyId(University m, HttpServletResponse re) {
+	public void updateByKeyId(UniversityQuery qu, HttpServletResponse re) {
 		PrintWriter out = null;
 		try {
 			out = re.getWriter();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Long long1 = iUniversityService.schoolByUserIdUpdate(m);
-		if (long1 == 1L) {
+		Long long1 = iUniversityService.prodectUpdate(qu);
+		if (long1 > 1L) {
 			out.print("请求成功");
 		} else {
 			out.print("请求失败");
@@ -636,12 +651,10 @@ public class UniversityController {
 				if(i!=list.size()-1){
 					json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"},{");
 				}else{
-					json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"}]}");
+					json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"}");
 				}
 			}
-			if(list.size()==0){
-				json.append("]}");
-			}
+			json.append("]}");
 			JSONObject json_test = JSONObject.fromObject(json.toString());
 			return json_test;
 		}
@@ -725,6 +738,27 @@ public class UniversityController {
 		public ServerResponse<PageInfo> schollByRecruit(UniversityQuery qu) {
 			PageInfo pageInfo = iUniversityService.schollByRecruit(qu);
 			return ServerResponse.createBySuccess("查询成功", pageInfo);
+		}
+	//下面是還沒寫controller接口的 
+		@RequestMapping(value="mySchoolMajorInfo.do") 
+		@ResponseBody 
+		public JSONObject mySchoolMajorInfo(UniversityQuery qu) {
+			StringBuffer json=new StringBuffer("{\"code\": 0,\"msg\": \"\",\"count\": 2,\"data\": [");
+			List<University> schoolResult = iUniversityService.mySchoolMajorInfo(qu);
+			for(int i=0;i<schoolResult.size();i++){
+				for(int j=0;j<schoolResult.get(i).getMajors().size();j++){
+					json.append("{\"id\":"+schoolResult.get(i).getMajors().get(j).getId()+",\"level\":\""+schoolResult.get(i).getUniversityCategory().getCategoryName()+"\",");
+					json.append("\"name\":\""+schoolResult.get(i).getMajors().get(j).getName()+"\",");
+					if(j!=schoolResult.get(i).getMajors().size()-1){
+						json.append("\"tuition\":\""+schoolResult.get(i).getMajors().get(j).getMajorCode()+"\"},");
+					}else{
+						json.append("\"tuition\":\""+schoolResult.get(i).getMajors().get(j).getMajorCode()+"\"}");
+					}
+				}
+			}
+			json.append("]}");
+			JSONObject json_test = JSONObject.fromObject(json.toString());
+			return json_test;
 		}
 		
 }

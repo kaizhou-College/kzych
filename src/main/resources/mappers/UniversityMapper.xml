@@ -22,7 +22,6 @@
     <result column="University_Type" property="universityType" jdbcType="INTEGER" />
     <result column="University_Nature" property="universityNature" jdbcType="INTEGER" />
     <result column="checked_info" property="checkedInfo" jdbcType="VARCHAR" />
-    <result column="school_CoverImg" property="schoolCoverimg" jdbcType="VARCHAR" />
     <result column="introduce_id" property="introduceId" jdbcType="BIGINT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.kz.po.universityWithBLOBs" extends="BaseResultMap" >
@@ -35,7 +34,7 @@
     ID, CODE, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, coupon, CATEGORYID, PUBLISH_STATUS, 
     School_license, Legal_person_name, Legal_person_Card, Legal_person_Phone, Administrator_Account, 
     Administrator_Name, Administrator_Phone, USER_id, University_Type, University_Nature, 
-    checked_info, school_CoverImg, introduce_id
+    checked_info, introduce_id
   </sql>
   <sql id="Blob_Column_List" >
     NAME, EMPLOYMENT_INFO, BROCHURE, INTRODUCTION
@@ -60,9 +59,9 @@
       Legal_person_Phone, Administrator_Account, 
       Administrator_Name, Administrator_Phone, 
       USER_id, University_Type, University_Nature, 
-      checked_info, school_CoverImg, introduce_id, 
-      NAME, EMPLOYMENT_INFO, BROCHURE, 
-      INTRODUCTION)
+      checked_info, introduce_id, NAME, 
+      EMPLOYMENT_INFO, BROCHURE, INTRODUCTION
+      )
     values (#{id,jdbcType=BIGINT}, #{code,jdbcType=BIGINT}, #{profile,jdbcType=VARCHAR}, 
       #{agreements,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{grants,jdbcType=DECIMAL}, 
       #{coupon,jdbcType=DECIMAL}, #{categoryid,jdbcType=BIGINT}, #{publishStatus,jdbcType=INTEGER}, 
@@ -70,9 +69,9 @@
       #{legalPersonPhone,jdbcType=VARCHAR}, #{administratorAccount,jdbcType=VARCHAR}, 
       #{administratorName,jdbcType=VARCHAR}, #{administratorPhone,jdbcType=VARCHAR}, 
       #{userId,jdbcType=INTEGER}, #{universityType,jdbcType=INTEGER}, #{universityNature,jdbcType=INTEGER}, 
-      #{checkedInfo,jdbcType=VARCHAR}, #{schoolCoverimg,jdbcType=VARCHAR}, #{introduceId,jdbcType=BIGINT}, 
-      #{name,jdbcType=LONGVARCHAR}, #{employmentInfo,jdbcType=LONGVARCHAR}, #{brochure,jdbcType=LONGVARCHAR}, 
-      #{introduction,jdbcType=LONGVARCHAR})
+      #{checkedInfo,jdbcType=VARCHAR}, #{introduceId,jdbcType=BIGINT}, #{name,jdbcType=LONGVARCHAR}, 
+      #{employmentInfo,jdbcType=LONGVARCHAR}, #{brochure,jdbcType=LONGVARCHAR}, #{introduction,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.kz.po.universityWithBLOBs" >
     insert into kz_university
@@ -136,9 +135,6 @@
       </if>
       <if test="checkedInfo != null" >
         checked_info,
-      </if>
-      <if test="schoolCoverimg != null" >
-        school_CoverImg,
       </if>
       <if test="introduceId != null" >
         introduce_id,
@@ -217,9 +213,6 @@
       <if test="checkedInfo != null" >
         #{checkedInfo,jdbcType=VARCHAR},
       </if>
-      <if test="schoolCoverimg != null" >
-        #{schoolCoverimg,jdbcType=VARCHAR},
-      </if>
       <if test="introduceId != null" >
         #{introduceId,jdbcType=BIGINT},
       </if>
@@ -297,9 +290,6 @@
       <if test="checkedInfo != null" >
         checked_info = #{checkedInfo,jdbcType=VARCHAR},
       </if>
-      <if test="schoolCoverimg != null" >
-        school_CoverImg = #{schoolCoverimg,jdbcType=VARCHAR},
-      </if>
       <if test="introduceId != null" >
         introduce_id = #{introduceId,jdbcType=BIGINT},
       </if>
@@ -339,7 +329,6 @@
       University_Type = #{universityType,jdbcType=INTEGER},
       University_Nature = #{universityNature,jdbcType=INTEGER},
       checked_info = #{checkedInfo,jdbcType=VARCHAR},
-      school_CoverImg = #{schoolCoverimg,jdbcType=VARCHAR},
       introduce_id = #{introduceId,jdbcType=BIGINT},
       NAME = #{name,jdbcType=LONGVARCHAR},
       EMPLOYMENT_INFO = #{employmentInfo,jdbcType=LONGVARCHAR},
@@ -368,11 +357,14 @@
       University_Type = #{universityType,jdbcType=INTEGER},
       University_Nature = #{universityNature,jdbcType=INTEGER},
       checked_info = #{checkedInfo,jdbcType=VARCHAR},
-      school_CoverImg = #{schoolCoverimg,jdbcType=VARCHAR},
       introduce_id = #{introduceId,jdbcType=BIGINT}
     where ID = #{id,jdbcType=BIGINT}
   </update>
-    <!-- 下面是我自己写的方法 -->
+  
+  
+  
+  
+  <!-- 下面是我自己写的方法 -->
   <resultMap type="com.kz.po.University" id="universityMap">
     <id column="universityId" property="id" jdbcType="BIGINT" />
     <result column="universityCode" property="code" jdbcType="BIGINT" />
@@ -394,7 +386,6 @@
     <result column="University_Type" property="universityType" jdbcType="INTEGER" />
     <result column="University_Nature" property="universityNature" jdbcType="INTEGER" />
     <result column="checked_info" property="checkedInfo" jdbcType="VARCHAR" />
-    <result column="school_CoverImg" property="schoolCoverimg" jdbcType="VARCHAR" />
     <result column="introduce_id" property="introduceId" jdbcType="BIGINT" />
   	<result column="universityName" property="name" jdbcType="LONGVARCHAR" />
     <result column="EMPLOYMENT_INFO" property="employmentInfo" jdbcType="LONGVARCHAR" />
@@ -402,11 +393,17 @@
     <result column="INTRODUCTION" property="introduction" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="universitySql">
-      kz_university.ID as universityId , kz_university.CODE as universityCode, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, coupon, CATEGORYID, PUBLISH_STATUS, 
+    kz_university.ID as universityId , kz_university.CODE as universityCode, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, coupon, CATEGORYID, PUBLISH_STATUS, 
     School_license, Legal_person_name, Legal_person_Card, Legal_person_Phone, Administrator_Account, 
     Administrator_Name, Administrator_Phone, USER_id, University_Type, University_Nature, 
-    checked_info, school_CoverImg, introduce_id,
+    checked_info, introduce_id,
     kz_university.NAME as universityName, EMPLOYMENT_INFO, BROCHURE, INTRODUCTION
+  </sql>
+  <sql id="universityCategorySql">
+      kz_university_category.ID as universityCategoryId, CATEGORY_NAME, CATEGORY_INFO, PARENTID
+  </sql>
+  <sql id="majorSql">
+      kz_major.ID as majorId, MAJOR_CATEGORY_ID, kz_major.NAME as majorName, MAJOR_CODE, ISHOT,DESCRIPTION
   </sql>
    <resultMap id="universityMajorMap" type="com.kz.po.University" extends="BaseResultMap">
     <id column="universityId" property="id" jdbcType="BIGINT" />
@@ -434,7 +431,6 @@
     <result column="University_Type" property="universityType" jdbcType="INTEGER" />
     <result column="University_Nature" property="universityNature" jdbcType="INTEGER" />
     <result column="checked_info" property="checkedInfo" jdbcType="VARCHAR" />
-    <result column="school_CoverImg" property="schoolCoverimg" jdbcType="VARCHAR" />
 		<collection property="majors" ofType="com.kz.po.Major">
 			<id column="major_id" property="id"></id>
 			<result column="major_category_id" property="majorCategoryId" />
@@ -461,7 +457,7 @@
 		kz_university.NAME as universityName, EMPLOYMENT_INFO, BROCHURE, INTRODUCTION,
 		Legal_person_name,Legal_person_Card,Legal_person_Phone,Administrator_Account,
 		Administrator_Name,Administrator_Phone,USER_id,University_Type,University_Nature,
-		checked_info,school_CoverImg
+		checked_info
 	</sql>
 	<select id="selectMajorsPageById" parameterType="long"
 		resultMap="universityMajorMap">
@@ -525,8 +521,6 @@
 		<result column="kz_university.University_Nature" property="universityNature"
 			jdbcType="INTEGER" />
 		<result column="kz_university.checked_info" property="checkedInfo" jdbcType="VARCHAR" />
-		<result column="kz_university.school_CoverImg" property="schoolCoverimg"
-			jdbcType="VARCHAR" />
 	</resultMap>
 		
 	<select id="schoolByIsNotHotList" parameterType="java.lang.Integer"
@@ -537,7 +531,7 @@
 			School_license, kz_university.Legal_person_name, kz_university.Legal_person_Card, kz_university.Legal_person_Phone, kz_university.
 			Administrator_Account, kz_university.
 			Administrator_Name, kz_university.Administrator_Phone, kz_university.USER_id, kz_university.University_Type, kz_university. University_Nature, kz_university.
-			checked_info, kz_university. school_CoverImg
+			checked_info
 		from
 		kz_university,
 		kz_university_major,
@@ -638,14 +632,16 @@
 		</where>
 	</select>
 	<select id="schoolByUserIdList" parameterType="com.kz.po.University"
-		resultMap="ResultMapWithBLOBs">
+		resultMap="universityMajorMap">
 		select
-		<include refid="Base_Column_List" />
+		<include refid="universitySql" />
 		,
-		<include refid="Blob_Column_List" />
-		from kz_university
+		<include refid="addressSql" />
+			from kz_university  , kz_address
 		where
-		user_Id=#{userId}
+			kz_address.university_id=kz_university.id 
+			and 
+			user_Id=#{userId}
 	</select>
 	<update id="updateByKeySelective" parameterType="com.kz.po.universityWithBLOBs">
 		update kz_university
@@ -681,17 +677,14 @@
 			<if test="universityNature != null">
 				University_Nature = #{universityNature,jdbcType=INTEGER},
 			</if>
-			<if test="address != null">
-				ADDRESS = #{address,jdbcType=LONGVARCHAR},
-			</if>
 			<if test="introduction != null">
 				INTRODUCTION = #{introduction,jdbcType=LONGVARCHAR},
 			</if>
 			<if test="schoolLicense != null">
 				school_License = #{schoolLicense,jdbcType=VARCHAR},
 			</if>
-			<if test="schoolCoverimg != null">
-				school_Coverimg = #{schoolCoverimg,jdbcType=VARCHAR},
+			<if test="profile != null">
+				profile = #{profile,jdbcType=VARCHAR},
 			</if>
 			<if test="name != null">
 				name = #{name,jdbcType=VARCHAR},
@@ -766,9 +759,6 @@
 			<if test="name != null">
 				NAME,
 			</if>
-			<if test="address != null">
-				ADDRESS,
-			</if>
 			<if test="employmentInfo != null">
 				EMPLOYMENT_INFO,
 			</if>
@@ -777,9 +767,6 @@
 			</if>
 			<if test="introduction != null">
 				INTRODUCTION,
-			</if>
-			<if test="schoolCoverimg != null">
-				school_CoverImg,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -844,9 +831,6 @@
 			<if test="name != null">
 				#{name,jdbcType=LONGVARCHAR},
 			</if>
-			<if test="address != null">
-				#{address,jdbcType=LONGVARCHAR},
-			</if>
 			<if test="employmentInfo != null">
 				#{employmentInfo,jdbcType=LONGVARCHAR},
 			</if>
@@ -855,9 +839,6 @@
 			</if>
 			<if test="introduction != null">
 				#{introduction,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="schoolCoverimg != null">
-				#{schoolCoverimg,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -962,20 +943,20 @@
 	select  
 		*   
 	from 	
-		kz_university kz_u,
-		kz_university_category kz_u_c,
-		kz_university_major kz_u_m,
-		kz_major kz_m,
-		kz_orderdetail kz_o,
-		kz_major_category kz_m_c
-	where 
+		kz_university kz_u, 
+		kz_university_category kz_u_c, 
+		kz_university_major kz_u_m, 
+		kz_major kz_m, 
+		kz_orderdetail kz_o, 
+		kz_major_category kz_m_c 
+	where  
 		kz_u.CATEGORYID=kz_u_c.id and 
 		kz_u.id = kz_u_m.UNIVERSITY_ID and 
 		kz_m.id = kz_u_m.MAJOR_ID and  
 		kz_u.id = kz_o.UNIVERSITY_ID and 
 		kz_o.major_id = kz_m.id and
 		kz_m.MAJOR_CATEGORY_ID=kz_m_c.MAJOR_CATEGORY_ID and 
-		kz_u.id=#{id}
+		kz_u.id=#{id} 
   </select>	
   	<update id="updateByTelephone" parameterType="com.kz.po.University">
 		update kz_university
@@ -1193,5 +1174,41 @@
 		where 
 			kz_university.id=kz_recruit_students.university_id and
 			kz_university.id=#{universityId}
+  	</select>
+  	<resultMap type="com.kz.po.University" id="mySchoolMajorInfoMap" extends="ResultMapWithBLOBs">
+  	    <id column="universityId" property="id"/>
+  	    <result column="universityCode" property="code"/>
+  	    <result column="universityName" property="name"/>
+  	    <association javaType="com.kz.po.UniversityCategory" property="universityCategory">
+  	        <id column="majorId" property="id" jdbcType="BIGINT" />
+    		<result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR" />
+    		<result column="CATEGORY_INFO" property="categoryInfo" jdbcType="VARCHAR" />
+    		<result column="PARENTID" property="parentid" jdbcType="INTEGER" />
+  	    </association>
+  	    <collection property="majors" ofType="com.kz.po.Major">
+  	        <id column="majorId" property="id" jdbcType="BIGINT" />
+		    <result column="MAJOR_CATEGORY_ID" property="majorCategoryId" jdbcType="BIGINT" />
+		    <result column="majorName" property="name" jdbcType="VARCHAR" />
+		    <result column="MAJOR_CODE" property="majorCode" jdbcType="VARCHAR" />
+		    <result column="ISHOT" property="ishot" jdbcType="INTEGER" />
+		    <result column="DESCRIPTION" property="description" jdbcType="LONGVARCHAR" />
+  	    </collection>
+  	</resultMap>
+  	<select id="mySchoolMajorInfo" parameterType="Long" resultMap="mySchoolMajorInfoMap">
+  	    select 
+			<include refid="universitySql"/>,
+			<include refid="majorSql" />,
+			<include refid="universityCategorySql" />
+		from 
+			kz_university ,
+			kz_university_category,
+		
+			kz_major,
+			kz_university_major
+		where
+			kz_university.CATEGORYID=kz_university_category.id and
+			kz_university_major.university_id=kz_university.id and 
+			kz_university_major.major_id=kz_major.id and 
+			kz_university.id=#{id}
   	</select>
 </mapper>

@@ -39,61 +39,7 @@
       #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, #{addrdetail,jdbcType=VARCHAR}, 
       #{universityId,jdbcType=BIGINT}, #{latitude,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.kz.po.Address" >
-    insert into kz_address
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="longitude != null" >
-        longitude,
-      </if>
-      <if test="provice != null" >
-        provice,
-      </if>
-      <if test="city != null" >
-        city,
-      </if>
-      <if test="county != null" >
-        county,
-      </if>
-      <if test="addrdetail != null" >
-        addrDetail,
-      </if>
-      <if test="universityId != null" >
-        university_id,
-      </if>
-      <if test="latitude != null" >
-        latitude,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="longitude != null" >
-        #{longitude,jdbcType=VARCHAR},
-      </if>
-      <if test="provice != null" >
-        #{provice,jdbcType=VARCHAR},
-      </if>
-      <if test="city != null" >
-        #{city,jdbcType=VARCHAR},
-      </if>
-      <if test="county != null" >
-        #{county,jdbcType=VARCHAR},
-      </if>
-      <if test="addrdetail != null" >
-        #{addrdetail,jdbcType=VARCHAR},
-      </if>
-      <if test="universityId != null" >
-        #{universityId,jdbcType=BIGINT},
-      </if>
-      <if test="latitude != null" >
-        #{latitude,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
+ 
   <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.Address" >
     update kz_address
     <set >
@@ -142,4 +88,61 @@
       university_id = #{universityId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  
+  
+  
+  
+  <!-- 下面这个是我改了的代码  （自增长）不能没有 -->
+   <insert id="insertSelective" parameterType="com.kz.po.Address" >
+    insert into kz_address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        id,
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="provice != null" >
+        provice,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="county != null" >
+        county,
+      </if>
+      <if test="addrdetail != null" >
+        addrDetail,
+      </if>
+      <if test="universityId != null" >
+        university_id,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+       null,
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="provice != null" >
+        #{provice,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="addrdetail != null" >
+        #{addrdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="universityId != null" >
+        #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
 </mapper>

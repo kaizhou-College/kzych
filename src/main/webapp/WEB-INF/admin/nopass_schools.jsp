@@ -25,16 +25,6 @@
   <link rel="stylesheet" href="${basePath}admin/css/layui.css" />
   <script type="text/javascript" src="${basePath}admin/data.js"></script>
   <script type="text/javascript" src="${basePath}admin/province.js"></script>
-  <script type="text/javascript">
-	var defaults = {
-		s1 : 'provid',
-		s2 : 'cityid',
-		s3 : 'areaid',
-		v1 : null,
-		v2 : null,
-		v3 : null
-	};
-</script>
 </head>
 
 <body class="layui-layout-body">
@@ -49,8 +39,8 @@
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
-          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-          贤心
+          <img src="https://kzych.oss-cn-qingdao.aliyuncs.com/${currentUser.userAvatar }" class="layui-nav-img">
+          ${currentUser.username }
         </a>
         <dl class="layui-nav-child">
           <dd><a href="">基本资料</a></dd>
@@ -75,7 +65,7 @@
 						<label class="layui-form-label">选择地区</label>
 						<div class="layui-input-inline">
 							<select name="provid" id="provid" lay-filter="provid">
-								<option value="">请选择省</option>
+								<option value="1">请选择省</option>
 							</select>
 						</div>
 						<div class="layui-input-inline">
@@ -183,8 +173,7 @@
               	  
 							    <label class="layui-form-label">机构封面图:</label>
 							    <div class="layui-input-block">
-							       <img id="school_coverImge" src="images/hndx.jpg" style="height:100px;">
-									  
+							       <img id="profile" src="images/hndx.jpg" style="height:100px;">
 							    </div>
 							</div>
 						  <div class="layui-form-item">
@@ -274,7 +263,7 @@ app.init(function($){
 			  $.ajax({
 		  			type:"post",
 		  			url:host_kzych+"university/dimListPage.do",
-		  			data:{"provice":$("#provid").val(),
+		  			data:{"provice":$("#provid").val()==1?null:$("#provid").val(),
 	  						"city":$("#cityid").val(),
 	  						"county":$("#areaid").val(),
 	  						"addrdetail":$("#search_key").val(),
@@ -299,7 +288,7 @@ app.init(function($){
 									$.ajax({
 							  			type:"post",
 							  			url:host_kzych+"university/dimListPage.do",
-							  			data:{"provice":$("#provid").val(),
+							  			data:{"provice":$("#provid").val()==1?null:$("#provid").val(),
 						  						"city":$("#cityid").val(),
 						  						"county":$("#areaid").val(),
 						  						"addrdetail":$("#search_key").val(),
@@ -449,8 +438,10 @@ app.init(function($){
 });
 //给学校信息赋值
 function showScoolInfo(list){
+	//因为地址是多个组成的
+	var address=list.address.provice+"-"+list.address.city+"-"+list.address.county+"-"+list.address.addrdetail;
 	$("#school_Name").val(list.name);
-	$("#school_Address").val(list.address);
+	$("#school_Address").val(address);
 	$("#school_License").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.schoolLicense);
 	$("#legal_person_Name").val(list.legalPersonName);
 	$("#legal_person_Card").val(list.legalPersonCard);
@@ -458,7 +449,7 @@ function showScoolInfo(list){
 	$("#administrator_Account").val(list.administratorAccount);
 	$("#administrator_Name").val(list.administratorName);
 	$("#administrator_Phone").val(list.administratorPhone);
-	$("#school_coverImge").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.schoolCoverimg);
+	$("#profile").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.profile);
 	$("#checkedInfo").html("原因是："+list.checkedInfo);
   	//设置下拉框的默认值
   	//机构类型 

@@ -80,4 +80,5 @@ public class Address {
     public void setLatitude(String latitude) {
         this.latitude = latitude == null ? null : latitude.trim();
     }
+    
 }

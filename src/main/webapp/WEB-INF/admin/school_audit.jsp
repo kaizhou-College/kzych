@@ -31,16 +31,6 @@
 <link rel="stylesheet" href="${basePath}admin/css/layui.css" />
 <script type="text/javascript" src="${basePath}admin/data.js"></script>
 <script type="text/javascript" src="${basePath}admin/province.js"></script>
-<script type="text/javascript">
-	var defaults = {
-		s1 : 'provid',
-		s2 : 'cityid',
-		s3 : 'areaid',
-		v1 : null,
-		v2 : null,
-		v3 : null
-	};
-</script>
 </head>
 
 <body class="layui-layout-body">
@@ -53,8 +43,9 @@
 
 			</ul>
 			<ul class="layui-nav layui-layout-right">
-				<li class="layui-nav-item"><a href="javascript:;"> <img
-						src="http://t.cn/RCzsdCq" class="layui-nav-img"> 贤心
+				<li class="layui-nav-item"><a href="javascript:;"> 
+				<img src="https://kzych.oss-cn-qingdao.aliyuncs.com/${currentUser.userAvatar }" class="layui-nav-img">
+          		${currentUser.username }
 				</a>
 					<dl class="layui-nav-child">
 						<dd>
@@ -80,7 +71,7 @@
 						<label class="layui-form-label">选择地区</label>
 						<div class="layui-input-inline">
 							<select name="provid" id="provid" lay-filter="provid">
-								<option value="">请选择省</option>
+								<option value="1">请选择省</option>
 							</select>
 						</div>
 						<div class="layui-input-inline">
@@ -185,8 +176,7 @@
               	  
 							    <label class="layui-form-label">机构封面图:</label>
 							    <div class="layui-input-block">
-							       <img id="school_coverImge" src="images/hndx.jpg" style="height:100px;">
-									  
+							       <img id="profile" src="" style="height:100px;">
 							    </div>
 							</div>
 						  <div class="layui-form-item">
@@ -198,7 +188,7 @@
 						  <div class="layui-form-item">
 						    <label class="layui-form-label">办学许可证:</label>
 						    <div class="layui-input-block">
-						      <img src="images/school_cert.jpg" id="school_License" style="height:100px;">
+						      <img src="" id="school_License" style="height:100px;">
 						    </div>
 						  </div>
 						  <div class="layui-form-item">
@@ -244,21 +234,16 @@
 						</div>
 						<hr class="layui-bg-green">
 						<form class="layui-form">
-							  
-								    
-							      <div class="layui-form-item layui-form-text">
-									    <label class="layui-form-label">审核</label>
-									    <div class="layui-input-block">
-									      <textarea placeholder="如果不通过请输入不通过原因" class="layui-textarea" id="checkedInfo"></textarea>
-									    </div>
-									  </div>
-									  
-									    <div class="layui-form-item" style="text-align:center;">
-										    <button id="pass" class="layui-btn" lay-submit="" lay-filter="demo2">通过</button>
-								            <button id="nopass" class="layui-btn" lay-submit="" lay-filter="demo1">不通过</button>
-										  </div>
-								 
-								  
+					      <div class="layui-form-item layui-form-text">
+							    <label class="layui-form-label">审核</label>
+							    <div class="layui-input-block">
+							      <textarea placeholder="如果不通过请输入不通过原因" class="layui-textarea" id="checkedInfo"></textarea>
+							    </div>
+						  </div>
+						  <div class="layui-form-item" style="text-align:center;">
+						     <button id="pass" class="layui-btn" lay-submit="" lay-filter="demo2">通过</button>
+				             <button id="nopass" class="layui-btn" lay-submit="" lay-filter="demo1">不通过</button>
+					      </div>
 						</form>
 			    </div>
 			    <div class="layui-tab-item">学校主页</div>
@@ -289,7 +274,7 @@
 				  $.ajax({
 			  			type:"post",
 			  			url:host_kzych+"university/dimListPage.do",
-			  			data:{"provice":$("#provid").val(),
+			  			data:{"provice":$("#provid").val()==1?null:$("#provid").val(),
 			  					"city":$("#cityid").val(),
 			  					"county":$("#areaid").val(),
 			  					"addrdetail":$("#search_key").val(),
@@ -314,7 +299,7 @@
 										$.ajax({
 								  			type:"post",
 								  			url:host_kzych+"university/dimListPage.do",
-								  			data:{"provice":$("#provid").val(),
+								  			data:{"provice":$("#provid").val()==1?null:$("#provid").val(),
 							  						"city":$("#cityid").val(),
 							  						"county":$("#areaid").val(),
 							  						"addrdetail":$("#search_key").val(),
@@ -488,42 +473,33 @@
 							var currentPage = obj.curr;//获取点击的页码 
 							var limit = obj.limit;
 							//window.location.href ="http://localhost:8080/kzych/university?page="+currentPage;
-							$
-									.get(
-											host_kzych+"/university/dimListPage.do?publishStatus=1&pageNum="
-													+ currentPage
-													+ "&pageSize="
-													+ limit,
-											function(
-													schoollist) {
-												var ele = '';
-												var list = schoollist.list;
+							$.get(host_kzych+"/university/dimListPage.do?publishStatus=1&pageNum="+ currentPage+ "&pageSize="+ limit,
+							function(schoollist) {
+								var ele = '';
+								var list = schoollist.list;
+								//清空
+								$("#school_list").empty();
+								for ( var i in list) {
+									   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
+				        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+				    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 
-												//清空
-												$(
-														"#school_list")
-														.empty();
-												for ( var i in list) {
-													   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-								        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
-								    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
+								}
+								//加载
+								$("#school_list").append(ele);
+								
+								 //单击图片显示单个信息  隐藏其他学校图片
+								$("#school_list div").on("click",function(){
+                  		       		  $("#main").hide();
+                  		      		  $("#detail").show();
+                  		      	   });
+								//单击返回隐藏单个学校学校 显示其他学校图片
+                  		   		  $(".layui-tab i").on("click",function(){
+                  		   	 		  $("#main").show();
+                  		     		  $("#detail").hide();
+                  		   		  });
 
-												}
-												//加载
-												$("#school_list").append(ele);
-												
-												 //单击图片显示单个信息  隐藏其他学校图片
-												$("#school_list div").on("click",function(){
-				                  		       		  $("#main").hide();
-				                  		      		  $("#detail").show();
-				                  		      	   });
-												//单击返回隐藏单个学校学校 显示其他学校图片
-				                  		   		  $(".layui-tab i").on("click",function(){
-				                  		   	 		  $("#main").show();
-				                  		     		  $("#detail").hide();
-				                  		   		  });
-
-											});
+							});
 						}
 					}
 				});
@@ -542,11 +518,13 @@
 		});
 
 	});
-			});
+});
 	//给学校信息赋值
 	function showScoolInfo(list){
+		//因为地址是多个组成的
+		var address=list.address.provice+"-"+list.address.city+"-"+list.address.county+"-"+list.address.addrdetail;
 		$("#school_Name").val(list.name);
-		$("#school_Address").val(list.address);
+		$("#school_Address").val(address);
 		$("#school_License").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.schoolLicense);
 		$("#legal_person_Name").val(list.legalPersonName);
 		$("#legal_person_Card").val(list.legalPersonCard);
@@ -554,8 +532,9 @@
 		$("#administrator_Account").val(list.administratorAccount);
 		$("#administrator_Name").val(list.administratorName);
 		$("#administrator_Phone").val(list.administratorPhone);
-		$("#school_coverImge").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.schoolCoverimg);
+		$("#profile").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.profile);
 	  	$("#id_school").val(list.id);
+	  	$("#checkedInfo").val(list.checkedInfo);
 		//设置下拉框的默认值
 	  	//机构类型 
 	  	var universityType=$("#universityType_seelct_01").html().split("<option value=\"");

@@ -33,8 +33,8 @@
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
-          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-          贤心
+          <img src="https://kzych.oss-cn-qingdao.aliyuncs.com/${currentUser.userAvatar }" class="layui-nav-img">
+          ${currentUser.username }
         </a>
         
       </li>
@@ -143,7 +143,7 @@
 			    		<div class="layui-form-item">
 						    <label class="layui-form-label">机构名称:</label>
 						    <div class="layui-input-block">
-						      <input type="hidden" name="id" value="${User_list.id}">
+						      <input type="hidden" name="university.id" value="${User_list.id}">
 						      <input type="text" name="" value="${User_list.name}" autocomplete="off" disabled class="layui-input">
 						    </div>
 						  </div>
@@ -152,7 +152,7 @@
 						    <div class="layui-inline">
 						      <label class="layui-form-label">机构类型</label>
 						      <div class="layui-input-inline">
-						        <select name="universityType" lay-filter="aihao" id="universityType_seelct_01">
+						        <select name="university.universityType" lay-filter="aihao" id="universityType_seelct_01">
 							        <option value="0"></option>
 							        <option value="1">学校</option>
 							        <option value="2" >企业</option>
@@ -166,7 +166,7 @@
 						      <!--只有选择学校才显示-->
 						      <label class="layui-form-label">机构性质:</label>
 						      <div class="layui-input-inline">
-						        <select name="universityNature" lay-filter="aihao" id="universityNature_seelct_02">
+						        <select name="university.universityNature" lay-filter="aihao" id="universityNature_seelct_02">
 							        <option value="0"></option>
 							        <option value="1">公办</option>
 							        <option value="2" >民办</option>
@@ -177,7 +177,7 @@
 						      <!--只有选择学校类型才显示-->
 						      <label class="layui-form-label">学校等级:</label>
 						      <div class="layui-input-inline">
-						        <select name="categoryid" lay-filter="aihao" id="categoryid_seelct_03">
+						        <select name="university.categoryid" lay-filter="aihao" id="categoryid_seelct_03">
 							        <option value="0"></option>
 							        <option value="1">本科</option>
 							        <option value="2" >大专</option>
@@ -188,12 +188,29 @@
 						    </div>
 						  </div>
 			        
-               <div class="layui-form-item">
-						    <label class="layui-form-label">机构地址:</label>
-						    <div class="layui-input-block">
-						      <input type="text" name="address" id="address" value="${User_list.address}" autocomplete="off"  class="layui-input">
-						    </div>
-						  </div>
+              		<div class="layui-form-item">
+						<label class="layui-form-label">选择地区</label>
+							<input type="hidden" value="${User_list.address.id}" name="address.id"/>
+							<div class="layui-input-inline">
+								<select  class="layui-select" name="provid" id="provid" lay-filter="provid">
+									<option value="1">请选择省</option>
+								</select>
+							</div>
+							<div class="layui-input-inline">
+								<select  class="layui-select" name="cityid" id="cityid" lay-filter="cityid">
+									<option value="">请选择市</option>
+								</select>
+							</div>
+							<div class="layui-input-inline">
+								<select class="layui-select" name="areaid" id="areaid" lay-filter="areaid">
+									<option value="">请选择县/区</option>
+								</select>
+							</div>
+							<div class="layui-input-inline">
+								<input name="address.addrdetail" placeholder="详细地址" autocomplete="off"
+									class="layui-input" type="text" id="addrdetail" value="${User_list.address.addrdetail}">
+							</div>
+					</div>
 						  
 						   <div class="layui-form-item">
               	   <div class="layui-inline">
@@ -204,10 +221,10 @@
 												  <button name="selectFiles" class='layui-btn'>选择文件</button>
 												  <button class='layui-btn' name="postFiles">开始上传</button>
 												  <div class="layui-upload-list">
-												    <img  src="https://kzych.oss-cn-qingdao.aliyuncs.com/${User_list.schoolCoverimg}"  class="layui-upload-img" id="start-img-view2" style="height:100px;">
+												    <img  src="https://kzych.oss-cn-qingdao.aliyuncs.com/${User_list.profile}"  class="layui-upload-img" id="start-img-view2" style="height:100px;">
 												    <p id="errText2"></p>
 												  </div>
-												  <input type="hidden" name="schoolCoverimg" id="schoolCoverimg" value="${User_list.schoolCoverimg}"> 
+												  <input type="hidden" name="university.profile" id="profile" value="${User_list.profile}"> 
 												</div> 
 									    </div>
 							     </div>
@@ -224,7 +241,7 @@
 												    <img src="https://kzych.oss-cn-qingdao.aliyuncs.com/${User_list.schoolLicense}" class="layui-upload-img" id="start-img-view3" style="height:100px;">
 												    <p id="errText3"></p>
 												  </div>
-												  <input type="hidden" name="schoolLicense" id="schoolLicense" value="${User_list.schoolLicense}">
+												  <input type="hidden" name="university.schoolLicense" id="schoolLicense" value="${User_list.schoolLicense}">
 												</div> 
 									    </div>
 							     </div>
@@ -237,21 +254,21 @@
 						    <div class="layui-inline">
 						      <label class="layui-form-label">法人姓名</label>
 						      <div class="layui-input-inline">
-						        <input type="text" name="legalPersonName" id="legalPersonName" value="${User_list.legalPersonName}" autocomplete="off"  class="layui-input">
+						        <input type="text" name="university.legalPersonName" id="legalPersonName" value="${User_list.legalPersonName}" autocomplete="off"  class="layui-input">
 						      </div>
 						    </div>
 						    <div class="layui-inline">
 						      <!--只有选择学校才显示-->
 						      <label class="layui-form-label">法人身份证:</label>
 						      <div class="layui-input-inline">
-						        <input type="text" id="legalPersonCard" name="legalPersonCard" value="${User_list.legalPersonCard}" autocomplete="off"  class="layui-input">
+						        <input type="text" id="legalPersonCard" name="university.legalPersonCard" value="${User_list.legalPersonCard}" autocomplete="off"  class="layui-input">
 						      </div>
 						    </div>
 						    <div class="layui-inline">
 						      <!--只有选择学校类型才显示-->
 						      <label class="layui-form-label">法人电话:</label>
 						      <div class="layui-input-inline">
-						        <input type="text" id="legalPersonPhone" name="legalPersonPhone" value="${User_list.legalPersonPhone}" autocomplete="off"  class="layui-input">
+						        <input type="text" id="legalPersonPhone" name="university.legalPersonPhone" value="${User_list.legalPersonPhone}" autocomplete="off"  class="layui-input">
 						      </div>
 						    </div>
 						  </div>
@@ -261,7 +278,7 @@
 						  <div class="layui-form-item">
 						    <label class="layui-form-label">机构简介:</label>
 						    <div class="layui-input-block">
-						       <textarea id="detail" name="introduction" >${User_list.introduction}</textarea>
+						       <textarea id="detail" name="university.introduction" >${User_list.introduction}</textarea>
 						    </div>
 						  </div>
 						
@@ -299,7 +316,12 @@
 <script type="text/javascript" src="${basePath}admin/js/simditor.js"></script>
 <script type="text/javascript" src="${basePath}oss/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
 <script type="text/javascript" src="${basePath}oss/upload.js"></script>
+<script type="text/javascript" src="${basePath}admin/data.js"></script>
+<script type="text/javascript" src="${basePath}admin/province.js"></script>
 <script>
+//给地址放信息
+checkedSelect("${User_list.address.provice}","${User_list.address.city}","${User_list.address.county}");
+
 //用户名称
 var username ="${currentUser.username}";
 var basePath = "${basePath}";
@@ -352,7 +374,7 @@ var host_kzych="${host}";
 		        return layer.msg('上传失败');
 		      }
 		      //上传成功
-		      $("#schoolCoverimg").val(res.data.uri);
+		      $("#profile").val(res.data.uri);
 		    }
 		    ,error: function(){
 		      //演示失败状态，并实现重传
@@ -505,14 +527,33 @@ var host_kzych="${host}";
         	    		return false;
         	    	}
         	    	//验证机构地址是否填写
-        	    	if($("#address").val().trim().length>0){
-        	    		isNotPass=isNotPass+1;
-        	    	}else{
-        	    		shotMsg("亲请输入机构地址");
-        	    		return false;
-        	    	}
+        	    	//机构地址  provid cityid areaid addrdetail
+					if ($("#provid").val().trim().length > 0&$("#provid").val()!=1) {
+						isNotPass = isNotPass + 1
+					} else {
+						shotMsg("亲请输入省份");
+						return false;
+					}
+					if ($("#cityid").val().trim().length > 0&$("#cityid").val()!=1) {
+						isNotPass = isNotPass + 1
+					} else {
+						shotMsg("亲请输入市");
+						return false;
+					}
+					if ($("#areaid").val().trim().length > 0&$("#areaid").val()!=1) {
+						isNotPass = isNotPass + 1
+					} else {
+						shotMsg("亲请输入区/县");
+						return false;
+					}
+					if ($("#addrdetail").val().trim().length > 0&$("#addrdetail").val()!=1)  {
+						isNotPass = isNotPass + 1
+					} else {
+						shotMsg("亲请输入信息地址");
+						return false;
+					}
         	    	//验证机构封面图片是否上传 
-        	    	if($("#schoolCoverimg").val().trim().length>0){
+        	    	if($("#profile").val().trim().length>0){
         	    		isNotPass=isNotPass+1;
         	    	}else{
         	    		shotMsg("亲请上传机构封面图片");
@@ -556,12 +597,12 @@ var host_kzych="${host}";
         	    		shotMsg("亲请输入机构简历");
         	    		return false;
         	    	}
-            		if(isNotPass>=10){
+            		if(isNotPass>=13){
             			return true;
             		}else{
             			return false;
             		}
-            	    });
+              });
         });
       	
       	//设置下拉框的默认值

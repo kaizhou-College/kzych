@@ -38,7 +38,16 @@ public class UniversityQuery extends BaseQueryModel  {
     //univeraistyId;
     private Long universityId;
     
+    //包装university
+    private University university;
+    //包装address
+    private Address address;
     
+    private String provid ;
+    
+    private String cityid ;
+    
+    private String areaid;
     
 	public Integer getIsHot() {
 		return isHot;
@@ -149,6 +158,55 @@ public class UniversityQuery extends BaseQueryModel  {
 		this.universityId = universityId;
 	}
 
+	public University getUniversity() {
+		return university;
+	}
 
+	public void setUniversity(University university) {
+		this.university = university;
+	}
 
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public String getCityid() {
+		return cityid;
+	}
+
+	public void setCityid(String cityid) {
+		this.cityid = cityid;
+	}
+
+	public String getAreaid() {
+		return areaid;
+	}
+
+	public void setAreaid(String areaid) {
+		this.areaid = areaid;
+	}
+
+	public String getProvid() {
+		return provid;
+	}
+
+	public void setProvid(String provid) {
+		this.provid = provid;
+	}
+
+	@Override
+	public String toString() {
+		return "UniversityQuery [categoryId=" + categoryId + ", name=" + name + ", publishStatus=" + publishStatus
+				+ ", longitude=" + longitude + ", provice=" + provice + ", city=" + city + ", county=" + county
+				+ ", addrdetail=" + addrdetail + ", latitude=" + latitude + ", isHot=" + isHot + ", majorCategoryName="
+				+ majorCategoryName + ", majorId=" + majorId + ", universityId=" + universityId + ", university="
+				+ university + ", address=" + address + ", provid=" + provid + ", cityid=" + cityid + ", areaid="
+				+ areaid + "]";
+	}
+	
+	
 }

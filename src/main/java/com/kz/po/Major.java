@@ -17,9 +17,6 @@ public class Major extends BaseModel{
 
     private String description;
     
-    //在university 中myResultMap还缺一个字段  cost(花费,学费)；
-    private Integer cost;
-    
     private List<University> university;
     
     public Long getId() {
@@ -69,14 +66,6 @@ public class Major extends BaseModel{
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
-
-	public Integer getCost() {
-		return cost;
-	}
-
-	public void setCost(Integer cost) {
-		this.cost = cost;
-	}
 
 	public List<University> getUniversity() {
 		return university;

@@ -6,6 +6,7 @@
     v2: null,
     v3: null
 };
+var prov_01="<option value='1'>请选择</option>";
 var $form;
 var form;
 var $;
@@ -15,18 +16,44 @@ layui.define(['jquery', 'form'], function () {
     $form = $('form');
     treeSelect(defaults);
 });
+function checkedSelect(provice,city,county){
+	var city_01="";	
+	var county_01="";
+	for(var i in threeSelectData){
+		if(i!=provice){
+			prov_01=prov_01+"<option>"+i+"</option>";
+		}else{
+			prov_01=prov_01+"<option selected='selected'>"+i+"</option>";
+			for(var j in threeSelectData[i]['items']){
+				if(j!=city){
+					city_01=city_01+"<option>"+j+"</option>";
+				}else{
+					city_01=city_01+"<option selected='selected'>"+j+"</option>";
+					for(var n in threeSelectData[i]['items'][j]['items']){
+						county_01= n!=county?county_01+"<option>"+n+"</option>":county_01+"<option selected='selected'>"+n+"</option>";
+					}
+				}
+			}
+		}
+	}
+	$("#provid").html(prov_01);
+	$("#cityid").html(city_01);
+	$("#areaid").html(county_01);
+	
+}
+
 function treeSelect(config) {
     config.v1 = config.v1 ? config.v1 : 110000;
     config.v2 = config.v2 ? config.v2 : 110100;
     config.v3 = config.v3 ? config.v3 : 110101;
-    $.each(threeSelectData, function (k, v) {
+  /*  $.each(threeSelectData, function (k, v) {
 //    	alert('select[name=' + config.s1 + ']'+"k="+ k+"----v.val="+ v.val+"----config.v1="+ config.v1);
-       /* appendOptionTo($form.find('select[name=' + config.s1 + ']'), k, v.val, config.v1);*/
+        appendOptionTo($form.find('select[name=' + config.s1 + ']'), k, v.val, config.v1);
     	 appendOptionTo($form.find('select[name=' + config.s1 + ']'), k, k, config.v1);
-    });
+    });*/
     form.render();
-    cityEvent(config);
-    areaEvent(config);
+    //cityEvent(config);
+    //areaEvent(config);
     form.on('select(' + config.s1 + ')', function (data) {
         cityEvent(data);
         form.on('select(' + config.s2 + ')', function (data) {

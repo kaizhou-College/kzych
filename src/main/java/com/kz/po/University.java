@@ -32,12 +32,6 @@ public class University extends BaseModel{
 
     private String brochure;
 
-    private List<Major> majors;
-    
-    private Address address;
-    
-    private Introduce introduce;
-    
     private String schoolLicense;
 
     private String legalPersonName;
@@ -60,9 +54,17 @@ public class University extends BaseModel{
     
     private String checkedInfo;
     
-    private String schoolCoverimg;
-    
     private Long introduceId;
+    
+    private List<Major> majors;
+    
+    private UniversityCategory universityCategory;
+    
+    private Address address;
+    
+    private Introduce introduce;
+    
+    
     
 	public String getCheckedInfo() {
 		return checkedInfo;
@@ -264,15 +266,6 @@ public class University extends BaseModel{
 		this.universityNature = universityNature;
 	}
 	
-	public String getSchoolCoverimg() {
-		return schoolCoverimg;
-	}
-
-	public void setSchoolCoverimg(String schoolCoverimg) {
-		this.schoolCoverimg = schoolCoverimg;
-	}
-
-
 	public Long getIntroduceId() {
 		return introduceId;
 	}
@@ -297,4 +290,12 @@ public class University extends BaseModel{
 		this.introduce = introduce;
 	}
 
+	public UniversityCategory getUniversityCategory() {
+		return universityCategory;
+	}
+
+	public void setUniversityCategory(UniversityCategory universityCategory) {
+		this.universityCategory = universityCategory;
+	}
+	
 }

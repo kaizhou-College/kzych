@@ -11,8 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.kz.core.service.BaseService;
+import com.kz.dao.AddressMapper;
 import com.kz.dao.UniversityCategoryMapper;
 import com.kz.dao.UniversityMapper;
+import com.kz.po.Address;
 import com.kz.po.RecruitStudents;
 import com.kz.po.University;
 import com.kz.po.UniversityQuery;
@@ -29,9 +31,12 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 	}
 	@Autowired
 	private UniversityCategoryMapper mapperC;
-	public List<University> selectMajorsPageById(Long id,int pageNum,int pageSize) {
-		PageHelper.startPage(pageNum, pageSize);
-		return mapper.selectMajorsPageById(id);
+	@Autowired
+	private AddressMapper mapperA;
+	
+	public List<University> selectMajorsPageById(UniversityQuery qu) {
+		PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
+		return mapper.selectMajorsPageById(qu.getUniversityId());
 		
 	}
 	@Override
@@ -58,9 +63,7 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 	}
 	@Override
 	public Long insertSelectiveSequence(University m) {
-		m.setProfile("暂时未设值");
 		m.setCode(1L);
-		m.setProfile("暂时未设值");
 		m.setEmploymentInfo("暂时未设值");
 		m.setBrochure("暂时未设值");
 		m.setAgreements("暂时未设值");
@@ -71,6 +74,7 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 		m.setPublishStatus(1);
 		return mapper.insertSelectiveSequence(m);
 	}
+	
 	@Override
 	public Long updateByKeySelective(University m) {
 		return mapper.updateByKeySelective(m);
@@ -160,6 +164,38 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 		List<University> list =mapper.schollByRecruit(qu.getUniversityId());
 		PageInfo<University> result = new PageInfo<University>(list);
 		return result;
+	}
+	
+	public Long prodectAdd(University m,Address address){
+		Long long1 = insertSelectiveSequence(m);//添加学校
+		List<University> list = null;
+		if(long1==1L){//成功
+			//查询该用户的学校id
+			list = mapper.schoolByUserIdList(m);
+		}
+		address.setUniversityId(list.get(0).getId());
+		Long long2 = mapperA.insertSelective(address);
+		return long2+long1;
+	}
+	@Override
+	public Long prodectUpdate(UniversityQuery qu) {
+		Long long1 = mapper.schoolByUserIdUpdate(qu.getUniversity());
+		Long long2 = mapperA.updateByPrimaryKeySelective(qu.getAddress());
+		return long1+long2;
+	}
+	@Override
+	public Long userInfoSchool(UniversityQuery qu) {
+		Long long1 = mapper.schoolByUserIdUpdate(qu.getUniversity());
+		qu.getAddress().setProvice(qu.getProvid());
+		qu.getAddress().setCity(qu.getCityid());
+		qu.getAddress().setCounty(qu.getAreaid());
+		Long long2 = mapperA.updateByPrimaryKeySelective(qu.getAddress());
+		return long1+long2;
+	}
+	@Override
+	public List<University> mySchoolMajorInfo(UniversityQuery qu) {
+		List<University> schoolResult = mapper.mySchoolMajorInfo(qu.getUniversityId());
+		return schoolResult;
 	}
 	
 }

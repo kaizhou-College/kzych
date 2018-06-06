@@ -17,7 +17,6 @@
  {"name":"招聘","action":"post_publish.html","children":[],
                                          "side_nav":[
                                             {"name":"发布岗位","action":"post_publish.html","children":[]},
-                                            
                                             {"name":"岗位管理","action":"post_manager.html","children":[]},
                                             {"name":"简历管理","action":"resume_manager.html","children":[]},
                                             {"name":"人才查找","action":"talent_find.html","children":[]}

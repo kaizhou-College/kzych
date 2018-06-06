@@ -40,4 +40,5 @@ public class UniversityCategory {
     public void setParentid(Integer parentid) {
         this.parentid = parentid;
     }
+
 }

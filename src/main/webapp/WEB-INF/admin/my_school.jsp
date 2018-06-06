@@ -34,12 +34,12 @@
 	    <ul class="layui-nav layui-layout-right">
 	      <li class="layui-nav-item">
 	        <a href="javascript:;">
-	          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-	          贤心
+	          <img src="https://kzych.oss-cn-qingdao.aliyuncs.com/${currentUser.userAvatar }" class="layui-nav-img">
+          	  ${currentUser.username }
 	        </a>
 	        
 	      </li>
-	      <li class="layui-nav-item quit"><a href="javascript:void(0);">退出</a></li>
+	      <li class="layui-nav-item quit"><a onclick="exit()">退出</a></li>
 	    </ul>
 	  </div>
 	  
@@ -158,13 +158,11 @@
 							  
 							   <!--专业设置begin -->
 							   <div class="layui-tab-item layui-show"  style="padding: 0px 20px 0 0;box-sizing: border-box;">
-							  	
-							  	
 									
 									<div  style="margin:30px 0 0 0;width:100%;">
 								 			  <span style="float:right;"><button id="add-school-majar" class="layui-btn"><i class="layui-icon" style="font-size: 20px; ">&#xe654;</i>增加</button></span>
 												<hr class="layui-bg-green">
-												<table class="layui-table" lay-data="{ height:300, url:'${basePath}admin/testdata/school_majar.json'}" id="table4" lay-filter="majar">
+												<table class="layui-table" lay-data="{ height:300, url:'${basePath}/university/mySchoolMajorInfo.do?universityId=${schoolInfo.id}'}" id="table4" lay-filter="majar">
 											  <thead>
 											    <tr>
 											    
@@ -456,6 +454,7 @@
 	
 	//退出
 	function exit(){
+		alert(1);
 		$.ajax({
   			type:"get",
   			url:host_kzych+"/user/logout.do",
