@@ -38,7 +38,7 @@ public class MajorController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping(value="majorCategoryList.do", method = RequestMethod.GET)
+	@RequestMapping(value="major_category_list.do", method = RequestMethod.GET) //原来majorCategorylist
 	@ResponseBody
 	public ServerResponse majorCategorylist(MajorCategoryQuery qm){
 		PageInfo<MajorCategory> pageInfo = iMajorService.majorCategorylist(qm);
@@ -56,7 +56,7 @@ public class MajorController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
-	@RequestMapping(value="list.do")
+	@RequestMapping(value="major_list.do") //原来list
 	@ResponseBody
 	public ServerResponse<PageInfo> list(MajorQuery mq){
 		PageInfo pageInfo = iMajorService.getByConditionPage(mq);

@@ -672,7 +672,7 @@ public class UniversityController {
 		 **/
 		
 		//三 《通过专业id来查找学校   
-		@RequestMapping(value="selectByMajorId.do") 
+		@RequestMapping(value="major_university_list.do")  //原来selectByMajorId
 		@ResponseBody 
 		public ServerResponse<PageInfo> selectByMajorId(UniversityQuery qu) {
 			PageInfo pageInfo = iUniversityService.selectByMajorId(qu);
