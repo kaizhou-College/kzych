@@ -213,15 +213,7 @@ public class UniversityQuery extends BaseQueryModel  {
 		this.currentNum = currentNum;
 	}
 
-	@Override
-	public String toString() {
-		return "UniversityQuery [categoryId=" + categoryId + ", name=" + name + ", publishStatus=" + publishStatus
-				+ ", longitude=" + longitude + ", provice=" + provice + ", city=" + city + ", county=" + county
-				+ ", addrdetail=" + addrdetail + ", latitude=" + latitude + ", isHot=" + isHot + ", majorCategoryName="
-				+ majorCategoryName + ", majorId=" + majorId + ", universityId=" + universityId + ", university="
-				+ university + ", address=" + address + ", provid=" + provid + ", cityid=" + cityid + ", areaid="
-				+ areaid + ", currentNum=" + currentNum + "]";
-	}
+	
 
 	
 	

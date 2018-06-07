@@ -42,7 +42,7 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 		}else if(qu.getCurrentNum()==1){
 			result =mapper.schollByIntroduce(qu.getUniversityId());
 		}else if(qu.getCurrentNum()==2){
-			result =mapper.schollAndAddressList(qu.getUniversityId());
+			result =mapper.schollByRecruit(qu.getUniversityId());
 		}
 		
 		return result;
