@@ -478,9 +478,9 @@
 	<sql id="introduceSql">
 	    kz_introduce.id as introduceId, kz_introduce.detail as introDetail
 	</sql>
-	<select id="selectMajorsPageById" parameterType="long"
+	<select id="selectMajorsPageById" parameterType="Long"
 		resultMap="universityMajorMap">
-		select
+		    select
 			<include refid="kzBase_Column_List" />
 			,
 			<include refid="addressSql" />

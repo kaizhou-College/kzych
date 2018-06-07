@@ -49,6 +49,13 @@ public class UniversityQuery extends BaseQueryModel  {
     
     private String areaid;
     
+    
+    //微信小程序的查询university_detail接口 
+    //默认查询学校名称，地址，电话，专业)currentNum=0)
+    //图片视频描述currentNum=1)
+    //招生简章之类currentNum=2)
+    private Integer currentNum=0;
+    
 	public Integer getIsHot() {
 		return isHot;
 	}
@@ -198,6 +205,14 @@ public class UniversityQuery extends BaseQueryModel  {
 		this.provid = provid;
 	}
 
+	public Integer getCurrentNum() {
+		return currentNum;
+	}
+
+	public void setCurrentNum(Integer currentNum) {
+		this.currentNum = currentNum;
+	}
+
 	@Override
 	public String toString() {
 		return "UniversityQuery [categoryId=" + categoryId + ", name=" + name + ", publishStatus=" + publishStatus
@@ -205,8 +220,10 @@ public class UniversityQuery extends BaseQueryModel  {
 				+ ", addrdetail=" + addrdetail + ", latitude=" + latitude + ", isHot=" + isHot + ", majorCategoryName="
 				+ majorCategoryName + ", majorId=" + majorId + ", universityId=" + universityId + ", university="
 				+ university + ", address=" + address + ", provid=" + provid + ", cityid=" + cityid + ", areaid="
-				+ areaid + "]";
+				+ areaid + ", currentNum=" + currentNum + "]";
 	}
+
+	
 	
 	
 }

@@ -35,8 +35,17 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 	private AddressMapper mapperA;
 	
 	public List<University> selectMajorsPageById(UniversityQuery qu) {
-		PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
-		return mapper.selectMajorsPageById(qu.getUniversityId());
+		List<University> result =null;
+		if(qu.getCurrentNum()==0){
+			PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
+			result = mapper.selectMajorsPageById(qu.getUniversityId());
+		}else if(qu.getCurrentNum()==1){
+			result =mapper.schollByIntroduce(qu.getUniversityId());
+		}else if(qu.getCurrentNum()==2){
+			result =mapper.schollAndAddressList(qu.getUniversityId());
+		}
+		
+		return result;
 		
 	}
 	@Override
