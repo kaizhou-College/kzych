@@ -17,6 +17,9 @@ public class Major extends BaseModel{
 
     private String description;
     
+    //用来存储专业金额
+    private String cost;
+    
     private List<University> university;
     
     public Long getId() {
@@ -73,6 +76,14 @@ public class Major extends BaseModel{
 
 	public void setUniversity(List<University> university) {
 		this.university = university;
+	}
+
+	public String getCost() {
+		return cost;
+	}
+
+	public void setCost(String cost) {
+		this.cost = cost;
 	}
 
     
