@@ -475,7 +475,7 @@ public class UniversityController {
 	 *             session
 	 * @param: @return
 	 * @return: ServerResponse<University> 返回值类型
-	 */
+	 */ 
 	@RequestMapping(value="universityPageDetail.do", method = RequestMethod.GET)
 	@ResponseBody//在一些页面中这个方法还需要改 university_detail
 	public ServerResponse list(HttpSession session ,UniversityQuery qu) {
@@ -666,21 +666,14 @@ public class UniversityController {
 		 *二 《通过专业来查找专业列表 
 		 *http://localhost:8080/kzych/major/list.do?majorCategoryId=1
 		 *三 《通过专业列表来查找学校
-		 *http://localhost:8080/kzych/university/selectByMajorId.do?majorId=1
+		 *http://localhost:8080/kzych/major/major_university_list.do?majorId=1
 		 *四 《通过学校id查找学校  
 		 *http://localhost:8080/kzych/university/schollByIntroduceInfo.do?universityId=71&majorId=1
 		 **/
 		
-		//三 《通过专业列表id来查找学校   
-		@RequestMapping(value="major_university_list.do")  //原来selectByMajorId
-		@ResponseBody 
-		public ServerResponse<PageInfo> selectByMajorId(UniversityQuery qu) {
-			PageInfo pageInfo = iUniversityService.selectByMajorId(qu);
-			return ServerResponse.createBySuccess("查询成功", pageInfo);
-		}
 		
 		//四 《通过学校id查找学校
-		@RequestMapping(value="schoolByIntroduceInfo.do") 
+		@RequestMapping(value="university_major_detail.do") 
 		@ResponseBody 
 		public ServerResponse<PageInfo> schoolByIntroduceInfo(UniversityQuery qu) {
 			PageInfo pageInfo = iUniversityService.schoolByIntroduceInfo(qu);

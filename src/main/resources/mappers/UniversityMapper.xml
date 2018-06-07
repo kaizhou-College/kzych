@@ -856,7 +856,7 @@
     
     kz_major.id as majojrId,
     kz_major.NAME as majorName,
-    major_Code,
+    kz_university_major.cost as costDetail,
     
     kz_address.id as addressId,
     longitude,
@@ -866,31 +866,30 @@
     county,
     addrDetail
   </sql>  
-  <resultMap id="myResultMap" type="com.kz.po.Major" >
-    <id column="majojrId" property="id" />
-    <result column="majorName" property="name" />
-    <result column="major_Code" property="majorCode"/>
-  		<collection property="university" ofType="com.kz.po.University">
-			<id column="universityId" property="id"></id>
-			<result column="universityName" property="name" />
-			<result column="PROFILE" property="profile"/>
-			<association property="address" javaType="com.kz.po.Address">
-			    <id column="addressId" property="id"/>
-			    <result column="longitude" property="longitude"/>
-			    <result column="latitude" property="latitude"/>
-			    <result column="provice" property="provice"/>
-			    <result column="city" property="city"/>
-			    <result column="county" property="county"/>
-			    <result column="addrDetail" property="addrdetail"/>
-			</association>
-		</collection>
+  <resultMap id="myResultMap" type="com.kz.po.University" >
+    <id column="universityId" property="id"></id>
+	<result column="universityName" property="name" />
+	<result column="PROFILE" property="profile"/>
+	<association property="address" javaType="com.kz.po.Address">
+	    <id column="addressId" property="id"/>
+	    <result column="longitude" property="longitude"/>
+	    <result column="latitude" property="latitude"/>
+	    <result column="provice" property="provice"/>
+	    <result column="city" property="city"/>
+	    <result column="county" property="county"/>
+	    <result column="addrDetail" property="addrdetail"/>
+	</association>
+ 	<collection property="majors" ofType="com.kz.po.Major">
+		<id column="majojrId" property="id" />
+	    <result column="majorName" property="name" />
+	    <result column="costDetail" property="majorCode"/>
+	</collection>
   </resultMap>
   
   <select id="selectByMajorId" resultMap="myResultMap" parameterType="com.kz.po.UniversityQuery" >
     select 
     <include refid="myColumnList" />
-    ,
-    <include refid="myColumnList" /> 
+    
 	from 
 		kz_university,
 		kz_address,
@@ -900,9 +899,10 @@
 		kz_university.id=kz_address.university_id and
 		kz_university_major.university_id=kz_university.id and
 		kz_university_major.major_id=kz_major.id
-		<if test="majorId != null">
-			and kz_major.id=#{majorId}
+		<if test="universityId != null">
+			and kz_university.id=#{universityId}
 		</if>
+	order by kz_university.id asc
   </select>
   <select id="selectByMajorCategoryId" resultMap="ResultMapWithBLOBs"  parameterType="com.kz.po.UniversityQuery" >
       select 
@@ -975,7 +975,8 @@
 			</association>
 			<collection property="majors" ofType="com.kz.po.Major">
 			    <id column="majorId" property="id"/>
-				<result column="MAJOR_CODE" property="majorCode"/>
+			    <result column="majorName" property="name"/>
+				<result column="majorCost" property="majorCode"/>
 			</collection>
    </resultMap>
 	<select id="schoolByIntroduceInfo" resultMap="myResultMap_02" parameterType="com.kz.po.UniversityQuery" >
@@ -993,7 +994,8 @@
 			kz_introduce.detail as intrpDetail,
 			
 			kz_major.id as majorId,
-			MAJOR_CODE
+			kz_major.name as majorName,
+			kz_university_major.COST as majorCost
 		from 
 			kz_university,
 			kz_introduce,

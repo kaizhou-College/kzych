@@ -16,7 +16,9 @@ import com.kz.po.MajorCategory;
 import com.kz.po.MajorCategoryQuery;
 import com.kz.po.MajorQuery;
 import com.kz.po.MajorUniversity;
+import com.kz.po.UniversityQuery;
 import com.kz.service.IMajorService;
+import com.kz.service.IUniversityService;
 
 @Controller
 @RequestMapping("/major/")
@@ -25,7 +27,8 @@ public class MajorController {
 	@Autowired
 	private IMajorService iMajorService;
 	
-	
+	@Autowired
+	private IUniversityService iUniversityService;
 	
 	/**
 	 * 
@@ -44,6 +47,8 @@ public class MajorController {
 		PageInfo<MajorCategory> pageInfo = iMajorService.majorCategorylist(qm);
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}
+	
+	
 	
 	/**
 	 * 
@@ -86,7 +91,13 @@ public class MajorController {
 		return ServerResponse.createBySuccess("查询成功！", majorUniversity);
 	}
 	
-
 	
+	//三 《通过专业列表id来查找学校   
+	@RequestMapping(value="major_university_list.do")  //原来selectByMajorId
+	@ResponseBody 
+	public ServerResponse<PageInfo> selectByMajorId(UniversityQuery qu) {
+		PageInfo pageInfo = iUniversityService.selectByMajorId(qu);
+		return ServerResponse.createBySuccess("查询成功", pageInfo);
+	}
 	
 }
