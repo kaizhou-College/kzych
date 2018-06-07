@@ -671,7 +671,7 @@ public class UniversityController {
 		 *http://localhost:8080/kzych/university/schollByIntroduceInfo.do?universityId=71&majorId=1
 		 **/
 		
-		//三 《通过专业id来查找学校   
+		//三 《通过专业列表id来查找学校   
 		@RequestMapping(value="major_university_list.do")  //原来selectByMajorId
 		@ResponseBody 
 		public ServerResponse<PageInfo> selectByMajorId(UniversityQuery qu) {
@@ -703,7 +703,7 @@ public class UniversityController {
 		 * */
 		
 		//一，按照学校类别来查找学校
-		@RequestMapping(value="schollByTypeList.do") 
+		@RequestMapping(value="schollByTypeList.do")  
 		@ResponseBody 
 		public ServerResponse<PageInfo> schollByTypeList(UniversityQuery qu) {
 			PageInfo pageInfo = iUniversityService.schollByTypeList(qu);
@@ -713,12 +713,12 @@ public class UniversityController {
 		//二（1）通过id查找学校以及地址
 		@RequestMapping(value="university_detail.do") 
 		@ResponseBody 
-		public ServerResponse<PageInfo> schollAndAddressList(UniversityQuery qu) {
-			PageInfo pageInfo = iUniversityService.schollAndAddressList(qu);
+		public ServerResponse<PageInfo> universityDetail(UniversityQuery qu) {
+			PageInfo pageInfo = iUniversityService.universityDetail(qu);
 			return ServerResponse.createBySuccess("查询成功", pageInfo);
 		}
 		 //二（2）通过学校id查找该学校所有专业
-		@RequestMapping(value="scholl_detail_Major.do") 
+		@RequestMapping(value="university_detail_Major.do") 
 		@ResponseBody 
 		public ServerResponse<PageInfo> schollByMajor(UniversityQuery qu) {
 			PageInfo pageInfo = iUniversityService.schollByMajor(qu);

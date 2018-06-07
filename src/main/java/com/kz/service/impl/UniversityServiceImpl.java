@@ -36,15 +36,8 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 	
 	public List<University> selectMajorsPageById(UniversityQuery qu) {
 		List<University> result =null;
-		if(qu.getCurrentNum()==0){
-			PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
-			result = mapper.selectMajorsPageById(qu.getUniversityId());
-		}else if(qu.getCurrentNum()==1){
-			result =mapper.schollByIntroduce(qu.getUniversityId());
-		}else if(qu.getCurrentNum()==2){
-			result =mapper.schollByRecruit(qu.getUniversityId());
-		}
-		
+		PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
+		result = mapper.selectMajorsPageById(qu.getUniversityId());
 		return result;
 		
 	}
@@ -149,10 +142,20 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 		return result;
 	}
 	@Override
-	public PageInfo schollAndAddressList(UniversityQuery qu) {
-		List<University> list =mapper.schollAndAddressList(qu.getUniversityId());
-		PageInfo<University> result = new PageInfo<University>(list);
-		return result;
+	public PageInfo universityDetail(UniversityQuery qu) {
+		List<University> result =null;
+		if(qu.getCurrentNum()==0){
+			result=mapper.schollAndAddressList(qu.getUniversityId());
+		}else if(qu.getCurrentNum()==1){
+			PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
+			result=mapper.schollByMajor(qu.getUniversityId());
+		}else if(qu.getCurrentNum()==2){
+			result =mapper.schollByIntroduce(qu.getUniversityId());
+		}else if(qu.getCurrentNum()==3){
+			result =mapper.schollByRecruit(qu.getUniversityId());
+		}
+		PageInfo<University> pageInfo = new PageInfo<University>(result);
+		return pageInfo;
 	}
 	@Override
 	public PageInfo schollByMajor(UniversityQuery qu) {

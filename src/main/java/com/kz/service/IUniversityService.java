@@ -31,7 +31,7 @@ public interface IUniversityService extends IBaseService<University, UniversityQ
 	PageInfo selectByMajorId(UniversityQuery qu);
 	PageInfo schoolByIntroduceInfo(UniversityQuery u);
 	PageInfo schollByTypeList(UniversityQuery qu);
-	PageInfo schollAndAddressList(UniversityQuery qu);
+	PageInfo universityDetail(UniversityQuery qu);
 	PageInfo schollByMajor(UniversityQuery qu);
 	PageInfo schollByIntroduce(UniversityQuery qu);
 	PageInfo schollByRecruit(UniversityQuery qu);
