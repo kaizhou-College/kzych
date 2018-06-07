@@ -448,7 +448,23 @@
 			<result column="county" property="county"/>
 			<result column="addrDetail" property="addrdetail"/>
 		</collection>
-	</resultMap>
+		<collection property="introduce" javaType="com.kz.po.Introduce">
+			<id property="id" column="introId" />
+			<result property="detail" column="introDetail" />
+			<collection property="video" javaType="com.kz.po.Video">
+			    <id column="videoId" property="id"/>
+				<result column="url" property="url"/>
+				<result column="duration" property="duration"/>
+				<result column="thumb" property="thumb"/>
+			</collection>
+		</collection>
+		<collection property="universityDynamic" ofType="com.kz.po.UniversityDynamic">
+		    <id column="rsId" property="rsId"/>
+	  	    <result column="RsTitle" property="rsTitle"/>
+	  	    <result column="RsDetaTime" property="rsDatetime"/>
+	  	    <result column="RsContent" property="rsContent"/>
+		</collection>
+</resultMap>
 
 	<sql id="kzBase_Column_List">
 		kz_university.ID as universityId, CODE, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, coupon,
@@ -459,36 +475,47 @@
 		Administrator_Name,Administrator_Phone,USER_id,University_Type,University_Nature,
 		checked_info
 	</sql>
+	<sql id="introduceSql">
+	    kz_introduce.id as introduceId, kz_introduce.detail as introDetail
+	</sql>
 	<select id="selectMajorsPageById" parameterType="long"
 		resultMap="universityMajorMap">
 		select
-		<include refid="kzBase_Column_List" />
-		,
-		<include refid="addressSql" />
-		,
-			kz_major.id major_id,
-			kz_major.major_category_id,
-			kz_major.name
-			major_name,
-			kz_major.major_code,
-			kz_major.ishot,
-			kz_university_major.id
-			um_id,
-			kz_major.description
+			<include refid="kzBase_Column_List" />
+			,
+			<include refid="addressSql" />
+			,
+			<include refid="majorSql" />
+			,
+			<include refid="introduceSql"/>
+			,
+			kz_video.id as videoId,
+			url,
+			duration,
+			thumb,
+			kz_university_dynamic.rs_id as rsId,
+			kz_university_dynamic.rs_title as RsTitle,
+			kz_university_dynamic.rs_datetime as RsDetaTime,
+			kz_university_dynamic.rs_content as RsContent
+		from 
+			kz_university ,
+			kz_address ,
 		
-		from
-			kz_university,
-			kz_university_major,
-			kz_major,
-			kz_address
-		where
-			kz_address.university_id=kz_university.id 
-		and
-			kz_university.id = kz_university_major.university_id
-		and
-			kz_university_major.major_id = kz_major.id
-		and
-			kz_university.id = #{id}
+			kz_major ,
+			kz_university_major ,
+		
+			kz_introduce ,
+			kz_video , 
+		
+			kz_university_dynamic
+		where 
+			kz_university.id=kz_address.university_id and 
+			kz_university.id=kz_university_major.university_id and 
+			kz_major.id=kz_university_major.major_id and 
+			kz_university.introduce_id=kz_introduce.id and 
+			kz_introduce.id=kz_video.intro_id  and 
+			kz_university.id=kz_university_dynamic.university_id and
+			kz_university.id=#{id}
 	</select>
 	<resultMap id="ExplicitBaseResultMap" type="com.kz.po.University">
 		<id column="kz_university.ID" property="id" jdbcType="BIGINT" />

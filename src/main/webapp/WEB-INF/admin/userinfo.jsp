@@ -33,7 +33,7 @@
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
-          <img src="https://kzych.oss-cn-qingdao.aliyuncs.com/${currentUser.userAvatar }" class="layui-nav-img">
+          <img src="${currentUser.userAvatar }" class="layui-nav-img">
           ${currentUser.username }
         </a>
         
@@ -81,7 +81,7 @@
 										<button name="selectFiles" class='layui-btn'>选择文件</button>
 										<button class='layui-btn'  name="postFiles">开始上传</button>
 										  <div class="layui-upload-list">
-										    <img class="layui-upload-img" id="start-img-view1" src="https://kzych.oss-cn-qingdao.aliyuncs.com/${currentUser.userAvatar }" style="height:100px;">
+										    <img class="layui-upload-img" id="start-img-view1" src="${currentUser.userAvatar }" style="height:100px;">
 										    <p id="errText1"></p>
 										  </div>
 										<input type="hidden" value="${currentUser.userAvatar }" id="userAvatar" name="userAvatar">
@@ -221,7 +221,7 @@
 												  <button name="selectFiles" class='layui-btn'>选择文件</button>
 												  <button class='layui-btn' name="postFiles">开始上传</button>
 												  <div class="layui-upload-list">
-												    <img  src="https://kzych.oss-cn-qingdao.aliyuncs.com/${User_list.profile}"  class="layui-upload-img" id="start-img-view2" style="height:100px;">
+												    <img  src="${User_list.profile}"  class="layui-upload-img" id="start-img-view2" style="height:100px;">
 												    <p id="errText2"></p>
 												  </div>
 												  <input type="hidden" name="university.profile" id="profile" value="${User_list.profile}"> 
@@ -238,7 +238,7 @@
 												  <button name="selectFiles" class='layui-btn'>选择文件</button>
 												  <button class='layui-btn'  name="postFiles">开始上传</button>
 												  <div class="layui-upload-list">
-												    <img src="https://kzych.oss-cn-qingdao.aliyuncs.com/${User_list.schoolLicense}" class="layui-upload-img" id="start-img-view3" style="height:100px;">
+												    <img src="${User_list.schoolLicense}" class="layui-upload-img" id="start-img-view3" style="height:100px;">
 												    <p id="errText3"></p>
 												  </div>
 												  <input type="hidden" name="university.schoolLicense" id="schoolLicense" value="${User_list.schoolLicense}">

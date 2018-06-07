@@ -39,7 +39,7 @@
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
-          <img src="https://kzych.oss-cn-qingdao.aliyuncs.com/${currentUser.userAvatar }" class="layui-nav-img">
+          <img src="${currentUser.userAvatar }" class="layui-nav-img">
           ${currentUser.username }
         </a>
         <dl class="layui-nav-child">
@@ -245,7 +245,7 @@ app.init(function($){
 											$("#school_list").empty();
 											for ( var i in list) {
 												   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-							        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+							        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
 							    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 
 											}
@@ -270,7 +270,7 @@ app.init(function($){
 		  				$("#school_list").empty();
 						for ( var i in list) {
 							   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-		        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+		        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
 		    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 						}
 						//加载
@@ -299,7 +299,7 @@ app.init(function($){
    			   $("#school_list").empty();
    			   for(var i in list){
    				   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-       		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+       		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
        		   	/*    ele += '<div style="width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;" schoolid="' + list[i].id + '"> ';
        		   	   ele += '<img  onmouseup="showScoolInfo('+JSON.stringify(list[i])+')" src="' + list[i].profile + '" style="width:160px;height:120px;float:left;"/>';
@@ -335,7 +335,7 @@ app.init(function($){
                  			   $("#school_list").empty();
                  			   for(var i in list){
                  				 ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-                 		   	  	 ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+                 		   	  	 ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
              		           	 ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
                  		         
                      		   }
@@ -385,7 +385,7 @@ function showScoolInfo(list){
 	var address=list.address.provice+"-"+list.address.city+"-"+list.address.county+"-"+list.address.addrdetail;
 	$("#school_Name").val(list.name);
 	$("#school_Address").val(address);
-	$("#school_License").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.schoolLicense);
+	$("#school_License").attr("src",list.schoolLicense);
 	$("#legal_person_Name").val(list.legalPersonName);
 	$("#legal_person_Card").val(list.legalPersonCard);
 	$("#legal_person_Phone").val(list.legalPersonPhone);

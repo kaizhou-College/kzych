@@ -30,7 +30,7 @@
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
-          <img src="https://kzych.oss-cn-qingdao.aliyuncs.com/${currentUser.userAvatar }" class="layui-nav-img">
+          <img src="${currentUser.userAvatar }" class="layui-nav-img">
           ${currentUser.username }
         </a>
         <dl class="layui-nav-child">

@@ -44,7 +44,7 @@
 			</ul>
 			<ul class="layui-nav layui-layout-right">
 				<li class="layui-nav-item"><a href="javascript:;"> 
-				<img src="https://kzych.oss-cn-qingdao.aliyuncs.com/${currentUser.userAvatar }" class="layui-nav-img">
+				<img src="${currentUser.userAvatar }" class="layui-nav-img">
           		${currentUser.username }
 				</a>
 					<dl class="layui-nav-child">
@@ -317,7 +317,7 @@
 														.empty();
 												for ( var i in list) {
 													   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-								        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+								        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
 								    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 
 												}
@@ -342,7 +342,7 @@
 			  				$("#school_list").empty();
 							for ( var i in list) {
 								   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-			        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+			        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
 			    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 							}
 							//加载
@@ -446,7 +446,7 @@
 				$("#school_list").empty();
 				for ( var i in list) {
 					 ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-      		   	     ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+      		   	     ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
   		             ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 				}
 				//加载
@@ -481,7 +481,7 @@
 								$("#school_list").empty();
 								for ( var i in list) {
 									   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-				        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+				        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
 				    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 
 								}
@@ -525,14 +525,14 @@
 		var address=list.address.provice+"-"+list.address.city+"-"+list.address.county+"-"+list.address.addrdetail;
 		$("#school_Name").val(list.name);
 		$("#school_Address").val(address);
-		$("#school_License").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.schoolLicense);
+		$("#school_License").attr("src",list.schoolLicense);
 		$("#legal_person_Name").val(list.legalPersonName);
 		$("#legal_person_Card").val(list.legalPersonCard);
 		$("#legal_person_Phone").val(list.legalPersonPhone);
 		$("#administrator_Account").val(list.administratorAccount);
 		$("#administrator_Name").val(list.administratorName);
 		$("#administrator_Phone").val(list.administratorPhone);
-		$("#profile").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.profile);
+		$("#profile").attr("src",list.profile);
 	  	$("#id_school").val(list.id);
 	  	$("#checkedInfo").val(list.checkedInfo);
 		//设置下拉框的默认值

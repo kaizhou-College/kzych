@@ -64,6 +64,7 @@ public class University extends BaseModel{
     
     private Introduce introduce;
     
+    private List<UniversityDynamic> universityDynamic;
     
     
 	public String getCheckedInfo() {
@@ -297,5 +298,16 @@ public class University extends BaseModel{
 	public void setUniversityCategory(UniversityCategory universityCategory) {
 		this.universityCategory = universityCategory;
 	}
+
+	public List<UniversityDynamic> getUniversityDynamic() {
+		return universityDynamic;
+	}
+
+	public void setUniversityDynamic(List<UniversityDynamic> universityDynamic) {
+		this.universityDynamic = universityDynamic;
+	}
+
+
+	
 	
 }
