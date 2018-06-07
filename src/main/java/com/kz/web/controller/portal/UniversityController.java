@@ -476,11 +476,11 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: ServerResponse<University> 返回值类型
 	 */
-	@RequestMapping(value="university_detail.do", method = RequestMethod.GET)
-	@ResponseBody
+	@RequestMapping(value="universityPageDetail.do", method = RequestMethod.GET)
+	@ResponseBody//在一些页面中这个方法还需要改 university_detail
 	public ServerResponse list(HttpSession session ,UniversityQuery qu) {
 		/*User user = (User) session.getAttribute(Const.CURRENT_USER);
-		if (user == null) {
+		if (user == null) { 
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
 		}*/
 		// 3，根据学校的id查询该学校的所有专业信息
@@ -711,14 +711,14 @@ public class UniversityController {
 		}
 		
 		//二（1）通过id查找学校以及地址
-		@RequestMapping(value="schollAndAddressList.do") 
+		@RequestMapping(value="university_detail.do") 
 		@ResponseBody 
 		public ServerResponse<PageInfo> schollAndAddressList(UniversityQuery qu) {
 			PageInfo pageInfo = iUniversityService.schollAndAddressList(qu);
 			return ServerResponse.createBySuccess("查询成功", pageInfo);
 		}
 		 //二（2）通过学校id查找该学校所有专业
-		@RequestMapping(value="schollByMajor.do") 
+		@RequestMapping(value="scholl_detail_Major.do") 
 		@ResponseBody 
 		public ServerResponse<PageInfo> schollByMajor(UniversityQuery qu) {
 			PageInfo pageInfo = iUniversityService.schollByMajor(qu);
