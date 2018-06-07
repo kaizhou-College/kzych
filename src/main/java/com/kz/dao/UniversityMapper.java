@@ -6,7 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import com.github.pagehelper.PageInfo;
 import com.kz.core.dao.BaseMapper;
+import com.kz.po.Introduce;
+import com.kz.po.Major;
 import com.kz.po.University;
+import com.kz.po.UniversityDynamic;
 import com.kz.po.UniversityQuery;
 
 @Repository
@@ -27,8 +30,8 @@ public interface UniversityMapper extends BaseMapper<University, UniversityQuery
 	List<University> schoolByIntroduceInfo(UniversityQuery qu);
 	List<University> schollByTypeList(UniversityQuery qu);
 	List<University> schollAndAddressList(Long universityId);
-	List<University> schollByMajor(Long universityId);
-	List<University> schollByIntroduce(Long universityId);
-	List<University> schollByRecruit(Long universityId);
+	List<Major> schollByMajor(Long universityId);
+	List<Introduce> schollByIntroduce(Long universityId);
+	List<UniversityDynamic> schollByRecruit(Long universityId);
 	List<University> mySchoolMajorInfo(Long universityId);
 }

@@ -15,6 +15,8 @@ import com.kz.dao.AddressMapper;
 import com.kz.dao.UniversityCategoryMapper;
 import com.kz.dao.UniversityMapper;
 import com.kz.po.Address;
+import com.kz.po.Introduce;
+import com.kz.po.Major;
 import com.kz.po.University;
 import com.kz.po.UniversityDynamic;
 import com.kz.po.UniversityQuery;
@@ -146,13 +148,17 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 		List<University> result =null;
 		if(qu.getCurrentNum()==0){
 			result=mapper.schollAndAddressList(qu.getUniversityId());
-		}else if(qu.getCurrentNum()==1){
 			PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
-			result=mapper.schollByMajor(qu.getUniversityId());
+			List<Major> resultMajor=mapper.schollByMajor(qu.getUniversityId());
+			result.get(0).setMajors(resultMajor);
+		}else if(qu.getCurrentNum()==1){
+			result=mapper.schollAndAddressList(qu.getUniversityId());
+			List<Introduce> resultIntroduce =mapper.schollByIntroduce(qu.getUniversityId());
+			result.get(0).setIntroduce(resultIntroduce.get(0));
 		}else if(qu.getCurrentNum()==2){
-			result =mapper.schollByIntroduce(qu.getUniversityId());
-		}else if(qu.getCurrentNum()==3){
-			result =mapper.schollByRecruit(qu.getUniversityId());
+			result=mapper.schollAndAddressList(qu.getUniversityId());
+			List<UniversityDynamic> resultRecruit =mapper.schollByRecruit(qu.getUniversityId());
+			result.get(0).setUniversityDynamic(resultRecruit);
 		}
 		PageInfo<University> pageInfo = new PageInfo<University>(result);
 		return pageInfo;
@@ -160,21 +166,21 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 	@Override
 	public PageInfo schollByMajor(UniversityQuery qu) {
 		PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
-		List<University> list =mapper.schollByMajor(qu.getUniversityId());
-		PageInfo<University> result = new PageInfo<University>(list);
+		List<Major> list =mapper.schollByMajor(qu.getUniversityId());
+		PageInfo<Major> result = new PageInfo<Major>(list);
 		return result;
 	}
 	@Override
 	public PageInfo schollByIntroduce(UniversityQuery qu) {
-		List<University> list =mapper.schollByIntroduce(qu.getUniversityId());
-		PageInfo<University> result = new PageInfo<University>(list);
+		List<Introduce> list =mapper.schollByIntroduce(qu.getUniversityId());
+		PageInfo<Introduce> result = new PageInfo<Introduce>(list);
 		return result;
 	}
 	
 	@Override
 	public PageInfo schollByRecruit(UniversityQuery qu) {
-		List<University> list =mapper.schollByRecruit(qu.getUniversityId());
-		PageInfo<University> result = new PageInfo<University>(list);
+		List<UniversityDynamic> list =mapper.schollByRecruit(qu.getUniversityId());
+		PageInfo<UniversityDynamic> result = new PageInfo<UniversityDynamic>(list);
 		return result;
 	}
 	
