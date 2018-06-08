@@ -6,5 +6,7 @@ import com.kz.po.OrderQuery;
 
 public interface OrderMapper extends BaseMapper<Order, OrderQuery>{
 	Order selectByOrderNo(Long orderNo);
+
+	Long myInsertSelective(Order order);
    
 }

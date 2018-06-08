@@ -294,4 +294,43 @@
 		utc_timestamp(),
     </trim>
   </insert>
+  <insert id="userInfoAdd"  parameterType="com.kz.po.User">
+      insert into 
+      	kz_user
+      	<trim prefix=" (" suffix=") " suffixOverrides=",">
+      	    UUID,
+      	    user_avatar,
+      	    USERNAME,
+      	    real_name,
+      	    IDCARD,
+      	    SEX,
+      	    CELLPHONE,
+      	    ORIGIN_PLACE,
+      	    SCHOOL,
+      	    SIGN_MESSAGE,
+      	    create_Time,
+      	</trim>
+      	<trim prefix=" values(" suffix=")" suffixOverrides=",">
+      	    NULL,
+      	    #{userAvatar},
+      	    #{username},
+      	    #{realName},
+      	    #{idcard},
+      	    #{sex},
+      	    #{cellphone},
+      	    #{originPlace},
+      	    #{school},
+      	    #{signMessage},
+      	    #{createTime}
+      	</trim>
+  </insert>
+  <select id="userByIdCardSelect" parameterType="String" resultMap="BaseResultMap">
+      select
+      		<include refid="Base_Column_List" />
+      from
+      		kz_user
+      where 
+      		idcard=#{idcard}
+      order by create_Time desc
+  </select>
 </mapper>

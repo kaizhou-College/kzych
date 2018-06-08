@@ -83,9 +83,9 @@ public class UniversityDynamicController {
 				json.append("{");
 			}
 			if(i!=list.size()-1){
-				json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+formattingDate(list.get(i).getRsDatetime())+"\",\"name\":\""+list.get(i).getRsTitle()+"\"},{");
+				json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"},{");
 			}else{
-				json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+formattingDate(list.get(i).getRsDatetime())+"\",\"name\":\""+list.get(i).getRsTitle()+"\"}]}");
+				json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"}]}");
 			}
 		}
 		if(list.size()==0){
@@ -129,11 +129,6 @@ public class UniversityDynamicController {
 		}
 	}
 	
-	public String formattingDate(Date date){
-		Date nowTime=new Date(); 
-		SimpleDateFormat time=new SimpleDateFormat("yyyy-MM-dd"); 
-		return time.format(nowTime);
-	}
-	
+
 }
 

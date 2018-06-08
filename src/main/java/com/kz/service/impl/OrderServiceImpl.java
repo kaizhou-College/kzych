@@ -1,5 +1,8 @@
 package com.kz.service.impl;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import org.slf4j.Logger;
@@ -18,9 +21,14 @@ import com.kz.core.common.ServerResponse;
 import com.kz.core.service.BaseService;
 import com.kz.dao.OrderDetailMapper;
 import com.kz.dao.OrderMapper;
+import com.kz.dao.UniversityMapper;
+import com.kz.dao.UserMapper;
 import com.kz.po.Order;
 import com.kz.po.OrderDetail;
 import com.kz.po.OrderQuery;
+import com.kz.po.University;
+import com.kz.po.UniversityQuery;
+import com.kz.po.User;
 import com.kz.service.IOrderService;
 import com.kz.utils.ZfbPropertiesUtil;
 import com.kz.web.controller.portal.OrderController;
@@ -41,6 +49,12 @@ public class OrderServiceImpl extends BaseService<Order, OrderQuery>implements I
 	@Autowired
 	private OrderDetailMapper orderDetailMapper;
 
+	@Autowired
+	private UserMapper usermapper;
+	
+	@Autowired
+	private UniversityMapper universityMapper;
+	
 	public boolean create(Order order, OrderDetail orderDetail) {
 		// 1，添加订单
 		// 生产订单号
@@ -102,4 +116,35 @@ public class OrderServiceImpl extends BaseService<Order, OrderQuery>implements I
 		return currentTime + new Random().nextInt(100);
 	}
 
+	@Override
+	public Long order_create(User u, UniversityQuery qu) {
+		Long userId=0L;
+		double grants;//助学金
+		double coupon;//优惠金额
+		double cost;//学费
+		//需要传入 universityId majorId 以及user的值
+		//先创建用户
+		u.setCreateTime(new Date());
+		Long userAdd=usermapper.userInfoAdd(u);
+		//然后使用该用户身份证查询出该用户id
+		if(userAdd>0){
+			List<User> userList = usermapper.userByIdCardSelect(u.getIdcard());
+			userId=userList.get(0).getUuid();
+		}
+		//接着查询出university中的优惠券 university_major的学费
+		University costDetail = universityMapper.UniversityCostDetail(qu);
+		grants=costDetail.getGrants().doubleValue();
+		coupon=costDetail.getCoupon().doubleValue();
+		cost=Double.parseDouble(costDetail.getMajors().get(0).getCostDetail());
+		//那么就添加order  PAYMENT字段使用学费减掉优惠券
+		Order order=new Order();
+		order.setUserId(userId);
+		order.setCreateTime(new Date());
+		order.setPayment(new BigDecimal(cost-coupon-grants));
+		order.setStatus(0);
+		Long orderAdd=orderMapper.myInsertSelective(order);
+		//最后根据orderd用户id降序查询出第一条数据的id
+		//收尾完成orderDetail的数据添加
+		return null;
+	}
 }

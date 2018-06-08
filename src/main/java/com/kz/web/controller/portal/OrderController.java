@@ -23,6 +23,8 @@ import com.kz.core.common.ResponseCode;
 import com.kz.core.common.ServerResponse;
 import com.kz.po.Order;
 import com.kz.po.OrderDetail;
+import com.kz.po.University;
+import com.kz.po.UniversityQuery;
 import com.kz.po.User;
 import com.kz.service.IOrderService;
 import com.kz.vo.OrderVo;
@@ -136,4 +138,21 @@ public class OrderController {
         }*/
         return Const.AlipayCallback.RESPONSE_FAILED;
     }
+	
+	
+	//微信小程序的报名
+	@RequestMapping(value="order_create.do")
+	public ServerResponse<PageInfo> order_create(User u,UniversityQuery qu){
+		Long num=iOrderService.order_create(u,qu);
+		//需要传入 universityId majorId 以及user的值
+		//先创建用户
+		//然后使用该用户身份证查询出该用户id
+		//接着查询出university中的优惠券 university_major的学费
+		//那么就添加order  PAYMENT字段使用学费减掉优惠券
+		//最后根据orderd用户id降序查询出第一条数据的id
+		//收尾完成orderDetail的数据添加
+		
+		
+		return ServerResponse.createBySuccessMessage("下单成功");
+	}
 }

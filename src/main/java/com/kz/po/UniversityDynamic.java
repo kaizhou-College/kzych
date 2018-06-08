@@ -1,5 +1,6 @@
 package com.kz.po;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.kz.core.po.BaseModel;
@@ -9,7 +10,7 @@ public class UniversityDynamic extends BaseModel {
 
     private String rsTitle;
 
-    private Date rsDatetime;
+    private Date rsDatetime;//做了get请求
 
     private String rsContent;
 
@@ -31,8 +32,10 @@ public class UniversityDynamic extends BaseModel {
         this.rsTitle = rsTitle == null ? null : rsTitle.trim();
     }
 
-    public Date getRsDatetime() {
-        return rsDatetime;
+    public String getRsDatetime() {
+    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	String str_date = formatter.format(rsDatetime); // 将日期时间格式化
+        return str_date;
     }
 
     public void setRsDatetime(Date rsDatetime) {

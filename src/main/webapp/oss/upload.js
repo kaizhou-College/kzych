@@ -235,11 +235,12 @@ var uploader = new plupload.Uploader({
             	
             		var p = _this.parentNode.children;
             		if(p.length>3){
+            			
             			if(p[0].innerHTML=="选择文件"&&p[1].innerHTML=="开始上传"){
             				p[2].innerHTML="<img src='https://kzych.oss-cn-qingdao.aliyuncs.com/"+get_uploaded_object_name(file.name)+
      					    "' class='layui-upload-img'  id='start-img-view2' style='height:100px;'>"+
      					    "<p id='errText2'></p>"
-     					    p[3].setAttribute("value",get_uploaded_object_name(file.name));
+     					    p[3].setAttribute("value","https://kzych.oss-cn-qingdao.aliyuncs.com/"+get_uploaded_object_name(file.name));
             			}
             		}
             		//alert(p[2].innerHTML+"="+img.innerHTML);
