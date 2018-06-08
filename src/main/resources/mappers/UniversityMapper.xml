@@ -983,7 +983,7 @@
 	<select id="schoolByIntroduceInfo" resultMap="myResultMap_02" parameterType="com.kz.po.UniversityQuery" >
 	    select 
 		 	<include refid="universitySql"/>
-			
+			,
 			kz_video.id as videoId,
 			url,
 			duration,
@@ -1199,7 +1199,7 @@
 			kz_university_major.major_id=kz_major.id and 
 			kz_university.id=#{id}
   	</select>
-  	<resultMap type="com.kz.po.University" id="universityCostMap">
+  	<resultMap extends="universityMap" type="com.kz.po.University" id="universityCostMap">
   	    <collection property="majors" javaType="com.kz.po.Major">
   	        <id column="majorId" property="id" jdbcType="BIGINT" />
 		    <result column="MAJOR_CATEGORY_ID" property="majorCategoryId" jdbcType="BIGINT" />
