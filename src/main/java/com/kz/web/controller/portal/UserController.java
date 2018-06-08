@@ -275,7 +275,7 @@ public class UserController {
 			return ServerResponse.createBySuccess(fileMap);
 	}
 
-	@RequestMapping(value="userInsert.do",method = RequestMethod.POST)
+	@RequestMapping(value="user_register.do",method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse userInsert(User u) {
 		u.setCreateTime(new Date());
