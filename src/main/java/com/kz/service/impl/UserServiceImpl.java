@@ -150,6 +150,13 @@ public class UserServiceImpl extends BaseService<User, UserQuery> implements IUs
 
 	@Override
 	public Long userInfoAdd(User u) {
+		if(u.getSex().equals("1")){
+			u.setSex("男");
+		}if(u.getSex().equals("2")){
+			u.setSex("女");
+		}if(u.getSex().equals("0")){
+			u.setSex(null);
+		}
 		Long infoAdd = userMapper.userInfoAdd(u);
 		return infoAdd;
 	}

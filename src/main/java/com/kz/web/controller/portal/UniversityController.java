@@ -639,120 +639,131 @@ public class UniversityController {
 	
 	
 	//招生简章的数据返回 Enrollment Guide
-		@RequestMapping(value="/selectByUniversityId.do")
-		@ResponseBody
-		public JSONObject schoolByProfession(int universityId,HttpSession session,HttpServletResponse response){
-			StringBuffer json=new StringBuffer("{\"code\": 0,\"msg\": \"\",\"count\": 2,\"data\": [");
-			List<UniversityDynamic> list = iUniversityService.selectByUniversityId(universityId);
-			for(int i=0;i<list.size();i++){
-				if(i==0){
-					json.append("{");
-				}
-				if(i!=list.size()-1){
-					json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"},{");
+	@RequestMapping(value="/selectByUniversityId.do")
+	@ResponseBody
+	public JSONObject schoolByProfession(int universityId,HttpSession session,HttpServletResponse response){
+		StringBuffer json=new StringBuffer("{\"code\": 0,\"msg\": \"\",\"count\": 2,\"data\": [");
+		List<UniversityDynamic> list = iUniversityService.selectByUniversityId(universityId);
+		for(int i=0;i<list.size();i++){
+			if(i==0){
+				json.append("{");
+			}
+			if(i!=list.size()-1){
+				json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"},{");
+			}else{
+				json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"}");
+			}
+		}
+		json.append("]}");
+		JSONObject json_test = JSONObject.fromObject(json.toString());
+		return json_test;
+	}
+	
+	
+	//====*** 热门专业
+	/*一 《专业分类    
+	 * http://localhost:8080/kzych/major/majorCategoryList.do
+	 *二 《通过专业来查找专业列表 
+	 *http://localhost:8080/kzych/major/list.do?majorCategoryId=1
+	 *三 《通过专业列表来查找学校
+	 *http://localhost:8080/kzych/major/major_university_list.do?majorId=1
+	 *四 《通过学校id查找学校  
+	 *http://localhost:8080/kzych/university/schollByIntroduceInfo.do?universityId=71&majorId=1
+	 **/
+	
+	
+	//四 《通过学校id查找学校
+	@RequestMapping(value="university_major_detail.do") 
+	@ResponseBody 
+	public ServerResponse<PageInfo> schoolByIntroduceInfo(UniversityQuery qu) {
+		PageInfo pageInfo = iUniversityService.schoolByIntroduceInfo(qu);
+		return ServerResponse.createBySuccess("查询成功", pageInfo);
+	}
+	
+	//===**附件学校
+	//一，按照学校类别来查找学校
+	//http://localhost:8080/kzych/university/schollByTypeList.do?categoryId=2
+	//二，然后通过学校id来查找 该学校所有专业  和 学校信息（学校视频及学校图片）以及学校招生动态
+	
+	/*二（1）通过id查找学校以及地址
+	 * http://localhost:8080/kzych/university/schollAndAddressList.do?universityId=2
+	 *二（2）通过学校id查找该学校所有专业
+	 *http://localhost:8080/kzych/university/schollByMajor.do?universityId=71
+	 *二（3）通过学校id查找该学校的概况
+	 *http://localhost:8080/kzych/university/schollByIntroduce.do?universityId=71
+	 *二（4）通过学校id查找该学校的动态
+	 *http://localhost:8080/kzych/university/schollByRecruit.do?universityId=71
+	 * */
+	
+	//一，按照学校类别来查找学校
+	@RequestMapping(value="schollByTypeList.do")  
+	@ResponseBody 
+	public ServerResponse<PageInfo> schollByTypeList(UniversityQuery qu) {
+		PageInfo pageInfo = iUniversityService.schollByTypeList(qu);
+		return ServerResponse.createBySuccess("查询成功", pageInfo);
+	}
+	
+	//二（1）通过id查找学校以及地址
+	@RequestMapping(value="university_detail.do") 
+	@ResponseBody 
+	public ServerResponse<PageInfo> universityDetail(UniversityQuery qu) {
+		PageInfo pageInfo = iUniversityService.universityDetail(qu);
+		return ServerResponse.createBySuccess("查询成功", pageInfo);
+	}
+	 //二（2）通过学校id查找该学校所有专业
+	@RequestMapping(value="university_detail_Major.do") 
+	@ResponseBody 
+	public ServerResponse<PageInfo> schollByMajor(UniversityQuery qu) {
+		PageInfo pageInfo = iUniversityService.schollByMajor(qu);
+		return ServerResponse.createBySuccess("查询成功", pageInfo);
+	}
+	 
+	 //*二（3）通过学校id查找该学校的概况
+	@RequestMapping(value="university_detail_Introduce.do") 
+	@ResponseBody 
+	public ServerResponse<PageInfo> schollByIntroduce(UniversityQuery qu) {
+		PageInfo pageInfo = iUniversityService.schollByIntroduce(qu);
+		return ServerResponse.createBySuccess("查询成功", pageInfo);
+	}
+	 //*二（4）通过学校id查找该学校的动态 
+	@RequestMapping(value="university_detail_dynamic.do") 
+	@ResponseBody 
+	public ServerResponse<PageInfo> schollByRecruit(UniversityQuery qu) {
+		PageInfo pageInfo = iUniversityService.schollByRecruit(qu);
+		return ServerResponse.createBySuccess("查询成功", pageInfo);
+	}
+//下面是還沒寫controller接口的 
+	@RequestMapping(value="mySchoolMajorInfo.do") 
+	@ResponseBody 
+	public JSONObject mySchoolMajorInfo(UniversityQuery qu) {
+		StringBuffer json=new StringBuffer("{\"code\": 0,\"msg\": \"\",\"count\": 2,\"data\": [");
+		List<University> schoolResult = iUniversityService.mySchoolMajorInfo(qu);
+		for(int i=0;i<schoolResult.size();i++){
+			for(int j=0;j<schoolResult.get(i).getMajors().size();j++){
+				json.append("{\"id\":"+schoolResult.get(i).getMajors().get(j).getId()+",\"level\":\""+schoolResult.get(i).getUniversityCategory().getCategoryName()+"\",");
+				json.append("\"name\":\""+schoolResult.get(i).getMajors().get(j).getName()+"\",");
+				if(j!=schoolResult.get(i).getMajors().size()-1){
+					json.append("\"tuition\":\""+schoolResult.get(i).getMajors().get(j).getMajorCode()+"\"},");
 				}else{
-					json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"}");
+					json.append("\"tuition\":\""+schoolResult.get(i).getMajors().get(j).getMajorCode()+"\"}");
 				}
 			}
-			json.append("]}");
-			JSONObject json_test = JSONObject.fromObject(json.toString());
-			return json_test;
 		}
-		
-		
-		//====*** 热门专业
-		/*一 《专业分类    
-		 * http://localhost:8080/kzych/major/majorCategoryList.do
-		 *二 《通过专业来查找专业列表 
-		 *http://localhost:8080/kzych/major/list.do?majorCategoryId=1
-		 *三 《通过专业列表来查找学校
-		 *http://localhost:8080/kzych/major/major_university_list.do?majorId=1
-		 *四 《通过学校id查找学校  
-		 *http://localhost:8080/kzych/university/schollByIntroduceInfo.do?universityId=71&majorId=1
-		 **/
-		
-		
-		//四 《通过学校id查找学校
-		@RequestMapping(value="university_major_detail.do") 
-		@ResponseBody 
-		public ServerResponse<PageInfo> schoolByIntroduceInfo(UniversityQuery qu) {
-			PageInfo pageInfo = iUniversityService.schoolByIntroduceInfo(qu);
-			return ServerResponse.createBySuccess("查询成功", pageInfo);
-		}
-		
-		//===**附件学校
-		//一，按照学校类别来查找学校
-		//http://localhost:8080/kzych/university/schollByTypeList.do?categoryId=2
-		//二，然后通过学校id来查找 该学校所有专业  和 学校信息（学校视频及学校图片）以及学校招生动态
-		
-		/*二（1）通过id查找学校以及地址
-		 * http://localhost:8080/kzych/university/schollAndAddressList.do?universityId=2
-		 *二（2）通过学校id查找该学校所有专业
-		 *http://localhost:8080/kzych/university/schollByMajor.do?universityId=71
-		 *二（3）通过学校id查找该学校的概况
-		 *http://localhost:8080/kzych/university/schollByIntroduce.do?universityId=71
-		 *二（4）通过学校id查找该学校的动态
-		 *http://localhost:8080/kzych/university/schollByRecruit.do?universityId=71
-		 * */
-		
-		//一，按照学校类别来查找学校
-		@RequestMapping(value="schollByTypeList.do")  
-		@ResponseBody 
-		public ServerResponse<PageInfo> schollByTypeList(UniversityQuery qu) {
-			PageInfo pageInfo = iUniversityService.schollByTypeList(qu);
-			return ServerResponse.createBySuccess("查询成功", pageInfo);
-		}
-		
-		//二（1）通过id查找学校以及地址
-		@RequestMapping(value="university_detail.do") 
-		@ResponseBody 
-		public ServerResponse<PageInfo> universityDetail(UniversityQuery qu) {
-			PageInfo pageInfo = iUniversityService.universityDetail(qu);
-			return ServerResponse.createBySuccess("查询成功", pageInfo);
-		}
-		 //二（2）通过学校id查找该学校所有专业
-		@RequestMapping(value="university_detail_Major.do") 
-		@ResponseBody 
-		public ServerResponse<PageInfo> schollByMajor(UniversityQuery qu) {
-			PageInfo pageInfo = iUniversityService.schollByMajor(qu);
-			return ServerResponse.createBySuccess("查询成功", pageInfo);
-		}
-		 
-		 //*二（3）通过学校id查找该学校的概况
-		@RequestMapping(value="university_detail_Introduce.do") 
-		@ResponseBody 
-		public ServerResponse<PageInfo> schollByIntroduce(UniversityQuery qu) {
-			PageInfo pageInfo = iUniversityService.schollByIntroduce(qu);
-			return ServerResponse.createBySuccess("查询成功", pageInfo);
-		}
-		 //*二（4）通过学校id查找该学校的动态 
-		@RequestMapping(value="university_detail_dynamic.do") 
-		@ResponseBody 
-		public ServerResponse<PageInfo> schollByRecruit(UniversityQuery qu) {
-			PageInfo pageInfo = iUniversityService.schollByRecruit(qu);
-			return ServerResponse.createBySuccess("查询成功", pageInfo);
-		}
-	//下面是還沒寫controller接口的 
-		@RequestMapping(value="mySchoolMajorInfo.do") 
-		@ResponseBody 
-		public JSONObject mySchoolMajorInfo(UniversityQuery qu) {
-			StringBuffer json=new StringBuffer("{\"code\": 0,\"msg\": \"\",\"count\": 2,\"data\": [");
-			List<University> schoolResult = iUniversityService.mySchoolMajorInfo(qu);
-			for(int i=0;i<schoolResult.size();i++){
-				for(int j=0;j<schoolResult.get(i).getMajors().size();j++){
-					json.append("{\"id\":"+schoolResult.get(i).getMajors().get(j).getId()+",\"level\":\""+schoolResult.get(i).getUniversityCategory().getCategoryName()+"\",");
-					json.append("\"name\":\""+schoolResult.get(i).getMajors().get(j).getName()+"\",");
-					if(j!=schoolResult.get(i).getMajors().size()-1){
-						json.append("\"tuition\":\""+schoolResult.get(i).getMajors().get(j).getMajorCode()+"\"},");
-					}else{
-						json.append("\"tuition\":\""+schoolResult.get(i).getMajors().get(j).getMajorCode()+"\"}");
-					}
-				}
-			}
-			json.append("]}");
-			JSONObject json_test = JSONObject.fromObject(json.toString());
-			return json_test;
-		}
-		
+		json.append("]}");
+		JSONObject json_test = JSONObject.fromObject(json.toString());
+		return json_test;
+	}
+	/*9，获取热门专业列表
+	http://www.iychua.com:8080/major/pop_major_list?pageNum=1&pageSize=10
+
+	10，获取热门学校列表
+	http://www.iychua.com:8080/university/pop_university_list?pageNum=1&pageSize=10
+	 */
+	@RequestMapping("pop_university_list.do")
+	@ResponseBody
+	public ServerResponse<PageInfo<University>> popUniversityList(UniversityQuery qu){
+		PageInfo<University> universityList= iUniversityService.myUniversityHost(qu);
+		return ServerResponse.createBySuccess("查询成功",universityList);
+	}
 }
 

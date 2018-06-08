@@ -25,7 +25,7 @@ public class UniversityQuery extends BaseQueryModel  {
     private String latitude;
     
     //查看学校是否热门
-    private Integer isHot;
+    private Integer isHot=1;
     
     
     //专业类别

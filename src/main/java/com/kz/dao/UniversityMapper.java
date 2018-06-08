@@ -35,4 +35,5 @@ public interface UniversityMapper extends BaseMapper<University, UniversityQuery
 	List<UniversityDynamic> schollByRecruit(Long universityId);
 	List<University> mySchoolMajorInfo(Long universityId);
 	University UniversityCostDetail(UniversityQuery qu);
+	List<University> myUniversityHost(UniversityQuery qu);
 }

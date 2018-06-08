@@ -23,6 +23,7 @@
     <result column="University_Nature" property="universityNature" jdbcType="INTEGER" />
     <result column="checked_info" property="checkedInfo" jdbcType="VARCHAR" />
     <result column="introduce_id" property="introduceId" jdbcType="BIGINT" />
+    <result column="isHot" property="ishot" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.kz.po.universityWithBLOBs" extends="BaseResultMap" >
     <result column="NAME" property="name" jdbcType="LONGVARCHAR" />
@@ -34,7 +35,7 @@
     ID, CODE, PROFILE, AGREEMENTS, TELEPHONE, GRANTS, coupon, CATEGORYID, PUBLISH_STATUS, 
     School_license, Legal_person_name, Legal_person_Card, Legal_person_Phone, Administrator_Account, 
     Administrator_Name, Administrator_Phone, USER_id, University_Type, University_Nature, 
-    checked_info, introduce_id
+    checked_info, introduce_id, isHot
   </sql>
   <sql id="Blob_Column_List" >
     NAME, EMPLOYMENT_INFO, BROCHURE, INTRODUCTION
@@ -59,9 +60,9 @@
       Legal_person_Phone, Administrator_Account, 
       Administrator_Name, Administrator_Phone, 
       USER_id, University_Type, University_Nature, 
-      checked_info, introduce_id, NAME, 
-      EMPLOYMENT_INFO, BROCHURE, INTRODUCTION
-      )
+      checked_info, introduce_id, isHot, 
+      NAME, EMPLOYMENT_INFO, BROCHURE, 
+      INTRODUCTION)
     values (#{id,jdbcType=BIGINT}, #{code,jdbcType=BIGINT}, #{profile,jdbcType=VARCHAR}, 
       #{agreements,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{grants,jdbcType=DECIMAL}, 
       #{coupon,jdbcType=DECIMAL}, #{categoryid,jdbcType=BIGINT}, #{publishStatus,jdbcType=INTEGER}, 
@@ -69,9 +70,9 @@
       #{legalPersonPhone,jdbcType=VARCHAR}, #{administratorAccount,jdbcType=VARCHAR}, 
       #{administratorName,jdbcType=VARCHAR}, #{administratorPhone,jdbcType=VARCHAR}, 
       #{userId,jdbcType=INTEGER}, #{universityType,jdbcType=INTEGER}, #{universityNature,jdbcType=INTEGER}, 
-      #{checkedInfo,jdbcType=VARCHAR}, #{introduceId,jdbcType=BIGINT}, #{name,jdbcType=LONGVARCHAR}, 
-      #{employmentInfo,jdbcType=LONGVARCHAR}, #{brochure,jdbcType=LONGVARCHAR}, #{introduction,jdbcType=LONGVARCHAR}
-      )
+      #{checkedInfo,jdbcType=VARCHAR}, #{introduceId,jdbcType=BIGINT}, #{ishot,jdbcType=INTEGER}, 
+      #{name,jdbcType=LONGVARCHAR}, #{employmentInfo,jdbcType=LONGVARCHAR}, #{brochure,jdbcType=LONGVARCHAR}, 
+      #{introduction,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.kz.po.universityWithBLOBs" >
     insert into kz_university
@@ -138,6 +139,9 @@
       </if>
       <if test="introduceId != null" >
         introduce_id,
+      </if>
+      <if test="ishot != null" >
+        isHot,
       </if>
       <if test="name != null" >
         NAME,
@@ -216,6 +220,9 @@
       <if test="introduceId != null" >
         #{introduceId,jdbcType=BIGINT},
       </if>
+      <if test="ishot != null" >
+        #{ishot,jdbcType=INTEGER},
+      </if>
       <if test="name != null" >
         #{name,jdbcType=LONGVARCHAR},
       </if>
@@ -293,6 +300,9 @@
       <if test="introduceId != null" >
         introduce_id = #{introduceId,jdbcType=BIGINT},
       </if>
+      <if test="ishot != null" >
+        isHot = #{ishot,jdbcType=INTEGER},
+      </if>
       <if test="name != null" >
         NAME = #{name,jdbcType=LONGVARCHAR},
       </if>
@@ -330,6 +340,7 @@
       University_Nature = #{universityNature,jdbcType=INTEGER},
       checked_info = #{checkedInfo,jdbcType=VARCHAR},
       introduce_id = #{introduceId,jdbcType=BIGINT},
+      isHot = #{ishot,jdbcType=INTEGER},
       NAME = #{name,jdbcType=LONGVARCHAR},
       EMPLOYMENT_INFO = #{employmentInfo,jdbcType=LONGVARCHAR},
       BROCHURE = #{brochure,jdbcType=LONGVARCHAR},
@@ -357,14 +368,11 @@
       University_Type = #{universityType,jdbcType=INTEGER},
       University_Nature = #{universityNature,jdbcType=INTEGER},
       checked_info = #{checkedInfo,jdbcType=VARCHAR},
-      introduce_id = #{introduceId,jdbcType=BIGINT}
+      introduce_id = #{introduceId,jdbcType=BIGINT},
+      isHot = #{ishot,jdbcType=INTEGER}
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  
-  
-  
-  
-  <!-- 下面是我自己写的方法 -->
+    <!-- 下面是我自己写的方法 -->
   <!-- 下面是我自己写的方法 -->
   <resultMap type="com.kz.po.University" id="universityMap">
     <id column="universityId" property="id" jdbcType="BIGINT" />
@@ -533,8 +541,7 @@
 		kz_university.id =
 		kz_university_major.university_id
 		and
-		kz_university_major.major_id =
-		kz_major.id
+		kz_university_major.major_id = kz_major.id
 		and
 		kz_major.ISHOT=#{id}
 	</select>
@@ -1224,5 +1231,13 @@
   	    	kz_university_major.major_id=kz_major.id and
   	    	kz_major.id = #{majorId} and
   	    	kz_university.id = #{universityId} 
+  	</select>
+  	<select id="myUniversityHost" parameterType="com.kz.po.UniversityQuery" resultMap="universityMap">
+  	select 
+    	<include refid="universitySql" />
+    from 
+    	kz_university
+  	where 
+  		isHot=#{isHot}
   	</select>
 </mapper>

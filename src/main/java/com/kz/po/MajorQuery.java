@@ -6,6 +6,8 @@ public class MajorQuery extends BaseQueryModel {
 	private Long majorCategoryId;
 	
 	private String name;
+	
+	private Integer isHot=1;
 
 	public Long getMajorCategoryId() {
 		return majorCategoryId;
@@ -21,6 +23,14 @@ public class MajorQuery extends BaseQueryModel {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Integer getIsHot() {
+		return isHot;
+	}
+
+	public void setIsHot(Integer isHot) {
+		this.isHot = isHot;
 	}
 	
 	

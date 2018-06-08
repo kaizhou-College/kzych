@@ -99,5 +99,11 @@ public class MajorController {
 		PageInfo pageInfo = iUniversityService.selectByMajorId(qu);
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}
+	@RequestMapping(value="pop_major_list.do")
+	@ResponseBody
+	public ServerResponse<PageInfo> myMajorHot(MajorQuery qm){
+		PageInfo majorInfo=iMajorService.myMajorHot(qm);
+		return ServerResponse.createBySuccess("查询成功",majorInfo);
+	}
 	
 }

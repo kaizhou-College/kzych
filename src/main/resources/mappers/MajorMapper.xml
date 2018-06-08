@@ -165,7 +165,15 @@
   		kz_major.id=#{majorId} 
   	and 
   		kz_university_major.university_id=#{universityId}
-  	
   </select>
-
+	<select id="myMajorHot" resultMap="ResultMapWithBLOBs" parameterType="com.kz.po.MajorQuery">
+	   select 
+	   	 <include refid="Base_Column_List" />
+    	 ,
+    	 <include refid="Blob_Column_List" />
+	   from 
+	      kz_major
+	   where 
+	   	  ISHOT=#{isHot}
+	</select>
 </mapper>

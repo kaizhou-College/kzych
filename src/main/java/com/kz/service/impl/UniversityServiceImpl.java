@@ -215,5 +215,12 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 		List<University> schoolResult = mapper.mySchoolMajorInfo(qu.getUniversityId());
 		return schoolResult;
 	}
+	@Override
+	public PageInfo<University> myUniversityHost(UniversityQuery qu) {
+		PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
+		List<University> universityList=mapper.myUniversityHost(qu);
+		PageInfo<University> result = new PageInfo<University>(universityList);
+		return result;
+	}
 	
 }

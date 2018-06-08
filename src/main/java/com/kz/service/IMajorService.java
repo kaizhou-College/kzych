@@ -14,6 +14,8 @@ public interface IMajorService extends IBaseService<Major, MajorQuery>{
 	MajorUniversity findByUniversityId(int universityId, int majorId);
 
 	PageInfo<MajorCategory> majorCategorylist(MajorCategoryQuery qm);
+
+	PageInfo myMajorHot(MajorQuery qm);
 	
 	
 	

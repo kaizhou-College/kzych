@@ -44,5 +44,12 @@ public class MajorServiceImpl extends BaseService<Major, MajorQuery> implements 
 		PageInfo<MajorCategory> result = new PageInfo<MajorCategory>(list);
 		return result;
 	}
+	@Override
+	public PageInfo myMajorHot(MajorQuery qm) {
+		PageHelper.startPage(qm.getPageNum(),qm.getPageSize());
+		List<Major> majorList= mapper.myMajorHot(qm.getIsHot());
+		PageInfo<Major> result=new PageInfo<Major>(majorList);
+		return result;
+	}
 
 }

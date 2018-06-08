@@ -54,6 +54,8 @@ public class University extends BaseModel{
     
     private String checkedInfo;
     
+    private Integer ishot;
+    
     private Long introduceId;
     
     private List<Major> majors;
@@ -305,6 +307,14 @@ public class University extends BaseModel{
 
 	public void setUniversityDynamic(List<UniversityDynamic> universityDynamic) {
 		this.universityDynamic = universityDynamic;
+	}
+
+	public Integer getIshot() {
+		return ishot;
+	}
+
+	public void setIshot(Integer ishot) {
+		this.ishot = ishot;
 	}
 
 

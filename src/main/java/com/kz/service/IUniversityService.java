@@ -39,4 +39,5 @@ public interface IUniversityService extends IBaseService<University, UniversityQ
 	Long prodectUpdate(UniversityQuery qu);
 	Long userInfoSchool(UniversityQuery qu);
 	List<University> mySchoolMajorInfo(UniversityQuery qu);
+	PageInfo<University> myUniversityHost(UniversityQuery qu);
 }

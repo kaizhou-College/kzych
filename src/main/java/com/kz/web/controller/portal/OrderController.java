@@ -142,6 +142,7 @@ public class OrderController {
 	
 	//微信小程序的报名
 	@RequestMapping(value="order_create.do")
+	@ResponseBody
 	public ServerResponse order_create(User u,UniversityQuery qu){
 		Long num=iOrderService.order_create(u,qu);
 		//需要传入 universityId majorId 以及user的值
