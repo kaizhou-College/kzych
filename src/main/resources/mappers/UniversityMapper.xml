@@ -882,7 +882,7 @@
  	<collection property="majors" ofType="com.kz.po.Major">
 		<id column="majojrId" property="id" />
 	    <result column="majorName" property="name" />
-	    <result column="costDetail" property="cost"/>
+	    <result column="costDetail" property="costDetail"/>
 	</collection>
   </resultMap>
   
@@ -976,7 +976,7 @@
 			<collection property="majors" ofType="com.kz.po.Major">
 			    <id column="majorId" property="id"/>
 			    <result column="majorName" property="name"/>
-				<result column="majorCost" property="cost"/>
+				<result column="majorCost" property="costDetail"/>
 			</collection>
    </resultMap>
 	<select id="schoolByIntroduceInfo" resultMap="myResultMap_02" parameterType="com.kz.po.UniversityQuery" >

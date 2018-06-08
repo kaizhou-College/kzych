@@ -17,8 +17,8 @@ public class Major extends BaseModel{
 
     private String description;
     
-    //用来存储专业金额
-    private String cost;
+    //专业费用
+    private String costDetail;
     
     private List<University> university;
     
@@ -78,12 +78,12 @@ public class Major extends BaseModel{
 		this.university = university;
 	}
 
-	public String getCost() {
-		return cost;
+	public String getCostDetail() {
+		return costDetail;
 	}
 
-	public void setCost(String cost) {
-		this.cost = cost;
+	public void setCostDetail(String costDetail) {
+		this.costDetail = costDetail;
 	}
 
     
