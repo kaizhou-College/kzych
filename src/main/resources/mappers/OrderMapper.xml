@@ -223,4 +223,14 @@
       </if>
     </trim>
   </insert>
+  <select id="orderByUseridSelect" resultMap="BaseResultMap" parameterType="Long">
+      select 
+		 <include refid="Base_Column_List" />
+		from 
+			kz_order 
+		where 
+			kz_order.user_id=#{userId}
+		order by 
+			create_time desc
+  </select>
 </mapper>

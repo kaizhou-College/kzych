@@ -114,4 +114,53 @@
       grants = #{grants,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+  <insert id="myInertSelective" parameterType="com.kz.po.OrderDetail">
+     insert into kz_orderdetail 
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="orderid != null" >
+        ORDERID,
+      </if>
+      <if test="universityId != null" >
+        UNIVERSITY_ID,
+      </if>
+      <if test="majorId != null" >
+        major_id,
+      </if>
+      <if test="cost != null" >
+        COST,
+      </if>
+      <if test="coupon != null" >
+        coupon,
+      </if>
+      <if test="grants != null" >
+        grants,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=BIGINT},
+      </if>
+      <if test="universityId != null" >
+        #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="majorId != null" >
+        #{majorId,jdbcType=BIGINT},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="coupon != null" >
+        #{coupon,jdbcType=DECIMAL},
+      </if>
+      <if test="grants != null" >
+        #{grants,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
 </mapper>

@@ -1199,17 +1199,17 @@
 			kz_university_major.major_id=kz_major.id and 
 			kz_university.id=#{id}
   	</select>
-  	<resultMap extends="universityMap" type="com.kz.po.University" id="universityCostMap">
-  	    <collection property="majors" javaType="com.kz.po.Major">
-  	        <id column="majorId" property="id" jdbcType="BIGINT" />
-		    <result column="MAJOR_CATEGORY_ID" property="majorCategoryId" jdbcType="BIGINT" />
-		    <result column="majorName" property="name" jdbcType="VARCHAR" />
-		    <result column="MAJOR_CODE" property="majorCode" jdbcType="VARCHAR" />
-		    <result column="ISHOT" property="ishot" jdbcType="INTEGER" />
-		    <result column="DESCRIPTION" property="description" jdbcType="LONGVARCHAR" />
-  	    	<result column="costDetail" property="costDetail"/>
-  	    </collection>
-  	</resultMap>
+  	
+  	<resultMap extends="universityMap" id="universityCostMap" type="com.kz.po.University" >
+    	<id column="universityId" property="id" />
+   		<result column="universityName" property="name" />
+  		<result column="INTRODUCTION" property="introduction"/>
+			<collection property="majors" ofType="com.kz.po.Major">
+			    <id column="majorId" property="id"/>
+			    <result column="majorName" property="name"/>
+				<result column="costDetail" property="costDetail"/>
+			</collection>
+   </resultMap>
   	<select id="UniversityCostDetail" parameterType="com.kz.po.UniversityQuery" resultMap="universityCostMap">
   	    select 
   	    	<include refid="universitySql"/>,

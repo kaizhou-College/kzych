@@ -142,7 +142,7 @@ public class OrderController {
 	
 	//微信小程序的报名
 	@RequestMapping(value="order_create.do")
-	public ServerResponse<PageInfo> order_create(User u,UniversityQuery qu){
+	public ServerResponse order_create(User u,UniversityQuery qu){
 		Long num=iOrderService.order_create(u,qu);
 		//需要传入 universityId majorId 以及user的值
 		//先创建用户
@@ -151,8 +151,11 @@ public class OrderController {
 		//那么就添加order  PAYMENT字段使用学费减掉优惠券
 		//最后根据orderd用户id降序查询出第一条数据的id
 		//收尾完成orderDetail的数据添加
+		if(num==2L){
+			return ServerResponse.createBySuccessMessage("报名成功");
+		}else{
+			return ServerResponse.createBySuccessMessage("报名失败");
+		}
 		
-		
-		return ServerResponse.createBySuccessMessage("下单成功");
 	}
 }

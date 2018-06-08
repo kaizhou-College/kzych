@@ -119,9 +119,10 @@ public class OrderServiceImpl extends BaseService<Order, OrderQuery>implements I
 	@Override
 	public Long order_create(User u, UniversityQuery qu) {
 		Long userId=0L;
-		double grants;//助学金
-		double coupon;//优惠金额
-		double cost;//学费
+		Long orderId=0L;
+		double grants=0.0;//助学金
+		double coupon=0.0;//优惠金额
+		double cost=0.0;//学费
 		//需要传入 universityId majorId 以及user的值
 		//先创建用户
 		u.setCreateTime(new Date());
@@ -144,7 +145,19 @@ public class OrderServiceImpl extends BaseService<Order, OrderQuery>implements I
 		order.setStatus(0);
 		Long orderAdd=orderMapper.myInsertSelective(order);
 		//最后根据orderd用户id降序查询出第一条数据的id
+		if(orderAdd>0L){
+			List<Order> orderList= orderMapper.orderByUseridSelect(userId);
+			orderId=orderList.get(0).getId();
+		}
 		//收尾完成orderDetail的数据添加
-		return null;
+		OrderDetail orderDetail=new OrderDetail();
+		orderDetail.setUniversityId(qu.getUniversityId());
+		orderDetail.setCost(new BigDecimal(cost));
+		orderDetail.setCoupon(new BigDecimal(coupon));
+		orderDetail.setGrants(new BigDecimal(grants));
+		orderDetail.setMajorId(qu.getMajorId());
+		orderDetail.setOrderid(orderId);
+		Long orderDetailLong=orderDetailMapper.myInertSelective(orderDetail);
+		return orderAdd+orderDetailLong;
 	}
 }

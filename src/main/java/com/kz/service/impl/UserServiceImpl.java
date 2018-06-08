@@ -148,4 +148,10 @@ public class UserServiceImpl extends BaseService<User, UserQuery> implements IUs
 		return userMapper.updateByKeyInfo(u);
 	}
 
+	@Override
+	public Long userInfoAdd(User u) {
+		Long infoAdd = userMapper.userInfoAdd(u);
+		return infoAdd;
+	}
+
 }

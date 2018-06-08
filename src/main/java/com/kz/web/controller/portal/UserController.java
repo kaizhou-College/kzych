@@ -2,6 +2,7 @@ package com.kz.web.controller.portal;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import com.google.common.collect.Maps;
 import com.kz.core.common.Const;
 import com.kz.core.common.ResponseCode;
 import com.kz.core.common.ServerResponse;
+import com.kz.po.University;
 import com.kz.po.User;
 import com.kz.service.IFileService;
 import com.kz.service.IUserService;
@@ -273,6 +275,17 @@ public class UserController {
 			return ServerResponse.createBySuccess(fileMap);
 	}
 
-	
+	@RequestMapping(value="userInsert.do",method = RequestMethod.POST)
+	@ResponseBody
+	public ServerResponse userInsert(User u) {
+		u.setCreateTime(new Date());
+		Long userAdd=iUserService.userInfoAdd(u);
+		if(userAdd==1L){
+			return ServerResponse.createBySuccess("注册成功");
+		}else{
+			return ServerResponse.createBySuccess("注册失败");
+		}
+		
+	}
 	
 }

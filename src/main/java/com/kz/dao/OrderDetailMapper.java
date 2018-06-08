@@ -5,4 +5,6 @@ import com.kz.po.OrderDetail;
 import com.kz.po.OrderDetailQuery;
 
 public interface OrderDetailMapper extends BaseMapper<OrderDetail, OrderDetailQuery>{
+
+	Long myInertSelective(OrderDetail orderDetail);
 }
