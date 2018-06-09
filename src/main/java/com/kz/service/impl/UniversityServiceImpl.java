@@ -150,15 +150,18 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 			result=mapper.schollAndAddressList(qu.getUniversityId());
 			PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
 			List<Major> resultMajor=mapper.schollByMajor(qu.getUniversityId());
-			result.get(0).setMajors(resultMajor);
+			if(resultMajor.size()>=0)
+				result.get(0).setMajors(resultMajor);
 		}else if(qu.getCurrentNum()==1){
 			result=mapper.schollAndAddressList(qu.getUniversityId());
 			List<Introduce> resultIntroduce =mapper.schollByIntroduce(qu.getUniversityId());
-			result.get(0).setIntroduce(resultIntroduce.get(0));
+			if(resultIntroduce.size()>=1)
+				result.get(0).setIntroduce(resultIntroduce.get(0));
 		}else if(qu.getCurrentNum()==2){
 			result=mapper.schollAndAddressList(qu.getUniversityId());
 			List<UniversityDynamic> resultRecruit =mapper.schollByRecruit(qu.getUniversityId());
-			result.get(0).setUniversityDynamic(resultRecruit);
+			if(resultRecruit.size()>=1)
+				result.get(0).setUniversityDynamic(resultRecruit);
 		}
 		PageInfo<University> pageInfo = new PageInfo<University>(result);
 		return pageInfo;
