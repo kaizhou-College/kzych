@@ -1240,4 +1240,16 @@
   	where 
   		isHot=#{isHot}
   	</select>
+  	<resultMap type="com.kz.po.SearchModel" id="universityModelMap">
+  	    <id column="id" property="id"/>
+  	    <result column="name" property="name" />
+  	</resultMap>
+  	<select id="universityByNameDim" resultMap="universityModelMap"  parameterType="com.kz.po.MajorQuery">
+  	    select 
+  	    	id , name
+  	    from 
+  	    	kz_university
+  	    where 
+  	    	name  like '%${searchText}%'
+  	</select>
 </mapper>

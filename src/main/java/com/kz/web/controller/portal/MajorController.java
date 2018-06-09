@@ -106,4 +106,10 @@ public class MajorController {
 		return ServerResponse.createBySuccess("查询成功",majorInfo);
 	}
 	
+	@RequestMapping(value="search.do")
+	@ResponseBody
+	public ServerResponse<PageInfo> search(MajorQuery qm){
+		PageInfo majorUniversity=iMajorService.majorAndUniversityDim(qm);
+		return ServerResponse.createBySuccess("查成功", majorUniversity);
+	}
 }

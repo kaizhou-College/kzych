@@ -8,6 +8,8 @@ import com.github.pagehelper.PageInfo;
 import com.kz.core.dao.BaseMapper;
 import com.kz.po.Introduce;
 import com.kz.po.Major;
+import com.kz.po.MajorQuery;
+import com.kz.po.SearchModel;
 import com.kz.po.University;
 import com.kz.po.UniversityDynamic;
 import com.kz.po.UniversityQuery;
@@ -36,4 +38,5 @@ public interface UniversityMapper extends BaseMapper<University, UniversityQuery
 	List<University> mySchoolMajorInfo(Long universityId);
 	University UniversityCostDetail(UniversityQuery qu);
 	List<University> myUniversityHost(UniversityQuery qu);
+	List<SearchModel> universityByNameDim(MajorQuery qm);
 }

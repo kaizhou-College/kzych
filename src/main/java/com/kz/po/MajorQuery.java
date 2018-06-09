@@ -9,6 +9,8 @@ public class MajorQuery extends BaseQueryModel {
 	
 	private Integer isHot=1;
 
+	private String searchText;//模糊查询的字段
+	
 	public Long getMajorCategoryId() {
 		return majorCategoryId;
 	}
@@ -31,6 +33,14 @@ public class MajorQuery extends BaseQueryModel {
 
 	public void setIsHot(Integer isHot) {
 		this.isHot = isHot;
+	}
+
+	public String getSearchText() {
+		return searchText;
+	}
+
+	public void setSearchText(String searchText) {
+		this.searchText = searchText;
 	}
 	
 	
