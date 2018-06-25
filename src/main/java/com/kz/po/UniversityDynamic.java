@@ -33,7 +33,7 @@ public class UniversityDynamic extends BaseModel {
     }
 
     public String getRsDatetime() {
-    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     	String str_date = formatter.format(rsDatetime); // 将日期时间格式化
         return str_date;
     }

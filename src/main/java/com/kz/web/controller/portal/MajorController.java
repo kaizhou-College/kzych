@@ -87,10 +87,8 @@ public class MajorController {
 		if (majorUniversity == null) {
 			ServerResponse.createByErrorMessage("本校还未开此专业！！");
 		}
-		
 		return ServerResponse.createBySuccess("查询成功！", majorUniversity);
 	}
-	
 	
 	//三 《通过专业列表id来查找学校   
 	@RequestMapping(value="major_university_list.do")  //原来selectByMajorId
@@ -99,6 +97,7 @@ public class MajorController {
 		PageInfo pageInfo = iUniversityService.selectByMajorId(qu);
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}
+	
 	@RequestMapping(value="pop_major_list.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> myMajorHot(MajorQuery qm){

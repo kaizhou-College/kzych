@@ -83,9 +83,9 @@ public class UniversityDynamicController {
 				json.append("{");
 			}
 			if(i!=list.size()-1){
-				json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"},{");
+				json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\",\"content\":\""+list.get(i).getRsContent()+"\"},{");
 			}else{
-				json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"}]}");
+				json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\",\"content\":\""+list.get(i).getRsContent()+"\"}]}");
 			}
 		}
 		if(list.size()==0){
@@ -97,7 +97,7 @@ public class UniversityDynamicController {
 	//添加
 	@RequestMapping(value="/addRS.do")
 	public void addRS(UniversityDynamic rs,HttpServletResponse re){
-		rs.setRsDatetime(new Date());
+		
 		Long long1 = IUniversityDynamic.addSelective(rs);
 		PrintWriter out = null;
 		try {
@@ -111,7 +111,7 @@ public class UniversityDynamicController {
 			out.print("添加成功");
 		}
 	}
-	//添加
+	//删除
 	@RequestMapping(value="/delRS.do")
 	public void delRS(Long rsId,HttpServletResponse re){
 		Long deleteByPrimaryKey = IUniversityDynamic.deleteByPrimaryKey(rsId);
@@ -125,10 +125,29 @@ public class UniversityDynamicController {
 		if(deleteByPrimaryKey>=1L){
 			out.print("删除成功");
 		}else{
-			out.print("删除成功");
+			out.print("删除失败");
 		}
 	}
 	
-
+	//按照id修改标题及内容并且更新时间 updateRS
+	@RequestMapping(value="/updateRS.do")
+	public void updateRS(UniversityDynamic ud,HttpServletResponse re){
+		//设置新时间
+		ud.setRsDatetime(new Date());
+		ud.setUniversityId(null);
+		Long updateByPrimaryKey = IUniversityDynamic.updateSelective(ud);
+		
+		PrintWriter out = null;
+		try {
+			out = re.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(updateByPrimaryKey>=1L){
+			out.print("修改成功");
+		}else{
+			out.print("修改失败");
+		}
+	}
 }
 

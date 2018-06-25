@@ -196,17 +196,18 @@
 						 </div>
 					
 					  	 <div class="layui-form">
-					    		<div class="layui-form-item">
-								    <label class="layui-form-label">名称:</label>
-								    <div class="layui-input-block">
-								      <input type="text" name="" id="rsTitle" value="13764871235" autocomplete="off"  class="layui-input">
-								    </div>
-								  </div>
+				    		<div class="layui-form-item">
+							    <label class="layui-form-label" id="umName">名称:</label>
+							    <input type="hidden" id="umId" >
+							    <div class="layui-input-block"> 
+							      <input type="text" name="" id="rsTitle" placeholder="请输入招生标题" value="" autocomplete="off"  class="layui-input">
+							    </div>
+							  </div>
 								  
 								  <div class="layui-form-item">
 								    <label class="layui-form-label">内容:</label>
 								    <div class="layui-input-block">
-								       <textarea id="detail" ></textarea>
+								       <textarea id="detail"></textarea>
 								    </div>
 								  </div>
 								  
@@ -232,7 +233,7 @@
 					  	  	<div class="layui-form-item">
 								    <label class="layui-form-label">学位层次:</label>
 								    <div class="layui-input-block">
-								      <select name="interest" lay-filter="aihao">
+								    <select name="interest" lay-filter="aihao">
 							        <option value=""></option>
 							        <option value="0" selected="">无</option>
 							        <option value="1" selected="">中专</option>
@@ -291,11 +292,14 @@
 <script type="text/javascript" src="${basePath}admin/js/uploader.min.js"></script>
 <script type="text/javascript" src="${basePath}admin/js/simditor.js"></script>
 <script>
+	var userId="${User_list.id}";
 	cur_mod="招生";
 	//用户名称
 	var username ="${currentUser.username}";
 	var host_kzych="${host}";
 	var basePath = "${basePath}";
+	
+	
 	app.init(function($){
 		
 		     $(".layui-tab-item").removeClass("layui-show");
@@ -349,8 +353,11 @@
         });
         
         $(".back").on("click",function(){
-        	  $("#main").show();
-        	  $("#detail-page").hide();
+        	  $("#main").show(); 
+        	  $("#detail-page").hide(); 
+        	  $("#umId").val(""); 
+        	  $("#rsTitle").val("");   
+			  $(".simditor-body").html(""); 
         });
         
         $(".majar-back").on("click",function(){
@@ -359,20 +366,27 @@
         });
         
         //监听工具条
-			  app.table.on('tool(regulations)', function(obj){
-			    var data = obj.data;
-			    if(obj.event === 'detail'){
-			      layer.msg('ID：'+ data.id + ' 的查看操作');
-			    } else if(obj.event === 'del'){
-			      layer.confirm('真的删除行么', function(index){
-			        obj.del();
-			        layer.close(index);
-			        delRS(data.id); //删除的函数
-			      });
-			    } else if(obj.event === 'edit'){
-			      layer.alert('编辑行：<br>'+ JSON.stringify(data))
-			    }
-			  }); 
+		  app.table.on('tool(regulations)', function(obj){
+		    var data = obj.data;
+		    if(obj.event === 'detail'){
+		      layer.msg('ID：'+ data.id + ' 的查看操作');
+		    } else if(obj.event === 'del'){
+		      layer.confirm('真的删除行么', function(index){
+		        obj.del();
+		        layer.close(index);
+		        delRS(data.id); //删除的函数
+		      });
+		    } else if(obj.event === 'edit'){
+		      //layer.alert('编辑行：<br>'+ JSON.stringify(data))
+		     //修改时数据的显放
+		     $("#umId").val(data.id); 
+		     $("#rsTitle").val(data.name);   
+		     $(".simditor-body").html(data.content);  
+		     $("#main").hide(); 
+		     $("#majar-save").html("修改"); 
+        	 $("#detail-page").show(); 
+		    }
+		}); 
 			  
 			   app.table.on('tool(notice)', function(obj){
 			    var data = obj.data;
@@ -385,7 +399,12 @@
 			        delRS(data.id); //删除的函数
 			      });
 			    } else if(obj.event === 'edit'){
-			      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+			    	$("#umId").val(data.id); 
+				    $("#rsTitle").val(data.name);   
+				    $(".simditor-body").html(data.content);  
+				    $("#main").hide(); 
+				    $("#majar-save").html("修改"); 
+		        	$("#detail-page").show();
 			    }
 			  }); 
 			  
@@ -431,22 +450,42 @@
 	
 		//招生簡章的添加
 		$("#majar-save").on("click",function(){
-			$.ajax({
-	  			type:"post",
-	  			url:host_kzych+"/dynamic/addRS.do",
-	  			data:{"rsTitle":$("#rsTitle").val(),"rsContent":$("#detail").val(),"universityId":"${schoolInfo.id}"},  
-	  			success:function(data){
-	  				if(data.substring(0,4)=="添加成功"){
-	  					shotMsg("添加成功");
-	  					location.reload();//页面刷新
-	  				}else{
-	  					shotMsg("添加失败，请重新添加");
-	  				}
-	  			},
-	  			error:function(){
-	  				location.reload();
-	  			}
-			});	
+			if(!$("#umId").val().trim().length > 0){
+				$.ajax({
+		  			type:"post",
+		  			url:host_kzych+"/dynamic/addRS.do",
+		  			data:{"rsTitle":$("#rsTitle").val(),"rsContent":$("#detail").val(),"universityId":"${schoolInfo.id}"},  
+		  			success:function(data){
+		  				if(data.substring(0,4)=="添加成功"){
+		  					shotMsg("添加成功");
+		  					location.reload();//页面刷新
+		  				}else{
+		  					shotMsg("添加失败，请重新添加");
+		  				}
+		  			},
+		  			error:function(){
+		  				location.reload();
+		  			}
+				});	
+			}else{
+				$.ajax({
+		  			type:"post",
+		  			url:host_kzych+"/dynamic/updateRS.do",
+		  			data:{"rsId":$("#umId").val(),"rsTitle":$("#rsTitle").val(),"rsContent":$("#detail").val()},  
+		  			success:function(data){
+		  				if(data.substring(0,4)=="修改成功"){
+		  					shotMsg("修改成功");
+		  					location.reload();//页面刷新
+		  				}else{
+		  					shotMsg("修改失败，请重新添加");
+		  				}
+		  			},
+		  			error:function(){
+		  				location.reload();
+		  			}
+				});	
+			}
+			
 		});
 		
 	});
@@ -454,7 +493,6 @@
 	
 	//退出
 	function exit(){
-		alert(1);
 		$.ajax({
   			type:"get",
   			url:host_kzych+"/user/logout.do",
@@ -476,7 +514,7 @@
 	}
 	function delRS(del_id){
 		$.get(host_kzych+"/dynamic/delRS.do?rsId="+del_id,
-			  function(data){
+			function(data){
 			shotMsg(data);
 		});
 	}

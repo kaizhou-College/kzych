@@ -214,7 +214,7 @@ public class UniversityController {
 			e.printStackTrace();
 		}
 		Long long1 = iUniversityService.prodectAdd(m, address);
-		if (long1 == 1L) {
+		if (long1== 2L) {
 			out.print("请求成功");
 		} else {
 			out.print("请求失败");

@@ -20,6 +20,7 @@ function checkedSelect(provice,city,county){
 	var city_01="";	
 	var county_01="";
 	for(var i in threeSelectData){
+		
 		if(i!=provice){
 			prov_01=prov_01+"<option>"+i+"</option>";
 		}else{

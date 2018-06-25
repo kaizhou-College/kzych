@@ -134,7 +134,7 @@
 						  <div class="layui-form-item">
 						    <label class="layui-form-label">办学许可证:</label>
 						    <div class="layui-input-block">
-						      <img src="images/school_cert.jpg" id="school_License" style="height:100px;">
+						      <img src="#" id="school_License" style="height:100px;">
 						    </div>
 						  </div>
 						  <div class="layui-form-item">
@@ -197,10 +197,10 @@ var username ="${currentUser.username}";
 cur_mod="学校管理";
 var basePath ="${basePath}" ;
 var host_kzych="${host}";
+var userId="";
 app.init(function($){
 	layui.use('form', function(){
 		  var form = layui.form;
-		  
 		  //监听提交  (省份筛选)
 		  form.on('submit(formDemo)', function(data){
 			  $.ajax({
@@ -375,9 +375,15 @@ app.init(function($){
    		   	   $("#main").show();
    		       $("#detail").hide();
    		   });
-   		   
-   		   
    	});
+   	
+	//-------------给第一级下拉列表赋值
+	checkedSelect(null,null,null);
+	layui.use(['layer', 'form'], function(){
+		  var form = layui.form;
+		  form.render('select');
+	});
+	//-------------给第一级下拉列表赋值
 });
 //给学校信息赋值
 function showScoolInfo(list){

@@ -39,4 +39,5 @@ public interface UniversityMapper extends BaseMapper<University, UniversityQuery
 	University UniversityCostDetail(UniversityQuery qu);
 	List<University> myUniversityHost(UniversityQuery qu);
 	List<SearchModel> universityByNameDim(MajorQuery qm);
+	List<University> schoolByUserIdListNoAddress(University m);
 }

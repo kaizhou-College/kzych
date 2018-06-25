@@ -39,7 +39,7 @@
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
-          <img src="https://kzych.oss-cn-qingdao.aliyuncs.com/${currentUser.userAvatar }" class="layui-nav-img">
+          <img src="${currentUser.userAvatar }" class="layui-nav-img">
           ${currentUser.username }
         </a>
         <dl class="layui-nav-child">
@@ -173,7 +173,7 @@
               	  
 							    <label class="layui-form-label">机构封面图:</label>
 							    <div class="layui-input-block">
-							       <img id="profile" src="images/hndx.jpg" style="height:100px;">
+							       <img id="profile" src="#" style="height:100px;">
 							    </div>
 							</div>
 						  <div class="layui-form-item">
@@ -185,7 +185,7 @@
 						  <div class="layui-form-item">
 						    <label class="layui-form-label">办学许可证:</label>
 						    <div class="layui-input-block">
-						      <img src="images/school_cert.jpg" id="school_License" style="height:100px;">
+						      <img src="#" id="school_License" style="height:100px;">
 						    </div>
 						  </div>
 						  <div class="layui-form-item">
@@ -306,7 +306,7 @@ app.init(function($){
 													.empty();
 											for ( var i in list) {
 												   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-							        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+							        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
 							    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 
 											}
@@ -331,7 +331,7 @@ app.init(function($){
 		  				$("#school_list").empty();
 						for ( var i in list) {
 							   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-		        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+		        		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
 		    		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 						}
 						//加载
@@ -361,7 +361,7 @@ app.init(function($){
 			   $("#school_list").empty();
 			   for(var i in list){
 				   ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-    		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+    		   	   ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
 		           ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
 		         
     		   }
@@ -394,7 +394,7 @@ app.init(function($){
               			   $("#school_list").empty();
               			   for(var i in list){
               				 ele += "<div style='width:160px;margin:0 10px 20px 10px;float:left;cursor:pointer;' schoolid='" + list[i].id + "'> ";
-              		   	     ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='https://kzych.oss-cn-qingdao.aliyuncs.com/" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
+              		   	     ele += "<img  onmouseup='showScoolInfo("+JSON.stringify(list[i])+")' src='" + list[i].profile + "' style='width:160px;height:120px;float:left;'/>";
           		             ele += "<lable style='float:left;'>" + list[i].name + "</lable></div>";
               		         
                   		   }
@@ -434,7 +434,14 @@ app.init(function($){
 		       $("#detail").hide();
 		   });
 	});
-	
+	//-------------给第一级下拉列表赋值
+	checkedSelect(null,null,null);
+	layui.use('form', function(){
+		var form = layui.form;
+		//由于设置了下拉框的初始值所以需要重新渲染一次select
+	    form.render('select');
+	});
+	//-------------给第一级下拉列表赋值
 });
 //给学校信息赋值
 function showScoolInfo(list){
@@ -442,14 +449,14 @@ function showScoolInfo(list){
 	var address=list.address.provice+"-"+list.address.city+"-"+list.address.county+"-"+list.address.addrdetail;
 	$("#school_Name").val(list.name);
 	$("#school_Address").val(address);
-	$("#school_License").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.schoolLicense);
+	$("#school_License").attr("src",list.schoolLicense);
 	$("#legal_person_Name").val(list.legalPersonName);
 	$("#legal_person_Card").val(list.legalPersonCard);
 	$("#legal_person_Phone").val(list.legalPersonPhone);
 	$("#administrator_Account").val(list.administratorAccount);
 	$("#administrator_Name").val(list.administratorName);
 	$("#administrator_Phone").val(list.administratorPhone);
-	$("#profile").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/"+list.profile);
+	$("#profile").attr("src",list.profile);
 	$("#checkedInfo").html("原因是："+list.checkedInfo);
   	//设置下拉框的默认值
   	//机构类型 

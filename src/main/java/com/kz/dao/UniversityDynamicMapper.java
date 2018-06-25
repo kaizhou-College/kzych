@@ -11,4 +11,5 @@ import com.kz.po.UniversityDynamicQuery;
 public interface UniversityDynamicMapper extends BaseMapper<UniversityDynamic,UniversityDynamicQuery>{
     List<UniversityDynamic> selectByUniversityId(int universityId);
     Long addSelective(UniversityDynamic re);
+	Long updateSelective(UniversityDynamic ud);
 }

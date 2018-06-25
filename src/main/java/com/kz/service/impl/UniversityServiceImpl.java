@@ -186,16 +186,17 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 		PageInfo<UniversityDynamic> result = new PageInfo<UniversityDynamic>(list);
 		return result;
 	}
-	
+	@Override
 	public Long prodectAdd(University m,Address address){
-		Long long1 = insertSelectiveSequence(m);//添加学校
+		Long long1=insertSelective(m);
+		Long long2=0L;
 		List<University> list = null;
 		if(long1==1L){//成功
 			//查询该用户的学校id
-			list = mapper.schoolByUserIdList(m);
+			list = mapper.schoolByUserIdListNoAddress(m);
+			address.setUniversityId(list.get(0).getId());
+			long2 = mapperA.insertSelective(address);
 		}
-		address.setUniversityId(list.get(0).getId());
-		Long long2 = mapperA.insertSelective(address);
 		return long2+long1;
 	}
 	@Override

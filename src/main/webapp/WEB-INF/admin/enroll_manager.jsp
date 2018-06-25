@@ -268,6 +268,7 @@
 <script type="text/javascript" src="${basePath}admin/js/uploader.min.js"></script>
 <script type="text/javascript" src="${basePath}admin/js/simditor.js"></script>
 <script>
+	var userId="${User_list.id}";
 	cur_mod="招生";
 	var username ="${currentUser.username}";
 	var basePath = "${basePath}";

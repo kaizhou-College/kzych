@@ -1,8 +1,6 @@
 package com.kz.service.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +58,7 @@ public class MajorServiceImpl extends BaseService<Major, MajorQuery> implements 
 		PageInfo<Major> result=new PageInfo<Major>(majorList);
 		return result;
 	}
+	
 	@Override
 	public PageInfo majorAndUniversityDim(MajorQuery qm) {
 		List<SearchModel> majorList= mapper.majorByNameDim(qm);

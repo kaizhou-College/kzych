@@ -14,7 +14,7 @@
 <!-- //for-mobile-apps -->
 <link href="${host}/front/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <link href="${host}/front/css/iconeffects.css" rel='stylesheet' type='text/css' />
-<link rel="stylesheet" type="text/css" href="${host}/admin/css/jquery-ui1.css">
+<link rel="stylesheet" type="text/css" href="${host}/front/css/jquery-ui1.css">
 <link href="${host}/front/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!-- js -->
 <script type="text/javascript" src="${host}/front/js/jquery-2.1.4.min.js"></script>

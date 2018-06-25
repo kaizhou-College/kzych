@@ -135,4 +135,19 @@
       </if>
     </trim>
   </insert>
+  <update id="updateSelective" parameterType="com.kz.po.UniversityDynamic">
+      update kz_university_dynamic
+    <set >
+      <if test="rsTitle != null" >
+        rs_title = #{rsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="rsDatetime != null" >
+        rs_datetime = #{rsDatetime,jdbcType=DATE},
+      </if>
+      <if test="rsContent != null" >
+        rs_content = #{rsContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rs_id = #{rsId,jdbcType=BIGINT}
+  </update>
 </mapper>

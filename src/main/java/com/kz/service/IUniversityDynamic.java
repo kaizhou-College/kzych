@@ -10,4 +10,6 @@ public interface IUniversityDynamic extends IBaseService<UniversityDynamic, Univ
 	List selectByUniversityId(int id); 
 	
 	Long addSelective(UniversityDynamic re);
+
+	Long updateSelective(UniversityDynamic ud);
 }

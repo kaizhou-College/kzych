@@ -260,6 +260,7 @@
 
 </html>
 <script>	
+	var userId="";
 	cur_mod = "学校管理";
 	var basePath = "${basePath}";
 	var host_kzych="${host}";
@@ -268,7 +269,6 @@
 		
 		layui.use('form', function(){
 			  var form = layui.form;
-			  
 			  //监听提交  (省份筛选)
 			  form.on('submit(formDemo)', function(data){
 				  $.ajax({
@@ -516,7 +516,15 @@
 			$("#main").show();
 			$("#detail").hide();
 		});
-
+		
+		//-------------给第一级下拉列表赋值
+		checkedSelect(null,null,null);
+		layui.use('form', function(){
+			var form = layui.form;
+			//由于设置了下拉框的初始值所以需要重新渲染一次select
+		    form.render('select');
+		});
+		//-------------给第一级下拉列表赋值
 	});
 });
 	//给学校信息赋值

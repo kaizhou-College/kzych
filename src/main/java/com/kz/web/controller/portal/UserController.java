@@ -169,6 +169,10 @@ public class UserController {
 	@ResponseBody
 	public ServerResponse<String> logout(HttpSession session) {
 		session.removeAttribute(Const.CURRENT_USER);
+		University university =(University)session.getAttribute("User_list");
+		if(university!=null){
+			session.removeAttribute("User_list");
+		}
 		return ServerResponse.createBySuccessMessage("成功退出");
 	}
 

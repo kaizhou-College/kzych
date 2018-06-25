@@ -29,7 +29,7 @@ app.init = function(fn){
 
 	 	  app.layer = layui.layer;
 	 	  app.tpl = layui.laytpl;
-     
+
 	 	  app.upload = layui.upload;
 	 	  app.loadTopNav(app.$);
       if(typeof(fn) == 'function'){
@@ -163,7 +163,6 @@ app.loadSideNav = function(mod_name,d,$){
 
 
 app.loadTopNav = function ($){
-	  
 	  var nav_url =  basePath+"admin/testdata/nav.json";
 	  //异步请求看该用户是否管理员
 	  $.ajax({
@@ -196,6 +195,13 @@ app.loadTopNav = function ($){
 						  	 /*if(navlist[i].name == "招生" && getCookie("zhaosheng_service_status") != 2){
 						  		   continue;
 						  	   }*/
+						  	   //需要用户有学校之后才能开启招生计划
+						  	  var userID=typeof(userId)=="default"?userId:"";
+						  	  if (!userID.trim().length > 0) {  
+						  		if(navlist[i].name == "招生" && getCookie("zhaosheng_service_status") != 2){
+							  		   continue;
+							  	}
+						  	  }
 						  	  if(navlist[i].name == "招聘" && getCookie("recruit_service_status") != 2){
 						  	   	    continue;
 						  	   }

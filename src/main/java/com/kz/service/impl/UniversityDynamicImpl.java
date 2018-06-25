@@ -1,6 +1,7 @@
 package com.kz.service.impl;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,15 @@ public class UniversityDynamicImpl extends BaseService<UniversityDynamic, Univer
 	}
 	@Override
 	public Long addSelective(UniversityDynamic re) {
+		re.setRsDatetime(new Date());
 		Long addSelective = mapper.addSelective(re);
 		return addSelective;
+	}
+	@Override
+	public Long updateSelective(UniversityDynamic ud) {
+		ud.setRsDatetime(new Date());
+		Long updateSelective = mapper.updateSelective(ud);
+		return updateSelective;
 	}
 
 	

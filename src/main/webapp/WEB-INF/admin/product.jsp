@@ -48,7 +48,7 @@
 			</ul>
 			<ul class="layui-nav layui-layout-right">
 				<li class="layui-nav-item"><a href="javascript:void();"> 
-				<img src="https://kzych.oss-cn-qingdao.aliyuncs.com/${currentUser.userAvatar }" class="layui-nav-img">
+				<img src="${currentUser.userAvatar }" class="layui-nav-img">
 				${currentUser.username}
 				</a> <!--
         <dl class="layui-nav-child">
@@ -395,9 +395,9 @@ function init_page($) {
 		$("#id_p").val("${User_list.id}");
 		$("#name_p").val("${User_list.name}");
 		$("#address_p").val("${User_list.address}");
-		$("#start-img-view2").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/${User_list.profile}");
+		$("#start-img-view2").attr("src","${User_list.profile}");
 		$("#profile").val("${User_list.profile}");
-		$("#start-img-view3").attr("src","https://kzych.oss-cn-qingdao.aliyuncs.com/${User_list.schoolLicense}");
+		$("#start-img-view3").attr("src","${User_list.schoolLicense}");
 		$("#schoolLicense").val("${User_list.schoolLicense}");
 		$("#legalPersonName_p").val("${User_list.legalPersonName}");
 		$("#legalPersonCard_p").val("${User_list.legalPersonCard}");
@@ -493,14 +493,13 @@ function init_page($) {
 						"addrdetail"       :$("#addrdetail").val()
 					},        
 					success : function(data) {
-						alert(1);
 						setCookie("zhaosheng_service_status" + uuid,"1", "d1"); 
 						//这是测试代码，正试逻辑要删除。状态：0表示没有开通，1表示开通中，2表示已开通，3表示被拒决
 						location.reload();
 					},
 					error : function() {
 						alert(2);
-						location.reload();
+						//location.reload();
 					}
 				});
 			}
@@ -639,6 +638,8 @@ function init_page($) {
 		zhaosheng_service_status = 2;
 	} else if (status == "3") {
 		zhaosheng_service_status = 3;
+	} else {
+		zhaosheng_service_status = 0;
 	}
 	//招生
 	if (zhaosheng_service_status == null && checkedInfo == "初始值") {

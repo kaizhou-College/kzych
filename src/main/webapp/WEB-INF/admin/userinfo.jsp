@@ -324,398 +324,398 @@ checkedSelect("${User_list.address.provice}","${User_list.address.city}","${User
 
 //用户名称
 var username ="${currentUser.username}";
+var userId="${User_list.id}";
 var basePath = "${basePath}";
 var host_kzych="${host}";
-	cur_mod="个人中心";
-	
-	app.init(function($){
-			var uploadInst = app.upload.render({
-		    elem: '#start-img1'
-		    ,url: host_kzych+'/user/save.do'
-		    ,field: 'upload_file'
-		    ,before: function(obj){
-		      //预读本地文件示例，不支持ie8
-		      obj.preview(function(index, file, result){
-		        $('#start-img-view1').attr('src', result); //图片链接（base64）
-		      });
-		    }
-		    ,done: function(res){
-		      //如果上传失败
-		      if(res.code > 0){
-		        return layer.msg('上传失败');
-		      }
-		      //上传成功
-		      $("#userAvatar").val(res.data.uri);//到时候修改时就直接用字符串把路径传过去
-		      
-		    }
-		    ,error: function(){
-		      //演示失败状态，并实现重传
-		      var errText1 = $('#errText1');
-		      errText1.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-		      errText1.find('.demo-reload').on('click', function(){
-		        uploadInst.upload();
-		      });
-		    }
-     });
-     
-     		var uploadInst1 = app.upload.render({
-		    elem: '#start-img2'
-		    ,url: host_kzych+'/university/save1.do'
-		    ,field: 'upload_file'
-		    ,before: function(obj){
-		      //预读本地文件示例，不支持ie8
-		      obj.preview(function(index, file, result){
-		        $('#start-img-view2').attr('src', result); //图片链接（base64）
-		      });
-		    }
-		    ,done: function(res){
-		      //如果上传失败
-		      if(res.code > 0){
-		        return layer.msg('上传失败');
-		      }
-		      //上传成功
-		      $("#profile").val(res.data.uri);
-		    }
-		    ,error: function(){
-		      //演示失败状态，并实现重传
-		      var errText1 = $('#errText2');
-		      errText1.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-		      errText1.find('.demo-reload').on('click', function(){
-		        uploadInst.upload();
-		      });
-		    }
-     });
-     
-     var uploadInst2 = app.upload.render({
-		    elem: '#start-img3'
-		    ,url: host_kzych+'/university/save1.do'
-		    ,field: 'upload_file'
-		    ,before: function(obj){
-		      //预读本地文件示例，不支持ie8
-		      obj.preview(function(index, file, result){
-		        $('#start-img-view3').attr('src', result); //图片链接（base64）
-		      });
-		    }
-		    ,done: function(res){
-		      //如果上传失败
-		      if(res.code > 0){
-		        return layer.msg('上传失败');
-		      }
-		      //上传成功
-		      $("#schoolLicense").val(res.data.uri);
-		    }
-		    ,error: function(){
-		      //演示失败状态，并实现重传
-		      var errText1 = $('#errText3');
-		      errText1.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-		      errText1.find('.demo-reload').on('click', function(){
-		        uploadInst.upload();
-		      });
-		    }
-     });
-     
+cur_mod="个人中心";
+app.init(function($){
+		var uploadInst = app.upload.render({
+	    elem: '#start-img1'
+	    ,url: host_kzych+'/user/save.do'
+	    ,field: 'upload_file'
+	    ,before: function(obj){
+	      //预读本地文件示例，不支持ie8
+	      obj.preview(function(index, file, result){
+	        $('#start-img-view1').attr('src', result); //图片链接（base64）
+	      });
+	    }
+	    ,done: function(res){
+	      //如果上传失败
+	      if(res.code > 0){
+	        return layer.msg('上传失败');
+	      }
+	      //上传成功
+	      $("#userAvatar").val(res.data.uri);//到时候修改时就直接用字符串把路径传过去
+	      
+	    }
+	    ,error: function(){
+	      //演示失败状态，并实现重传
+	      var errText1 = $('#errText1');
+	      errText1.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+	      errText1.find('.demo-reload').on('click', function(){
+	        uploadInst.upload();
+	      });
+	    }
+    });
+    
+    		var uploadInst1 = app.upload.render({
+	    elem: '#start-img2'
+	    ,url: host_kzych+'/university/save1.do'
+	    ,field: 'upload_file'
+	    ,before: function(obj){
+	      //预读本地文件示例，不支持ie8
+	      obj.preview(function(index, file, result){
+	        $('#start-img-view2').attr('src', result); //图片链接（base64）
+	      });
+	    }
+	    ,done: function(res){
+	      //如果上传失败
+	      if(res.code > 0){
+	        return layer.msg('上传失败');
+	      }
+	      //上传成功
+	      $("#profile").val(res.data.uri);
+	    }
+	    ,error: function(){
+	      //演示失败状态，并实现重传
+	      var errText1 = $('#errText2');
+	      errText1.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+	      errText1.find('.demo-reload').on('click', function(){
+	        uploadInst.upload();
+	      });
+	    }
+    });
+    
+    var uploadInst2 = app.upload.render({
+	    elem: '#start-img3'
+	    ,url: host_kzych+'/university/save1.do'
+	    ,field: 'upload_file'
+	    ,before: function(obj){
+	      //预读本地文件示例，不支持ie8
+	      obj.preview(function(index, file, result){
+	        $('#start-img-view3').attr('src', result); //图片链接（base64）
+	      });
+	    }
+	    ,done: function(res){
+	      //如果上传失败
+	      if(res.code > 0){
+	        return layer.msg('上传失败');
+	      }
+	      //上传成功
+	      $("#schoolLicense").val(res.data.uri);
+	    }
+	    ,error: function(){
+	      //演示失败状态，并实现重传
+	      var errText1 = $('#errText3');
+	      errText1.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+	      errText1.find('.demo-reload').on('click', function(){
+	        uploadInst.upload();
+	      });
+	    }
+    });
+    
 
-     
-      toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough',
-            'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|',
-            'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment'
-        ];
+    
+     toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough',
+           'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|',
+           'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment'
+       ];
 
-        editor = new Simditor({ //文本编辑框初始化
-            textarea: $('#detail'),
-            placeholder: '',
-            toolbar: toolbar, //工具栏
-            upload: {
-                url: '', //文件上传的接口地址
-                params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
-                fileKey: 'Filedata', //服务器端获取文件数据的参数名
-                connectionCount: 1,
-                leaveConfirm: '正在上传文件'
-            }
-        });
-        
-        
-        
-        
-        
-        //身份证  毕业  家庭住址  的输入框 中的默认值
-		var info="只有在用户报读大中专学校和找工作、社会实践时才会要求填写";
-      //身份证
-      	var idcrad="${currentUser.idcard}";
-      	//学校
-      	var school="${currentUser.school}";
-      	//家庭住址
-      	var originPlace="${currentUser.originPlace}";
-      	
-      	layui.use('form', function(){
-        	  var form = layui.form;
-        	  form.on('submit(demo1)', function(data){
-        		  var isNotPass=0;
-        		  //验证身份证
-        		  var isIDCard1=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/; //15位的身份证
-        		  var isIDCard2=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$/;//18位  身份证的正则表达式
-				  if(isIDCard2.test($("#default_1").val())||isIDCard1.test($("#default_1"))){
-					  isNotPass=isNotPass+1;
-				  }else{
-					  shotMsg("亲请输入正确的身份证号");
-					  return false;
-				  }
-        		  //验证电话 
-        		  var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
-        		  if(phone.test($("#cellphone").val())){
-        			  isNotPass=isNotPass+1;
-        		  }else{
-        			  shotMsg("亲请输入正确的电话号");
-        			  return false;
-        		  }
-        		  //验证学校是否为空 
-        		  if($("#default_2").val().trim().length>0&&$("#default_2").val()!=info){
-        			  isNotPass=isNotPass+1;
-        		  }else{
-        			  shotMsg("亲请输入学校名称");
-        			  return false;
-        		  }
-        		  //验证家庭住址是为空
-        		  if($("#default_3").val().trim().length>0&&$("#default_3").val()!=info){
-        			  isNotPass=isNotPass+1;
-        		  }else{
-        			  shotMsg("亲请输入家庭住址");
-        			  return false;
-        		  }
-        		  //验证姓名是否为空 
-        		  if($("#realName").val().trim().length){
-        			  isNotPass=isNotPass+1;
-        		  }else{
-        			  shotMsg("亲请输入真实姓名");
-        			  return false;
-        		  }
-        		  //验证
-        		  if($("#userAvatar").val().trim().length>0){
-        			  isNotPass=isNotPass+1;
-        		  }else{
-        			  shotMsg("亲请上传头像");
-        			  return false;
-        		  }
-        		  if(isNotPass>=6){
-          			return true;
-          		}else{
-          			return false;
-          		}
-        		
-        	    }); 
-        	    form.on('submit(demo2)', function(data){
-        	    	var isNotPass=0;
-        	    	//验证机构类型是否选择 
-        	    	if($("#universityType_seelct_01").val()!=0){
-        	    		isNotPass=isNotPass+1;
-        	    	}else{
-        	    		shotMsg("亲请选择机构类型");
-        	    		return false;
-        	    	}
-        	    	//验证机构性质是否选择 
-        	    	if($("#universityNature_seelct_02").val()!=0){
-        	    		isNotPass=isNotPass+1;
-        	    	}else{
-        	    		shotMsg("亲请选择机构性质");
-        	    		return false;
-        	    	}
-        	    	//验证学校等级是否选择 
-        	    	if($("#categoryid_seelct_03").val()!=0){
-        	    		isNotPass=isNotPass+1;
-        	    	}else{
-        	    		shotMsg("亲请选择学校等级");
-        	    		return false;
-        	    	}
-        	    	//验证机构地址是否填写
-        	    	//机构地址  provid cityid areaid addrdetail
-					if ($("#provid").val().trim().length > 0&$("#provid").val()!=1) {
-						isNotPass = isNotPass + 1
-					} else {
-						shotMsg("亲请输入省份");
-						return false;
-					}
-					if ($("#cityid").val().trim().length > 0&$("#cityid").val()!=1) {
-						isNotPass = isNotPass + 1
-					} else {
-						shotMsg("亲请输入市");
-						return false;
-					}
-					if ($("#areaid").val().trim().length > 0&$("#areaid").val()!=1) {
-						isNotPass = isNotPass + 1
-					} else {
-						shotMsg("亲请输入区/县");
-						return false;
-					}
-					if ($("#addrdetail").val().trim().length > 0&$("#addrdetail").val()!=1)  {
-						isNotPass = isNotPass + 1
-					} else {
-						shotMsg("亲请输入信息地址");
-						return false;
-					}
-        	    	//验证机构封面图片是否上传 
-        	    	if($("#profile").val().trim().length>0){
-        	    		isNotPass=isNotPass+1;
-        	    	}else{
-        	    		shotMsg("亲请上传机构封面图片");
-        	    		return false;
-        	    	}
-        	    	//验证办学许可证是否上传 
-        	    	if($("#schoolLicense").val().trim().length>0){
-        	    		isNotPass=isNotPass+1;
-        	    	}else{
-        	    		shotMsg("亲请上传办学许可证");
-        	    		return false;
-        	    	}
-        	    	//验证法人姓名是否填入 
-        	    	if($("#legalPersonName").val().trim().length>0){
-        	    		isNotPass=isNotPass+1;
-        	    	}else{
-        	    		shotMsg("亲请输入法人姓名");
-        	    		return false;
-        	    	}
-        	    	//验证法人身份证格式是否正确 
-          		 	var isIDCard1=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/; //15位的身份证
-          		  	var isIDCard2=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$/;//18位  身份证的正则表达式
-  				  	if(isIDCard2.test($("#legalPersonCard").val())||isIDCard1.test($("#default_1"))){
-  				  		isNotPass=isNotPass+1;
-  				  	}else{
-  				  		shotMsg("亲请输入正确的身份证号");
-  				  		return false;
-  				  	}
-        	    	//验证法人电话格式是否正确 
-  				  	var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
-        		  	if(phone.test($("#legalPersonPhone").val())){
-        		  		isNotPass=isNotPass+1;
-        		  	}else{
-        		  		shotMsg("亲请输入正确的电话号");
-        		  		return false;
-        		  	}
-        	    	//验证机构简历是否为空 
-        	    	if($("#detail").val().trim().length>0){
-        	    		isNotPass=isNotPass+1;
-        	    	}else{
-        	    		shotMsg("亲请输入机构简历");
-        	    		return false;
-        	    	}
-            		if(isNotPass>=13){
-            			return true;
-            		}else{
-            			return false;
-            		}
-              });
-        });
-      	
-      	//设置下拉框的默认值
-      	//机构类型 
-      	var universityType=$("#universityType_seelct_01").html().split("<option value=\"");
-      //机构性质
-      	var universityNature=$("#universityNature_seelct_02").html().split("<option value=\"");
-      //学校等级
-      	var categoryname=$("#categoryid_seelct_03").html().split("<option value=\"");
-      //机构类型的设置默认值
-      	settingsSelected(universityType,"${User_list.universityType}","universityType_seelct_01");
-      //机构性质设置默认值
-      	settingsSelected(universityNature,"${User_list.universityNature}","universityNature_seelct_02");
-      //学校等级的设置默认值 
-      	settingsSelected(categoryname,"${User_list.categoryid}","categoryid_seelct_03");
-      	function settingsSelected(list,id,select_id){
-      		for(var i=1;i<list.length;i++){
-          		if(list[i].substring(0,1)==id){
-          			$("#"+select_id+" option[value="+(i-1)+"]").attr("selected","selected");
-          		}
-          	}
-      	}
-      	
-    	layui.use('form', function(){
-    		var form = layui.form;
-    		//由于设置了下拉框的初始值所以需要重新渲染一次select
-    	    form.render('select');
-    	});
-      	
-      	
-      	//身份证的输入框 
-      	if(idcrad.length>0){
-      		$("#default_1").val(idcrad);
-      		$("#default_1").blur(function(){
-    			if($.trim($("#default_1").val()).length==0){
-    				$("#default_1").val(idcrad);
-    			}
-    		});
-      	}else{
-      		$("#default_1").val(info);
-      		$("#default_1").focus(function(){
-    			if($("#default_1").val()==info){
-    				$("#default_1").val("");
-    			}
-    		});
-      		$("#default_1").blur(function(){
-    			if($.trim($("#default_1").val()).length==0){
-    				$("#default_1").val(info);
-    			}
-    		});
-      	}
-      	//学校的输入框
-      	if(school.length>0){
-      		$("#default_2").val(school);
-      		$("#default_2").blur(function(){
-    			if($.trim($("#default_2").val()).length==0){
-    				$("#default_2").val(school);
-    			}
-    		});
-      	}else{
-      		$("#default_2").val(info);
-      		$("#default_2").focus(function(){
-    			if($("#default_2").val()==info){
-    				$("#default_2").val("");
-    			}
-    		});
-      		$("#default_2").blur(function(){
-    			if($.trim($("#default_2").val()).length==0){
-    				$("#default_2").val(info);
-    			}
-    		});
-      	}
-      	//家庭住址的输入框
-      	if(originPlace.length>0){
-      		$("#default_3").val(originPlace);
-      		$("#default_3").blur(function(){
-    			if($.trim($("#default_3").val()).length==0){
-    				$("#default_3").val(originPlace);
-    			}
-    		});
-      	}else{
-      		$("#default_3").val(info);
-      		$("#default_3").focus(function(){
-    			if($("#default_3").val()==info){
-    				$("#default_3").val("");
-    			}
-    		});
-      		$("#default_3").blur(function(){
-    			if($.trim($("#default_3").val()).length==0){
-    				$("#default_3").val(info);
-    			}
-    		});
-      	}
+       editor = new Simditor({ //文本编辑框初始化
+           textarea: $('#detail'),
+           placeholder: '',
+           toolbar: toolbar, //工具栏
+           upload: {
+               url: '', //文件上传的接口地址
+               params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
+               fileKey: 'Filedata', //服务器端获取文件数据的参数名
+               connectionCount: 1,
+               leaveConfirm: '正在上传文件'
+           }
+       });
+       
+       
+       
+       
+       
+       //身份证  毕业  家庭住址  的输入框 中的默认值
+	var info="只有在用户报读大中专学校和找工作、社会实践时才会要求填写";
+     //身份证
+   	var idcrad="${currentUser.idcard}";
+   	//学校
+   	var school="${currentUser.school}";
+   	//家庭住址
+   	var originPlace="${currentUser.originPlace}";
+   	
+   	layui.use('form', function(){
+     	  var form = layui.form;
+     	  form.on('submit(demo1)', function(data){
+     		  var isNotPass=0;
+     		  //验证身份证
+     		  var isIDCard1=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/; //15位的身份证
+     		  var isIDCard2=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$/;//18位  身份证的正则表达式
+	  if(isIDCard2.test($("#default_1").val())||isIDCard1.test($("#default_1"))){
+		  isNotPass=isNotPass+1;
+	  }else{
+		  shotMsg("亲请输入正确的身份证号");
+		  return false;
+	  }
+     		  //验证电话 
+     		  var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
+     		  if(phone.test($("#cellphone").val())){
+     			  isNotPass=isNotPass+1;
+     		  }else{
+     			  shotMsg("亲请输入正确的电话号");
+     			  return false;
+     		  }
+     		  //验证学校是否为空 
+     		  if($("#default_2").val().trim().length>0&&$("#default_2").val()!=info){
+     			  isNotPass=isNotPass+1;
+     		  }else{
+     			  shotMsg("亲请输入学校名称");
+     			  return false;
+     		  }
+     		  //验证家庭住址是为空
+     		  if($("#default_3").val().trim().length>0&&$("#default_3").val()!=info){
+     			  isNotPass=isNotPass+1;
+     		  }else{
+     			  shotMsg("亲请输入家庭住址");
+     			  return false;
+     		  }
+     		  //验证姓名是否为空 
+     		  if($("#realName").val().trim().length){
+     			  isNotPass=isNotPass+1;
+     		  }else{
+     			  shotMsg("亲请输入真实姓名");
+     			  return false;
+     		  }
+     		  //验证
+     		  if($("#userAvatar").val().trim().length>0){
+     			  isNotPass=isNotPass+1;
+     		  }else{
+     			  shotMsg("亲请上传头像");
+     			  return false;
+     		  }
+     		  if(isNotPass>=6){
+       			return true;
+       		}else{
+       			return false;
+       		}
+     		
+     	    }); 
+     	    form.on('submit(demo2)', function(data){
+     	    	var isNotPass=0;
+     	    	//验证机构类型是否选择 
+     	    	if($("#universityType_seelct_01").val()!=0){
+     	    		isNotPass=isNotPass+1;
+     	    	}else{
+     	    		shotMsg("亲请选择机构类型");
+     	    		return false;
+     	    	}
+     	    	//验证机构性质是否选择 
+     	    	if($("#universityNature_seelct_02").val()!=0){
+     	    		isNotPass=isNotPass+1;
+     	    	}else{
+     	    		shotMsg("亲请选择机构性质");
+     	    		return false;
+     	    	}
+     	    	//验证学校等级是否选择 
+     	    	if($("#categoryid_seelct_03").val()!=0){
+     	    		isNotPass=isNotPass+1;
+     	    	}else{
+     	    		shotMsg("亲请选择学校等级");
+     	    		return false;
+     	    	}
+     	    	//验证机构地址是否填写
+     	    	//机构地址  provid cityid areaid addrdetail
+		if ($("#provid").val().trim().length > 0&$("#provid").val()!=1) {
+			isNotPass = isNotPass + 1
+		} else {
+			shotMsg("亲请输入省份");
+			return false;
+		}
+		if ($("#cityid").val().trim().length > 0&$("#cityid").val()!=1) {
+			isNotPass = isNotPass + 1
+		} else {
+			shotMsg("亲请输入市");
+			return false;
+		}
+		if ($("#areaid").val().trim().length > 0&$("#areaid").val()!=1) {
+			isNotPass = isNotPass + 1
+		} else {
+			shotMsg("亲请输入区/县");
+			return false;
+		}
+		if ($("#addrdetail").val().trim().length > 0&$("#addrdetail").val()!=1)  {
+			isNotPass = isNotPass + 1
+		} else {
+			shotMsg("亲请输入信息地址");
+			return false;
+		}
+   	    	//验证机构封面图片是否上传 
+   	    	if($("#profile").val().trim().length>0){
+   	    		isNotPass=isNotPass+1;
+   	    	}else{
+   	    		shotMsg("亲请上传机构封面图片");
+   	    		return false;
+   	    	}
+   	    	//验证办学许可证是否上传 
+   	    	if($("#schoolLicense").val().trim().length>0){
+   	    		isNotPass=isNotPass+1;
+   	    	}else{
+   	    		shotMsg("亲请上传办学许可证");
+   	    		return false;
+   	    	}
+   	    	//验证法人姓名是否填入 
+   	    	if($("#legalPersonName").val().trim().length>0){
+   	    		isNotPass=isNotPass+1;
+   	    	}else{
+   	    		shotMsg("亲请输入法人姓名");
+   	    		return false;
+   	    	}
+   	    	//验证法人身份证格式是否正确 
+     		 	var isIDCard1=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/; //15位的身份证
+     		  	var isIDCard2=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X|x)$/;//18位  身份证的正则表达式
+	  	if(isIDCard2.test($("#legalPersonCard").val())||isIDCard1.test($("#default_1"))){
+	  		isNotPass=isNotPass+1;
+	  	}else{
+	  		shotMsg("亲请输入正确的身份证号");
+	  		return false;
+	  	}
+   	    	//验证法人电话格式是否正确 
+	  	var phone=/^1[3|4|5|8][0-9]\d{4,8}$/; //移动电话的标准格式 11位
+   		  	if(phone.test($("#legalPersonPhone").val())){
+   		  		isNotPass=isNotPass+1;
+   		  	}else{
+   		  		shotMsg("亲请输入正确的电话号");
+   		  		return false;
+   		  	}
+   	    	//验证机构简历是否为空 
+   	    	if($("#detail").val().trim().length>0){
+   	    		isNotPass=isNotPass+1;
+   	    	}else{
+   	    		shotMsg("亲请输入机构简历");
+   	    		return false;
+   	    	}
+       		if(isNotPass>=13){
+       			return true;
+       		}else{
+       			return false;
+       		}
+         });
+    });
+     	
+     	//设置下拉框的默认值
+     	//机构类型 
+     	var universityType=$("#universityType_seelct_01").html().split("<option value=\"");
+     //机构性质
+     	var universityNature=$("#universityNature_seelct_02").html().split("<option value=\"");
+     //学校等级
+     	var categoryname=$("#categoryid_seelct_03").html().split("<option value=\"");
+     //机构类型的设置默认值
+     	settingsSelected(universityType,"${User_list.universityType}","universityType_seelct_01");
+     //机构性质设置默认值
+     	settingsSelected(universityNature,"${User_list.universityNature}","universityNature_seelct_02");
+     //学校等级的设置默认值 
+     	settingsSelected(categoryname,"${User_list.categoryid}","categoryid_seelct_03");
+     	function settingsSelected(list,id,select_id){
+     		for(var i=1;i<list.length;i++){
+         		if(list[i].substring(0,1)==id){
+         			$("#"+select_id+" option[value="+(i-1)+"]").attr("selected","selected");
+         		}
+         	}
+     	}
+     	
+   	layui.use('form', function(){
+   		var form = layui.form;
+   		//由于设置了下拉框的初始值所以需要重新渲染一次select
+   	    form.render('select');
+   	});
+     	
+     	
+     	//身份证的输入框 
+     	if(idcrad.length>0){
+     		$("#default_1").val(idcrad);
+     		$("#default_1").blur(function(){
+   			if($.trim($("#default_1").val()).length==0){
+   				$("#default_1").val(idcrad);
+   			}
+   		});
+     	}else{
+     		$("#default_1").val(info);
+     		$("#default_1").focus(function(){
+   			if($("#default_1").val()==info){
+   				$("#default_1").val("");
+   			}
+   		});
+     		$("#default_1").blur(function(){
+   			if($.trim($("#default_1").val()).length==0){
+   				$("#default_1").val(info);
+   			}
+   		});
+     	}
+     	//学校的输入框
+     	if(school.length>0){
+     		$("#default_2").val(school);
+     		$("#default_2").blur(function(){
+   			if($.trim($("#default_2").val()).length==0){
+   				$("#default_2").val(school);
+   			}
+   		});
+     	}else{
+     		$("#default_2").val(info);
+     		$("#default_2").focus(function(){
+   			if($("#default_2").val()==info){
+   				$("#default_2").val("");
+   			}
+   		});
+     		$("#default_2").blur(function(){
+   			if($.trim($("#default_2").val()).length==0){
+   				$("#default_2").val(info);
+   			}
+   		});
+     	}
+     	//家庭住址的输入框
+     	if(originPlace.length>0){
+     		$("#default_3").val(originPlace);
+     		$("#default_3").blur(function(){
+   			if($.trim($("#default_3").val()).length==0){
+   				$("#default_3").val(originPlace);
+   			}
+   		});
+     	}else{
+     		$("#default_3").val(info);
+     		$("#default_3").focus(function(){
+   			if($("#default_3").val()==info){
+   				$("#default_3").val("");
+   			}
+   		});
+     		$("#default_3").blur(function(){
+   			if($.trim($("#default_3").val()).length==0){
+   				$("#default_3").val(info);
+   			}
+   		});
+     	}
+});
+//退出
+function exit(){
+	$.ajax({
+		type:"get",
+		url:host_kzych+"/user/logout.do",
+		success:function(data){
+			location.href=host_kzych+"/front/index.do";
+		},
+		error:function(){
+			location.reload();
+		}
 	});
-	//退出
-	function exit(){
-		$.ajax({
-  			type:"get",
-  			url:host_kzych+"/user/logout.do",
-  			success:function(data){
-  				location.href=host_kzych+"/front/index.do";
-  			},
-  			error:function(){
-  				location.reload();
-  			}
-		});
-	}
-	//弹  未满足的条件
-	function shotMsg(string){
-		layui.use(['layer', 'form'], function(){
-  	 	 	var layer = layui.layer
-  	  		,form = layui.form;
-  	  		layer.msg(string);
-  		});
-	}
+}
+//弹  未满足的条件
+function shotMsg(string){
+	layui.use(['layer', 'form'], function(){
+ 	 	var layer = layui.layer
+  		,form = layui.form;
+  		layer.msg(string);
+	});
+}
 </script>
