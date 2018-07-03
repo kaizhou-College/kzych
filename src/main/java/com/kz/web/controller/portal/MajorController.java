@@ -107,7 +107,7 @@ public class MajorController {
 	
 	@RequestMapping(value="search.do")
 	@ResponseBody
-	public ServerResponse<PageInfo> search(MajorQuery qm){
+	public ServerResponse<PageInfo> search(@RequestBody MajorQuery qm){
 		PageInfo majorUniversity=iMajorService.majorAndUniversityDim(qm);
 		return ServerResponse.createBySuccess("查成功", majorUniversity);
 	}
