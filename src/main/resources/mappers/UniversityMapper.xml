@@ -976,12 +976,7 @@
   			<association property="introduce" javaType="com.kz.po.Introduce">
 				<id property="id" column="introId" />
 				<result property="detail" column="intrpDetail" />
-				<association property="video" javaType="com.kz.po.Video">
-				    <id column="videoId" property="id"/>
-					<result column="url" property="url"/>
-					<result column="duration" property="duration"/>
-					<result column="thumb" property="thumb"/>
-				</association>
+				
 			</association>
 			<collection property="majors" ofType="com.kz.po.Major">
 			    <id column="majorId" property="id"/>
@@ -993,10 +988,6 @@
 	    select 
 		 	<include refid="universitySql"/>
 			,
-			kz_video.id as videoId,
-			url,
-			duration,
-			thumb,
 			
 			kz_introduce.id as introId,
 			kz_introduce.detail as intrpDetail,
@@ -1007,12 +998,11 @@
 		from 
 			kz_university,
 			kz_introduce,
-			kz_video ,
+			
 			kz_university_major,
 			kz_major
 		where 
 			kz_university.introduce_id=kz_introduce.id and 
-			kz_introduce.id=kz_video.intro_id and 
 			kz_university_major.university_id=kz_university.id and
 			kz_university_major.major_id=kz_major.id 
 			<if test="universityId != null">
@@ -1116,28 +1106,17 @@
   	<resultMap type="com.kz.po.Introduce" id="myResultMap_06">
   	    <id column="introId" property="id"/>
   	    <result column="introDetail" property="detail"/>
-  	    <association property="video" javaType="com.kz.po.Video">
-  	        <id column="videoId" property="id"/>
-  	        <result column="videoUrl" property="url"/>
-  	        <result column="videoDuration" property="duration"/>
-  	        <result column="videoThumb" property="thumb"/>
-  	    </association>
+  	    
   	</resultMap>
   	<select id="schollByIntroduce" resultMap="myResultMap_06" parameterType="Long" >
   	    select 
 			kz_introduce.id as introId,
-			kz_introduce.detail as introDetail,
-			kz_video.id as videoId,
-			kz_video.url as videoUrl,
-			kz_video.duration as videoDuration,
-			kz_video.thumb as videoThumb
+			kz_introduce.detail as introDetail
 		from 
 			kz_university ,	 
-			kz_introduce , 
-			kz_video 
+			kz_introduce 
 		where 
-			kz_university.introduce_id=kz_introduce.id and 
-			kz_introduce.id=kz_video.intro_id and
+			kz_university.introduce_id=kz_introduce.id and
 			kz_university.id=#{universityId}
   	</select>
   	<resultMap type="com.kz.po.UniversityDynamic" id="myResultMap_07">
