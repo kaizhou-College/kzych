@@ -8,7 +8,7 @@ public class MajorQuery extends BaseQueryModel {
 	private String name;
 	
 	private Integer isHot=1;
-
+	
 	private String searchText;//模糊查询的字段
 	
 	public Long getMajorCategoryId() {

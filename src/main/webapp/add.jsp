@@ -51,8 +51,9 @@
 					url:"http://localhost:8080/kzych/major/search.do",
 					//data:"name=二狗子&detail=好东西",
 					contentType:"application/json;charset=utf-8",
-					data:'{"searchText":"java"}',
+					data:'{"searchText":"学","pageSize":20}',
 					success:function(data){
+						alert("成功");
 						for(var i=0;i<data.data.list.length;i++){
 							alert(data.data.list[i].name);
 						}

@@ -1085,6 +1085,9 @@
   	    <result column="majorCode" property="majorCode"/>
   	    <result column="majorIsHot" property="ishot"/>
   	    <result column="majorDescription" property="description"/>
+  	    <collection  property="university" ofType="com.kz.po.University">
+  	        <id column="universityId" property="id" jdbcType="BIGINT" />
+  	    </collection>
   	</resultMap>
   	<select id="schollByMajor" resultMap="myResultMap_05" parameterType="Long" >
   	    select 
@@ -1093,7 +1096,8 @@
 			kz_major.NAME as majorName,
 			kz_major.MAJOR_CODE as majorCode,
 			kz_major.ISHOT as majorIsHot,
-			kz_major.DESCRIPTION as majorDescription
+			kz_major.DESCRIPTION as majorDescription,
+			kz_university.id as universityId
 		from 
 			kz_university,
 			kz_major,

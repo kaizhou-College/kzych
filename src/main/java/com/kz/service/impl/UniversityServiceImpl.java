@@ -150,6 +150,7 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 			result=mapper.schollAndAddressList(qu.getUniversityId());
 			PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
 			List<Major> resultMajor=mapper.schollByMajor(qu.getUniversityId());
+			
 			if(resultMajor.size()>=0)
 				result.get(0).setMajors(resultMajor);
 		}else if(qu.getCurrentNum()==1){
