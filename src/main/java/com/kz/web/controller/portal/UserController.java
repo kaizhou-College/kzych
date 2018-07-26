@@ -104,7 +104,7 @@ public class UserController {
 		User user=(User) session.getAttribute(Const.CURRENT_USER);
 		
 		if(user!=null){
-			ServerResponse<User> login = iUserService.getInformation(user.getUuid());
+			ServerResponse<User> login = iUserService.getInformation(user.getUid());
 			session.setAttribute(Const.CURRENT_USER, login.getData());
 			return "/admin/userinfo";
 		}else{
@@ -221,7 +221,7 @@ public class UserController {
 		if (currentUser == null) {
 			return ServerResponse.createByErrorMessage("用户未登录");
 		}
-		user.setUuid(currentUser.getUuid());
+		user.setUid(currentUser.getUid());
 		user.setUsername(currentUser.getUsername());
 		ServerResponse<User> response = iUserService.updateInformation(user);
 		if (response.isSuccess()) {
@@ -246,7 +246,7 @@ public class UserController {
 		if (currentUser == null) {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
 		}
-		return iUserService.getInformation(currentUser.getUuid());
+		return iUserService.getInformation(currentUser.getUid());
 	}
 	/**
 	 * 

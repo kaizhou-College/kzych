@@ -60,8 +60,8 @@ public class OrderController {
 		//User curUser = (User) session.getAttribute(Const.CURRENT_USER);
 		//TODO 测试用
 		User curUser = new User();
-		curUser.setUuid(1L);
-		order.setUserId(curUser.getUuid());
+		curUser.setUid(1L);
+		order.setUserId(curUser.getUid());
 		order.setPaymentType(orderVo.getPaymentType());
 		order.setStatus(Const.OrderStatusEnum.NO_PAY.getCode());
 		//2.2创建订单详情
@@ -95,7 +95,7 @@ public class OrderController {
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iOrderService.pay(orderNo,user.getUuid());
+        return iOrderService.pay(orderNo,user.getUid());
     }
 	@RequestMapping("alipay_callback.do")
     @ResponseBody

@@ -86,12 +86,12 @@ public class UserServiceImpl extends BaseService<User, UserQuery> implements IUs
 	public ServerResponse<User> updateInformation(User user) {
 		// username是不能被更新的
 		// email也要进行一个校验,校验新的email是不是已经存在,并且存在的email如果相同的话,不能是我们当前的这个用户的.
-		int resultCount = userMapper.checkEmailByUserId(user.getIdcard(), user.getUuid());
+		int resultCount = userMapper.checkEmailByUserId(user.getIdcard(), user.getUid());
 		if (resultCount > 0) {
 			return ServerResponse.createByErrorMessage("email已存在,请更换email再尝试更新");
 		}
 		User updateUser = new User();
-		updateUser.setUuid(user.getUuid());
+		updateUser.setUid(user.getUid());
 		updateUser.setSex(user.getSex());
 		updateUser.setIdcard(user.getIdcard());
 		updateUser.setCellphone(user.getCellphone());

@@ -66,7 +66,7 @@ public class UniversityDynamicController {
 		}
 		University university=new University();
 		//转类型
-		long userid = user.getUuid();
+		long userid = user.getUid();
 		university.setUserId((int) userid);
 		List<University> byUserIdList = universityService.schoolByUserIdList(university);
 		session.setAttribute("schoolInfo", byUserIdList.get(0));

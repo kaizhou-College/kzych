@@ -130,7 +130,7 @@ public class OrderServiceImpl extends BaseService<Order, OrderQuery>implements I
 		//然后使用该用户身份证查询出该用户id
 		if(userAdd>0){
 			List<User> userList = usermapper.userByIdCardSelect(u.getIdcard());
-			userId=userList.get(0).getUuid();
+			userId=userList.get(0).getUid();
 		}
 		//接着查询出university中的优惠券 university_major的学费
 		University costDetail = universityMapper.UniversityCostDetail(qu);

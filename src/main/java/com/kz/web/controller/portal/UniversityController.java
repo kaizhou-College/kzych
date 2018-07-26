@@ -103,7 +103,7 @@ public class UniversityController {
 		User u = (User) session.getAttribute(Const.CURRENT_USER);
 		University un = new University();
 		if(u!=null){
-			long userid = u.getUuid();
+			long userid = u.getUid();
 			un.setUserId((int) userid);
 		}
 		List<University> resultUniversity = iUniversityService.schoolByUserIdList(un);
@@ -249,7 +249,7 @@ public class UniversityController {
 		User u = (User) session.getAttribute(Const.CURRENT_USER);
 		University un = new University();
 		if(u!=null){
-			long userid = u.getUuid();
+			long userid = u.getUid();
 			un.setUserId((int) userid);
 		}
 		List<University> result = iUniversityService.schoolByUserIdList(un);
@@ -400,6 +400,7 @@ public class UniversityController {
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
 	 */
+	
 	@RequestMapping("schoolList.do")
 	@ResponseBody
 	public ServerResponse<PageInfo<University>> list(UniversityQuery uq,HttpSession session,HttpServletRequest re) {
