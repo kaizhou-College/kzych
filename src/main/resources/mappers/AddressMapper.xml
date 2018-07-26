@@ -9,12 +9,13 @@
     <result column="county" property="county" jdbcType="VARCHAR" />
     <result column="addrDetail" property="addrdetail" jdbcType="VARCHAR" />
     <result column="university_id" property="universityId" jdbcType="BIGINT" />
+    <result column="cityid" property="cityid" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.kz.po.Address" extends="BaseResultMap" >
     <result column="latitude" property="latitude" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, longitude, provice, city, county, addrDetail, university_id
+    id, longitude, provice, city, county, addrDetail, university_id, cityid
   </sql>
   <sql id="Blob_Column_List" >
     latitude
@@ -34,12 +35,13 @@
   <insert id="insert" parameterType="com.kz.po.Address" >
     insert into kz_address (id, longitude, provice, 
       city, county, addrDetail, 
-      university_id, latitude)
+      university_id, cityid, latitude
+      )
     values (#{id,jdbcType=BIGINT}, #{longitude,jdbcType=VARCHAR}, #{provice,jdbcType=VARCHAR}, 
       #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, #{addrdetail,jdbcType=VARCHAR}, 
-      #{universityId,jdbcType=BIGINT}, #{latitude,jdbcType=LONGVARCHAR})
+      #{universityId,jdbcType=BIGINT}, #{cityid,jdbcType=INTEGER}, #{latitude,jdbcType=LONGVARCHAR}
+      )
   </insert>
- 
   <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.Address" >
     update kz_address
     <set >
@@ -61,6 +63,9 @@
       <if test="universityId != null" >
         university_id = #{universityId,jdbcType=BIGINT},
       </if>
+      <if test="cityid != null" >
+        cityid = #{cityid,jdbcType=INTEGER},
+      </if>
       <if test="latitude != null" >
         latitude = #{latitude,jdbcType=LONGVARCHAR},
       </if>
@@ -75,6 +80,7 @@
       county = #{county,jdbcType=VARCHAR},
       addrDetail = #{addrdetail,jdbcType=VARCHAR},
       university_id = #{universityId,jdbcType=BIGINT},
+      cityid = #{cityid,jdbcType=INTEGER},
       latitude = #{latitude,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -85,15 +91,14 @@
       city = #{city,jdbcType=VARCHAR},
       county = #{county,jdbcType=VARCHAR},
       addrDetail = #{addrdetail,jdbcType=VARCHAR},
-      university_id = #{universityId,jdbcType=BIGINT}
+      university_id = #{universityId,jdbcType=BIGINT},
+      cityid = #{cityid,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
   
   
   
-  
-  
-  <!-- 下面这个是我改了的代码  （自增长）不能没有 -->
+   <!-- 下面这个是我改了的代码  （自增长）不能没有 -->
    <insert id="insertSelective" parameterType="com.kz.po.Address" >
     insert into kz_address
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -119,6 +124,9 @@
       <if test="latitude != null" >
         latitude,
       </if>
+      <if test="cityid != null" >
+        cityid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
        null,
@@ -142,6 +150,9 @@
       </if>
       <if test="latitude != null" >
         #{latitude,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cityid != null" >
+        #{cityid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

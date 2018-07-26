@@ -569,7 +569,7 @@
 			<include refid="universitySql" />
 			,
 			<include refid="addressSql" />
-		from kz_university,kz_address
+		from kz_university,kz_address 
 		<where>
 		    kz_address.university_id=kz_university.id 
 			<if test="categoryId!=0 &amp;&amp;categoryId > 0">
@@ -597,6 +597,8 @@
 			<if test="addrdetail!=null &amp;&amp; addrdetail!='' ">
 				and  kz_address.addrdetail like '%${addrdetail}%' 
 			</if>
+			
+			
 		</where>
 	</select>
 	<select id="listKeyPublishStatus" parameterType="com.kz.po.UniversityQuery"

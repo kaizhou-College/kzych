@@ -22,17 +22,14 @@ import com.kz.utils.MD5Util;
 @Transactional
 public class UserServiceImpl extends BaseService<User, UserQuery> implements IUserService {
 	private UserMapper userMapper = null;
-	
-	@Autowired
-	private WxBindInfoMapper wxUserMapper;
-	
+		
 	@Autowired
 	private void setDao(UserMapper mapper) {
 		this.userMapper = mapper;
 		super.setMapper(mapper);
 	}
-	//这个是用户的 因为需要微信小程序需要 login接口 所以这里被我注释了
-	/*public ServerResponse<User> login(String username, String password) {
+	
+	public ServerResponse<User> login(String username, String password) {
 		int resultCount = userMapper.checkUsername(username);
 		if (resultCount == 0) {
 			ServerResponse.createByErrorMessage("用户不存在!");
@@ -45,14 +42,9 @@ public class UserServiceImpl extends BaseService<User, UserQuery> implements IUs
 		}
 		user.setPassword(org.apache.commons.lang3.StringUtils.EMPTY);
 		return ServerResponse.createBySuccess("登陆成功！！", user);
-	}*/
-	public ServerResponse<WxBindInfo> login(WxBindInfoQuery wx) {
-		WxBindInfo wxUser = wxUserMapper.selectLogin(wx);
-		if (wxUser == null) {
-			return ServerResponse.createByErrorMessage("沒有该用戶");
-		}
-		return ServerResponse.createBySuccess("登陆成功！！", wxUser);
 	}
+	
+	
 	@Override
 	public ServerResponse<String> register(User user) {
 		ServerResponse validResponse = this.checkValid(user.getUsername(), Const.USERNAME);

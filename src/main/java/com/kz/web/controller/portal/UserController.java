@@ -132,7 +132,7 @@ public class UserController {
 	 * @return: ServerResponse<User> 返回值类型
 	 */
 	//这个是用户的 因为需要微信小程序需要 login接口 所以这里被我注释了
-	/*@RequestMapping(value="login.do", method = RequestMethod.POST)
+	@RequestMapping(value="login.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<User> login(String username, String password, HttpSession session) {
 		ServerResponse<User> response = iUserService.login(username, password);
@@ -140,16 +140,8 @@ public class UserController {
 			session.setAttribute(Const.CURRENT_USER, response.getData());
 		}
 		return response;
-	}*/
-	@RequestMapping(value="login.do", method = RequestMethod.POST)
-	@ResponseBody
-	public ServerResponse<WxBindInfo> login(WxBindInfoQuery wx,HttpSession session) {
-		ServerResponse<WxBindInfo> response = iUserService.login(wx);
-		if (response.isSuccess()) {
-			session.setAttribute(Const.CURRENT_USER, response.getData());
-		}
-		return response;
 	}
+	
 	
 	/**
 	 * @Title: login
@@ -196,7 +188,7 @@ public class UserController {
 	 * @param: @return
 	 * @return: ServerResponse<String> 返回值类型
 	 */
-	/*@RequestMapping(value = "register.do", method = RequestMethod.POST)
+	@RequestMapping(value = "register.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<String> register(User user,HttpSession session) {
 		//登入时的数据
@@ -214,7 +206,7 @@ public class UserController {
 		ServerResponse<User> response = iUserService.login(user.getUsername(),password);
 		session.setAttribute(Const.CURRENT_USER, response.getData());
 		return register;
-	}*/
+	}
 
 	/**
 	 * @Title: update_information

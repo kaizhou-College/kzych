@@ -11,7 +11,7 @@ import com.kz.po.WxBindInfoQuery;
 
 public interface IUserService extends IBaseService<User, UserQuery>{
 
-	ServerResponse<WxBindInfo> login(WxBindInfoQuery wx);
+	ServerResponse<User> login(String username,String password);
 
 	ServerResponse<String> register(User user);
 
