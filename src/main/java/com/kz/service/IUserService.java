@@ -6,10 +6,12 @@ import com.kz.core.service.IBaseService;
 import com.kz.po.University;
 import com.kz.po.User;
 import com.kz.po.UserQuery;
+import com.kz.po.WxBindInfo;
+import com.kz.po.WxBindInfoQuery;
 
 public interface IUserService extends IBaseService<User, UserQuery>{
 
-	ServerResponse<User> login(String username, String password);
+	ServerResponse<WxBindInfo> login(WxBindInfoQuery wx);
 
 	ServerResponse<String> register(User user);
 

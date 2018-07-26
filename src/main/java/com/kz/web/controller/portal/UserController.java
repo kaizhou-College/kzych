@@ -23,6 +23,8 @@ import com.kz.core.common.ResponseCode;
 import com.kz.core.common.ServerResponse;
 import com.kz.po.University;
 import com.kz.po.User;
+import com.kz.po.WxBindInfo;
+import com.kz.po.WxBindInfoQuery;
 import com.kz.service.IFileService;
 import com.kz.service.IUserService;
 import com.kz.utils.PropertiesUtil;
@@ -129,7 +131,8 @@ public class UserController {
 	 * @param: @return
 	 * @return: ServerResponse<User> 返回值类型
 	 */
-	@RequestMapping(value="login.do", method = RequestMethod.POST)
+	//这个是用户的 因为需要微信小程序需要 login接口 所以这里被我注释了
+	/*@RequestMapping(value="login.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<User> login(String username, String password, HttpSession session) {
 		ServerResponse<User> response = iUserService.login(username, password);
@@ -137,8 +140,17 @@ public class UserController {
 			session.setAttribute(Const.CURRENT_USER, response.getData());
 		}
 		return response;
+	}*/
+	@RequestMapping(value="login.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ServerResponse<WxBindInfo> login(WxBindInfoQuery wx,HttpSession session) {
+		ServerResponse<WxBindInfo> response = iUserService.login(wx);
+		if (response.isSuccess()) {
+			session.setAttribute(Const.CURRENT_USER, response.getData());
+		}
+		return response;
 	}
-
+	
 	/**
 	 * @Title: login
 	 * @Description: 验证是否管理员
@@ -167,7 +179,7 @@ public class UserController {
 
 	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
 	@ResponseBody
-	public ServerResponse<String> logout(HttpSession session) {
+	public ServerResponse<String> logout(WxBindInfoQuery wx,HttpSession session) {
 		session.removeAttribute(Const.CURRENT_USER);
 		University university =(University)session.getAttribute("User_list");
 		if(university!=null){
@@ -184,7 +196,7 @@ public class UserController {
 	 * @param: @return
 	 * @return: ServerResponse<String> 返回值类型
 	 */
-	@RequestMapping(value = "register.do", method = RequestMethod.POST)
+	/*@RequestMapping(value = "register.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<String> register(User user,HttpSession session) {
 		//登入时的数据
@@ -202,7 +214,7 @@ public class UserController {
 		ServerResponse<User> response = iUserService.login(user.getUsername(),password);
 		session.setAttribute(Const.CURRENT_USER, response.getData());
 		return register;
-	}
+	}*/
 
 	/**
 	 * @Title: update_information
