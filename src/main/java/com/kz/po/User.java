@@ -3,7 +3,7 @@ package com.kz.po;
 import java.util.Date;
 
 public class User {
-    private Long uuid;
+    private Long uid;
 
     private String realName;
 
@@ -34,16 +34,16 @@ public class User {
     private String userAvatar;
     
     private String credits;
-    
-    public Long getUuid() {
-        return uuid;
-    }
 
-    public void setUuid(Long uuid) {
-        this.uuid = uuid;
-    }
+    public Long getUid() {
+		return uid;
+	}
 
-    public String getRealName() {
+	public void setUid(Long uid) {
+		this.uid = uid;
+	}
+
+	public String getRealName() {
         return realName;
     }
 

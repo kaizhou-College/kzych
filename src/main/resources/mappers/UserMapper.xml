@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.kz.dao.UserMapper" >
   <resultMap id="BaseResultMap" type="com.kz.po.User" >
-    <id column="UUID" property="uuid" jdbcType="BIGINT" />
+    <id column="UID" property="uid" jdbcType="BIGINT" />
     <result column="real_name" property="realName" jdbcType="VARCHAR" />
     <result column="USERNAME" property="username" jdbcType="VARCHAR" />
     <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
@@ -20,27 +20,27 @@
     <result column="credits" property="credits" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    UUID, real_name, USERNAME, PASSWORD, CELLPHONE, SEX, IDCARD, ORIGIN_PLACE, SCHOOL, 
+    UID, real_name, USERNAME, PASSWORD, CELLPHONE, SEX, IDCARD, ORIGIN_PLACE, SCHOOL, 
     SIGN_MESSAGE, PROFILE, USER_TYPE, CREATE_TIME, LASTLOGIN_TIME, user_avatar, credits
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from kz_user
-    where UUID = #{uuid,jdbcType=BIGINT}
+    where UID = #{uid,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from kz_user
-    where UUID = #{uuid,jdbcType=BIGINT}
+    where UID = #{uid,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.kz.po.User" >
-    insert into kz_user (UUID, real_name, USERNAME, 
+    insert into kz_user (UID, real_name, USERNAME, 
       PASSWORD, CELLPHONE, SEX, 
       IDCARD, ORIGIN_PLACE, SCHOOL, 
       SIGN_MESSAGE, PROFILE, USER_TYPE, 
       CREATE_TIME, LASTLOGIN_TIME, user_avatar, 
       credits)
-    values (#{uuid,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+    values (#{uid,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
       #{idcard,jdbcType=VARCHAR}, #{originPlace,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, 
       #{signMessage,jdbcType=VARCHAR}, #{profile,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER}, 
@@ -50,8 +50,8 @@
   <insert id="insertSelective" parameterType="com.kz.po.User" >
     insert into kz_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
-        UUID,
+      <if test="uid != null" >
+        UID,
       </if>
       <if test="realName != null" >
         real_name,
@@ -100,8 +100,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
-        #{uuid,jdbcType=BIGINT},
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
       </if>
       <if test="realName != null" >
         #{realName,jdbcType=VARCHAR},
@@ -199,7 +199,7 @@
         credits = #{credits,jdbcType=VARCHAR},
       </if>
     </set>
-    where UUID = #{uuid,jdbcType=BIGINT}
+    where UID = #{uid,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.kz.po.User" >
     update kz_user
@@ -218,7 +218,7 @@
       LASTLOGIN_TIME = #{lastloginTime,jdbcType=TIMESTAMP},
       user_avatar = #{userAvatar,jdbcType=VARCHAR},
       credits = #{credits,jdbcType=VARCHAR}
-    where UUID = #{uuid,jdbcType=BIGINT}
+    where UID = #{uid,jdbcType=BIGINT}
   </update>
   
   <!-- 下面是我自己写的方法  -->
@@ -240,7 +240,7 @@
 	</select>
 	<select id="checkEmailByUserId" parameterType="map" resultType="int">
 		select count(1) from kz_user
-		where idcard=#{idcard} and uuid=#{uuid}
+		where idcard=#{idcard} and uid=#{uid}
 	</select>
 	<select id="selectAdministrator" parameterType="string" resultMap="BaseResultMap">
 		select
@@ -273,12 +273,12 @@
         SCHOOL = #{school,jdbcType=VARCHAR},
       </if>
     </set>
-    where UUID = #{uuid,jdbcType=BIGINT}
+    where UID = #{uid,jdbcType=BIGINT}
   </update>
    <insert id="insertSelectiveRegister" parameterType="com.kz.po.User" >
     insert into kz_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
-        UUID,
+        UID,
         USERNAME,
         PASSWORD,
         user_Type,
@@ -298,7 +298,7 @@
       insert into 
       	kz_user
       	<trim prefix=" (" suffix=") " suffixOverrides=",">
-      	    UUID,
+      	    UID,
       	    user_avatar,
       	    USERNAME,
       	    real_name,
