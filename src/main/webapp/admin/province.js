@@ -1,7 +1,7 @@
 ﻿var defaults = {
-    s1: 'provid',
-    s2: 'cityid',
-    s3: 'areaid',
+    s1: 'provice',
+    s2: 'city',
+    s3: 'county',
     v1: null,
     v2: null,
     v3: null
@@ -37,9 +37,9 @@ function checkedSelect(provice,city,county){
 			}
 		}
 	}
-	$("#provid").html(prov_01);
-	$("#cityid").html(city_01);
-	$("#areaid").html(county_01);
+	$("#provice").html(prov_01);
+	$("#city").html(city_01);
+	$("#county").html(county_01);
 	
 }
 

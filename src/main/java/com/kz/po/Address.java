@@ -16,6 +16,8 @@ public class Address {
     private Long universityId;
 
     private String latitude;
+    
+    private Integer cityid;
 
     public Long getId() {
         return id;
@@ -80,5 +82,13 @@ public class Address {
     public void setLatitude(String latitude) {
         this.latitude = latitude == null ? null : latitude.trim();
     }
+
+	public Integer getCityid() {
+		return cityid;
+	}
+
+	public void setCityid(Integer cityid) {
+		this.cityid = cityid;
+	}
     
 }

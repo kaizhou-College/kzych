@@ -25,6 +25,18 @@ public class WxBindInfo {
 
     private String updRand;
 
+    private String gender;
+
+    private String mobile;
+
+    private String school;
+
+    private String originplace;
+
+    private String idcard;
+
+    private String nickname;
+
     public Integer getUid() {
         return uid;
     }
@@ -119,5 +131,53 @@ public class WxBindInfo {
 
     public void setUpdRand(String updRand) {
         this.updRand = updRand == null ? null : updRand.trim();
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender == null ? null : gender.trim();
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school == null ? null : school.trim();
+    }
+
+    public String getOriginplace() {
+        return originplace;
+    }
+
+    public void setOriginplace(String originplace) {
+        this.originplace = originplace == null ? null : originplace.trim();
+    }
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard == null ? null : idcard.trim();
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
     }
 }
