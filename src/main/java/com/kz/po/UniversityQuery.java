@@ -4,11 +4,10 @@ import com.kz.core.web.BaseQueryModel;
 
 public class UniversityQuery extends BaseQueryModel  {
 	
-	 //默认是查询本科类学校
-    private Long categoryId = 1L;
+	 //默认是查询全部
+    private Long categoryId = 0L;
     
     private String name;
-    
     
     private Integer publishStatus;
     //查询时的地址
@@ -23,6 +22,8 @@ public class UniversityQuery extends BaseQueryModel  {
     private String addrdetail;
 
     private String latitude;
+    
+    private int cityid;
     
     //查看学校是否热门
     private Integer isHot=1;
@@ -43,11 +44,11 @@ public class UniversityQuery extends BaseQueryModel  {
     //包装address
     private Address address;
     
-    private String provid ;
+    /*private String provid ;
     
     private String cityid ;
     
-    private String areaid;
+    private String areaid;*/
     
     
     //微信小程序的查询university_detail接口 
@@ -173,36 +174,14 @@ public class UniversityQuery extends BaseQueryModel  {
 		this.university = university;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
+	
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public String getCityid() {
+	public int getCityid() {
 		return cityid;
 	}
 
-	public void setCityid(String cityid) {
+	public void setCityid(int cityid) {
 		this.cityid = cityid;
-	}
-
-	public String getAreaid() {
-		return areaid;
-	}
-
-	public void setAreaid(String areaid) {
-		this.areaid = areaid;
-	}
-
-	public String getProvid() {
-		return provid;
-	}
-
-	public void setProvid(String provid) {
-		this.provid = provid;
 	}
 
 	public Integer getCurrentNum() {
@@ -211,6 +190,14 @@ public class UniversityQuery extends BaseQueryModel  {
 
 	public void setCurrentNum(Integer currentNum) {
 		this.currentNum = currentNum;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	

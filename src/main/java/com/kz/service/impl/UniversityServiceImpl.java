@@ -150,7 +150,6 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 			result=mapper.schollAndAddressList(qu.getUniversityId());
 			PageHelper.startPage(qu.getPageNum(),qu.getPageSize());
 			List<Major> resultMajor=mapper.schollByMajor(qu.getUniversityId());
-			
 			if(resultMajor.size()>=0)
 				result.get(0).setMajors(resultMajor);
 		}else if(qu.getCurrentNum()==1){
@@ -209,9 +208,9 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 	@Override
 	public Long userInfoSchool(UniversityQuery qu) {
 		Long long1 = mapper.schoolByUserIdUpdate(qu.getUniversity());
-		qu.getAddress().setProvice(qu.getProvid());
-		qu.getAddress().setCity(qu.getCityid());
-		qu.getAddress().setCounty(qu.getAreaid());
+		qu.getAddress().setProvice(qu.getProvice());
+		qu.getAddress().setCity(qu.getCity());
+		qu.getAddress().setCounty(qu.getCounty());
 		Long long2 = mapperA.updateByPrimaryKeySelective(qu.getAddress());
 		return long1+long2;
 	}

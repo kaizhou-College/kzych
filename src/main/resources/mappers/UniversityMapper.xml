@@ -597,8 +597,9 @@
 			<if test="addrdetail!=null &amp;&amp; addrdetail!='' ">
 				and  kz_address.addrdetail like '%${addrdetail}%' 
 			</if>
-			
-			
+			<if test="cityid!=0 &amp;&amp;cityid > 0">
+				and cityid=#{cityid}
+			</if>
 		</where>
 	</select>
 	<select id="listKeyPublishStatus" parameterType="com.kz.po.UniversityQuery"
