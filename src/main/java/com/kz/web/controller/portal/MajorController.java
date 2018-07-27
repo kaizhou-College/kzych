@@ -112,4 +112,12 @@ public class MajorController {
 		PageInfo majorUniversity=iMajorService.majorAndUniversityDim(qm);
 		return ServerResponse.createBySuccess("查成功", majorUniversity);
 	}
+	
+	//按照majorCategoryId(专业类别id)来查找专业
+	@RequestMapping(value="majorTyleIdSearch.do")
+	@ResponseBody
+	public ServerResponse<PageInfo> majorTyleIdSearch(MajorQuery qm){
+		PageInfo majorUniversity=iMajorService.majorTyleIdSearch(qm);
+		return ServerResponse.createBySuccess("查成功", majorUniversity);
+	}
 }

@@ -19,7 +19,7 @@ public interface IMajorService extends IBaseService<Major, MajorQuery>{
 
 	PageInfo majorAndUniversityDim(MajorQuery qm);
 	
-	
+	PageInfo majorTyleIdSearch(MajorQuery qm);
 	
 	
 }

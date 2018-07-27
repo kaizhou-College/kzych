@@ -51,6 +51,8 @@ public class UserServiceImpl extends BaseService<User, UserQuery> implements IUs
 		if (!validResponse.isSuccess()) {
 			return validResponse;
 		}
+		
+		
 		validResponse = this.checkValid(user.getIdcard(), Const.IDCARD);
 		if (!validResponse.isSuccess()) {
 			return validResponse;

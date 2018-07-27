@@ -22,5 +22,7 @@ public interface MajorMapper extends BaseMapper<Major, MajorQuery>{
 	List<Major> myMajorHot(Integer isHot);
 
 	List<SearchModel> majorByNameDim(MajorQuery qm);
+
+	List<Major> majorTyleIdSearch(MajorQuery qm);
 	
 }

@@ -188,4 +188,16 @@
 	   where 
 	   	  name like '%${searchText}%'
 	</select>
+	<select id="majorTyleIdSearch" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+	    select 
+	   	 ID, kz_major.MAJOR_CATEGORY_ID, NAME, 
+	   	 MAJOR_CODE, ISHOT ,DESCRIPTION
+	   from 
+			kz_major , kz_major_category 
+		where 
+			kz_major.MAJOR_CATEGORY_ID =kz_major_category.MAJOR_CATEGORY_ID 
+			<if test="majorCategoryId!=null &amp;&amp; majorCategoryId!='' ">
+				and kz_major_category.major_category_id=#{majorCategoryId}
+			</if>
+	</select>
 </mapper>

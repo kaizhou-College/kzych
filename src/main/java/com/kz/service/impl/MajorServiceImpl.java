@@ -81,9 +81,6 @@ public class MajorServiceImpl extends BaseService<Major, MajorQuery> implements 
 			result.add(sm);
 			universityNum++;
 		}
-		for (int i = 0; i < result.size(); i++) {
-			System.out.println(result.get(i));
-		}
 		//再定义一个ArrayList来接收分页后的数据
 		List<SearchModel> pageSearch=new ArrayList<>(0);
 		if(result.size()>((qm.getPageNum()-1)*qm.getPageSize())){
@@ -96,6 +93,12 @@ public class MajorServiceImpl extends BaseService<Major, MajorQuery> implements 
 			}
 		}
 		PageInfo<SearchModel> pageInfo=new PageInfo<SearchModel>(pageSearch);
+		return pageInfo;
+	}
+	@Override
+	public PageInfo majorTyleIdSearch(MajorQuery qm) {
+		List<Major> majorTypeList=mapper.majorTyleIdSearch(qm);
+		PageInfo<Major> pageInfo=new PageInfo<Major>(majorTypeList);
 		return pageInfo;
 	}
 
