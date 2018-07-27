@@ -45,7 +45,13 @@ public class WxUserServiceImpl  extends BaseService<WxBindInfo, WxBindInfoQuery>
 		wx.setToken("暂时未设值");
 		wx.setExpiresIn(10);
 		wx.setDateline(1);
-		Long resultCount = wxUserMapper.insertSelective(wx);
+		Long resultCount = 0L;
+		try{
+			resultCount=wxUserMapper.insertSelective(wx);
+        }catch(Exception e){    
+        	return ServerResponse.createByErrorMessage("该用户已经被注册了");   
+        }
+		
 		if (resultCount == 0) {
 			return ServerResponse.createByErrorMessage("注册失败");
 		}

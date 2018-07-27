@@ -35,7 +35,7 @@ public class WxBindInfo {
 
     private String idcard;
 
-    private String nickname;
+    private String realname;
 
     public Integer getUid() {
         return uid;
@@ -173,11 +173,13 @@ public class WxBindInfo {
         this.idcard = idcard == null ? null : idcard.trim();
     }
 
-    public String getNickname() {
-        return nickname;
-    }
+	public String getRealname() {
+		return realname;
+	}
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname == null ? null : nickname.trim();
-    }
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+
+    
 }

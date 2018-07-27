@@ -19,11 +19,11 @@
     <result column="school" property="school" jdbcType="VARCHAR" />
     <result column="originPlace" property="originplace" jdbcType="VARCHAR" />
     <result column="idCard" property="idcard" jdbcType="VARCHAR" />
-    <result column="nickName" property="nickname" jdbcType="VARCHAR" />
+    <result column="realName" property="realname" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     uid, wx_username, token, tsecret, dateline, synctowx, expires_in, openid, refresh_token, 
-    unionid, pc_openid, upd_rand, gender, mobile, school, originPlace, idCard, nickName
+    unionid, pc_openid, upd_rand, gender, mobile, school, originPlace, idCard, realName
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -41,14 +41,14 @@
       expires_in, openid, refresh_token, 
       unionid, pc_openid, upd_rand, 
       gender, mobile, school, 
-      originPlace, idCard, nickName
+      originPlace, idCard, realName
       )
     values (#{uid,jdbcType=INTEGER}, #{wxUsername,jdbcType=CHAR}, #{token,jdbcType=CHAR}, 
       #{tsecret,jdbcType=CHAR}, #{dateline,jdbcType=INTEGER}, #{synctowx,jdbcType=BIT}, 
       #{expiresIn,jdbcType=INTEGER}, #{openid,jdbcType=VARCHAR}, #{refreshToken,jdbcType=VARCHAR}, 
       #{unionid,jdbcType=VARCHAR}, #{pcOpenid,jdbcType=VARCHAR}, #{updRand,jdbcType=VARCHAR}, 
       #{gender,jdbcType=CHAR}, #{mobile,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, 
-      #{originplace,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}
+      #{originplace,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}
       )
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.kz.po.WxBindInfo" >
@@ -102,8 +102,8 @@
       <if test="idcard != null" >
         idCard = #{idcard,jdbcType=VARCHAR},
       </if>
-      <if test="nickname != null" >
-        nickName = #{nickname,jdbcType=VARCHAR},
+      <if test="realname != null" >
+        realName = #{realname,jdbcType=VARCHAR},
       </if>
     </set>
     where uid = #{uid,jdbcType=INTEGER}
@@ -126,7 +126,7 @@
       school = #{school,jdbcType=VARCHAR},
       originPlace = #{originplace,jdbcType=VARCHAR},
       idCard = #{idcard,jdbcType=VARCHAR},
-      nickName = #{nickname,jdbcType=VARCHAR}
+      realName = #{realname,jdbcType=VARCHAR}
     where uid = #{uid,jdbcType=INTEGER}
   </update>
   
@@ -185,8 +185,8 @@
       <if test="idcard != null" >
         idCard,
       </if>
-      <if test="nickname != null" >
-        nickName,
+      <if test="realname != null" >
+        realName,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -239,8 +239,8 @@
       <if test="idcard != null" >
         #{idcard,jdbcType=VARCHAR},
       </if>
-      <if test="nickname != null" >
-        #{nickname,jdbcType=VARCHAR},
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

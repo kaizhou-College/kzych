@@ -6,3 +6,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 request.setAttribute("basePath", basePath);//47.104.135.201
 request.setAttribute("host","http://localhost:8080/kzych/"); 
 %>
+
