@@ -25,7 +25,7 @@ public class WxUserController {
 	
 	@RequestMapping(value="login.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<WxBindInfo> login(WxBindInfoQuery wx,HttpSession session) {
+	public ServerResponse<WxBindInfo> login(@RequestBody WxBindInfoQuery wx,HttpSession session) {
 		ServerResponse<WxBindInfo> response = iWxUserService.login(wx);
 		if (response.isSuccess()) {
 			session.setAttribute(Const.CURRENT_USER, response.getData());

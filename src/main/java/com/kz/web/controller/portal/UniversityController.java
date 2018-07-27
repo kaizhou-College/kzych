@@ -59,11 +59,11 @@ public class UniversityController {
 	
 	/**
 	 * @Title: selectByMajorCategoryId
-	 * @Description: 按照专业类别来查找学校
+	 * @Description: 按照专业类别名称来查找学校
 	 * @param: @param
-	 *             session
+	 *             majorCategoryName
 	 * @param: @return
-	 * @return: String 返回值类型
+	 * @return: ServerResponse
 	 */
 	@RequestMapping(value="selectByMajorCategoryId.do")
 	@ResponseBody
