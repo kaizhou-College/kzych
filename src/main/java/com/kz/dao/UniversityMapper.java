@@ -22,7 +22,7 @@ public interface UniversityMapper extends BaseMapper<University, UniversityQuery
 	Long insertSelectiveSequence(University m);
 	Long updateByKeySelective(University m);
 	List<University> schoolByUserIdList(University m);
-	Long schoolByUserIdUpdate(University m);
+	Long schoolByIdUpdate(University m);
 	List<University> schoolByIsNotHotList(Integer isHot);
 	List<University> selectByPrimaryLongitudeAndLatitude(UniversityQuery uq);
 	List<University> selectByMajorCategoryId(UniversityQuery uq);

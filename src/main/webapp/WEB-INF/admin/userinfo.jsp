@@ -138,7 +138,7 @@
 			    
 			    
 			    <div class="layui-tab-item">
-			    	     <form class="layui-form" action="${host}/university/schoolByUserIdUpdate.do" method="post">
+			    	     <form class="layui-form" action="${host}/university/schoolByIdUpdate.do" method="post">
 			    	<!-- <form class="layui-form" action="/kzych/university/schoolByUserIdUpdate.do" method="post"> -->
 			    		<div class="layui-form-item">
 						    <label class="layui-form-label">机构名称:</label>

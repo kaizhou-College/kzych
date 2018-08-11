@@ -74,12 +74,11 @@
       #{name,jdbcType=LONGVARCHAR}, #{employmentInfo,jdbcType=LONGVARCHAR}, #{brochure,jdbcType=LONGVARCHAR}, 
       #{introduction,jdbcType=LONGVARCHAR})
   </insert>
+  <!-- 被我改了的 （id）-->
   <insert id="insertSelective" parameterType="com.kz.po.universityWithBLOBs" >
     insert into kz_university
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
         ID,
-      </if>
       <if test="code != null" >
         CODE,
       </if>
@@ -157,9 +156,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
+      null,
       <if test="code != null" >
         #{code,jdbcType=BIGINT},
       </if>
@@ -538,8 +535,7 @@
 		kz_university_major,
 		kz_major
 		where
-		kz_university.id =
-		kz_university_major.university_id
+		kz_university.id =kz_university_major.university_id
 		and
 		kz_university_major.major_id = kz_major.id
 		and
@@ -580,7 +576,7 @@
 				and name like '%${name}%'
 			</if>
 			<!-- 经伪度 -->
-			<if test="longitude!=null &amp;&amp; longitude!='' &amp;&amp; schoolLatitude!='' &amp;&amp; schoolLatitude!=''">
+			<if test="longitude!=null &amp;&amp; longitude!='' &amp;&amp; latitude!='' &amp;&amp; latitude!=''">
 				and kz_address.latitude =#{latitude} 
 				and kz_address.longitude =#{longitude} 
 			</if>
@@ -614,7 +610,7 @@
 			<if test="publishStatus!=null &amp;&amp; publishStatus!='' ">
 				and publish_Status=#{publishStatus}
 			</if>
-			<if test="longitude!=null &amp;&amp; longitude!='' &amp;&amp; schoolLatitude!='' &amp;&amp; schoolLatitude!=''">
+			<if test="longitude!=null &amp;&amp; longitude!='' &amp;&amp; latitude!='' &amp;&amp; latitude!=''">
 				and kz_address.latitude =#{latitude} 
 				and kz_address.longitude =#{longitude} 
 			</if>
@@ -659,7 +655,7 @@
 		</set>
 		where ID = #{id,jdbcType=BIGINT}
 	</update>
-	<update id="schoolByUserIdUpdate" parameterType="com.kz.po.universityWithBLOBs">
+	<update id="schoolByIdUpdate" parameterType="com.kz.po.universityWithBLOBs">
 		update kz_university
 		<set>
 			<if test="categoryid != null">
@@ -854,7 +850,7 @@
 		kz_university,kz_address
 	where 
 	    kz_address.university_id=kz_university.id 
-    	<if test="longitude!=null &amp;&amp; longitude!='' &amp;&amp; schoolLatitude!='' &amp;&amp; schoolLatitude!=''">
+    	<if test="longitude!=null &amp;&amp; longitude!='' &amp;&amp; latitude!='' &amp;&amp; latitude!=''">
 		and kz_address.latitude =#{latitude} 
 		and kz_address.longitude =#{longitude} 
 		</if>
@@ -935,7 +931,7 @@
   </select>
   <select id="selectByMajorCategoryId" resultMap="ResultMapWithBLOBs"  parameterType="com.kz.po.UniversityQuery" >
     select 
-		u.*  
+		DISTINCT u.*
 	from 
 		kz_university u,
 		kz_university_major um,

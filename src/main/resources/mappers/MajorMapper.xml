@@ -139,22 +139,22 @@
   
   
   <sql id="kzBase_Column_List">
- 	 kz_major.ID, MAJOR_CATEGORY_ID, kz_major.NAME, MAJOR_CODE, ISHOT,DESCRIPTION
+ 	 kz_major.ID, MAJOR_CATEGORY_ID, kz_major.NAME, MAJOR_CODE,DESCRIPTION
   </sql>
   <resultMap id="kzMajorMap" type="com.kz.po.MajorUniversity" extends="ResultMapWithBLOBs">
   	 <id column="universityId" property="universityId" jdbcType="BIGINT" />
   </resultMap>
   <select id="findByUniversityId" parameterType="map" resultMap="kzMajorMap">
   	select 
-  	<include refid="kzBase_Column_List"/>
-  	,kz_university_major.university_id universityId,
-  	kz_university_major.id umid,
-  	kz_university_major.cost,
-  	kz_university_major.major_message majorMesssage,
-  	kz_university_major.COST_Constitution costConstitution,
-  	kz_university_major.job_info jobInfo,
-  	kz_university.profile,
-  	kz_university.name universityName
+  		<include refid="kzBase_Column_List"/>
+  		,kz_university_major.university_id universityId,
+	  	kz_university_major.id umid,
+	  	kz_university_major.cost,
+	  	kz_university_major.major_message majorMesssage,
+	  	kz_university_major.COST_Constitution costConstitution,
+	  	kz_university_major.job_info jobInfo,
+	  	kz_university.profile,
+	  	kz_university.name universityName
   	from 
   		kz_major,kz_university_major,kz_university
   	where 

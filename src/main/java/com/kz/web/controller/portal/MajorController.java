@@ -91,7 +91,17 @@ public class MajorController {
 		return ServerResponse.createBySuccess("查询成功！", majorUniversity);
 	}
 	
-	//三 《通过专业列表id来查找学校   
+	/**
+	 * 
+	 * @Title: findByUniversityId
+	 * @Description: 通过专业列表id来查找学校   
+	 * @param: @param
+	 *             universityId
+	 * @param: @param
+	 *             majorId
+	 * @param: @return
+	 * @return: ServerResponse<pageInfo> 返回值类型
+	 */
 	@RequestMapping(value="major_university_list.do")  //原来selectByMajorId
 	@ResponseBody 
 	public ServerResponse<PageInfo> selectByMajorId(UniversityQuery qu) {
@@ -99,6 +109,15 @@ public class MajorController {
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}
 	
+	/**
+	 * 
+	 * @Title: pop_major_list
+	 * @Description: 查询热门专业
+	 * @param: @param
+	 *             isHot
+	 * @param: @return
+	 * @return: ServerResponse<pageInfo> 返回值类型
+	 */
 	@RequestMapping(value="pop_major_list.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> myMajorHot(MajorQuery qm){
@@ -106,6 +125,19 @@ public class MajorController {
 		return ServerResponse.createBySuccess("查询成功",majorInfo);
 	}
 	
+	/**
+	 * 
+	 * @Title: search
+	 * @Description: universityName与majorName联合模糊查询
+	 * @param: @param
+	 *             searchText
+	 * @param: @param
+	 *             pageNum
+	 * @param: @param
+	 *             pageSize
+	 * @param: @return
+	 * @return: ServerResponse<pageInfo> 返回值类型
+	 */
 	@RequestMapping(value="search.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> search(@RequestBody MajorQuery qm){
@@ -113,7 +145,19 @@ public class MajorController {
 		return ServerResponse.createBySuccess("查成功", majorUniversity);
 	}
 	
-	//按照majorCategoryId(专业类别id)来查找专业
+	/**
+	 * 
+	 * @Title: majorTyleIdSearch
+	 * @Description: /按照majorCategoryId(专业类别id)来查找专业
+	 * @param: @param
+	 *             searchText
+	 * @param: @param
+	 *             pageNum
+	 * @param: @param
+	 *             pageSize
+	 * @param: @return
+	 * @return: ServerResponse<pageInfo> 返回值类型
+	 */
 	@RequestMapping(value="majorTyleIdSearch.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> majorTyleIdSearch(MajorQuery qm){

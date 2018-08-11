@@ -22,7 +22,7 @@ public interface IUniversityService extends IBaseService<University, UniversityQ
 	Long insertSelectiveSequence(University m);
 	Long updateByKeySelective(University m);
 	List<University> schoolByUserIdList(University m);
-	Long schoolByUserIdUpdate(University qu);
+	Long schoolByIdUpdate(University qu);
 	PageInfo<University> schoolByIsNotHotList(UniversityQuery hq);
 	PageInfo<University> schoolAddressList(UniversityQuery hq);
 	PageInfo<University> selectByMajorCategoryId(UniversityQuery qu);

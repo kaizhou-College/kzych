@@ -8,6 +8,6 @@ import com.kz.po.AddressQuery;
 
 @Repository
 public interface AddressMapper extends BaseMapper<Address,AddressQuery>{
-   
+    Long updateByUniversityKeySelective(Address a);
 	
 }

@@ -57,15 +57,123 @@ public class UniversityController {
 	@Autowired
 	private IFileService iFileService;
 	
+	
 	/**
-	 * @Title: selectByMajorCategoryId
+	 * 
+	 * @Title: list
+	 * @Description: 分页查询学校信息
+	 * @param: @param
+	 *             pageSiz
+	 * @param: @param
+	 *             pageNum
+	 * @param: @param
+	 *             name
+	 * @param: @param
+	 *             latitude
+	 * @param: @param
+	 *             longitude
+	 * @param: @param
+	 *             provice
+	 * @param: @param
+	 *             city
+	 * @param: @param
+	 *             county
+	 * @param: @param
+	 *             addrdetail
+	 * @param: @param
+	 *             cityid
+	 * @param: @param
+	 *             session
+	 * @param: @return
+	 * @return: ServerResponse<PageInfo> 返回值类型
+	 */
+	@RequestMapping("schoolList.do")
+	@ResponseBody
+	public ServerResponse<PageInfo<University>> list(UniversityQuery uq,HttpSession session,HttpServletRequest re) {
+		/*User user = (User) session.getAttribute(Const.CURRENT_USER);
+		if (user == null) {
+			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
+		}*/
+		String method = re.getMethod();
+		if(method.equals("GET")){
+			String name = uq.getName();
+			String provid = uq.getProvice();
+			String cityid = uq.getCity();
+			String areaid = uq.getCounty();
+			String search_key = uq.getAddrdetail();
+			try {
+				if(name!=null){
+					name = new String(name.getBytes("iso-8859-1"), "UTF-8");
+					uq.setName(name);
+				}
+				if(provid!=null){
+					provid = new String(provid.getBytes("iso-8859-1"), "UTF-8");
+					uq.setProvice(provid);
+				}
+				if(cityid!=null){
+					cityid = new String(cityid.getBytes("iso-8859-1"), "UTF-8");
+					uq.setCity(cityid);
+				}
+				if(areaid!=null){
+					areaid = new String(areaid.getBytes("iso-8859-1"), "UTF-8");
+					uq.setCounty(areaid);
+				}
+				if(search_key!=null){
+					search_key = new String(search_key.getBytes("iso-8859-1"), "UTF-8");
+					uq.setAddrdetail(search_key);
+				}
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		PageInfo<University> pageInfo = iUniversityService.getByConditionPage(uq);
+		// 页面显示数据
+		return ServerResponse.createBySuccess("查询成功", pageInfo);
+	}
+	
+	/**
+	 * 
+	 * @Title: universityPageDetail
+	 * @Description: 按照universityId 分页查询学校专业
+	 * @param: @param
+	 *             pageSiz
+	 * @param: @param
+	 *             pageNum
+	 * @param: @param
+	 *             universityId
+	 * @param: @param
+	 *             session
+	 * @param: @return
+	 * @return: ServerResponse<University> 返回值类型
+	 */ 
+	@RequestMapping(value="universityPageDetail.do", method = RequestMethod.GET)
+	@ResponseBody//在一些页面中这个方法还需要改 university_detail
+	public ServerResponse list(HttpSession session ,UniversityQuery qu) {
+		/*User user = (User) session.getAttribute(Const.CURRENT_USER);
+		if (user == null) { 
+			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
+		}*/
+		// 3，根据学校的id查询该学校的所有专业信息
+		List<University> university = iUniversityService.selectMajorsPageById(qu);
+		
+		// 页面显示数据
+		return ServerResponse.createBySuccess("查询成功", university);
+	}
+	
+	/**
+	 * @Title: selectByMajorCategoryName
 	 * @Description: 按照专业类别名称来查找学校
 	 * @param: @param
 	 *             majorCategoryName
+	 * @param: @param
+	 *             pageNum
+	 * @param: @param
+	 *             pageSize
 	 * @param: @return
 	 * @return: ServerResponse
 	 */
-	@RequestMapping(value="selectByMajorCategoryId.do")
+	@RequestMapping(value="selectByMajorCategoryName.do",method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<PageInfo> selectByMajorCategoryId(UniversityQuery qu) {
 		PageInfo pageInfo = iUniversityService.selectByMajorCategoryId(qu);
@@ -73,31 +181,42 @@ public class UniversityController {
 	}
 	/**
 	 * 
-	 * @Title: schoolByUserIdUpdate
+	 * @Title: schoolByIdUpdate
 	 * @Description: 按照学校id来修改该学校
 	 * @param: @param
-	 *             id
+	 *             university.id
 	 * @param: @param
-	 *             universityType
+	 *             university.universityType
 	 * @param: @param
-	 *             universityNature
+	 *             university.universityNature
 	 * @param: @param
-	 *             categoryid
+	 *             university.categoryid
 	 * @param: @param
-	 *             address
+	 *             university.legalPersonName
 	 * @param: @param
-	 *             legalPersonName
+	 *             university.legalPersonCard
 	 * @param: @param
-	 *             legalPersonCard
+	 *             university.legalPersonPhone
 	 * @param: @param
-	 *             legalPersonPhone
+	 *             university.introduction
 	 * @param: @param
-	 *             introduction
+	 *             provice
 	 * @param: @param
-	 *             re
+	 *             city
+	 * @param: @param
+	 *             county
+	 * @param: @param
+	 *             addrdetail
+	 * @param: @param
+	 *             latitude
+	 * @param: @param
+	 *             longitude
+	 * @param: @param
+	 *             cityid
+	 *             
 	 */
-	@RequestMapping(value="schoolByUserIdUpdate.do", method = RequestMethod.POST)
-	public void schoolByUserIdUpdate(UniversityQuery qu, HttpServletResponse response,HttpServletRequest request,HttpSession session) {
+	@RequestMapping(value="schoolByIdUpdate.do", method = RequestMethod.POST)
+	public void schoolByUpdate(UniversityQuery qu, HttpServletResponse response,HttpServletRequest request,HttpSession session) {
 		Long result = iUniversityService.userInfoSchool(qu);
 		//用户更改完成后session里面也需要更改
 		User u = (User) session.getAttribute(Const.CURRENT_USER);
@@ -105,27 +224,27 @@ public class UniversityController {
 		if(u!=null){
 			long userid = u.getUid();
 			un.setUserId((int) userid);
-		}
-		List<University> resultUniversity = iUniversityService.schoolByUserIdList(un);
-		if(resultUniversity.size()>0){
-			session.setAttribute("publicStatus", resultUniversity.get(0).getPublishStatus());
-			session.setAttribute("User_list", resultUniversity.get(0));
-		}
-		try {
-//			response.sendRedirect("/kzych/user/userinfoTo.do");
-			if(result==2L){
-				response.sendRedirect("/user/toUserInfo.do");
-			}else{
-				response.sendRedirect("/error.do");
+			List<University> resultUniversity = iUniversityService.schoolByUserIdList(un);
+			if(resultUniversity.size()>0){
+				session.setAttribute("publicStatus", resultUniversity.get(0).getPublishStatus());
+				session.setAttribute("User_list", resultUniversity.get(0));
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+	//			response.sendRedirect("/kzych/user/userinfoTo.do");
+				if(result==2L){
+					response.sendRedirect("/user/toUserInfo.do");
+				}else{
+					response.sendRedirect("/error.do");
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	/**
 	 * 
 	 * @Title: schoolByUserIdList
-	 * @Description: 按照用户id来查找该学校
+	 * @Description: 按照用户id来查找该学校  然后返回不允许通过的原因
 	 * @param: @param
 	 *             userId
 	 * @param: @param
@@ -141,6 +260,7 @@ public class UniversityController {
 			e.printStackTrace();
 		}
 		List<University> result = iUniversityService.schoolByUserIdList(m);
+		
 		if (result.size()>0) {
 			out.print(result.get(0).getCheckedInfo());
 		} else { 
@@ -149,8 +269,8 @@ public class UniversityController {
 	}
 	/**
 	 * 
-	 * @Title: universityUpdatePublicString
-	 * @Description: 按学校id查询 并且修改这一条数据（但审核时点击通过或者不通过时需要修改Cookie中的值 但我的Cookie中名字是跟表数据有关系的）
+	 * @Title: updatePublicStatus
+	 * @Description: 审核通过与不通过（但审核时点击通过或者不通过时需要修改Cookie中的值 但我的Cookie中名字是跟表数据有关系的）
 	 * @param: @param
 	 *             id
 	 * @param: @param
@@ -201,10 +321,23 @@ public class UniversityController {
 	 * @param: @param
 	 *             userId
 	 * @param: @param
-	 *             address
+	 *             latitude
+	 * @param: @param
+	 *             longitude
+	 * @param: @param
+	 *             provice
+	 * @param: @param
+	 *             city
+	 * @param: @param
+	 *             county
+	 * @param: @param
+	 *             addrdetail
+	 * @param: @param
+	 *             cityid
 	 * @param: @param
 	 *             re
 	 */
+	
 	@RequestMapping(value="universityAdd.do", method = RequestMethod.POST)
 	public void universityAdd(Address address,University m, HttpServletResponse re) {
 		PrintWriter out = null;
@@ -318,14 +451,14 @@ public class UniversityController {
 	 *             search_key
 	 * @param: @return
 	 * @return: ServerResponse<PageInfo> 返回值类型
-	 */
+	 *//*
 	@RequestMapping("schoolListPageWithConditions.do")
 	@ResponseBody
 	public ServerResponse<PageInfo> listKeyPublishStatus(UniversityQuery qu) {
 		// 按条件分页查询
 		PageInfo pageInfo = iUniversityService.listKeyPublishStatus(qu);
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
-	}
+	}*/
 	
 	/**
 	 * 
@@ -360,7 +493,7 @@ public class UniversityController {
 			String provid = qu.getProvice();
 			String cityid = qu.getCity();
 			String areaid = qu.getCounty();
-			String search_key = qu.getAddrdetail();
+			String addrdetail = qu.getAddrdetail();
 			try {
 				if(provid!=null){
 					provid = new String(provid.getBytes("iso-8859-1"), "UTF-8");
@@ -374,9 +507,9 @@ public class UniversityController {
 					areaid = new String(areaid.getBytes("iso-8859-1"), "UTF-8");
 					qu.setCounty(areaid);
 				}
-				if(search_key!=null){
-					search_key = new String(search_key.getBytes("iso-8859-1"), "UTF-8");
-					qu.setAddrdetail(search_key);
+				if(addrdetail!=null){
+					addrdetail = new String(addrdetail.getBytes("iso-8859-1"), "UTF-8");
+					qu.setAddrdetail(addrdetail);
 				}
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
@@ -387,59 +520,8 @@ public class UniversityController {
 		return pageInfo;
 	}
 
-	/**
-	 * 
-	 * @Title: list
-	 * @Description: 分页查询学校信息
-	 * @param: @param
-	 *             pageSiz
-	 * @param: @param
-	 *             pageNum
-	 * @param: @param
-	 *             session
-	 * @param: @return
-	 * @return: ServerResponse<PageInfo> 返回值类型
-	 */
 	
-	@RequestMapping("schoolList.do")
-	@ResponseBody
-	public ServerResponse<PageInfo<University>> list(UniversityQuery uq,HttpSession session,HttpServletRequest re) {
-		/*User user = (User) session.getAttribute(Const.CURRENT_USER);
-		if (user == null) {
-			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
-		}*/
-		String method = re.getMethod();
-		if(method.equals("GET")){
-			String provid = uq.getProvice();
-			String cityid = uq.getCity();
-			String areaid = uq.getCounty();
-			String search_key = uq.getAddrdetail();
-			try {
-				if(provid!=null){
-					provid = new String(provid.getBytes("iso-8859-1"), "UTF-8");
-					uq.setProvice(provid);
-				}
-				if(cityid!=null){
-					cityid = new String(cityid.getBytes("iso-8859-1"), "UTF-8");
-					uq.setCity(cityid);
-				}
-				if(areaid!=null){
-					areaid = new String(areaid.getBytes("iso-8859-1"), "UTF-8");
-					uq.setCounty(areaid);
-				}
-				if(search_key!=null){
-					search_key = new String(search_key.getBytes("iso-8859-1"), "UTF-8");
-					uq.setAddrdetail(search_key);
-				}
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		PageInfo<University> pageInfo = iUniversityService.getByConditionPage(uq);
-		// 页面显示数据
-		return ServerResponse.createBySuccess("查询成功", pageInfo);
-	}
+	
 	
 
 	/**
@@ -462,34 +544,8 @@ public class UniversityController {
 		return hotList;
 	}
 	
-	/**
-	 * 
-	 * @Title: university_detail
-	 * @Description: 按照universityId 分页查询学校专业
-	 * @param: @param
-	 *             pageSiz
-	 * @param: @param
-	 *             pageNum
-	 * @param: @param
-	 *             universityId
-	 * @param: @param
-	 *             session
-	 * @param: @return
-	 * @return: ServerResponse<University> 返回值类型
-	 */ 
-	@RequestMapping(value="universityPageDetail.do", method = RequestMethod.GET)
-	@ResponseBody//在一些页面中这个方法还需要改 university_detail
-	public ServerResponse list(HttpSession session ,UniversityQuery qu) {
-		/*User user = (User) session.getAttribute(Const.CURRENT_USER);
-		if (user == null) { 
-			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请登录管理员");
-		}*/
-		// 3，根据学校的id查询该学校的所有专业信息
-		List<University> university = iUniversityService.selectMajorsPageById(qu);
-		
-		// 页面显示数据
-		return ServerResponse.createBySuccess("查询成功", university);
-	}
+	
+	
 	/**
 	 * 
 	 * @Title: schoolAddressList
@@ -499,13 +555,13 @@ public class UniversityController {
 	 * @param: @param
 	 *             pageNum
 	 * @param: @param
-	 *             schoolLongitude
+	 *             longitude
 	 * @param: @param
-	 *             schoolLatitude
+	 *             latitude
 	 * @param: @return
 	 * @return: ServerResponse 返回值类型
 	 */
-	@RequestMapping(value="schoolAddressList.do", method = RequestMethod.POST)
+	@RequestMapping(value="schoolAddressList.do")
 	@ResponseBody
 	public PageInfo<University> schoolAddressList(UniversityQuery hq){
 		PageInfo<University> hotList = iUniversityService.schoolAddressList(hq);
@@ -579,7 +635,7 @@ public class UniversityController {
 	/**
 	 * 
 	 * @Title: updateByKeyId
-	 * @Description: 为用户添加一所学校
+	 * @Description: 为用户修改一所学校
 	 * @param: @param
 	 *             id
 	 * @param: @param
@@ -601,7 +657,19 @@ public class UniversityController {
 	 * @param: @param
 	 *             userId
 	 * @param: @param
-	 *             address
+	 *             latitude
+	 * @param: @param
+	 *             longitude
+	 * @param: @param
+	 *             provice
+	 * @param: @param
+	 *             city
+	 * @param: @param
+	 *             county
+	 * @param: @param
+	 *             addrdetail
+	 * @param: @param
+	 *             cityid
 	 * @param: @param
 	 *             re
 	 */
@@ -621,7 +689,15 @@ public class UniversityController {
 		}
 	}
 	
-	//还没有写Controller接口
+	/**
+	 * 
+	 * @Title: UpdateTelephone
+	 * @Description: 按照universityId来修改招生电话
+	 * @param: @param
+	 *             id
+	 * @param: @param
+	 * 				telephone
+	 */
 	@RequestMapping(value="UpdateTelephone.do",method = RequestMethod.GET)
 	public void UpdateTelephone(University u, HttpServletResponse re) {
 		PrintWriter out = null;
@@ -638,42 +714,15 @@ public class UniversityController {
 		}
 	}
 	
-	
-	//招生简章的数据返回 Enrollment Guide
-	@RequestMapping(value="/selectByUniversityId.do")
-	@ResponseBody
-	public JSONObject schoolByProfession(int universityId,HttpSession session,HttpServletResponse response){
-		StringBuffer json=new StringBuffer("{\"code\": 0,\"msg\": \"\",\"count\": 2,\"data\": [");
-		List<UniversityDynamic> list = iUniversityService.selectByUniversityId(universityId);
-		for(int i=0;i<list.size();i++){
-			if(i==0){
-				json.append("{");
-			}
-			if(i!=list.size()-1){
-				json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"},{");
-			}else{
-				json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"}");
-			}
-		}
-		json.append("]}");
-		JSONObject json_test = JSONObject.fromObject(json.toString());
-		return json_test;
-	}
-	
-	
-	//====*** 热门专业
-	/*一 《专业分类    
-	 * http://localhost:8080/kzych/major/majorCategoryList.do
-	 *二 《通过专业来查找专业列表 
-	 *http://localhost:8080/kzych/major/list.do?majorCategoryId=1
-	 *三 《通过专业列表来查找学校
-	 *http://localhost:8080/kzych/major/major_university_list.do?majorId=1
-	 *四 《通过学校id查找学校  
-	 *http://localhost:8080/kzych/university/schollByIntroduceInfo.do?universityId=71&majorId=1
-	 **/
-	
-	
-	//四 《通过学校id查找学校
+	/**
+	 * 
+	 * @Title: university_major_detail
+	 * @Description: 通过学校id和专业id查找学校信息，专业，详情
+	 * @param: @param
+	 *             universityId
+	 * @param: @param
+	 * 				majorId
+	 */
 	@RequestMapping(value="university_major_detail.do") 
 	@ResponseBody 
 	public ServerResponse<PageInfo> schoolByIntroduceInfo(UniversityQuery qu) {
@@ -681,22 +730,15 @@ public class UniversityController {
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}
 	
-	//===**附件学校
-	//一，按照学校类别来查找学校
-	//http://localhost:8080/kzych/university/schollByTypeList.do?categoryId=2
-	//二，然后通过学校id来查找 该学校所有专业  和 学校信息（学校视频及学校图片）以及学校招生动态
-	
-	/*二（1）通过id查找学校以及地址
-	 * http://localhost:8080/kzych/university/schollAndAddressList.do?universityId=2
-	 *二（2）通过学校id查找该学校所有专业
-	 *http://localhost:8080/kzych/university/schollByMajor.do?universityId=71
-	 *二（3）通过学校id查找该学校的概况
-	 *http://localhost:8080/kzych/university/schollByIntroduce.do?universityId=71
-	 *二（4）通过学校id查找该学校的动态
-	 *http://localhost:8080/kzych/university/schollByRecruit.do?universityId=71
-	 * */
-	
-	//一，按照学校类别来查找学校
+	/**
+	 * 
+	 * @Title: university_major_detail
+	 * @Description: 按照学校类别来查找学校
+	 * @param: @param
+	 *             universityId
+	 * @param: @param
+	 * 				majorId
+	 */
 	@RequestMapping(value="schollByTypeList.do")  
 	@ResponseBody 
 	public ServerResponse<PageInfo> schollByTypeList(UniversityQuery qu) {
@@ -704,21 +746,29 @@ public class UniversityController {
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}
 	
-	//二（1）通过id查找学校以及地址
+	/**
+	 * 
+	 * @Title: university_detail
+	 * @Description: 通过id查找学校以及地址
+	 * @param: @param
+	 *             universityId
+	 * @param: @param
+	 * 				majorId
+	 */
 	@RequestMapping(value="university_detail.do") 
 	@ResponseBody 
 	public ServerResponse<PageInfo> universityDetail(UniversityQuery qu) {
 		PageInfo pageInfo = iUniversityService.universityDetail(qu);
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}
-	 //二（2）通过学校id查找该学校所有专业
+	/*
 	@RequestMapping(value="university_detail_Major.do") 
 	@ResponseBody 
 	public ServerResponse<PageInfo> schollByMajor(UniversityQuery qu) {
 		PageInfo pageInfo = iUniversityService.schollByMajor(qu);
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}
-	 
+
 	 //*二（3）通过学校id查找该学校的概况
 	@RequestMapping(value="university_detail_Introduce.do") 
 	@ResponseBody 
@@ -733,32 +783,13 @@ public class UniversityController {
 		PageInfo pageInfo = iUniversityService.schollByRecruit(qu);
 		return ServerResponse.createBySuccess("查询成功", pageInfo);
 	}
-//下面是還沒寫controller接口的 
-	@RequestMapping(value="mySchoolMajorInfo.do") 
-	@ResponseBody 
-	public JSONObject mySchoolMajorInfo(UniversityQuery qu) {
-		StringBuffer json=new StringBuffer("{\"code\": 0,\"msg\": \"\",\"count\": 2,\"data\": [");
-		List<University> schoolResult = iUniversityService.mySchoolMajorInfo(qu);
-		for(int i=0;i<schoolResult.size();i++){
-			for(int j=0;j<schoolResult.get(i).getMajors().size();j++){
-				json.append("{\"id\":"+schoolResult.get(i).getMajors().get(j).getId()+",\"level\":\""+schoolResult.get(i).getUniversityCategory().getCategoryName()+"\",");
-				json.append("\"name\":\""+schoolResult.get(i).getMajors().get(j).getName()+"\",");
-				if(j!=schoolResult.get(i).getMajors().size()-1){
-					json.append("\"tuition\":\""+schoolResult.get(i).getMajors().get(j).getMajorCode()+"\"},");
-				}else{
-					json.append("\"tuition\":\""+schoolResult.get(i).getMajors().get(j).getMajorCode()+"\"}");
-				}
-			}
-		}
-		json.append("]}");
-		JSONObject json_test = JSONObject.fromObject(json.toString());
-		return json_test;
-	}
-	/*9，获取热门专业列表
-	http://www.iychua.com:8080/major/pop_major_list?pageNum=1&pageSize=10
-
-	10，获取热门学校列表
-	http://www.iychua.com:8080/university/pop_university_list?pageNum=1&pageSize=10
+	*/
+	/**
+	 * 
+	 * @Title: pop_university_list
+	 * @Description: 查找热门学校
+	 * @param: @param
+	 *             isHot
 	 */
 	@RequestMapping("pop_university_list.do")
 	@ResponseBody
@@ -766,5 +797,54 @@ public class UniversityController {
 		PageInfo<University> universityList= iUniversityService.myUniversityHost(qu);
 		return ServerResponse.createBySuccess("查询成功",universityList);
 	}
+	
+	///---------还有问题
+		/**
+		 * 
+		 * @Title: UpdateTelephone
+		 * @Description: 招生简章的数据返回 Enrollment Guide
+		 * @param: @param
+		 *             universityId
+		 */
+		@RequestMapping(value="/selectByUniversityId.do")
+		@ResponseBody
+		public JSONObject schoolByProfession(int universityId,HttpSession session,HttpServletResponse response){
+			StringBuffer json=new StringBuffer("{\"code\": 0,\"msg\": \"\",\"count\": 2,\"data\": [");
+			List<UniversityDynamic> list = iUniversityService.selectByUniversityId(universityId);
+			for(int i=0;i<list.size();i++){
+				if(i==0){
+					json.append("{");
+				}
+				if(i!=list.size()-1){
+					json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"},{");
+				}else{
+					json.append("\"id\":"+"\""+list.get(i).getRsId()+"\","+"\"datetime\":"+"\""+list.get(i).getRsDatetime()+"\",\"name\":\""+list.get(i).getRsTitle()+"\"}");
+				}
+			}
+			json.append("]}");
+			JSONObject json_test = JSONObject.fromObject(json.toString());
+			return json_test;
+		}
+		
+		@RequestMapping(value="mySchoolMajorInfo.do") 
+		@ResponseBody 
+		public JSONObject mySchoolMajorInfo(UniversityQuery qu) {
+			StringBuffer json=new StringBuffer("{\"code\": 0,\"msg\": \"\",\"count\": 2,\"data\": [");
+			List<University> schoolResult = iUniversityService.mySchoolMajorInfo(qu);
+			for(int i=0;i<schoolResult.size();i++){
+				for(int j=0;j<schoolResult.get(i).getMajors().size();j++){
+					json.append("{\"id\":"+schoolResult.get(i).getMajors().get(j).getId()+",\"level\":\""+schoolResult.get(i).getUniversityCategory().getCategoryName()+"\",");
+					json.append("\"name\":\""+schoolResult.get(i).getMajors().get(j).getName()+"\",");
+					if(j!=schoolResult.get(i).getMajors().size()-1){
+						json.append("\"tuition\":\""+schoolResult.get(i).getMajors().get(j).getMajorCode()+"\"},");
+					}else{
+						json.append("\"tuition\":\""+schoolResult.get(i).getMajors().get(j).getMajorCode()+"\"}");
+					}
+				}
+			}
+			json.append("]}");
+			JSONObject json_test = JSONObject.fromObject(json.toString());
+			return json_test;
+		}
 }
 

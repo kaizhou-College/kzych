@@ -156,4 +156,31 @@
       </if>
     </trim>
   </insert>
+  <update id="updateByUniversityKeySelective" parameterType="com.kz.po.Address" >
+    update kz_address
+    <set >
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="provice != null" >
+        provice = #{provice,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        county = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="addrdetail != null" >
+        addrDetail = #{addrdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="cityid != null" >
+        cityid = #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where university_id =  #{universityId,jdbcType=BIGINT}
+  </update>
 </mapper>

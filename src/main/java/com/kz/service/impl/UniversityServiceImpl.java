@@ -89,8 +89,8 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 		return  result;
 	}
 	@Override
-	public Long schoolByUserIdUpdate(University m) {
-		return mapper.schoolByUserIdUpdate(m);
+	public Long schoolByIdUpdate(University m) {
+		return mapper.schoolByIdUpdate(m);
 	}
 	@Override
 	public PageInfo<University> schoolByIsNotHotList(UniversityQuery hq) {
@@ -188,6 +188,14 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 	}
 	@Override
 	public Long prodectAdd(University m,Address address){
+		m.setCode(0L);
+		m.setEmploymentInfo("0");
+		m.setBrochure("0");
+		m.setAgreements("0");
+		m.setTelephone("0");
+		m.setIntroduction("0");
+		m.setCoupon(new BigDecimal("0"));
+		m.setGrants( new BigDecimal("0"));
 		Long long1=insertSelective(m);
 		Long long2=0L;
 		List<University> list = null;
@@ -195,23 +203,39 @@ public class UniversityServiceImpl extends BaseService<University, UniversityQue
 			//查询该用户的学校id
 			list = mapper.schoolByUserIdListNoAddress(m);
 			address.setUniversityId(list.get(0).getId());
+			address.setCityid(0);
 			long2 = mapperA.insertSelective(address);
 		}
 		return long2+long1;
 	}
 	@Override
 	public Long prodectUpdate(UniversityQuery qu) {
-		Long long1 = mapper.schoolByUserIdUpdate(qu.getUniversity());
-		Long long2 = mapperA.updateByPrimaryKeySelective(qu.getAddress());
+		Long long1 = mapper.schoolByIdUpdate(qu.getUniversity());
+		qu.getAddress().setUniversityId(qu.getUniversity().getId());
+		Long long2 = mapperA.updateByUniversityKeySelective(qu.getAddress());
 		return long1+long2;
 	}
 	@Override
 	public Long userInfoSchool(UniversityQuery qu) {
-		Long long1 = mapper.schoolByUserIdUpdate(qu.getUniversity());
-		qu.getAddress().setProvice(qu.getProvice());
-		qu.getAddress().setCity(qu.getCity());
-		qu.getAddress().setCounty(qu.getCounty());
-		Long long2 = mapperA.updateByPrimaryKeySelective(qu.getAddress());
+		Long long1 = mapper.schoolByIdUpdate(qu.getUniversity());
+		Address addre=new Address();
+		if(qu.getUniversity().getId()!=null)
+		addre.setUniversityId(qu.getUniversity().getId());
+		if(qu.getProvice()!=null)
+		addre.setProvice(qu.getProvice());
+		if(qu.getCity()!=null)
+		addre.setCity(qu.getCity());
+		if(qu.getCounty()!=null)
+		addre.setCounty(qu.getCounty());
+		if(qu.getLatitude()!=null)
+		addre.setLatitude(qu.getLatitude());
+		if(qu.getLongitude()!=null)
+		addre.setLongitude(qu.getLongitude());
+		if(qu.getAddrdetail()!=null)
+		addre.setAddrdetail(qu.getAddrdetail());
+		if(qu.getCityid()!=0)
+		addre.setCityid(qu.getCityid());
+		Long long2 = mapperA.updateByUniversityKeySelective(addre);
 		return long1+long2;
 	}
 	@Override
